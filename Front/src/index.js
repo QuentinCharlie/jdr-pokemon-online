@@ -2,6 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import 'semantic-ui-css/semantic.min.css';
 
 // == Import : local
 import App from 'src/components/App';

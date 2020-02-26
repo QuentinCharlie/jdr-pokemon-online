@@ -1,16 +1,24 @@
 // == Import npm
 import React from 'react';
 
+// Styles
+import AppStyled from './AppStyled';
+
 // == Import
-import reactLogo from './react-logo.svg';
-import './styles.css';
+import Nav from 'src/components/Nav';
+import Board from 'src/components/Board';
 
 // == Composant
 const App = () => (
-  <div className="app">
-    <img src={reactLogo} alt="react logo" />
-    <h1>Composant : App</h1>
-  </div>
+  <AppStyled>
+    <Nav />
+    <Board />
+    <div className="log"></div>
+    <div className="trainer"></div>
+    <div className="pokemon"></div>
+    <div className="attacks"></div>
+    <div className="dices"></div>
+  </AppStyled>
 );
 
 // == Export
