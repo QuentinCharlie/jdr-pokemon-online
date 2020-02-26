@@ -8,19 +8,27 @@ import AppStyled from './AppStyled';
 import Nav from 'src/components/Nav';
 import Board from 'src/components/Board';
 import Log from 'src/components/Log';
+import Trainer from 'src/components/Trainer';
+import Pokemon from 'src/components/Pokemon';
+import Attacks from 'src/components/Attacks';
+import Dices from 'src/components/Dices';
 
 // == Composant
 const App = () => (
   <AppStyled>
     <Nav />
-    <div className="container container--board-log">
-      <Board />
-      <Log />
+    <div className="main-wrapper">
+      <div className="container container--board-log">
+        <Board />
+        <Log />
+      </div>
+      <div className="container container--trainer-to-dices">
+        <Trainer />
+        <Pokemon />
+        <Attacks />
+        <Dices />
+      </div>
     </div>
-    <div className="trainer"></div>
-    <div className="pokemon"></div>
-    <div className="attacks"></div>
-    <div className="dices"></div>
   </AppStyled>
 );
 
