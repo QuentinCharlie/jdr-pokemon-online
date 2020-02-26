@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const LogStyled = styled.div`
   @media (max-width : 1024px), (max-height : 768px) {
-    width: calc(15vh - .5em);
-    height: calc(15vh - .5em);
+    width: calc(15vh - .75em);
+    height: calc(15vh - .75em);
     margin: 0 .5em .5em 0;
     background-color: lightgray;
   }
