@@ -8,7 +8,7 @@ import {
 } from 'semantic-ui-react'; 
 
 // Styles
-import NavStyled from './NavStyled';
+// import NavStyled from './NavStyled';
 
 // == Import
 
