@@ -16,13 +16,27 @@ import Dices from 'src/components/Dices';
 // == Composant
 const App = () => (
   <AppStyled>
-    <Nav />
-    <div className="main-wrapper">
-      <div className="container container--board-log">
-        <Board />
-        <Log />
+    <div className="desktop">
+      <Nav />
+      <div className="main-wrapper">
+        <div className="container container--board-log">
+          <Board />
+          <Log />
+        </div>
+        <div className="container container--trainer-to-dices">
+          <Trainer />
+          <Pokemon />
+          <Attacks />
+          <Dices />
+        </div>
       </div>
-      <div className="container container--trainer-to-dices">
+    </div>
+
+    <div className="mobile-tablet">
+      <Board />
+      <div className="container container--nav-to-dices">
+        <Nav />
+        <Log />
         <Trainer />
         <Pokemon />
         <Attacks />
