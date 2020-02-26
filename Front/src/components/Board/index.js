@@ -6,9 +6,9 @@ import BoardStyled from './BoardStyled';
 
 
 // == Composant
-const App = () => (
+const Board = () => (
   <BoardStyled />
 );
 
 // == Export
-export default App;
+export default Board;
