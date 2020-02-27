@@ -13,9 +13,8 @@ const Trainer = () => (
     <div className="trainer-avatar">
       <img src={avatar} alt="avatar" />
       <div className="health-container">
-        <div className="health-bar" style={{ width: '50%' }}>
-          <span>50/100</span>
-        </div>
+        <span>40/100</span>
+        <div className="health-bar" style={{ width: '40%' }} />
       </div>
     </div>
     <div className="money">
