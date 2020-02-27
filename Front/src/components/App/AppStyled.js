@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AppStyled = styled.div`
-  @media (max-width : 1024px), (max-height : 768px) {
+  @media (max-width : 1024px) {
     .desktop {
       display: none;
     }
@@ -19,7 +19,7 @@ const AppStyled = styled.div`
     }
   }
 
-  @media (min-height : 769px) {
+  @media (min-width : 1025px) {
     .mobile-tablet {
       display: none;
     }
