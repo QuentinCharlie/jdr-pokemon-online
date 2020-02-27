@@ -1,16 +1,41 @@
 import styled from 'styled-components';
 
 const AppStyled = styled.div`
-  width: 100vw;
-  height: 100vh;
+  @media (max-width : 1024px), (max-height : 768px) {
+    .desktop {
+      display: none;
+    }
+    .mobile-tablet {
+      display: flex;
+    }
+    
+    width: 100vw;
+    height: 100vh;
 
-  .main-wrapper {
-    height: calc(100vh - 40px - 1em);
+
+    .container--nav-to-dices {
+      display: flex;      
+      flex-direction: column;
+    }
   }
 
-  .container {
-    display: flex;
+  @media (min-height : 769px) {
+    .mobile-tablet {
+      display: none;
+    }
+
+    width: 100%;
+    height: 100%;
+
+    .main-wrapper {
+      height: calc(100vh - 40px - 1em);
+    }
+    
+    .container {
+      display: flex;
+    }
   }
+
 `;
 
 export default AppStyled;
