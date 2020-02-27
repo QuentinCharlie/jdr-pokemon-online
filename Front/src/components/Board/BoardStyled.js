@@ -5,7 +5,7 @@ const BoardStyled = styled.div`
     width: calc(100% - 1em);
     height: calc(100vh - 1em);
     margin: 0.5em;
-    background-color: red; 
+    background-color: lightgray; 
   }
 
   @media (min-height : 769px) {
