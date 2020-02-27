@@ -20,23 +20,30 @@ const TrainerStyled = styled.div`
       height: 100%;
       overflow: hidden;
       position: relative;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      align-items: flex-start;
+      img {
+        object-fit: cover;
+      }
       .health-container {
         position: absolute;
-        bottom: 0em;
+        bottom: 0;
         height: 1.5em;
         width: 100%;
-        text-align: center;
         background-color: gray;
+        text-align: center;
+        span {
+          position: relative;
+          z-index: 5;
+        }
+        /* BARRE VERTE*/
         .health-bar {
           position: absolute;
           bottom: 0em;
           height: 100%;
           background-color: green;
-          span {
-            position: absolute;
-            left: 100%;
-            transform: translateX(-50%);
-          }
         }
       }
     }
