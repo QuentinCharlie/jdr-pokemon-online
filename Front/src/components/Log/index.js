@@ -8,8 +8,8 @@ import LogStyled from './LogStyled';
 // == Composant
 const Log = () => (
   <LogStyled>
-    <div className="log"></div>
-    <div className="current-player"></div>
+    <div className="log" />
+    <div className="current-player" />
   </LogStyled>
 );
 
