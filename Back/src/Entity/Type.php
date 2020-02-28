@@ -32,8 +32,8 @@ class Type
     private $pokemons;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Attack", inversedBy="type")
-     */
+    * @ORM\OneToMany(targetEntity="App\Entity\Attack", mappedBy="type")
+    */
     private $attacks;
 
     public function getId(): ?int

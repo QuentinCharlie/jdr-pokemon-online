@@ -32,7 +32,7 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Avatar", inversedBy="users")
      */
     private $avatar;
 

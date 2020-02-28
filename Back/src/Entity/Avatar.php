@@ -33,7 +33,7 @@ class Avatar
     private $avatar_game;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="avatar")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="avatar")
      */
     private $users;
 
