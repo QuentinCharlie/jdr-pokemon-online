@@ -15,10 +15,10 @@ const mapStateToProps = (state) => ({
   damage: 5,
   accuracy: 5,
   energy: 5,
-  category: 'status',
-  range: 'melee',
-  effect: '5',
-  type: '5',
+  category: 'statut',
+  distance: 'melee',
+  effect: 'Attaque permettant de prendre aussitôt la fuite.',
+  type: 'Psy',
 });
 
 // == Actions / dispatch

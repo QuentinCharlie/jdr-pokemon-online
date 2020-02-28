@@ -13,7 +13,6 @@ import Dices from 'src/components/Dices';
 // Styles
 import AppStyled from './AppStyled';
 
-
 // == Composant
 const App = () => (
   <AppStyled>

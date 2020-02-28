@@ -16,7 +16,7 @@ const Attacks = ({
   accuracy,
   energy,
   category,
-  range,
+  distance,
   effect,
   type,
 }) => (
@@ -27,7 +27,7 @@ const Attacks = ({
       accuracy={accuracy}
       energy={energy}
       category={category}
-      range={range}
+      distance={distance}
       effect={effect}
       type={type}
     />
@@ -37,7 +37,7 @@ const Attacks = ({
       accuracy={accuracy}
       energy={energy}
       category={category}
-      range={range}
+      distance={distance}
       effect={effect}
       type={type}
     />
@@ -47,7 +47,7 @@ const Attacks = ({
       accuracy={accuracy}
       energy={energy}
       category={category}
-      range={range}
+      distance={distance}
       effect={effect}
       type={type}
     />
@@ -57,7 +57,7 @@ const Attacks = ({
       accuracy={accuracy}
       energy={energy}
       category={category}
-      range={range}
+      distance={distance}
       effect={effect}
       type={type}
     />
@@ -70,7 +70,7 @@ Attacks.propTypes = {
   accuracy: PropTypes.number.isRequired,
   energy: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
-  range: PropTypes.string.isRequired,
+  distance: PropTypes.string.isRequired,
   effect: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };

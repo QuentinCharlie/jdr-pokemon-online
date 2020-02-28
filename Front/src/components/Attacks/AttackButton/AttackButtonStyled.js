@@ -61,67 +61,100 @@ const AttackButtonStyled = styled.div`
         color-stop(1, rgb(90,150,199))
       );
     }
-    .attack {
-      display: flex;
-      flex-direction: column;
-      .attack-name {
-        width: calc(100% - .2em);
-        padding-bottom: .2em;
-        }
-      .attack-icons {
+    @media (min-height: 960px) {
+      .attack {
         display: flex;
-        width: 100%;
-        height: 1em;
+        flex-direction: column;
+        .attack-name {
+          width: calc(100% - .2em);
+          padding-bottom: .2em;
+          }
+        .attack-icons {
+          display: flex;
+          width: 100%;
+          height: 1em;
+          align-items: center;
+          .attack-category {
+            width: auto;
+            height: 70%;
+            padding-right: .3em;
+          }
+          .statut {
+            content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
+            opacity: .8;
+          }
+          .special {
+            content: url("https://www.pokebip.com/pokedex-images/types/speciale.png");
+            opacity: .8;
+          }
+          .physical {
+            content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
+            opacity: .8;
+          }
+          .attack-distance {
+            width: auto;
+            height: 70%;
+          }
+          .melee {
+            content: url("https://i.imgur.com/bsvUkK6.png");
+            opacity: .8;
+          }
+          .distance {
+            /*https://i.imgur.com/xgGwnku.png */
+          }
+          .attack-info {
+            width: auto;
+            height: 70%;
+            padding-left: .3em;
+            content: url("https://image.flaticon.com/icons/svg/813/813715.svg");
+            opacity: .8;
+          }
+      
+        }
+      }
+      .attack-stats {
+        display: flex;
+        justify-content: flex-start;
+        /* overflow: auto; */
+        /* scrollbar hidden (IE/Edge)
+        -ms-overflow-style: none;
+        /* scrollbar hidden (Chrome/Firefox/Safari) */
+        /* &::-webkit-scrollbar {
+          display: none;
+        } */ 
+      }
+      .attack-stat {
+        padding-right: .5em;
+        font-size: .6em;
+        font-weight: normal;
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        .attack-category {
+      }
+    }
+  }
+
+  @media (max-height: 959px) {
+    .attack {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .attack-icons {
+        height: 1.3em;
+        display: flex;
+        align-items: center;
+        .attack-info {
           width: auto;
           height: 70%;
-          padding-right: .3em;
-        }
-        .status {
-          content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
+          padding-left: .3em;
+          content: url("https://image.flaticon.com/icons/svg/813/813715.svg");
           opacity: .8;
         }
-        .special {
-          content: url("https://www.pokebip.com/pokedex-images/types/speciale.png");
-          opacity: .8;
-        }
-        .physical {
-          content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
-          opacity: .8;
-        }
-        .attack-range {
-          width: auto;
-          height: 70%;
-        }
-        .melee {
-          content: url("https://i.imgur.com/bsvUkK6.png");
-          opacity: .8;
-        }
-        .ranged {
-          /*https://i.imgur.com/xgGwnku.png */
-        }
-    
       }
     }
     .attack-stats {
-      display: flex;
-      justify-content: flex-start;
-      /* overflow: auto; */
-      /* scrollbar hidden (IE/Edge)
-      -ms-overflow-style: none;
-      /* scrollbar hidden (Chrome/Firefox/Safari) */
-      /* &::-webkit-scrollbar {
-        display: none;
-      } */ 
-    }
-    .attack-stat {
-      padding-right: .5em;
-      font-size: .6em;
-      font-weight: normal;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: none;
     }
   }
 
