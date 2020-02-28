@@ -52,8 +52,8 @@ class Attack
     private $effect;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Type", mappedBy="attacks")
-     */
+    * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="attacks")
+    */
     private $type;
 
     /**
