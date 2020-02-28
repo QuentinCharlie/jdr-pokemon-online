@@ -364,6 +364,30 @@
         <argument type="service" id=".service_locator.pNNo5z3.App\Controller\TrainerController"/>
       </call>
     </service>
+    <service id="App\Repository\AttackRepository" class="App\Repository\AttackRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\AvatarRepository" class="App\Repository\AvatarRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\PokemonRepository" class="App\Repository\PokemonRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\TrainerRepository" class="App\Repository\TrainerRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\TypeRepository" class="App\Repository\TypeRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory" public="false"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener" public="false">
       <tag name="kernel.event_subscriber"/>
@@ -2294,6 +2318,14 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
+        <argument>console.command</argument>
+        <argument type="collection">
+          <argument type="service" id="debug.debug_handlers_listener"/>
+          <argument>configure</argument>
+        </argument>
+        <argument>2048</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service" id="router_listener"/>
@@ -3628,7 +3660,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.I3K77mT"/>
+      <argument type="service" id=".service_locator.l_8Yppf"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4417,6 +4449,18 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TrainerController" class="App\Controller\TrainerController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TrainerController" class="App\Controller\TrainerController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\TrainerController" class="App\Controller\TrainerController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AttackRepository" class="App\Repository\AttackRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\AttackRepository" class="App\Repository\AttackRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AvatarRepository" class="App\Repository\AvatarRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\AvatarRepository" class="App\Repository\AvatarRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PokemonRepository" class="App\Repository\PokemonRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\PokemonRepository" class="App\Repository\PokemonRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TrainerRepository" class="App\Repository\TrainerRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\TrainerRepository" class="App\Repository\TrainerRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TypeRepository" class="App\Repository\TypeRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\TypeRepository" class="App\Repository\TypeRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.CmORmuK" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4718,6 +4762,17 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
+      </argument>
+    </service>
+    <service id=".service_locator.l_8Yppf" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Repository\AttackRepository" type="service" id="App\Repository\AttackRepository"/>
+        <argument key="App\Repository\AvatarRepository" type="service" id="App\Repository\AvatarRepository"/>
+        <argument key="App\Repository\PokemonRepository" type="service" id="App\Repository\PokemonRepository"/>
+        <argument key="App\Repository\TrainerRepository" type="service" id="App\Repository\TrainerRepository"/>
+        <argument key="App\Repository\TypeRepository" type="service" id="App\Repository\TypeRepository"/>
+        <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
       </argument>
     </service>
     <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger" public="false"/>
