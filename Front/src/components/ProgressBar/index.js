@@ -15,7 +15,7 @@ const ProgressBar = ({ color, number, maxNumber }) => {
         className="bar"
         style={{
           width: `${barWidth}%`,
-          'background-color': color,
+          backgroundColor: color,
         }}
       />
     </ProgressBarStyled>

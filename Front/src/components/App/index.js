@@ -1,17 +1,18 @@
 // == Import npm
 import React from 'react';
 
-// Styles
-import AppStyled from './AppStyled';
-
 // == Import
 import Nav from 'src/components/Nav';
 import Board from 'src/components/Board';
 import Log from 'src/components/Log';
 import Trainer from 'src/components/Trainer';
 import Pokemon from 'src/components/Pokemon';
-import Attacks from 'src/components/Attacks';
+import Attacks from 'src/containers/Attacks';
 import Dices from 'src/components/Dices';
+
+// Styles
+import AppStyled from './AppStyled';
+
 
 // == Composant
 const App = () => (
