@@ -20,7 +20,11 @@ const AttackButton = ({
   <AttackButtonStyled>
     <div className={`button ${type}`}>
       <div className="attack">
-        {name}
+        <div className="attack-name">{name}</div>
+        <div className="attack-icons">
+          <div className={`attack-category ${category}`}></div>
+          <div className={`attack-range ${range}`}></div>
+        </div>
       </div>
       <div className="attack-stats">
         <div className="attack-stat">

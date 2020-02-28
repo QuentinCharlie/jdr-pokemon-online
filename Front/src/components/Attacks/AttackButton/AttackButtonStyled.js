@@ -15,15 +15,14 @@ const AttackButtonStyled = styled.div`
     color: #fff;
     font-weight: bold;
     background-color: #538fbe;
-    /* padding: 20px 70px; */
     font-size: 1.5em;
     border: 1px solid #2d6898;
+    /* BACKGROUND GRADIENT */
     background-image: linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
     background-image: -o-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
     background-image: -moz-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
     background-image: -webkit-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
     background-image: -ms-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
- 
     background-image: -webkit-gradient(
       linear,
       left bottom,
@@ -31,15 +30,18 @@ const AttackButtonStyled = styled.div`
       color-stop(0, rgb(73,132,180)),
       color-stop(1, rgb(97,155,203))
     );
+
+    /* BORDER RADIUS */
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+
+    /* SHADOW */
     text-shadow: 0px -1px 0px rgba(0,0,0,.5);
     -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     -moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     transition: 0.15s;
-
 
     &:active {
       box-shadow: none;
@@ -59,18 +61,62 @@ const AttackButtonStyled = styled.div`
         color-stop(1, rgb(90,150,199))
       );
     }
-    .attack-stats {
+    .attack {
       display: flex;
-      justify-content: space-between;
-      overflow: auto;
-      /* scrollbar hidden (IE/Edge) */
-      -ms-overflow-style: none;
-      /* scrollbar hidden (Chrome/Firefox/Safari) */
-      &::-webkit-scrollbar {
-        display: none;
+      flex-direction: column;
+      .attack-name {
+        width: calc(100% - .2em);
+        padding-bottom: .2em;
+        }
+      .attack-icons {
+        display: flex;
+        width: 100%;
+        height: 1em;
+        align-items: center;
+        .attack-category {
+          width: auto;
+          height: 70%;
+          padding-right: .3em;
+        }
+        .status {
+          content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
+          opacity: .8;
+        }
+        .special {
+          content: url("https://www.pokebip.com/pokedex-images/types/speciale.png");
+          opacity: .8;
+        }
+        .physical {
+          content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
+          opacity: .8;
+        }
+        .attack-range {
+          width: auto;
+          height: 70%;
+        }
+        .melee {
+          content: url("https://i.imgur.com/bsvUkK6.png");
+          opacity: .8;
+        }
+        .ranged {
+          /*https://i.imgur.com/xgGwnku.png */
+        }
+    
       }
     }
+    .attack-stats {
+      display: flex;
+      justify-content: flex-start;
+      /* overflow: auto; */
+      /* scrollbar hidden (IE/Edge)
+      -ms-overflow-style: none;
+      /* scrollbar hidden (Chrome/Firefox/Safari) */
+      /* &::-webkit-scrollbar {
+        display: none;
+      } */ 
+    }
     .attack-stat {
+      padding-right: .5em;
       font-size: .6em;
       font-weight: normal;
       display: flex;

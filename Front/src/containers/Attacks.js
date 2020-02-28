@@ -15,8 +15,8 @@ const mapStateToProps = (state) => ({
   damage: 5,
   accuracy: 5,
   energy: 5,
-  category: '5',
-  range: '5',
+  category: 'status',
+  range: 'melee',
   effect: '5',
   type: '5',
 });
