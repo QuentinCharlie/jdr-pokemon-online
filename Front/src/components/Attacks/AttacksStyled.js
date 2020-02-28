@@ -12,7 +12,11 @@ const AttacksStyled = styled.div`
     width: calc((70vw - (30vh - 40px - 3em))/2 - 1.5em);
     height: calc(30vh - 40px - 3em);
     margin: 1em 1em 1em 0;
-    background-color: lightgray;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
   }
 `;
 

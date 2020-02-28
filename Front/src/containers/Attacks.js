@@ -1,29 +1,33 @@
 import { connect } from 'react-redux';
 
 // Du composant qui a besoin de data ou d'actions
-import Demo from 'src/components/Demo';
+import Attacks from 'src/components/Attacks';
 
 // Action Creators
-import { doSomething } from 'src/actions/demo';
+// import { doSomething } from 'src/actions/attacks';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
+// eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  message: state.message,
+  name: 'Teleport',
+  damage: 5,
+  accuracy: 5,
+  energy: 5,
+  category: '5',
+  range: '5',
+  effect: '5',
+  type: '5',
 });
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?
 // On prépare un objet avec les props attendues par le composant
-const mapDispatchToProps = (dispatch) => ({
-  doAction: () => {
-    dispatch(doSomething('Hello'));
-  },
-});
+const mapDispatchToProps = () => ({});
 
 // création du lien : container
 // connect(redux)(react) - connect(ce dont on a besoin)(qui en a besoin)
-const DemoContainer = connect(mapStateToProps, mapDispatchToProps)(Demo);
+const AttacksContainer = connect(mapStateToProps, mapDispatchToProps)(Attacks);
 
-export default DemoContainer;
+export default AttacksContainer;
