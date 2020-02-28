@@ -2,9 +2,12 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Popup } from 'semantic-ui-react';
 
 // == Import style
 import AttackButtonStyled from './AttackButtonStyled';
+
+import InfoAttackPopUp from './InfoAttackPopUp';
 
 // == Composant
 const AttackButton = ({
@@ -13,14 +16,34 @@ const AttackButton = ({
   accuracy,
   energy,
   category,
-  range,
+  distance,
   effect,
   type,
 }) => (
   <AttackButtonStyled>
     <div className={`button ${type}`}>
       <div className="attack">
-        {name}
+        <div className="attack-name">{name}</div>
+        <div className="attack-icons">
+          <div className={`attack-category ${category}`} />
+          <div className={`attack-distance ${distance}`} />
+          <Popup
+            content={(
+              <InfoAttackPopUp
+                name={name}
+                damage={damage}
+                accuracy={accuracy}
+                energy={energy}
+                category={category}
+                distance={distance}
+                effect={effect}
+                type={type}
+              />
+            )}
+            trigger={<div className="attack-info" />}
+            wide="very"
+          />
+        </div>
       </div>
       <div className="attack-stats">
         <div className="attack-stat">
@@ -47,19 +70,10 @@ AttackButton.propTypes = {
   accuracy: PropTypes.number.isRequired,
   energy: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
-  range: PropTypes.string.isRequired,
+  distance: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   effect: PropTypes.string.isRequired,
 };
 
 // == Export
 export default AttackButton;
-
-// name,
-// damage,
-// accuracy,
-// energy,
-// category,
-// range,
-// effect,
-// type,

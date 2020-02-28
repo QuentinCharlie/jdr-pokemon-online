@@ -12,7 +12,8 @@ const BoardStyled = styled.div`
     width: calc(70vw - 1em);
     height: 70vh;
     margin-left: 1em;
-    background-color: lightgrey; 
+    background-color: lightgrey;
+    box-shadow: inset 0 0 20px grey;
   }
 `;
 
