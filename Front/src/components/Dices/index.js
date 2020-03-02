@@ -108,8 +108,8 @@ const Dices = ({ openDiceList, isTrainerDicesActive, isPokemonDicesActive }) => 
           {isPokemonDicesActive && (
             <>
               <img className="avatar-dice pokemon" src="https://img.pokemondb.net/sprites/black-white/anim/normal/abra.gif" alt="" />
-              <button className="roll-button pokemon" onClick={handleDiceClick} >
-                <img className="back-arrow pokemon" src={backArrow} alt="arrow back to dices"/>
+              <button className="roll-button pokemon" onClick={handleDiceClick}>
+                <img className="back-arrow pokemon" src={backArrow} alt="arrow back to dices" />
                 <span />
               </button>
               <div className="dice-buttons">
