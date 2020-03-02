@@ -80,7 +80,7 @@ const DicesStyled = styled.div`
         width: calc((100% / 3) - .2em );
         &.pokemon {
           margin: 0 auto;
-          width: calc(((100% / 3) - .2em) / 1.5);
+          width: 80px;
           transform: scaleX(-1);
         }
       }
