@@ -17,6 +17,7 @@ const AttackButtonStyled = styled.div`
     background-color: #538fbe;
     font-size: 1.5em;
     border: 1px solid #2d6898;
+    cursor: pointer;
     /* BACKGROUND GRADIENT */
     background-image: linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
     background-image: -o-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
@@ -41,12 +42,12 @@ const AttackButtonStyled = styled.div`
     -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     -moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
-    transition: 0.15s;
+    transition: 0.2s;
 
     &:active {
       box-shadow: none;
       transform: translateY(6px);
-      transition: 0.2s;
+      transition: 0s;
       background-image: linear-gradient(bottom, rgb(88,154,204) 0%, rgb(90,150,199) 100%);
       background-image: -o-linear-gradient(bottom, rgb(88,154,204) 0%, rgb(90,150,199) 100%);
       background-image: -moz-linear-gradient(bottom, rgb(88,154,204) 0%, rgb(90,150,199) 100%);

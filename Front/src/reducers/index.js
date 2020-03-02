@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import demoReducer from './demo';
+import dicesReducer from './dices';
 
 const rootReducer = combineReducers({
-  demo: demoReducer,
+  dices: dicesReducer,
   // ... autres reducers
 });
 

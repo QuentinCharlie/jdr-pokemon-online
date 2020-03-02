@@ -8,7 +8,7 @@ import Log from 'src/components/Log';
 import Trainer from 'src/components/Trainer';
 import Pokemon from 'src/components/Pokemon';
 import Attacks from 'src/containers/Attacks';
-import Dices from 'src/components/Dices';
+import Dices from 'src/containers/Dices';
 
 // Styles
 import AppStyled from './AppStyled';

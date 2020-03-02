@@ -1,36 +1,170 @@
 /* eslint-disable react/button-has-type */
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 // Styles
 import DicesStyled from './DicesStyled';
 
 // == Import files
 import ashTrainer from './sacha-face.png';
+import ashTrainer2 from './sacha-droite.png';
+import backArrow from './left-arrow.png';
 
 
 // == Composant
-const Dices = () => (
-  <DicesStyled>
-    <div className="dices">
-      <div className="dice dice-trainer">
-        <img src={ashTrainer} alt="" />
-        <button>Dés Dresseur<span /></button>
-      </div>
-      <div className="dice dice-pokemon">
-        <img src="https://img.pokemondb.net/sprites/black-white/normal/abra.png" alt="" />
-        <button>Dés Pokémon<span /></button>
-      </div>
-      <div className=" dice dice-luck">
-        <img src="https://img.pokemondb.net/sprites/black-white/normal/chansey.png" alt="" />
-        <button>Roll Chance<span /></button>
-      </div>
-    </div>
-    <div className="trainer-list-dices" />
-    <div className="pokemon-list-dices" />
+const Dices = ({ openDiceList, isTrainerDicesActive, isPokemonDicesActive }) => {
+  const handleDiceClick = (e) => {
+    const diceListToOpen = e.currentTarget.className;
+    openDiceList(diceListToOpen);
+  };
 
-  </DicesStyled>
-);
+  const cssTrainerStyle = {
+    dice: true,
+    'dice-trainer': true,
+    active: isTrainerDicesActive,
+    hidden: isPokemonDicesActive,
+  };
 
+  const cssPokemonStyle = {
+    dice: true,
+    'dice-pokemon': true,
+    active: isPokemonDicesActive,
+    hidden: isTrainerDicesActive,
+  };
+
+  const cssLuckStyle = {
+    dice: true,
+    'dice-luck': true,
+    hidden: isTrainerDicesActive || isPokemonDicesActive,
+  };
+
+  return (
+    <DicesStyled>
+      <div className="dices">
+        <div className={classNames(cssTrainerStyle)}>
+          {isTrainerDicesActive === false && (
+            <>
+              <img className="avatar-dice trainer" src={ashTrainer} alt="" />
+              <button className="roll-button trainer" onClick={handleDiceClick}>
+                Dés Dresseur
+                <span />
+              </button>
+            </>
+          )}
+          {isTrainerDicesActive && (
+            <>
+              <img className="avatar-dice trainer" src={ashTrainer2} alt="" />
+              <button className="roll-button">
+                <img className="back-arrow trainer" src={backArrow} alt="arrow back to dices" onClick={handleDiceClick} />
+                <span />
+              </button>
+              <div className="dice-buttons">
+                <div className="buttons-legend">
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                </div>
+                <div className="dice-button-list">
+                  <button className="dice-button level-2">Bricolage</button>
+                  <button className="dice-button level-1">Charisme</button>
+                  <button className="dice-button level-3">Combat</button>
+                  <button className="dice-button level-1">Conduite</button>
+                  <button className="dice-button level-5">Dédection</button>
+                  <button className="dice-button level-1">Discrétion</button>
+                  <button className="dice-button level-0">Expression</button>
+                  <button className="dice-button level-2">Psychologie</button>
+                  <button className="dice-button level-4">Sport</button>
+                  <button className="dice-button level-1">Survie</button>
+                  <button className="dice-button level-0">Education</button>
+                  <button className="dice-button level-1">Géographie</button>
+                  <button className="dice-button level-1">Informatique</button>
+                  <button className="dice-button level-5">Légende</button>
+                  <button className="dice-button level-0">Médecine</button>
+                  <button className="dice-button level-1">Médecine Pokémon</button>
+                  <button className="dice-button level-0">Nature</button>
+                  <button className="dice-button level-1">Psychisme</button>
+                  <button className="dice-button level-3">Science</button>
+                  <button className="dice-button level-0">Pokélogie</button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className={classNames(cssPokemonStyle)}>
+          {isPokemonDicesActive === false && (
+            <>
+              <img className="avatar-dice pokemon" src="https://img.pokemondb.net/sprites/black-white/normal/abra.png" alt="" />
+              <button className="roll-button pokemon" onClick={handleDiceClick}>
+                Dés Pokémon
+                <span />
+              </button>
+            </>
+          )}
+          {isPokemonDicesActive && (
+            <>
+              <img className="avatar-dice pokemon" src="https://img.pokemondb.net/sprites/black-white/anim/normal/abra.gif" alt="" />
+              <button className="roll-button">
+                <img className="back-arrow pokemon" src={backArrow} alt="arrow back to dices" onClick={handleDiceClick} />
+                <span />
+              </button>
+              <div className="dice-buttons">
+                <div className="buttons-legend">
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                </div>
+                <div className="dice-button-list">
+                  <button className="dice-button level-2">Bricolage</button>
+                  <button className="dice-button level-1">Charisme</button>
+                  <button className="dice-button level-3">Combat</button>
+                  <button className="dice-button level-1">Conduite</button>
+                  <button className="dice-button level-5">Dédection</button>
+                  <button className="dice-button level-1">Discrétion</button>
+                  <button className="dice-button level-0">Expression</button>
+                  <button className="dice-button level-2">Psychologie</button>
+                  <button className="dice-button level-4">Sport</button>
+                  <button className="dice-button level-1">Survie</button>
+                  <button className="dice-button level-0">Education</button>
+                  <button className="dice-button level-1">Géographie</button>
+                  <button className="dice-button level-1">Informatique</button>
+                  <button className="dice-button level-5">Légende</button>
+                  <button className="dice-button level-0">Médecine</button>
+                  <button className="dice-button level-1">Médecine Pokémon</button>
+                  <button className="dice-button level-0">Nature</button>
+                  <button className="dice-button level-1">Psychisme</button>
+                  <button className="dice-button level-3">Science</button>
+                  <button className="dice-button level-0">Pokélogie</button>
+                </div>
+              </div>
+            </>
+          )}
+
+        </div>
+
+        <div className={classNames(cssLuckStyle)}>
+          <img className="avatar-dice" src="https://img.pokemondb.net/sprites/black-white/normal/chansey.png" alt="" />
+          <button className="roll-button luck" onClick={handleDiceClick}>
+            Roll Chance
+            <span />
+          </button>
+        </div>
+      </div>
+    </DicesStyled>
+  );
+};
+
+// == Validation
+Dices.propTypes = {
+  openDiceList: PropTypes.func.isRequired,
+  isTrainerDicesActive: PropTypes.bool.isRequired,
+  isPokemonDicesActive: PropTypes.bool.isRequired,
+};
 // == Export
 export default Dices;
