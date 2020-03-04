@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class MainController extends AbstractController
 {
@@ -19,6 +20,7 @@ class MainController extends AbstractController
 
     /**
      * @Route("/play", name="game_list")
+     * @IsGranted("ROLE_USER")
      */
     public function gameList()
     {
@@ -28,6 +30,7 @@ class MainController extends AbstractController
 
     /**
      * @Route("/ressources", name="ressources")
+     * @IsGranted("ROLE_USER")
      */
     public function ressources()
     {
