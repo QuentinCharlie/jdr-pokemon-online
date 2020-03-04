@@ -19,6 +19,8 @@ return [
         '/play' => [[['_route' => 'game_list', '_controller' => 'App\\Controller\\MainController::gameList'], null, null, null, false, false, null]],
         '/ressources' => [[['_route' => 'ressources', '_controller' => 'App\\Controller\\MainController::ressources'], null, null, null, false, false, null]],
         '/pokemon/list' => [[['_route' => 'list_pokemon', '_controller' => 'App\\Controller\\PokemonController::pokemonList'], null, null, null, false, false, null]],
+        '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
+        '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
         '/trainer/list' => [[['_route' => 'list_trainer', '_controller' => 'App\\Controller\\TrainerController::trainerList'], null, null, null, false, false, null]],
         '/admin' => [[['_route' => 'easyadmin', '_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], null, null, null, true, false, null]],
     ],

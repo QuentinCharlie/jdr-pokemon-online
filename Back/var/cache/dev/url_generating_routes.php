@@ -24,6 +24,8 @@ return [
     'list_pokemon' => [[], ['_controller' => 'App\\Controller\\PokemonController::pokemonList'], [], [['text', '/pokemon/list']], [], []],
     'detail_pokemon' => [['id'], ['_controller' => 'App\\Controller\\PokemonController::pokemonById'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/pokemon']], [], []],
     'profil' => [['slug'], ['_controller' => 'App\\Controller\\ProfilController::profil'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/profil']], [], []],
+    'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
+    'app_logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/logout']], [], []],
     'list_trainer' => [[], ['_controller' => 'App\\Controller\\TrainerController::trainerList'], [], [['text', '/trainer/list']], [], []],
     'detail_trainer' => [['id'], ['_controller' => 'App\\Controller\\TrainerController::trainerById'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/trainer']], [], []],
     'easyadmin' => [[], ['_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], [], [['text', '/admin/']], [], []],
