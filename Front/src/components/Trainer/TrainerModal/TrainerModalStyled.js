@@ -80,7 +80,6 @@ const TrainerModalStyled = styled.div`
             display: flex;
             flex-direction: column;
             width: 50%;
-            height: 100%;
             margin-right: .5em;
             .trainer-description-infos-basics {
               height: 50%;
@@ -166,8 +165,14 @@ const TrainerModalStyled = styled.div`
             height: 100%;
             .stat {
               height: calc(100% / 6);
-              span {
-                margin-bottom: .2em;
+              .title {
+                margin-bottom: .5em;
+              }
+              div {
+                margin-top: .1em;
+                span { 
+                  top: calc(50% - .5em);
+                }
               }
             }
           }      
