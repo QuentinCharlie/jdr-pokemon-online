@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 // == Import files
-import pokeGif from 'src/components/Pokemon/pikachu.gif';
-import pokePng from 'src/components/Pokemon/pikachu.png';
-import ashTrainer from './sacha-face.png';
-import ashTrainer2 from './sacha-droite.png';
-import backArrow from './left-arrow.png';
+import pokeGif from 'src/assets/images/pikachu.gif';
+import pokePng from 'src/assets/images/pikachu.png';
+import ashTrainer from 'src/assets/images/sacha-face.png';
+import ashTrainer2 from 'src/assets/images/sacha-droite.png';
+import backArrow from 'src/assets/images/left-arrow.png';
 
 // Styles
 import DicesStyled from './DicesStyled';

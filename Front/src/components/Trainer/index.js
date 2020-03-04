@@ -3,10 +3,10 @@
 import React from 'react';
 import { Modal } from 'semantic-ui-react';
 
+// == Import files
+import avatar from 'src/assets/images/red.jpg';
 // == Import components
 import TrainerModal from './TrainerModal';
-// == Import files
-import avatar from './red.jpg';
 // == Import Styles
 import TrainerStyled from './TrainerStyled';
 

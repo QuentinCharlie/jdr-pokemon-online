@@ -11,14 +11,14 @@ import Attacks from 'src/components/Attacks';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  name: 'Teleport',
+  name: 'Tonnerre',
   damage: 5,
   accuracy: 5,
   energy: 5,
   category: 'statut',
   distance: 'melee',
-  effect: 'Attaque permettant de prendre aussitôt la fuite.',
-  type: 'Psy',
+  effect: 'Attaque pouvant paralyser',
+  type: 'Electrik',
 });
 
 // == Actions / dispatch

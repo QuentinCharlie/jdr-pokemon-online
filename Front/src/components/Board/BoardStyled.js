@@ -14,6 +14,7 @@ const BoardStyled = styled.div`
     margin-left: 1em;
     background-color: lightgrey;
     box-shadow: inset 0 0 20px grey;
+    overflow: scroll;
   }
 `;
 

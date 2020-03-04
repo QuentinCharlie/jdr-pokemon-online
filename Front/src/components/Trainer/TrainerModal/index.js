@@ -7,10 +7,10 @@ import { Modal } from 'semantic-ui-react';
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
-import avatar from 'src/components/Trainer/red.jpg';
-import pokeAvatar from 'src/components/Pokemon/25.png';
-import pokeball from './pokeball.png';
-import trainer from './sacha.png';
+import avatar from 'src/assets/images/red.jpg';
+import pokeAvatar from 'src/assets/images/25.png';
+import pokeball from 'src/assets/images/pokeball.png';
+import trainer from 'src/assets/images/sacha.png';
 // == Import style
 import TrainerModalStyled from './TrainerModalStyled';
 
