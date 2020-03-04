@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 // == import files
 // import pokeGif from 'src/assets/images/pikachu.gif';
@@ -10,7 +11,9 @@ import BoardStyled from './BoardStyled';
 // == Composant
 const Board = () => (
   <BoardStyled>
-    <img src={map} alt="" />
+    <ScrollContainer className="scroll-container">
+      <img src={map} alt="" />
+    </ScrollContainer>
   </BoardStyled>
 );
 
