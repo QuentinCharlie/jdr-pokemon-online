@@ -4,13 +4,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-// Styles
-import DicesStyled from './DicesStyled';
-
 // == Import files
+import pokeGif from 'src/components/Pokemon/pikachu.gif';
+import pokePng from 'src/components/Pokemon/pikachu.png';
 import ashTrainer from './sacha-face.png';
 import ashTrainer2 from './sacha-droite.png';
 import backArrow from './left-arrow.png';
+
+// Styles
+import DicesStyled from './DicesStyled';
 
 
 // == Composant
@@ -98,7 +100,7 @@ const Dices = ({ openDiceList, isTrainerDicesActive, isPokemonDicesActive }) => 
         <div className={classNames(cssPokemonStyle)}>
           {isPokemonDicesActive === false && (
             <>
-              <img className="avatar-dice pokemon" src="https://img.pokemondb.net/sprites/black-white/normal/abra.png" alt="" />
+              <img className="avatar-dice pokemon" src={pokePng} alt="" />
               <button className="roll-button pokemon" onClick={handleDiceClick}>
                 Dés Pokémon
                 <span />
@@ -107,7 +109,7 @@ const Dices = ({ openDiceList, isTrainerDicesActive, isPokemonDicesActive }) => 
           )}
           {isPokemonDicesActive && (
             <>
-              <img className="avatar-dice pokemon" src="https://img.pokemondb.net/sprites/black-white/anim/normal/abra.gif" alt="" />
+              <img className="avatar-dice pokemon" src={pokeGif} alt="" />
               <button className="roll-button pokemon" onClick={handleDiceClick}>
                 <img className="back-arrow pokemon" src={backArrow} alt="arrow back to dices" />
                 <span />
