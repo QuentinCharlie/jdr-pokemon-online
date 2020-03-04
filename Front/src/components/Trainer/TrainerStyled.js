@@ -24,7 +24,8 @@ const TrainerStyled = styled.div`
       justify-content: center;
       /* align-items: center; */
       align-items: flex-start;
-      img {
+      .trainer-avatar-img {
+        width: 100%;
         object-fit: cover;
       }
       .health-container {
