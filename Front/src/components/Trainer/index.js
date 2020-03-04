@@ -1,5 +1,7 @@
 // == Import npm
 import React from 'react';
+import { Header, Image, Modal } from 'semantic-ui-react';
+
 
 // == Import files
 import avatar from './Kojiro_Koharu.jpg';
@@ -11,7 +13,24 @@ import TrainerStyled from './TrainerStyled';
 const Trainer = () => (
   <TrainerStyled>
     <div className="trainer-avatar">
-      <img src={avatar} alt="avatar" />
+      <Modal
+        closeIcon
+        style={{ width: '95vw', margin: 'auto' }}
+        trigger={<img src={avatar} alt="avatar" />}
+      >
+        <Modal.Header>Select a Photo</Modal.Header>
+        <Modal.Content image>
+          <Image wrapped size="medium" src={avatar} />
+          <Modal.Description>
+            <Header>Default Profile Image</Header>
+            <p>
+              We've found the following gravatar image associated with your e-mail
+              address.
+            </p>
+            <p>Is it okay to use this photo?</p>
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
       <div className="health-container">
         <span>40/100</span>
         <div className="health-bar" style={{ width: '40%' }} />
