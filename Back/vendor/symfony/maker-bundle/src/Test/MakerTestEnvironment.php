@@ -199,10 +199,10 @@ final class MakerTestEnvironment
 
     public function runMaker()
     {
-        $this->preMake();
-
         // Lets remove cache
         $this->fs->remove($this->path.'/var/cache');
+
+        $this->preMake();
 
         // We don't need ansi coloring in tests!
         $testProcess = MakerTestProcess::create(
@@ -289,6 +289,7 @@ final class MakerTestEnvironment
             $yaml = file_get_contents($this->path.'/config/packages/security.yaml');
             $manipulator = new YamlSourceManipulator($yaml);
             $data = $manipulator->getData();
+
             foreach ($guardAuthenticators as $firewallName => $id) {
                 if (!isset($data['security']['firewalls'][$firewallName])) {
                     throw new \Exception(sprintf('Could not find firewall "%s"', $firewallName));
@@ -320,9 +321,9 @@ final class MakerTestEnvironment
 
         $rootPath = str_replace('\\', '\\\\', realpath(__DIR__.'/../..'));
 
-        // allow dev dependencies
+        // dev deps already will allow dev deps, but we should prefer stable
         if (false !== strpos($targetVersion, 'dev')) {
-            MakerTestProcess::create('composer config minimum-stability dev', $this->flexPath)
+            MakerTestProcess::create('composer config prefer-stable true', $this->flexPath)
                 ->run();
         }
 
@@ -350,12 +351,11 @@ final class MakerTestEnvironment
         // fetch a few packages needed for testing
         MakerTestProcess::create('composer require phpunit browser-kit symfony/css-selector --prefer-dist --no-progress --no-suggest', $this->flexPath)
                         ->run();
-        $this->fs->remove($this->flexPath.'/vendor/symfony/phpunit-bridge');
 
         if ('\\' !== \DIRECTORY_SEPARATOR) {
-            $this->fs->symlink('../../../../../../vendor/symfony/phpunit-bridge', './vendor/symfony/phpunit-bridge');
-        } else {
-            $this->fs->mirror(\dirname(__DIR__, 2).'/vendor/symfony/phpunit-bridge', $this->flexPath.'/vendor/symfony/phpunit-bridge');
+            $this->fs->remove($this->flexPath.'/vendor/symfony/phpunit-bridge');
+
+            $this->fs->symlink($rootPath.'/vendor/symfony/phpunit-bridge', $this->flexPath.'/vendor/symfony/phpunit-bridge');
         }
 
         // temporarily ignoring indirect deprecations - see #237
@@ -450,10 +450,7 @@ echo json_encode($missingDependencies);
 
                     break;
                 case 'dev':
-                    $version = $data['dev'];
-                    $parts = explode('.', $version);
-
-                    $this->targetFlexVersion = sprintf('%s.%s.x-dev', $parts[0], $parts[1]);
+                    $this->targetFlexVersion = 'dev-master';
 
                     break;
                 default:
