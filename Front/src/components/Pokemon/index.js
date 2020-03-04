@@ -8,7 +8,7 @@ import ProgressBar from 'src/components/ProgressBar';
 import PokemonStyled from './PokemonStyled';
 
 // == Import files
-import pokeAvatar from './63.png';
+import pokeAvatar from './25.png';
 
 // == Composant
 const Pokemon = () => (
@@ -29,7 +29,7 @@ const Pokemon = () => (
     </div>
     <div className="pokemon-info">
       <div className="pokemon-presentation">
-        <span className="pokemon-name">Abra</span>
+        <span className="pokemon-name">Pikachu</span>
         <span className="pokemon-type">
           <img src="https://www.pokebip.com/pokedex-images/types/psy.png" alt="" />
         </span>
@@ -40,7 +40,7 @@ const Pokemon = () => (
           <ProgressBar color="yellow" number={2} maxNumber={16} />
         </div>
         <div className="stat">
-          <span><abbr title="ENDURENCE">END</abbr></span>
+          <span><abbr title="ENDURANCE">END</abbr></span>
           <ProgressBar color="yellow" number={2} maxNumber={16} />
         </div>
         <div className="stat">

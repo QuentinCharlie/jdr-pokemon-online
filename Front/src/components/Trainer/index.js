@@ -6,7 +6,7 @@ import { Modal } from 'semantic-ui-react';
 // == Import components
 import TrainerModal from './TrainerModal';
 // == Import files
-import avatar from './Kojiro_Koharu.jpg';
+import avatar from './red.jpg';
 // == Import Styles
 import TrainerStyled from './TrainerStyled';
 
