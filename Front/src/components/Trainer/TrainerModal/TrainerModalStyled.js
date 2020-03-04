@@ -116,15 +116,31 @@ const TrainerModalStyled = styled.div`
     }
 
     .wrapper-right {
-      background-color: lightgrey;
+      display: flex;
+      flex-direction: column;
       width: 30%;
       height: 100%;
-      /* .nav {
-        background-color: ;
+      .spendables {
+        background-color: lightblue;
+        height: calc(100% / 14);
+        margin-bottom: .5em;
       }
       .inventory {
-        background-color: ;
-      } */
+        height: calc(100% - (100% / 14));
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .inventory-nav {
+          background-color: coral;
+          height: calc(100% / 14);
+          width: 100%;
+        }
+        .inventory-content {
+          background-color: lightcoral;
+          height: calc(100% - (100% / 14));
+          width: 100%;
+        }
+      }
     }
   }
   

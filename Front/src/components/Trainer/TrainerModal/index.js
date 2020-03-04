@@ -38,48 +38,50 @@ const TrainerModal = () => (
         </div>
       </div>
       <div className="wrapper-right">
-        <div className="nav"></div>
         <div className="spendables">
           <div className="spendables-money"></div>
           <div className="spendables-xp"></div>
         </div>
         <div className="inventory">
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
-          <div className="inventory-item"></div>
+          <div className="inventory-nav"></div>
+          <div className="inventory-content">
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+            <div className="inventory-item"></div>
+          </div>
         </div>
       </div>
     </Modal.Content>
