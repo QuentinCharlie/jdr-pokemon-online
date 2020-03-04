@@ -27,6 +27,21 @@ class Pokemon
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $gender;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $weight;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $size;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $vitality;
@@ -254,6 +269,66 @@ class Pokemon
     public function setAttacks($attacks)
     {
         $this->attacks = $attacks;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of gender
+     */ 
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set the value of gender
+     *
+     * @return  self
+     */ 
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight
+     */ 
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set the value of weight
+     *
+     * @return  self
+     */ 
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of size
+     */ 
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set the value of size
+     *
+     * @return  self
+     */ 
+    public function setSize($size)
+    {
+        $this->size = $size;
 
         return $this;
     }

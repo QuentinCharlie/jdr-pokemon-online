@@ -32,6 +32,36 @@ class Trainer
     private $age;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $eyesColor;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $skinColor;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hairColor;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $corpulence;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $size;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $weight;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $vitality;
@@ -527,6 +557,126 @@ class Trainer
     public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of eyesColor
+     */ 
+    public function getEyesColor()
+    {
+        return $this->eyesColor;
+    }
+
+    /**
+     * Set the value of eyesColor
+     *
+     * @return  self
+     */ 
+    public function setEyesColor($eyesColor)
+    {
+        $this->eyesColor = $eyesColor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of skinColor
+     */ 
+    public function getSkinColor()
+    {
+        return $this->skinColor;
+    }
+
+    /**
+     * Set the value of skinColor
+     *
+     * @return  self
+     */ 
+    public function setSkinColor($skinColor)
+    {
+        $this->skinColor = $skinColor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hairColor
+     */ 
+    public function getHairColor()
+    {
+        return $this->hairColor;
+    }
+
+    /**
+     * Set the value of hairColor
+     *
+     * @return  self
+     */ 
+    public function setHairColor($hairColor)
+    {
+        $this->hairColor = $hairColor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of corpulence
+     */ 
+    public function getCorpulence()
+    {
+        return $this->corpulence;
+    }
+
+    /**
+     * Set the value of corpulence
+     *
+     * @return  self
+     */ 
+    public function setCorpulence($corpulence)
+    {
+        $this->corpulence = $corpulence;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of size
+     */ 
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set the value of size
+     *
+     * @return  self
+     */ 
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight
+     */ 
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set the value of weight
+     *
+     * @return  self
+     */ 
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
 
         return $this;
     }
