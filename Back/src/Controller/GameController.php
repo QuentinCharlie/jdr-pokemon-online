@@ -12,7 +12,7 @@ class GameController extends AbstractController
 
     /**
      * @Route("/game/{id}", name="game_board")
-     * @IsGranted("ROLE_USER")
+     * 
      */
     public function gameBoard()
     {
