@@ -14,7 +14,23 @@ const BoardStyled = styled.div`
     margin-left: 1em;
     background-color: lightgrey;
     box-shadow: inset 0 0 20px grey;
-    overflow: scroll;
+    .scroll-container {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      .map {
+        position: absolute;
+        z-index: auto;
+      }
+      .pikachu {
+        position: absolute;
+      }
+      #board {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 `;
 
