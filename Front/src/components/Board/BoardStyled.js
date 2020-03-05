@@ -17,7 +17,19 @@ const BoardStyled = styled.div`
     .scroll-container {
       height: 100%;
       width: 100%;
-      overflow: auto;
+      position: relative;
+      .map {
+        position: absolute;
+        z-index: auto;
+      }
+      .pikachu {
+        position: absolute;
+      }
+      #board {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 `;
