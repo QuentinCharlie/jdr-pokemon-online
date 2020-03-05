@@ -54,7 +54,7 @@ const TrainerModal = () => (
                   <div className="pokemon">
                     <img
                       src={pokeAvatar}
-                      style={{ 'background-color': '#FFE629' }}
+                      style={{ backgroundColor: '#FFE629' }}
                       alt=""
                     />
                   </div>
@@ -120,27 +120,27 @@ const TrainerModal = () => (
           <div className="stats-stat">
             <div className="stat-container">
               <div className="stat">
-                <span>FORCE</span>
+                <span className="title">FORCE</span>
                 <ProgressBar color="yellow" number={1} maxNumber={5} />
               </div>
               <div className="stat">
-                <span>ENDURANCE</span>
+                <span className="title">ENDURANCE</span>
                 <ProgressBar color="yellow" number={2} maxNumber={5} />
               </div>
               <div className="stat">
-                <span>CONCENTRATION</span>
+                <span className="title">CONCENTRATION</span>
                 <ProgressBar color="yellow" number={3} maxNumber={5} />
               </div>
               <div className="stat">
-                <span>VOLONTÉ</span>
+                <span className="title">VOLONTÉ</span>
                 <ProgressBar color="yellow" number={4} maxNumber={5} />
               </div>
               <div className="stat">
-                <span>DEXTERITÉ</span>
+                <span className="title">DEXTERITÉ</span>
                 <ProgressBar color="yellow" number={5} maxNumber={5} />
               </div>
               <div className="stat">
-                <span>VITALITÉ</span>
+                <span className="title">VITALITÉ</span>
                 <ProgressBar color="yellow" number={9} maxNumber={10} />
               </div>
             </div>

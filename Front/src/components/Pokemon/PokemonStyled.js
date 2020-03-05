@@ -40,7 +40,9 @@ const PokemonStyled = styled.div`
         background-color: gray;
         text-align: center;
         span {
+          height: 100%;
           position: relative;
+          top: calc(50% - .7em);
           z-index: 5;
         }
         /* BARRE VERTE*/
@@ -60,7 +62,9 @@ const PokemonStyled = styled.div`
         background-color: gray;
         text-align: center;
         span {
+          height: 100%;
           position: relative;
+          top: calc(50% - .7em);
           z-index: 5;
         }
         /* BARRE VERTE*/
@@ -115,7 +119,7 @@ const PokemonStyled = styled.div`
         .stat {
           display: flex;
           align-items: center;
-          span {
+          .title {
             padding: .2em 0;
             width: 30%;
             /* text-align: center; */

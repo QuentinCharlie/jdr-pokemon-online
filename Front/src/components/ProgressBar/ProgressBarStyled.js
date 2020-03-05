@@ -7,7 +7,9 @@ const ProgressBarStyled = styled.div`
   text-align: center;
   position: relative;
   span {
+    height: 100%;
     position: relative;
+    top: calc(50% - .7em);
     z-index: 5;
   }
   .bar {

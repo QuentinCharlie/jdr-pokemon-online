@@ -36,23 +36,23 @@ const Pokemon = () => (
       </div>
       <div className="pokemon-stats">
         <div className="stat">
-          <span><abbr title="FORCE">FOR</abbr></span>
+          <span className="title"><abbr title="FORCE">FOR</abbr></span>
           <ProgressBar color="yellow" number={2} maxNumber={16} />
         </div>
         <div className="stat">
-          <span><abbr title="ENDURANCE">END</abbr></span>
+          <span className="title"><abbr title="ENDURANCE">END</abbr></span>
           <ProgressBar color="yellow" number={2} maxNumber={16} />
         </div>
         <div className="stat">
-          <span><abbr title="CONCENTRATION">CON</abbr></span>
+          <span className="title"><abbr title="CONCENTRATION">CON</abbr></span>
           <ProgressBar color="yellow" number={11} maxNumber={16} />
         </div>
         <div className="stat">
-          <span><abbr title="VOLONTE">VOL</abbr></span>
+          <span className="title"><abbr title="VOLONTE">VOL</abbr></span>
           <ProgressBar color="yellow" number={6} maxNumber={16} />
         </div>
         <div className="stat">
-          <span><abbr title="DEXTERITE">DEX</abbr></span>
+          <span className="title"><abbr title="DEXTERITE">DEX</abbr></span>
           <ProgressBar color="yellow" number={9} maxNumber={16} />
         </div>
       </div>
