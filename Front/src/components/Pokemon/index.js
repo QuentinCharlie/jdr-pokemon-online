@@ -4,11 +4,11 @@ import React from 'react';
 // == Import Components
 import ProgressBar from 'src/components/ProgressBar';
 
+// == Import files
+import pokeAvatar from 'src/assets/images/25.png';
+
 // Styles
 import PokemonStyled from './PokemonStyled';
-
-// == Import files
-import pokeAvatar from './25.png';
 
 // == Composant
 const Pokemon = () => (
