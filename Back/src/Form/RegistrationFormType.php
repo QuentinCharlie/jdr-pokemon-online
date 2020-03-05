@@ -23,7 +23,7 @@ class RegistrationFormType extends AbstractType
                 
             ])
 
-            ->add('nickname', TextType::class,)
+            ->add('nickname', TextType::class)
 
             ->add('avatar', EntityType::class,[
                 'class' => Avatar::class,
