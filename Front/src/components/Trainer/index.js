@@ -4,7 +4,7 @@ import React from 'react';
 import { Modal } from 'semantic-ui-react';
 
 // == Import files
-import avatar from 'src/assets/images/red.jpg';
+import avatar from 'src/assets/images/ash.png';
 // == Import components
 import TrainerModal from './TrainerModal';
 // == Import Styles

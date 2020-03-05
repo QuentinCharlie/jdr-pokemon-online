@@ -14,7 +14,9 @@ const PokemonStyled = styled.div`
     width: calc((70vw - (30vh - 40px - 3em))/2 - 1.5em);
     height: calc(30vh - 40px - 3em);
     margin: 1em 1em 1em 0;
-    background-color: lightgray;
+    background-color: #f6e652;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(117, 117, 117, .6);
     padding: .5em;
     display: flex;
     .pokemon-avatar {
@@ -22,24 +24,28 @@ const PokemonStyled = styled.div`
       width: calc(30vh - 40px - 4em);
       margin-right: .5em;
       padding-bottom: 3em;
-      background-color: #fff;
+      /* background-color: #fff; */
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       img {
-        max-height: 100%;
+        max-height: 80%;
         max-width: 100%;
+        -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
+        filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
       }
       /* BARRE GRISE */
       .energy-container {
         position: absolute;
-        bottom: 1.5em;
+        bottom: 1.8em;
         height: 1.5em;
         width: 100%;
-        background-color: gray;
+        background-color: #f4df25;
+        border-radius: 10px;
         text-align: center;
         span {
+          color: white;
           height: 100%;
           position: relative;
           top: calc(50% - .7em);
@@ -50,7 +56,8 @@ const PokemonStyled = styled.div`
           position: absolute;
           bottom: 0em;
           height: 100%;
-          background-color: lightblue;
+          background-color: #98bfe6;
+          border-radius: 10px 0 0 10px;
         }
       }
       /* BARRE GRISE */
@@ -59,9 +66,11 @@ const PokemonStyled = styled.div`
         bottom: 0;
         height: 1.5em;
         width: 100%;
-        background-color: gray;
+        background-color: #f4df25;
+        border-radius: 10px;
         text-align: center;
         span {
+          color: white;
           height: 100%;
           position: relative;
           top: calc(50% - .7em);
@@ -72,14 +81,18 @@ const PokemonStyled = styled.div`
           position: absolute;
           bottom: 0em;
           height: 100%;
-          background-color: green;
+          background-color: #19cd70;
+          border-radius: 10px 0 0 10px;
         }
       }
     }
     .exp {
+      /* font-weight: bold; */
+      color: white;
       position: absolute;
-      top: 0; right: 0;
-      background-color: yellow;
+      top: .25em; right: 0;
+      background-color: #f4df25;
+      border-radius: 10px;
       padding: .2em .5em;
     }
 
@@ -102,6 +115,7 @@ const PokemonStyled = styled.div`
         flex-direction: column;
         margin-bottom: .6em;
         .pokemon-name {
+          color: white;
           font-size: 2em;
           font-weight: bold;
         }
@@ -115,11 +129,13 @@ const PokemonStyled = styled.div`
       }
       .pokemon-stats {
         width: 100%;
+        height: 100%;
         max-height: 100%;
         .stat {
           display: flex;
-          align-items: center;
+          align-items: flex-end;
           .title {
+            color: white;
             padding: .2em 0;
             width: 30%;
             /* text-align: center; */
