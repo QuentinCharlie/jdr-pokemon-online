@@ -1,12 +1,14 @@
 // == Import npm
 import React from 'react';
+import { Modal } from 'semantic-ui-react';
 
 // == Import Components
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
 import pokeAvatar from 'src/assets/images/25.png';
-
+// == Import components
+import PokemonModal from './PokemonModal';
 // Styles
 import PokemonStyled from './PokemonStyled';
 
@@ -14,7 +16,14 @@ import PokemonStyled from './PokemonStyled';
 const Pokemon = () => (
   <PokemonStyled>
     <div className="pokemon-avatar">
-      <img src={pokeAvatar} alt="avatar pokemon" />
+      <Modal
+        className="modal-pokemon"
+        style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
+        trigger={<div className="avatar-container"><img src={pokeAvatar} alt="avatar pokemon" /></div>}
+        closeIcon
+      >
+        <PokemonModal />
+      </Modal>
       <div className="exp">
         <span>50 XP</span>
       </div>
