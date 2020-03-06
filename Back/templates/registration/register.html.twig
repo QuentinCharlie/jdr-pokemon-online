@@ -4,31 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <title>Inscription</title>
 </head>
 
 <body>
 
-   <div class="divTitle">
+   <div class="divTitle divForm">
 
-    <h2>Register</h2>
+    <h2>Inscription</h2>
  
         <div>
         {{ form_start(registrationForm) }}
+        
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.nickname) }}
         {{ form_row(registrationForm.plainPassword) }}
-        </div>
-
-        <div>
         {{ form_row(registrationForm.avatar) }}
-        </div>
         
-        <button class="btn">Register</button>
-        {{ form_end(registrationForm) }}
-
+        <!-- Button trigger modal -->
+<button type="button" id="modalBttn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    Voir les avatars
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Avatars</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="card-group">
+                <div class="card">
+                  <img class="card-img-top" src="{{asset('assets/images/sacha.png')}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Sacha</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="{{asset('assets/images/ondine.png')}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Ondine</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="{{asset('assets/images/pierre.png')}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Pierre</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="card-group">
+                <div class="card">
+                  <img class="card-img-top" src="{{asset('assets/images/max.png')}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Max</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="{{asset('assets/images/flora.png')}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Flora</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="{{asset('assets/images/aurore.png')}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Aurore</h5>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
     </div>
+  </div>
+          
+<div>
+        <button class="btn-dark">Valider</button>
+        {{ form_end(registrationForm) }}
+</div>
+<span class="triangle"></span>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>

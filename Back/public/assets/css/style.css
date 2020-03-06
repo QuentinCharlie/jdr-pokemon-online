@@ -35,6 +35,29 @@ body{
 
 }
 
+.divForm{
+    height: 37.5em;
+}
+
+.divLogin{
+    height: 20em;
+}
+
+.form-group{
+    font-family: "Arial";
+    width:400px;
+    margin-left: 10em;
+    
+}
+
+#modalBttn{
+    margin-bottom:10px;
+}
+
+.card-body{
+    padding:0;
+}
+
 .triangle{
     margin-left: 41em;
     width: 0;
@@ -44,6 +67,11 @@ body{
     border-color: #000000 transparent transparent transparent;
 }
 
+.triangle2{
+    margin-left: 7.6em;
+}
+
+
 
 .authButton{
     padding:8px 20px 0 20px;
@@ -51,16 +79,6 @@ body{
     width: 9em;
     margin:auto;
     font-size:3em;
-}
-
-
-.triangle2{
-    margin-left: 7.6em;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px 10px 0 10px;
-    border-color: #000000 transparent transparent transparent;
 }
 
 .signUpBtton{
