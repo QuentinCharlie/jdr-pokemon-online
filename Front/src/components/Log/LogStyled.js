@@ -12,6 +12,15 @@ const LogStyled = styled.div`
         margin: 0 .5em .5em 0;
         background-color: lightblue;
       }
+      .ui.left.sidebar {
+        background-color: lightblue;
+        width: 40vw;
+        /* // for a fullboard size sidebar :
+        width: calc(100% - 15vh); */
+        .log-sidebar {
+          color: white;
+        }
+      }
     }
   }
   /* DESKTOP */
