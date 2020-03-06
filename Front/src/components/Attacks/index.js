@@ -21,46 +21,50 @@ const Attacks = ({
   type,
 }) => (
   <AttacksStyled>
-    <AttackButton
-      name={name}
-      damage={damage}
-      accuracy={accuracy}
-      energy={energy}
-      category={category}
-      distance={distance}
-      effect={effect}
-      type={type}
-    />
-    <AttackButton
-      name={name}
-      damage={damage}
-      accuracy={accuracy}
-      energy={energy}
-      category={category}
-      distance={distance}
-      effect={effect}
-      type={type}
-    />
-    <AttackButton
-      name={name}
-      damage={damage}
-      accuracy={accuracy}
-      energy={energy}
-      category={category}
-      distance={distance}
-      effect={effect}
-      type={type}
-    />
-    <AttackButton
-      name={name}
-      damage={damage}
-      accuracy={accuracy}
-      energy={energy}
-      category={category}
-      distance={distance}
-      effect={effect}
-      type={type}
-    />
+    <div className="mobile-tablet"></div>
+    
+    <div className="desktop">
+      <AttackButton
+        name={name}
+        damage={damage}
+        accuracy={accuracy}
+        energy={energy}
+        category={category}
+        distance={distance}
+        effect={effect}
+        type={type}
+      />
+      <AttackButton
+        name={name}
+        damage={damage}
+        accuracy={accuracy}
+        energy={energy}
+        category={category}
+        distance={distance}
+        effect={effect}
+        type={type}
+      />
+      <AttackButton
+        name={name}
+        damage={damage}
+        accuracy={accuracy}
+        energy={energy}
+        category={category}
+        distance={distance}
+        effect={effect}
+        type={type}
+      />
+      <AttackButton
+        name={name}
+        damage={damage}
+        accuracy={accuracy}
+        energy={energy}
+        category={category}
+        distance={distance}
+        effect={effect}
+        type={type}
+      />
+    </div>
   </AttacksStyled>
 );
 

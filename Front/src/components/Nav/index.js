@@ -21,16 +21,6 @@ const Nav = ({ visible, changeNavSidebarVisibility }) => {
   };
   return (
     <NavStyled>
-      <div className="desktop">
-        <a href="#" className="nav-item">Accueil</a>
-        <div className="nav-items">
-          <a href="#" className="nav-item">Dresseurs</a>
-          <a href="#" className="nav-item">Pokemon</a>
-          <a href="#" className="nav-item">Ressources</a>
-          <a href="#" className="nav-item">Compte Joueur</a>
-        </div>
-      </div>
-
       <div className="mobile-tablet">
         <div className="nav-button" onClick={handleClick} />
         <Sidebar
@@ -39,8 +29,18 @@ const Nav = ({ visible, changeNavSidebarVisibility }) => {
           direction="left"
           visible={visible}
         >
-         <div className="nav-sidebar" />
+         <div className="nav-sidebar">navbar/menu ici</div>
         </Sidebar>
+      </div>
+
+      <div className="desktop">
+        <a href="#" className="nav-item">Accueil</a>
+        <div className="nav-items">
+          <a href="#" className="nav-item">Dresseurs</a>
+          <a href="#" className="nav-item">Pokemon</a>
+          <a href="#" className="nav-item">Ressources</a>
+          <a href="#" className="nav-item">Compte Joueur</a>
+        </div>
       </div>
     </NavStyled>
   );
