@@ -2,22 +2,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Grid,
-  Header,
-  Image,
   Segment,
   Sidebar,
 } from 'semantic-ui-react';
 
+import { getSidebarNameCapitalize } from 'src/utils/functions';
 // Styles
 import NavStyled from './NavStyled';
 
 // == Import
 
 // == Composant
-const Nav = ({ visible, changeNavSidebarVisibility }) => {
-  const handleClick = () => {
-    changeNavSidebarVisibility();
+const Nav = ({ visible, changeSidebarVisibility }) => {
+  const handleClick = (e) => {
+    const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
+    changeSidebarVisibility(sidebarNameCapitalize, visible);
   };
   return (
     <NavStyled>
@@ -48,7 +47,7 @@ const Nav = ({ visible, changeNavSidebarVisibility }) => {
 
 Nav.propTypes = {
   visible: PropTypes.bool.isRequired,
-  changeNavSidebarVisibility: PropTypes.func.isRequired,
+  changeSidebarVisibility: PropTypes.func.isRequired,
 };
 
 // == Export

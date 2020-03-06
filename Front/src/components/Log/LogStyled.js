@@ -6,10 +6,12 @@ const LogStyled = styled.div`
       display: none
     }
     .mobile-tablet {
-      width: calc(15vh - .75em);
-      height: calc(15vh - .75em);
-      margin: 0 .5em .5em 0;
-      background-color: lightblue;
+      .log-button {
+        width: calc(15vh - .75em);
+        height: calc(15vh - .75em);
+        margin: 0 .5em .5em 0;
+        background-color: lightblue;
+      }
     }
   }
   /* DESKTOP */

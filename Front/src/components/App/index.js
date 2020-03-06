@@ -4,7 +4,7 @@ import React from 'react';
 // == Import
 import Nav from 'src/containers/Nav';
 import Board from 'src/components/Board';
-import Log from 'src/components/Log';
+import Log from 'src/containers/Log';
 import Trainer from 'src/components/Trainer';
 import Pokemon from 'src/components/Pokemon';
 import Attacks from 'src/containers/Attacks';

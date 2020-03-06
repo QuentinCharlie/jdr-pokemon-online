@@ -3,7 +3,7 @@ import { CHANGE_NAV_SIDEBAR_VISIBILITY } from 'src/actions/nav';
 
 // Initial State
 const initialState = {
-  isNavSiderbarVisible: false,
+  isNavSidebarVisible: false,
 };
 
 // Reducer
@@ -12,7 +12,7 @@ const navReducer = (state = initialState, action = {}) => {
     case CHANGE_NAV_SIDEBAR_VISIBILITY: 
         return {
           ...state,
-          isNavSiderbarVisible: !state.isNavSiderbarVisible,
+          isNavSidebarVisible: !state.isNavSidebarVisible,
         };
 
     default:

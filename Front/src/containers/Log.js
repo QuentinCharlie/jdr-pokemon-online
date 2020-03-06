@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 // Du composant qui a besoin de data ou d'actions
-import Nav from 'src/components/Nav';
+import Log from 'src/components/Log';
 
 // Action Creators
 import { changeSidebarVisibility } from 'src/actions/sidebar';
@@ -11,7 +11,7 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  visible: state.sidebar.isNavSidebarVisible,
+  visible: state.sidebar.isLogSidebarVisible,
 });
 
 // == Actions / dispatch
@@ -25,6 +25,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 // création du lien : container
 // connect(redux)(react) - connect(ce dont on a besoin)(qui en a besoin)
-const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
+const LogContainer = connect(mapStateToProps, mapDispatchToProps)(Log);
 
-export default NavContainer;
+export default LogContainer;
