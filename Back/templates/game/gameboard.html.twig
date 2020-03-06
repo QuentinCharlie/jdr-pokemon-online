@@ -1,19 +1,22 @@
-{% extends "base.html.twig" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameBoard</title>
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link href="../game/css/vendors~main.css" rel="stylesheet">
+    <link href="../game/css/main.css" rel="stylesheet">
+</head>
+<body>
 
-    {% block stylesheets %}
-        <link rel="shortcut icon" href="./favicon.ico">
-        <link href="../game/css/vendors~main.css" rel="stylesheet">
-        <link href="../game/css/main.css" rel="stylesheet">
-    {% endblock %}
+    <div id="root"></div>
+    
+    <script type="text/javascript" src="../game/js/runtime.19194e80d341ac8a1859.js"></script>
+    <script type="text/javascript" src="../game/js/vendors~main.a9f4b0c96bc17a443f74.js"></script>
+    <script type="text/javascript" src="../game/js/main.7180724632157bec5a42.js"></script>
+</body>
+</html>
 
-    {% block body %}
 
-        <div id="root"></div>
 
-        {% block javascripts %}
-            <script type="text/javascript" src="../game/js/runtime.19194e80d341ac8a1859.js"></script>
-            <script type="text/javascript" src="../game/js/vendors~main.a9f4b0c96bc17a443f74.js"></script>
-            <script type="text/javascript" src="../game/js/main.7180724632157bec5a42.js"></script>
-        {% endblock %}
-        
-    {% endblock %}
