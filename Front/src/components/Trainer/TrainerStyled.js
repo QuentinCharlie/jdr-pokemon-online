@@ -24,6 +24,7 @@ const TrainerStyled = styled.div`
       justify-content: center;
       /* align-items: center; */
       align-items: flex-start;
+      cursor: pointer;
       .trainer-avatar-img {
         width: 100%;
         object-fit: cover;

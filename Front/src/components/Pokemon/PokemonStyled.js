@@ -23,13 +23,19 @@ const PokemonStyled = styled.div`
       margin-right: .5em;
       padding-bottom: 3em;
       background-color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       position: relative;
-      img {
-        max-height: 100%;
-        max-width: 100%;
+      .avatar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5em;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        img {
+          max-height: 100%;
+          max-width: 100%;
+        }
       }
       /* BARRE GRISE */
       .energy-container {
