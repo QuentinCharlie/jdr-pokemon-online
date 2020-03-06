@@ -1,0 +1,74 @@
+body{
+    background-image: url("../images/map.png");
+}
+
+@font-face
+{
+    font-family: "PokemonClassic";
+    src: url(../font/PokemonClassic.ttf);
+}
+
+#navbarNav{
+    margin-left: 54em;
+}
+
+.imgTitle{
+    margin-bottom: 10px;
+}
+
+
+
+.divTitle{
+    margin: 9em 8em 2em 36em;
+    padding-top: 6px;
+    border-radius: 10px;
+    background-color: white;
+    width: 45em;
+    height: 15em;
+    border: 2px solid #343a40;
+    -webkit-box-shadow: 11px 13px 7px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 13px 7px -5px rgba(0,0,0,0.75);
+    box-shadow: 11px 13px 7px -5px rgba(0,0,0,0.75);
+    text-align: center;
+    color: #343a40;
+    font-family: "PokemonClassic";
+
+}
+
+.triangle{
+    margin-left: 41em;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #000000 transparent transparent transparent;
+}
+
+
+.authButton{
+    padding:8px 20px 0 20px;
+    height: 2.5em;
+    width: 9em;
+    margin:auto;
+    font-size:3em;
+}
+
+
+.triangle2{
+    margin-left: 7.6em;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #000000 transparent transparent transparent;
+}
+
+.signUpBtton{
+    margin-right: 42px;
+    margin-bottom: 15px;
+}
+
+.signInBtton{
+    margin-bottom: 15px;
+}
+

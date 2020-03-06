@@ -1,16 +1,34 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Register{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <title>Inscription</title>
+</head>
 
-{% block body %}
-    <h1>Register</h1>
+<body>
 
-    {{ form_start(registrationForm) }}
+   <div class="divTitle">
+
+    <h2>Register</h2>
+ 
+        <div>
+        {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.nickname) }}
-        {{ form_row(registrationForm.avatar) }}
         {{ form_row(registrationForm.plainPassword) }}
+        </div>
 
+        <div>
+        {{ form_row(registrationForm.avatar) }}
+        </div>
+        
         <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+        {{ form_end(registrationForm) }}
+
+    </div>
+</body>
+
+</html>
