@@ -16,6 +16,7 @@ const AppStyled = styled.div`
     .container--nav-to-dices {
       display: flex;      
       flex-direction: column;
+      overflow: hidden;
     }
   }
 
