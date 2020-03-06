@@ -8,10 +8,20 @@ const PokemonStyled = styled.div`
       display: none
     }
     .mobile-tablet {
-      width: calc(15vh - .75em);
-      height: calc(15vh - .75em);
-      margin: 0 .5em .5em 0;
-      background-color: lightsalmon;
+      .pokemon-button {
+        width: calc(15vh - .75em);
+        height: calc(15vh - .75em);
+        margin: 0 .5em .5em 0;
+        background-color: lightsalmon;
+      }
+      .ui.left.sidebar {
+        background-color: lightsalmon;
+        /* for a fullboard size sidebar : */
+        width: calc(100% - 15vh);
+        .pokemon-sidebar {
+          color: white;
+        }
+      }
     }
   }
 

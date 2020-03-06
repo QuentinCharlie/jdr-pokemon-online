@@ -6,10 +6,21 @@ const AttacksStyled = styled.div`
       display: none
     }
     .mobile-tablet {
-      width: calc(15vh - .75em);
-      height: calc(15vh - .75em);
-      margin: 0 .5em .5em 0;
-      background-color: lightskyblue;
+      .attacks-button {
+        width: calc(15vh - .75em);
+        height: calc(15vh - .75em);
+        margin: 0 .5em .5em 0;
+        background-color: lightskyblue;
+      }
+      .ui.left.sidebar {
+        background-color: lightskyblue;
+        width: 40vw;
+        /* for a fullboard size sidebar : 
+        width: calc(100% - 15vh); */
+        .attacks-sidebar {
+          color: white;
+        }
+      }
     }
   }
 

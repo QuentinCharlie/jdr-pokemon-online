@@ -6,10 +6,21 @@ const DicesStyled = styled.div`
       display: none
     }
     .mobile-tablet {
-      width: calc(15vh - .75em);
-      height: calc(15vh - .75em);
-      margin: 0 .5em .5em 0;
-      background-color: lightcoral;
+      .dices-button {
+        width: calc(15vh - .75em);
+        height: calc(15vh - .75em);
+        margin: 0 .5em .5em 0;
+        background-color: lightcoral;
+      }
+      .ui.left.sidebar {
+        background-color: lightcoral;
+        width: 30vw;
+        /* for a fullboard size sidebar :
+        width: calc(100% - 15vh); */
+        .dices-sidebar {
+          color: white;
+        }
+      }
     }
   }
 

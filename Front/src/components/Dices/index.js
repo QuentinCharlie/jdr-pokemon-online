@@ -3,6 +3,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {
+  Segment,
+  Sidebar,
+  Modal,
+} from 'semantic-ui-react';
+
+import { getSidebarNameCapitalize } from 'src/utils/functions';
 
 // == Import files
 import pokeGif from 'src/assets/images/pikachu.gif';
@@ -16,10 +23,20 @@ import DicesStyled from './DicesStyled';
 
 
 // == Composant
-const Dices = ({ openDiceList, isTrainerDicesActive, isPokemonDicesActive }) => {
+const Dices = ({
+  openDiceList,
+  isTrainerDicesActive,
+  isPokemonDicesActive,
+  visible,
+  changeSidebarVisibility,
+}) => {
   const handleDiceClick = (e) => {
     const diceListToOpen = e.currentTarget.className;
     openDiceList(diceListToOpen);
+  };
+  const handleSidebarButtonClick = (e) => {
+    const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
+    changeSidebarVisibility(sidebarNameCapitalize, visible);
   };
 
   const cssTrainerStyle = {
@@ -44,7 +61,17 @@ const Dices = ({ openDiceList, isTrainerDicesActive, isPokemonDicesActive }) => 
 
   return (
     <DicesStyled>
-      <div className="mobile-tablet"></div>
+      <div className="mobile-tablet">
+      <div className="dices-button" onClick={handleSidebarButtonClick} />
+      <Sidebar
+        as={Segment}
+        animation="overlay"
+        direction="left"
+        visible={visible}
+      >
+        <div className="dices-sidebar">dés ici</div>
+      </Sidebar>
+    </div>
       
       <div className="desktop">
         <div className="dices">
@@ -171,6 +198,8 @@ Dices.propTypes = {
   openDiceList: PropTypes.func.isRequired,
   isTrainerDicesActive: PropTypes.bool.isRequired,
   isPokemonDicesActive: PropTypes.bool.isRequired,
+  visible: PropTypes.bool.isRequired,
+  changeSidebarVisibility: PropTypes.func.isRequired,
 };
 // == Export
 export default Dices;

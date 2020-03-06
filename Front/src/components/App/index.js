@@ -5,8 +5,8 @@ import React from 'react';
 import Nav from 'src/containers/Nav';
 import Board from 'src/components/Board';
 import Log from 'src/containers/Log';
-import Trainer from 'src/components/Trainer';
-import Pokemon from 'src/components/Pokemon';
+import Trainer from 'src/containers/Trainer';
+import Pokemon from 'src/containers/Pokemon';
 import Attacks from 'src/containers/Attacks';
 import Dices from 'src/containers/Dices';
 

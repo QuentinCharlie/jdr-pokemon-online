@@ -5,6 +5,7 @@ import Dices from 'src/components/Dices';
 
 // Action Creators
 import { openDiceList } from 'src/actions/dices';
+import { changeSidebarVisibility } from 'src/actions/sidebar';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
@@ -13,6 +14,7 @@ import { openDiceList } from 'src/actions/dices';
 const mapStateToProps = (state) => ({
   isTrainerDicesActive: state.dices.isTrainerDicesActive,
   isPokemonDicesActive: state.dices.isPokemonDicesActive,
+  visible: state.sidebar.isDicesSidebarVisible,
 });
 
 // == Actions / dispatch
@@ -21,6 +23,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   openDiceList: (list) => {
     dispatch(openDiceList(list));
+  },
+  changeSidebarVisibility: (sidebarName, visible) => {
+    dispatch(changeSidebarVisibility(sidebarName, visible));
   },
 });
 

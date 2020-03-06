@@ -6,10 +6,20 @@ const TrainerStyled = styled.div`
       display: none
     }
     .mobile-tablet {
-      width: calc(15vh - .75em);
-      height: calc(15vh - .75em);
-      margin: 0 .5em .5em 0;
-      background-color: lightgreen;
+      .trainer-button {
+        width: calc(15vh - .75em);
+        height: calc(15vh - .75em);
+        margin: 0 .5em .5em 0;
+        background-color: lightgreen;
+      }
+      .ui.left.sidebar {
+        background-color: lightgreen;
+        /* for a fullboard size sidebar : */
+        width: calc(100% - 15vh);
+        .trainer-sidebar {
+          color: white;
+        }
+      }
     }
   }
 
