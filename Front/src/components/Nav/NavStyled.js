@@ -13,9 +13,12 @@ const NavStyled = styled.nav`
       margin-bottom: .5em;
       background-color: lightgray;
       }
-      .ui.left.sidebar {
+      .ui.bottom.sidebar {
         background-color: lightgrey;
-        width: 30vw;
+        margin-right: calc(7vw + .5em)!important;
+        margin-left: calc(93vw - 20vw - .5em)! important;
+        width: 20vw!important;
+        height: calc(100% - .5em)!important;
         /* // for a fullboard size sidebar :
         width: calc(93vw - .5em); */
         .nav-sidebar {

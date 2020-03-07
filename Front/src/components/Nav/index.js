@@ -25,7 +25,7 @@ const Nav = ({ visible, changeSidebarVisibility }) => {
         <Sidebar
           as={Segment}
           animation="overlay"
-          direction="left"
+          direction="bottom"
           visible={visible}
         >
          <div className="nav-sidebar">navbar/menu ici</div>
