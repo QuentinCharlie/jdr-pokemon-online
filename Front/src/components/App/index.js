@@ -16,7 +16,7 @@ import AppStyled from './AppStyled';
 // == Composant
 const App = () => (
   <AppStyled>
-    <div className="mobile-tablet">
+    <div className="mobile-tablet-app">
       <Board />
       <div className="container container--nav-to-dices">
         <Nav />
@@ -28,7 +28,7 @@ const App = () => (
       </div>
     </div>
     
-    <div className="desktop">
+    <div className="desktop-app">
       <Nav />
       <div className="main-wrapper">
         <div className="container container--board-log">

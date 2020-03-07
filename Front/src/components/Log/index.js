@@ -24,7 +24,7 @@ const Log = ({ visible, changeSidebarVisibility }) => {
         <Sidebar
           as={Segment}
           animation="overlay"
-          direction="left"
+          direction="top"
           visible={visible}
         >
           <div className="log-sidebar">logs ici</div>

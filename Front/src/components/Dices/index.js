@@ -66,7 +66,7 @@ const Dices = ({
       <Sidebar
         as={Segment}
         animation="overlay"
-        direction="left"
+        direction="bottom"
         visible={visible}
       >
         <div className="dices-sidebar">dés ici</div>

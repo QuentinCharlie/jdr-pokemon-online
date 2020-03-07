@@ -7,16 +7,19 @@ const LogStyled = styled.div`
     }
     .mobile-tablet {
       .log-button {
-        width: calc(15vh - .75em);
-        height: calc(15vh - .75em);
-        margin: 0 .5em .5em 0;
+        width: calc(7vw - .5em);
+        height: calc(7vw - .5em);
+        margin-bottom: .5em;
         background-color: lightblue;
       }
-      .ui.left.sidebar {
+      .ui.top.sidebar {
         background-color: lightblue;
-        width: 40vw;
+        margin-right: calc(7vw - 1em)! important;
+        margin-left: calc(43vw - .5em)! important;
+        width: 50vw!important;
+        height: calc(100vh - .5em)!important;
         /* // for a fullboard size sidebar :
-        width: calc(100% - 15vh); */
+        width: calc(93vw - .5em); */
         .log-sidebar {
           color: white;
         }

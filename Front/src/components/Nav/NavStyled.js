@@ -8,16 +8,16 @@ const NavStyled = styled.nav`
     }
     .mobile-tablet {
       .nav-button {
-      width: calc(15vh - .75em);
-      height: calc(15vh - .75em);
-      margin: .5em 0 .5em 0;
+      width: calc(7vw - .5em);
+      height: calc(7vw - .5em);
+      margin-bottom: .5em;
       background-color: lightgray;
       }
       .ui.left.sidebar {
         background-color: lightgrey;
         width: 30vw;
         /* // for a fullboard size sidebar :
-        width: calc(100% - 15vh); */
+        width: calc(93vw - .5em); */
         .nav-sidebar {
           color: white;
         }

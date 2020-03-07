@@ -7,16 +7,17 @@ const DicesStyled = styled.div`
     }
     .mobile-tablet {
       .dices-button {
-        width: calc(15vh - .75em);
-        height: calc(15vh - .75em);
-        margin: 0 .5em .5em 0;
+        width: calc(7vw - .5em);
+        height: calc(7vw - .5em);
         background-color: lightcoral;
       }
-      .ui.left.sidebar {
+      .ui.bottom.sidebar {
         background-color: lightcoral;
-        width: 30vw;
+        margin-left: .5em!important;
+        width: calc(93vw - 1em)!important;
+        height: 25vh!important;
         /* for a fullboard size sidebar :
-        width: calc(100% - 15vh); */
+        width: calc(93vw - .5em); */
         .dices-sidebar {
           color: white;
         }

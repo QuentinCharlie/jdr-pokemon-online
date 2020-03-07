@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const BoardStyled = styled.div`
   @media (max-width : 1024px) {
-    width: calc(100% - (15vh - .75em));
+    width: calc(93vw - 1em);
     height: calc(100vh - 1em);
     margin: 0.5em;
     background-color: lightgray; 
