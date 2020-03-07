@@ -14,6 +14,7 @@ const LogStyled = styled.div`
       }
       .ui.top.sidebar {
         background-color: lightblue;
+        padding: .5em;
         margin-right: calc(7vw - 1em)! important;
         margin-left: calc(43vw - .5em)! important;
         width: 50vw!important;
@@ -21,7 +22,44 @@ const LogStyled = styled.div`
         /* // for a fullboard size sidebar :
         width: calc(93vw - .5em); */
         .log-sidebar {
-          color: white;
+          height: 100%;
+          width: 100%;
+          padding: .2em;
+          .log {
+            width: 100%;
+            height: 90%;
+            margin-bottom: .5em;
+            overflow: auto;
+            /* scrollbar hidden (IE/Edge) */
+            -ms-overflow-style: none;
+            /* scrollbar hidden (Chrome/Firefox/Safari) */
+            &::-webkit-scrollbar {
+              display: none;
+            }
+            p {
+              margin-bottom: 0;
+            } 
+            .entry {
+              background-color: white;
+              margin-bottom: .3em;
+              padding: .5em;
+              .turn {
+                padding: 0 1em;
+              }
+            }
+          }
+          .current-player {
+            background-color: lightblue;
+            width: 100%;
+            height: calc(10% - .5em);
+            p {
+              margin-bottom: 0;
+            }
+            .turn-name {
+              font-size: 1.5em;
+              text-align: center;
+            }
+          }
         }
       }
     }

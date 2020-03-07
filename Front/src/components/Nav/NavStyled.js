@@ -15,6 +15,7 @@ const NavStyled = styled.nav`
       }
       .ui.bottom.sidebar {
         background-color: lightgrey;
+        padding: .5em;
         margin-right: calc(7vw + .5em)!important;
         margin-left: calc(93vw - 20vw - .5em)! important;
         width: 20vw!important;
@@ -23,6 +24,17 @@ const NavStyled = styled.nav`
         width: calc(93vw - .5em); */
         .nav-sidebar {
           color: white;
+          padding: .5em;
+          .nav-items {
+            display: flex;
+            flex-direction: column;
+            margin-top: .5em;
+          }
+          .nav-item {
+            margin-bottom: .5em;
+            display: block;
+            /* border: 1px solid black; */
+          }
         }
       }
     }
@@ -48,7 +60,6 @@ const NavStyled = styled.nav`
       .nav-item {
         margin-right: 1.5em;
         margin-bottom: 0;
-        
       }
     }
   }

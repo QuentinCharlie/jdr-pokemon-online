@@ -28,7 +28,15 @@ const Nav = ({ visible, changeSidebarVisibility }) => {
           direction="bottom"
           visible={visible}
         >
-         <div className="nav-sidebar">navbar/menu ici</div>
+         <div className="nav-sidebar">
+            <a href="#" className="nav-item">Accueil</a>
+            <div className="nav-items">
+              <a href="#" className="nav-item">Dresseurs</a>
+              <a href="#" className="nav-item">Pokemon</a>
+              <a href="#" className="nav-item">Ressources</a>
+              <a href="#" className="nav-item">Compte Joueur</a>
+            </div>
+         </div>
         </Sidebar>
       </div>
 
