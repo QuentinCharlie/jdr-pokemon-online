@@ -17,11 +17,6 @@ const BoardStyled = styled.div`
       .pikachu {
         position: absolute;
       }
-      #board {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-      }
     }
   }
 
@@ -41,11 +36,6 @@ const BoardStyled = styled.div`
       }
       .pikachu {
         position: absolute;
-      }
-      #board {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
       }
     }
   }
