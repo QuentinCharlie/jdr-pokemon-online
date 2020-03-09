@@ -56,19 +56,26 @@ const TrainerModalStyled = styled.div`
           height: 100%;
           width: 20%;
           padding: .5em;
-          background-color: lightblue;
           margin-right: .5em;
-          border-radius: 10px;
-          box-shadow: lightgrey 0 0 5px;
+          /* background-color: lightblue; */
+          /* border-radius: 10px;
+          box-shadow: lightgrey 0 0 5px; */
           .trainer-avatar-container {
-            overflow: hidden;
+            position: relative;
+            /* overflow: hidden; */
             height: 100%;
             width: 100%;
-            border-radius: 8px;
+            /* border-radius: 8px; */
             .modal-trainer-avatar {
-              width: 100%;
-              object-position: 50% 50%;
-              objet-fit: cover;
+              z-index: 10;
+              position: absolute;
+              bottom: -1em;
+              left: 50%;
+              transform: translateX(-50%);
+              /* object-position: 50% 50%;
+              objet-fit: cover; */
+              -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
+              filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
             }
           }
         }
@@ -82,15 +89,26 @@ const TrainerModalStyled = styled.div`
             width: 50%;
             margin-right: .5em;
             .trainer-description-infos-basics {
+              position: relative;
               height: 50%;
-              background-color: lightblue;
+              background-color: #69a3ff;
               margin-bottom: .5em;
               padding: .5em;
-              /* box-shadow: inset 2px 2px 5px grey; */
               border-radius: 10px;
-              box-shadow: lightgrey 0 0 5px;
+              box-shadow: 0 0 15px rgba(117, 117, 117, .6);
               color: white;
               font-size: 1.5em;
+              &::after {
+                position: absolute;
+                top: -0.17em;
+                right: .3em;
+                line-height: 1em;
+                font-weight: bold;
+                content: 'Trainer';
+                color: white;
+                opacity: .3;
+                text-transform: uppercase;
+              }
             }
             .trainer-description-infos-team {
               height: 50%; 
@@ -126,16 +144,28 @@ const TrainerModalStyled = styled.div`
             }
           }
           .trainer-description-appearance {
+            position: relative;
             display: flex;
             align-items: center;
-            background-color: lightblue;
+            background-color: #69a3ff;
             width: 50%;
             height: 100%;              
             padding:.5em;
             border-radius: 10px;
-            box-shadow: lightgrey 0 0 5px;
+            box-shadow: 0 0 15px rgba(117, 117, 117, .6);
             color: white;
             font-size: 1.5em;
+            &::after {
+              position: absolute;
+              top: -0.17em;
+              right: .3em;
+              line-height: 1em;
+              font-weight: bold;
+              content: 'Informations';
+              color: white;
+              opacity: .3;
+              text-transform: uppercase;
+            }
             .table-container {
               width: 75%;
             }
@@ -150,21 +180,43 @@ const TrainerModalStyled = styled.div`
       }
       .stats {
         height: calc(100% / 2.5);
+        min-height: calc(100% / 2.5);
         width: 100%;
         margin: .5em 0;
         display: flex;
+        flex-direction: row;
         .stats-stat {
-          background-color: lightgreen; 
+          position: relative;
+          z-index: 5;
+          color: white;
+          background-color: #32e689; 
           border-radius: 10px;
-          box-shadow: lightgrey 0 0 5px;
+          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
           height: 100%;
           width: calc((100% / 3) - .25em);
           padding: .5em;
+          &::after {
+            position: absolute;
+            top: -0.17em;
+            right: .3em;
+            line-height: 1em;
+            font-size: 1.5em;
+            font-weight: bold;
+            content: 'Stats';
+            color: white;
+            opacity: .3;
+            text-transform: uppercase;
+          }
           .stat-container {
+            padding-top: 2em;
+            padding-bottom: 1em;
             width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             .stat {
-              height: calc(100% / 6);
+              /* height: calc(100% / 6); */
               .title {
                 margin-bottom: .5em;
               }
@@ -178,17 +230,35 @@ const TrainerModalStyled = styled.div`
           }      
         }
         .stats-skills {
+          position: relative;
           border-radius: 10px;
-          box-shadow: lightgrey 0 0 5px;
-          background-color: green; 
+          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+          background-color: #32e689;
+          color: white;
           height: 100%;
           width: calc((100% / 3) * 2);
           margin-left: .5em;
           padding: .5em;
+          padding-top: 2em;
+          &::after {
+            position: absolute;
+            top: -0.17em;
+            right: .3em;
+            line-height: 1em;
+            font-size: 1.5em;
+            font-weight: bold;
+            content: 'Skills & Knowledge';
+            color: white;
+            opacity: .3;
+            text-transform: uppercase;
+          }
           table {
             width: 100%;
             height: 100%;
-            background-color: lightgreen;
+            th {
+              padding-bottom: 1em;
+              font-weight: bold;
+            }
           }
         }
       }
@@ -197,6 +267,8 @@ const TrainerModalStyled = styled.div`
         width: 100%;
         display: flex;
         .text-background {
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
           background-color: lightcoral; 
           width: calc(100% / 3);
           height: 100%;
@@ -227,19 +299,59 @@ const TrainerModalStyled = styled.div`
         margin-bottom: .5em;
         display: flex;
         .spendables-money {
-          box-shadow: lightgrey 0 0 5px;
+          position: relative;
+          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
           border-radius: 10px;
           height: 100%;
           width: 50%;
-          background-color: lightblue;
+          font-size: 1.5em;
+          color: white;
+          background-color: lightgrey;
           margin-right: .5em;
+          span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+          &::after {
+              position: absolute;
+              top: -0.17em;
+              right: .3em;
+              line-height: 1em;
+              font-weight: bold;
+              content: 'Money';
+              color: white;
+              opacity: .3;
+              text-transform: uppercase;
+            }
         }
         .spendables-xp {
-          box-shadow: lightgrey 0 0 5px;
+          position: relative;
+          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
           border-radius: 10px;
           height: 100%;
           width: 50%;
-          background-color: lightblue;
+          font-size: 1.5em;
+          color: white;
+          background-color: lightgrey;
+          span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+          &::after {
+            position: absolute;
+            top: -0.17em;
+            right: .3em;
+            line-height: 1em;
+            font-weight: bold;
+            content: 'Exp';
+            color: white;
+            opacity: .3;
+            text-transform: uppercase;
+          }
         }
       }
       .inventory {

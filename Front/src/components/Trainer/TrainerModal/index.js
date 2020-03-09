@@ -7,7 +7,7 @@ import { Modal, Popup } from 'semantic-ui-react';
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files for styles
-import avatar from 'src/assets/images/red.jpg';
+import avatar from 'src/assets/images/ash.png';
 import pokeAvatar from 'src/assets/images/25.png';
 import greyPokeball from 'src/assets/images/pokeball.png';
 import trainer from 'src/assets/images/sacha.png';
@@ -41,7 +41,7 @@ const TrainerModal = () => (
         <div className="trainer">
           <div className="trainer-avatar">
             <div className="trainer-avatar-container">
-              <img className="modal-trainer-avatar" src={avatar} alt="" />
+              <img className="modal-trainer-avatar" src={avatar} alt="trainer avatar" />
             </div>
           </div>
           <div className="trainer-description">
@@ -138,27 +138,27 @@ const TrainerModal = () => (
             <div className="stat-container">
               <div className="stat">
                 <span className="title">FORCE</span>
-                <ProgressBar color="yellow" number={1} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={1} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">ENDURANCE</span>
-                <ProgressBar color="yellow" number={2} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={2} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">CONCENTRATION</span>
-                <ProgressBar color="yellow" number={3} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={3} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">VOLONTÉ</span>
-                <ProgressBar color="yellow" number={4} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={4} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">DEXTERITÉ</span>
-                <ProgressBar color="yellow" number={5} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={5} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">VITALITÉ</span>
-                <ProgressBar color="yellow" number={9} maxNumber={10} />
+                <ProgressBar color="#19cd70" number={9} maxNumber={10} />
               </div>
             </div>
           </div>
@@ -180,12 +180,12 @@ const TrainerModal = () => (
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>Education</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td>2</td>
+                  <td>Dresseur</td>
                 </tr>
                 <tr>
                   <td>Charisme</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                   <td>G&eacute;ographie</td>
                   <td>&nbsp;</td>
@@ -193,10 +193,10 @@ const TrainerModal = () => (
                 </tr>
                 <tr>
                   <td>Combat</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                   <td>Informatique</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -209,10 +209,10 @@ const TrainerModal = () => (
                 </tr>
                 <tr>
                   <td>D&eacute;t&eacute;ction</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td>2</td>
+                  <td>Pokémon</td>
                   <td>M&eacute;decines</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -220,7 +220,7 @@ const TrainerModal = () => (
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>M&eacute;decine Pok&eacute;mon</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -228,7 +228,7 @@ const TrainerModal = () => (
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>Nature</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -241,19 +241,19 @@ const TrainerModal = () => (
                 </tr>
                 <tr>
                   <td>Sports</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td>2</td>
+                  <td>Course</td>
                   <td>Sciences</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Survie</td>
-                  <td>&nbsp;</td>
+                  <td>1</td>
                   <td>&nbsp;</td>
                   <td>Pok&eacute;logie</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td>2</td>
+                  <td>Table des types</td>
                 </tr>
               </tbody>
             </table>
@@ -267,36 +267,40 @@ const TrainerModal = () => (
       </div>
       <div className="wrapper-right">
         <div className="spendables">
-          <div className="spendables-money">5000 ₽</div>
-          <div className="spendables-xp">25 XP</div>
+          <div className="spendables-money">
+            <span>5000 ₽</span>
+          </div>
+          <div className="spendables-xp">
+            <span>25 XP</span>
+          </div>
         </div>
         <div className="inventory">
           <div className="inventory-nav">
             <div className="menu-item">
-              <img className="menu-item-img" src={ballMenu} alt="balls"/>
+              <img className="menu-item-img" src={ballMenu} alt="balls" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={materialMenu} alt=""/>
+              <img className="menu-item-img" src={materialMenu} alt="" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={medicMenu} alt=""/>
+              <img className="menu-item-img" src={medicMenu} alt="" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={combatItemMenu} alt=""/>
+              <img className="menu-item-img" src={combatItemMenu} alt="" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={trainingItemMenu} alt=""/>
+              <img className="menu-item-img" src={trainingItemMenu} alt="" />
             </div>
           </div>
           <div className="inventory-content">
             <div className="inventory-item">
               <div className="item-infos">
-                <Popup 
+                <Popup
                   content={
                     <div className="item-description">Cela sert à emprisonner un pokémon inoncent contre son gré afin de le faire combattre d'autres pokémon capturés à ma guise"</div>
                   }
                   trigger={
-                    <img className="item-img" src={pokeball} alt=""/>
+                    <img className="item-img" src={pokeball} alt="" />
                   }
                 />
                 <div className="item-name">Pokéball</div>
@@ -305,12 +309,12 @@ const TrainerModal = () => (
             </div>
             <div className="inventory-item">
               <div className="item-infos">
-                <Popup 
+                <Popup
                   content={
                     <div className="item-description">Cela sert à emprisonner un pokémon inoncent contre son gré afin de le faire combattre d'autres pokémon capturés à ma guise"</div>
                   }
                   trigger={
-                    <img className="item-img" src={superball} alt=""/>
+                    <img className="item-img" src={superball} alt="" />
                   }
                 />
                 <div className="item-name">Superball</div>
@@ -318,34 +322,34 @@ const TrainerModal = () => (
               <div className="item-quantity">x3</div>
             </div>
             <div className="inventory-item">
-                <Popup 
-                  content={
-                    <div className="item-description">Cela sert à se repérer dans les contrées perdues de Hyrule"</div>
-                  }
-                  trigger={
-                    <div className="item-infos">
-                      <img className="item-img" src={map} alt=""/>
-                      <div className="item-name">Carte</div>
-                    </div>
-                  }
-                />
+              <Popup
+                content={
+                  <div className="item-description">Cela sert à se repérer dans les contrées perdues de Hyrule"</div>
+                }
+                trigger={(
+                  <div className="item-infos">
+                    <img className="item-img" src={map} alt="" />
+                    <div className="item-name">Carte</div>
+                  </div>
+                )}
+              />
               <div className="item-quantity">x1</div>
             </div>
             <div className="inventory-item">
-                <Popup 
-                  content={
-                    <div className="item-description">Her</div>
-                  }
-                  trigger={
-                    <div className="item-infos">
-                      <img className="item-img" src={herbeRappel} alt=""/>
-                      <div className="item-name">Herbe Rappel</div>
-                    </div>
-                  }
-                />
+              <Popup
+                content={
+                  <div className="item-description">Her</div>
+                }
+                trigger={(
+                  <div className="item-infos">
+                    <img className="item-img" src={herbeRappel} alt="" />
+                    <div className="item-name">Herbe Rappel</div>
+                  </div>
+                )}
+              />
               <div className="item-quantity">x6</div>
             </div>
-            
+
           </div>
         </div>
       </div>
