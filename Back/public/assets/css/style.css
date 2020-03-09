@@ -105,7 +105,7 @@ body{
 }
 
 .card-deck{
-    margin: 0 20px 0 20px;
+    margin: 0 20px 0 200px;
 }
 
 .pokemonCard{
@@ -119,7 +119,7 @@ body{
 }
 
 .pokemonDetailCard{
-  margin: 0 20px 0 20px;
+  margin: 20px 20px 0 20px;
   padding: 20px
 }
 
@@ -151,4 +151,11 @@ body{
 
 .delete_btn:hover {
     color: white;
+}
+
+.pokemonTitle {
+    border: 1px solid;
+    padding: 0.7em;
+    background-color: white;
+    margin: 0 10em;
 }
