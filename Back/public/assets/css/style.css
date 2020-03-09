@@ -94,7 +94,28 @@ body{
     margin-bottom: 15px;
 }
 
-.card-pokemon{
-    min-width: 20%;
+.pokemonTitle{
+    font-family: "PokemonClassic";
+    text-align: center;
+    margin: 20px 0 20px 0;
+}
+
+.card-deck{
+    margin: 0 20px 0 20px;
+}
+
+.pokemonCard{
+    font-size: small;
+    font-family: "PokemonClassic";
+    padding: 10px;
+    text-align: center;
+    min-width: 17%;
+    max-width: 17%;
+    margin: 20px;
+}
+
+.pokemonDetailCard{
+  margin: 0 20px 0 20px;
+  padding: 20px
 }
 
