@@ -16,15 +16,8 @@ import AttacksStyled from './AttacksStyled';
 
 // == Composant
 const Attacks = ({
-  name,
-  damage,
-  accuracy,
-  energy,
-  category,
-  distance,
-  effect,
-  type,
-  visible, 
+  attacks,
+  visible,
   changeSidebarVisibility,
 }) => {
   const handleClick = (e) => {
@@ -44,62 +37,29 @@ const Attacks = ({
           <div className="attacks-sidebar">boutons des attaques ici</div>
         </Sidebar>
       </div>
-      
+
       <div className="desktop">
-        <AttackButton
-          name={name}
-          damage={damage}
-          accuracy={accuracy}
-          energy={energy}
-          category={category}
-          distance={distance}
-          effect={effect}
-          type={type}
-        />
-        <AttackButton
-          name={name}
-          damage={damage}
-          accuracy={accuracy}
-          energy={energy}
-          category={category}
-          distance={distance}
-          effect={effect}
-          type={type}
-        />
-        <AttackButton
-          name={name}
-          damage={damage}
-          accuracy={accuracy}
-          energy={energy}
-          category={category}
-          distance={distance}
-          effect={effect}
-          type={type}
-        />
-        <AttackButton
-          name={name}
-          damage={damage}
-          accuracy={accuracy}
-          energy={energy}
-          category={category}
-          distance={distance}
-          effect={effect}
-          type={type}
-        />
+        {attacks.map((attack, index) => (
+          <AttackButton
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            name={attack.name}
+            damage={attack.damage}
+            accuracy={attack.accuracy}
+            energy={attack.energy}
+            category={attack.category}
+            distance={attack.distance}
+            effect={attack.effect}
+            type={attack.type}
+          />
+        ))}
       </div>
     </AttacksStyled>
   );
 };
 
 Attacks.propTypes = {
-  name: PropTypes.string.isRequired,
-  damage: PropTypes.number.isRequired,
-  accuracy: PropTypes.number.isRequired,
-  energy: PropTypes.number.isRequired,
-  category: PropTypes.string.isRequired,
-  distance: PropTypes.string.isRequired,
-  effect: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  attacks: PropTypes.array.isRequired,
   visible: PropTypes.bool.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
