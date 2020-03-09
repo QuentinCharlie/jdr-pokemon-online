@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Attacks from 'src/components/Attacks';
 
 // Action Creators
-// import { doSomething } from 'src/actions/attacks';
+import { changeSidebarVisibility } from 'src/actions/sidebar';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
@@ -19,12 +19,17 @@ const mapStateToProps = (state) => ({
   distance: 'melee',
   effect: 'Attaque pouvant paralyser',
   type: 'Electrik',
+  visible: state.sidebar.isAttacksSidebarVisible,
 });
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?
 // On prépare un objet avec les props attendues par le composant
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  changeSidebarVisibility: (sidebarName, visible) => {
+    dispatch(changeSidebarVisibility(sidebarName, visible));
+  },
+});
 
 // création du lien : container
 // connect(redux)(react) - connect(ce dont on a besoin)(qui en a besoin)

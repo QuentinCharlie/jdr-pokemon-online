@@ -2,14 +2,61 @@
 
 {% block body %}
 
-<h2>Détaile du <'nom de pokemon'></h2>
+<h2 class="pokemonTitle">Détails de {{pokemon.name}}</h2>
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="card pokemonDetailCard">
+
+  <div class="row no-gutters">
+
+    <div class="col-4">
+      <img src="{{asset('assets/images/sprites-pokemon/'~ pokemon.number ~'.png')}}" class="card-img-top"
+        alt="{{pokemon.name}}">
     </div>
+
+    <div class="card-body">
+      <div class="col-6">
+        {% for type in pokemon.types%}
+        <h3 style="color:#{{ type.color }}">{{type.name}}</h3>
+        {% endfor %}
+  
+
+        <p> HP : {{ pokemon.vitality}}</p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{pokemon.vitality}}%" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+        <p> Force : {{pokemon.strength}} </p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{pokemon.strength}}%" aria-valuemin="0"
+            aria-valuemax="26"></div>
+        </div>
+        <p> Endurance : {{pokemon.endurance}} </p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{pokemon.endurance}}%;" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+        <p> Concentration : {{pokemon.concentration}}</p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{pokemon.concentration}}%;" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+        <p> Volonté : {{pokemon.willpower}}</p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{pokemon.willpower}}%;" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+        <p> Dexterité : {{pokemon.dexterity}}</p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: {{pokemon.dexterity}}%;" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
+
+</div>
+</div>
 {% endblock %}

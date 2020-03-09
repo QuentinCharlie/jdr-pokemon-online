@@ -2,10 +2,27 @@ import styled from 'styled-components';
 
 const BoardStyled = styled.div`
   @media (max-width : 1024px) {
-    width: calc(100% - 1em);
+    width: calc(93vw - 1em);
     height: calc(100vh - 1em);
     margin: 0.5em;
     background-color: lightgray; 
+    .scroll-container {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      .map {
+        position: absolute;
+        z-index: auto;
+      }
+      .pikachu {
+        position: absolute;
+      }
+      #board {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 
   @media (min-width: 1025px) {

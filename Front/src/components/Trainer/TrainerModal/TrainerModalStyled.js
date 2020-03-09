@@ -178,10 +178,18 @@ const TrainerModalStyled = styled.div`
           }      
         }
         .stats-skills {
-          background-color: lightgreen; 
+          border-radius: 10px;
+          box-shadow: lightgrey 0 0 5px;
+          background-color: green; 
           height: 100%;
           width: calc((100% / 3) * 2);
           margin-left: .5em;
+          padding: .5em;
+          table {
+            width: 100%;
+            height: 100%;
+            background-color: lightgreen;
+          }
         }
       }
       .text {
@@ -215,9 +223,24 @@ const TrainerModalStyled = styled.div`
       width: 30%;
       height: 100%;
       .spendables {
-        background-color: lightblue;
         height: calc(100% / 14);
         margin-bottom: .5em;
+        display: flex;
+        .spendables-money {
+          box-shadow: lightgrey 0 0 5px;
+          border-radius: 10px;
+          height: 100%;
+          width: 50%;
+          background-color: lightblue;
+          margin-right: .5em;
+        }
+        .spendables-xp {
+          box-shadow: lightgrey 0 0 5px;
+          border-radius: 10px;
+          height: 100%;
+          width: 50%;
+          background-color: lightblue;
+        }
       }
       .inventory {
         height: calc(100% - (100% / 14));
@@ -228,13 +251,33 @@ const TrainerModalStyled = styled.div`
           background-color: coral;
           height: calc(100% / 14);
           width: 100%;
+          display: flex;
+          justify-content: space-around;
+          .menu-item {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            &-img {
+            }
+          }
         }
         .inventory-content {
           background-color: lightcoral;
           height: calc(100% - (100% / 14));
           width: 100%;
+          display:flex;
+          flex-direction: column;
+          padding: .5em 1.5em .5em 1em;
+          overflow: auto;
           .inventory-item {
-           
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .2em;
+            .item-infos {
+              display: flex;
+              align-items: center;
+            }
           }
         }
       }
