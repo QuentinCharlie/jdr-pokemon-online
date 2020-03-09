@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "baseAuth.htlm.twig" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <title>Inscription</title>
-</head>
-
-<body>
+{% block body %}
 
    <div class="divTitle divForm">
 
@@ -23,11 +13,21 @@
         {{ form_row(registrationForm.nickname) }}
         {{ form_row(registrationForm.plainPassword) }}
         {{ form_row(registrationForm.avatar) }}
+
+        
         
         <!-- Button trigger modal -->
 <button type="button" id="modalBttn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
     Voir les avatars
   </button>
+
+  <div>
+    <button class="btn-dark">Valider</button>
+    {{ form_end(registrationForm) }}
+  </div>
+
+  <span class="triangle"></span>
+    </div>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -41,45 +41,16 @@
         </div>
         <div class="modal-body">
             <div class="card-group">
-                <div class="card">
-                  <img class="card-img-top" src="{{asset('assets/images/sacha.png')}}" alt="Card image cap">
+
+              <!-- Call avatar card from database -->
+              {% for avatar in avatars %}
+                <div class="card-avatar">
+                  <img class="card-img-top" src="{{asset('assets/images/'~ avatar.name ~'.png')}}" alt="Card image cap">
                   <div class="card-body">
-                    <h5 class="card-title">Sacha</h5>
+                    <h5 class="card-title">{{avatar.name}}</h5>
                   </div>
                 </div>
-                <div class="card">
-                  <img class="card-img-top" src="{{asset('assets/images/ondine.png')}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Ondine</h5>
-                  </div>
-                </div>
-                <div class="card">
-                  <img class="card-img-top" src="{{asset('assets/images/pierre.png')}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Pierre</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="card-group">
-                <div class="card">
-                  <img class="card-img-top" src="{{asset('assets/images/max.png')}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Max</h5>
-                  </div>
-                </div>
-                <div class="card">
-                  <img class="card-img-top" src="{{asset('assets/images/flora.png')}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Flora</h5>
-                  </div>
-                </div>
-                <div class="card">
-                  <img class="card-img-top" src="{{asset('assets/images/aurore.png')}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Aurore</h5>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -88,16 +59,7 @@
     </div>
   </div>
           
-<div>
-        <button class="btn-dark">Valider</button>
-        {{ form_end(registrationForm) }}
-</div>
-<span class="triangle"></span>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
 
-</html>
+
+    {% endblock %}
