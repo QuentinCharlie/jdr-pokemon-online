@@ -13,6 +13,8 @@ import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
 import pokeAvatar from 'src/assets/images/25.png';
+import heartIcon from 'src/assets/images/heart.svg';
+import zapIcon from 'src/assets/images/zap.svg';
 // == Import components
 import PokemonModal from './PokemonModal';
 // Styles
@@ -53,10 +55,12 @@ const Pokemon = ({ visible, changeSidebarVisibility }) => {
           </div>
           <div className="energy-container">
             <span>45/50</span>
+            <img src={zapIcon} alt="energy logo" />
             <div className="energy-bar" style={{ width: '90%' }} />
           </div>
           <div className="health-container">
             <span>20/100</span>
+            <img src={heartIcon} alt="heart logo" />
             <div className="health-bar" style={{ width: '20%' }} />
           </div>
         </div>
