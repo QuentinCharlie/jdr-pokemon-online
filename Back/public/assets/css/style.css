@@ -43,6 +43,10 @@ body{
     height: 26em;
 }
 
+.divProfil{
+    height: 28em;
+}
+
 .form-group{
     font-family: "Arial";
     width:400px;
@@ -119,3 +123,32 @@ body{
   padding: 20px
 }
 
+#profil_img{
+    margin: 1.5em 0;
+    width : 200px; height : 200px;
+    border: none;
+    -moz-border-radius : 100px;
+    -webkit-border-radius : 100px;
+    border-radius : 100px;
+    -webkit-box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.4);
+    -moz-box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.4);
+    box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.4);
+}
+
+.profil_edit p {
+    margin-bottom: 3em;
+}
+
+.delete_btn {
+    padding: 0.7em;
+    border-radius: 12px 12px 12px 12px;
+    -moz-border-radius: 12px 12px 12px 12px;
+    -webkit-border-radius: 12px 12px 12px 12px;
+    border: 1px solid #782033;
+    color: white;
+    background-color: #bd2f4c;
+}
+
+.delete_btn:hover {
+    color: white;
+}
