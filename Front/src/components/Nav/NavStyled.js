@@ -49,8 +49,9 @@ const NavStyled = styled.nav`
       width: 100vw;
       height: 40px;
       margin-bottom: 1em;
-      padding: 0 0 0 1em;
-      background-color: lightgray;
+      padding: 0 1em;
+      background-color: #6c757d;
+      box-shadow: 0 0 15px rgba(117, 117, 117, .6);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -58,8 +59,19 @@ const NavStyled = styled.nav`
         display: flex;
       }
       .nav-item {
-        margin-right: 1.5em;
+        color: white;
+        line-height: 40px;
+        padding: 0 1em;
+        margin-right: 0em;
         margin-bottom: 0;
+        /* border-left: 1px solid black;
+        border-right: 1px solid black; */
+        transition: .3s;
+        &:hover {
+          box-shadow: inset 0 -3px red;
+          background-color: rgb(90,97,104);
+          transition: .2s;
+        }
       }
     }
   }
