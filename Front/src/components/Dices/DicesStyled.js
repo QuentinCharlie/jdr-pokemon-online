@@ -42,21 +42,28 @@ const DicesStyled = styled.div`
       }
       .dice {
         display: flex;
+        border-radius: 10px;
         background: linear-gradient(180deg, lightgray 0%, rgba(255,255,255,0) 28%);
         flex-grow: 1;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
         width: calc((100% / 3) - .2em );
+        &.hidden {
+          display: none;
+        }
         .avatar-dice {
           object-fit: contain;
           height: 48%;
           margin-bottom: .6em;
+          &.trainer {
+            padding: 1.1em;
+          }
         }
         .roll-button {
           background: linear-gradient(0deg, rgba(240,0,0,1) 0%, rgba(238,21,21,1) 100%);
           border-bottom: 2px solid black;
-          border-radius: 5px;
+          border-radius: 10px;
           color: white;
           font-weight: bold;
           box-shadow: 0 10px 0 lightgrey;
@@ -151,7 +158,7 @@ const DicesStyled = styled.div`
               margin-left: .4em;
               margin-bottom: .4em;
               border: none;
-              border-radius: 3px;
+              border-radius: 10px;
               box-shadow: 0 0 5px lightgrey;
               color: #fff;
               padding: .8em .4em;
@@ -179,9 +186,6 @@ const DicesStyled = styled.div`
         }
       } 
     }
-  }
-  .hidden {
-    display: none;
   }
 `;
 

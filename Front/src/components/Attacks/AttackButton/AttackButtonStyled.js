@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
+// import Electric from 'src/assets/images/types/Electric.svg';
+
 const AttackButtonStyled = styled.div`
   width: 100%;
   height: 48%;
   margin: 0 0 .5em 0;
   @media (min-width: 1400px) {
     width: 49%;
-    margin: 0 0em .5em 0;
+    /* margin: 0 0em .5em 0; */
   }
   .button {
     position: relative;
@@ -32,6 +34,7 @@ const AttackButtonStyled = styled.div`
     /* SHADOW */
     box-shadow: 0 0 15px rgba(117, 117, 117, .3);
     transition: 0.2s;
+
     
     &:active {
       box-shadow: none;

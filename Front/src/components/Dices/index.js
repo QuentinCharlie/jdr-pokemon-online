@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import {
   Segment,
   Sidebar,
-  Modal,
 } from 'semantic-ui-react';
 
 import { getSidebarNameCapitalize } from 'src/utils/functions';
@@ -62,17 +61,17 @@ const Dices = ({
   return (
     <DicesStyled>
       <div className="mobile-tablet">
-      <div className="dices-button" onClick={handleSidebarButtonClick} />
-      <Sidebar
-        as={Segment}
-        animation="overlay"
-        direction="bottom"
-        visible={visible}
-      >
-        <div className="dices-sidebar">dés ici</div>
-      </Sidebar>
-    </div>
-      
+        <div className="dices-button" onClick={handleSidebarButtonClick} />
+        <Sidebar
+          as={Segment}
+          animation="overlay"
+          direction="bottom"
+          visible={visible}
+        >
+          <div className="dices-sidebar">dés ici</div>
+        </Sidebar>
+      </div>
+
       <div className="desktop">
         <div className="dices">
           <div className={classNames(cssTrainerStyle)}>
