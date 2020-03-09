@@ -51,6 +51,7 @@ const Attacks = ({
             distance={attack.distance}
             effect={attack.effect}
             type={attack.type}
+            color={attack.color}
           />
         ))}
       </div>

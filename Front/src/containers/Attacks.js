@@ -20,7 +20,8 @@ const mapStateToProps = (state) => ({
       category: 'special',
       distance: 'rayon',
       effect: 'Sur 10, paralyse la cible',
-      type: 'Electrique',
+      type: 'Electrik',
+      color: '#ffbb33',
     },
     {
       name: 'Vive-Attaque',
@@ -31,6 +32,7 @@ const mapStateToProps = (state) => ({
       distance: 'rayon',
       effect: 'Initiative +10',
       type: 'Normal',
+      color: '#bbaabb',
     },
     {
       name: 'Mimi-Queue',
@@ -41,6 +43,7 @@ const mapStateToProps = (state) => ({
       distance: 'cible',
       effect: 'END-1 jusqu\'à la fin du combat ou au rappel du Pokemon adversaire',
       type: 'Normal',
+      color: '#bbaabb',
     },
     {
       name: 'Rugissement',
@@ -51,6 +54,7 @@ const mapStateToProps = (state) => ({
       distance: 'cible',
       effect: 'FOR-1 jusqu\'à la fin du combat ou au rappel du pokemon adversaire',
       type: 'Normal',
+      color: '#bbaabb',
     },
   ],
   visible: state.sidebar.isAttacksSidebarVisible,
