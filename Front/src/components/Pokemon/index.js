@@ -6,6 +6,8 @@ import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
 import pokeAvatar from 'src/assets/images/25.png';
+import zapIcon from 'src/assets/images/zap.svg';
+import heartIcon from 'src/assets/images/heart.svg';
 
 // Styles
 import PokemonStyled from './PokemonStyled';
@@ -20,10 +22,12 @@ const Pokemon = () => (
       </div>
       <div className="energy-container">
         <span>45/50</span>
+        <img src={zapIcon} alt="" />
         <div className="energy-bar" style={{ width: '90%' }} />
       </div>
       <div className="health-container">
         <span>20/100</span>
+        <img src={heartIcon} alt="" />
         <div className="health-bar" style={{ width: '20%' }} />
       </div>
     </div>

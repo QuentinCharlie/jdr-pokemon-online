@@ -45,6 +45,14 @@ const TrainerStyled = styled.div`
           position: relative;
           z-index: 5;
         }
+        img {
+          position: absolute;
+          z-index: 5;
+          color: white;
+          left: .3em;
+          bottom: .15em;
+          height: 80%;
+        }
         /* BARRE VERTE*/
         .health-bar {
           position: absolute;

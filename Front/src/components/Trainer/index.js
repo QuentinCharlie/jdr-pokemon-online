@@ -5,6 +5,8 @@ import { Modal } from 'semantic-ui-react';
 
 // == Import files
 import avatar from 'src/assets/images/ash.png';
+import heartIcon from 'src/assets/images/heart.svg';
+
 // == Import components
 import TrainerModal from './TrainerModal';
 // == Import Styles
@@ -24,6 +26,7 @@ const Trainer = () => (
       </Modal>
       <div className="health-container">
         <span>40/100</span>
+        <img src={heartIcon} alt="" />
         {/* The style in composant is require for dynamisation */}
         <div className="health-bar" style={{ width: '40%' }} />
       </div>

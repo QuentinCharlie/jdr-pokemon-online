@@ -51,6 +51,13 @@ const PokemonStyled = styled.div`
           top: calc(50% - .7em);
           z-index: 5;
         }
+        img {
+          position: absolute;
+          z-index: 5;
+          left: .3em;
+          bottom: .15em;
+          height: 80%;
+        }
         /* BARRE VERTE*/
         .energy-bar {
           position: absolute;
@@ -75,6 +82,13 @@ const PokemonStyled = styled.div`
           position: relative;
           top: calc(50% - .7em);
           z-index: 5;
+        }
+        img {
+          position: absolute;
+          z-index: 5;
+          left: .3em;
+          bottom: .15em;
+          height: 80%;
         }
         /* BARRE VERTE*/
         .health-bar {

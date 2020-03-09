@@ -43,7 +43,7 @@ const LogStyled = styled.div`
       z-index: 6;
       width: 100%;
       height: 90%;
-      padding: 2.5em .5em 0 .5em;
+      padding: 3.5em .5em 0 .5em;
       margin-bottom: .5em;
       overflow: auto;
       /* scrollbar hidden (IE/Edge) */
@@ -78,7 +78,7 @@ const LogStyled = styled.div`
       p {
         color: white;
         position: absolute;
-        bottom: 1.7em;
+        bottom: 1em;
         left: 50%;
         transform: translateX(-50%);
         z-index: 10;
