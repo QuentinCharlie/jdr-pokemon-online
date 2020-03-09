@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/pokemon")
@@ -19,15 +20,21 @@ class PokemonController extends AbstractController
     public function pokemonList()
     {
 
-        return $this->render('pokemon/pokemonlist.html.twig');
+        $pokemons = $this->getDoctrine()->getRepository(Pokemon::class)->findAll();
+
+        return $this->render('pokemon/pokemonlist.html.twig', [
+            'pokemons' => $pokemons
+        ]);
     }
 
     /**
      * @Route("/{id}", name="detail_pokemon")
      */
-    public function pokemonById()
+    public function pokemonById(Pokemon $pokemon)
     {
 
-        return $this->render('pokemon/detailpokemon.html.twig');
+        return $this->render('pokemon/detailpokemon.html.twig', [
+            'pokemon' => $pokemon
+        ]);
     }
 }

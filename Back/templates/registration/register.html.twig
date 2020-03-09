@@ -2,35 +2,36 @@
 
 {% block body %}
 
-   <div class="divTitle divForm">
+<div class="divTitle divForm">
 
-    <h2>Inscription</h2>
- 
-        <div>
-        {{ form_start(registrationForm) }}
-        
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.nickname) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.avatar) }}
-
-        
-        
-        <!-- Button trigger modal -->
-<button type="button" id="modalBttn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-    Voir les avatars
-  </button>
+  <h2>Inscription</h2>
 
   <div>
-    <button class="btn-dark">Valider</button>
-    {{ form_end(registrationForm) }}
+    {{ form_start(registrationForm) }}
+
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.nickname) }}
+    {{ form_row(registrationForm.plainPassword) }}
+    {{ form_row(registrationForm.avatar) }}
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" id="modalBttn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+      Voir les avatars
+    </button>
+
+    <div>
+      <button class="btn-dark">Valider</button>
+      {{ form_end(registrationForm) }}
+    </div>
+
+    <span class="triangle"></span>
   </div>
 
-  <span class="triangle"></span>
-    </div>
-  
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -40,25 +41,25 @@
           </button>
         </div>
         <div class="modal-body">
-            <div class="card-group">
+          <div class="card-group">
 
-              <!-- Call avatar card from database -->
-              {% for avatar in avatars %}
-                <div class="card-avatar">
-                  <img class="card-img-top" src="{{asset('assets/images/'~ avatar.name ~'.png')}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">{{avatar.name}}</h5>
-                  </div>
-                </div>
-              {% endfor %}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <!-- Call avatar card from database -->
+            {% for avatar in avatars %}
+            <div class="card-avatar">
+              <img class="card-img-top" src="{{asset('assets/images/'~ avatar.name ~'.png')}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{avatar.name}}</h5>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-          
+
 
 
 
