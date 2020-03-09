@@ -9,11 +9,13 @@ import {
 } from 'semantic-ui-react';
 
 // == Import files
-import avatar from 'src/assets/images/red.jpg';
+import avatar from 'src/assets/images/ash.png';
+import heartIcon from 'src/assets/images/heart.svg';
+// == Import utils
+import { getSidebarNameCapitalize } from 'src/utils/functions';
 // == Import components
 import TrainerModal from './TrainerModal';
 
-import { getSidebarNameCapitalize } from 'src/utils/functions';
 // == Import Styles
 import TrainerStyled from './TrainerStyled';
 
@@ -49,6 +51,7 @@ const Trainer = ({ visible, changeSidebarVisibility }) => {
           </Modal>
           <div className="health-container">
             <span>40/100</span>
+            <img src={heartIcon} alt="heart logo" />
             {/* The style in composant is require for dynamisation */}
             <div className="health-bar" style={{ width: '40%' }} />
           </div>
