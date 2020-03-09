@@ -70,16 +70,18 @@ const LogStyled = styled.div`
       display: none
     }
     .desktop {
+      border-radius: 10px;
+      position: relative;
       width: calc(30vw - 2em);
       height: 70vh;
       margin: 0 1em;
       padding-top: .5em;
-      background-color: lightgray;
-      
+      /* background-color: lightgray; */
       .log {
+        border-radius: 10px;
         width: 100%;
         height: 90%;
-        padding: 0 .5em;
+        padding: 2em .5em 0 .5em;
         margin-bottom: .5em;
         overflow: auto;
         /* scrollbar hidden (IE/Edge) */
@@ -92,6 +94,10 @@ const LogStyled = styled.div`
           margin-bottom: 0;
         } 
         .entry {
+          box-shadow: 0 0 7px rgba(117, 117, 117, .2);
+          border-radius: 10px;
+          position: relative;
+          z-index: 6;
           background-color: white;
           margin-bottom: .3em;
           padding: .5em;
@@ -100,18 +106,49 @@ const LogStyled = styled.div`
           }
         }
       }
+      .svg1 {
+      border-radius: 10px 10px 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      }
+      .svg2 {
+        border-radius: 10px 10px 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 7;
+        -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
+        filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .5));
+
+      }
+      .svg3 {
+        border-radius: 0 0 10px 10px;
+        position: absolute;
+        bottom: .25em;
+        left: 0;
+        z-index: 7;
+        -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
+        filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .5));
+      }
     }
-    
     .current-player {
-      background-color: lightgray;
+      border-radius: 0 0 10px 10px;
+      /* background-color: lightgray; */
       width: 100%;
       height: calc(10% - .5em);
-      border-top: solid gray 2px;
+      /* border-top: solid gray 2px; */
       padding: .5em;
-      p {
-        margin-bottom: 0;
-      }
       .turn-name {
+        width: 100%;
+        margin-bottom: 0;
+        color: white;
+        position: absolute;
+        left: 50%;
+        bottom: 1.5em;
+        transform: translate(-50%, 50%);
+        z-index: 10;
         font-size: 1.5em;
         text-align: center;
       }

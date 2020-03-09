@@ -30,7 +30,6 @@ const AttacksStyled = styled.div`
       display: none
     }
     .desktop {
-      /* width: calc(((70vw - (30vh - 40px - 3em))/2 - 1.5em)/1.8); */
       width: 100%;
       height: calc(30vh - 40px - 3em);
       margin: 1em 0 auto auto;
@@ -40,7 +39,6 @@ const AttacksStyled = styled.div`
       align-content: space-between;
       flex-wrap: wrap;
       overflow: auto;
-      /* flex-grow: 1; */
       /* scrollbar hidden (IE/Edge) */
       -ms-overflow-style: none;
       /* scrollbar hidden (Chrome/Firefox/Safari) */
