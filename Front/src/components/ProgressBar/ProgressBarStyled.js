@@ -21,6 +21,16 @@ const ProgressBarStyled = styled.div`
     bottom: 0em;
     height: 100%;
   }
+
+  /* @media (max-width: 1350px) {
+    background: none;
+    text-align: right;
+    margin-right: 1em;
+    text-shadow: 1px 1px 2px rgba(20, 20, 20, .15);
+    .bar {
+      display: none;
+    }
+  } */
 `;
 
 export default ProgressBarStyled;

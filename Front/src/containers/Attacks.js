@@ -11,14 +11,48 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  name: 'Tonnerre',
-  damage: 5,
-  accuracy: 5,
-  energy: 5,
-  category: 'statut',
-  distance: 'melee',
-  effect: 'Attaque pouvant paralyser',
-  type: 'Electrik',
+  attacks: [
+    {
+      name: 'Éclair',
+      damage: 40,
+      accuracy: '100%',
+      energy: 1,
+      category: 'special',
+      distance: 'rayon',
+      effect: 'Sur 10, paralyse la cible',
+      type: 'Electrique',
+    },
+    {
+      name: 'Vive-Attaque',
+      damage: 40,
+      accuracy: '100%',
+      energy: 1,
+      category: 'physical',
+      distance: 'rayon',
+      effect: 'Initiative +10',
+      type: 'Normal',
+    },
+    {
+      name: 'Mimi-Queue',
+      damage: 0,
+      accuracy: '100%',
+      energy: 1,
+      category: 'statut',
+      distance: 'cible',
+      effect: 'END-1 jusqu\'à la fin du combat ou au rappel du Pokemon adversaire',
+      type: 'Normal',
+    },
+    {
+      name: 'Rugissement',
+      damage: 0,
+      accuracy: '100%',
+      energy: 1,
+      category: 'statut',
+      distance: 'cible',
+      effect: 'FOR-1 jusqu\'à la fin du combat ou au rappel du pokemon adversaire',
+      type: 'Normal',
+    },
+  ],
   visible: state.sidebar.isAttacksSidebarVisible,
 });
 

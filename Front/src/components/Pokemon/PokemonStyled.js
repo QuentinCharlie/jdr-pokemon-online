@@ -27,14 +27,15 @@ const PokemonStyled = styled.div`
 
   /* DESKTOP */
   @media (min-width: 1025px) {
+    width: 70%;
+    margin-right: 1em;
     .mobile-tablet {
       display: none
     }
     .desktop {
-      width: calc((70vw - (30vh - 40px - 3em))/2 - 1.5em);
+      width: 100%;
       height: calc(30vh - 40px - 3em);
       margin: 1em 1em 1em 0;
-      /* @todo background should vary according to the Pokemon main color */
       background-color: #f6e652;
       color: white;
       border-radius: 10px;
@@ -200,6 +201,11 @@ const PokemonStyled = styled.div`
       }
       }
     }
+  }
+
+  @media (min-width: 1400px) {
+    width: 50%;
+    margin-right: 1em;
   }
 `;
 

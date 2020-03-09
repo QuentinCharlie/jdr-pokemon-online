@@ -35,6 +35,16 @@ const AppStyled = styled.div`
     .main-wrapper {
       height: calc(100vh - 40px - 1em);
     }
+
+    .bottom-left-wrapper {
+      display: flex;
+      width: 70vw;
+      margin-right: 1em;
+      .sub-left-wrapper {
+        display: flex;
+        width: 100%;
+      }
+    }
     
     .container {
       display: flex;

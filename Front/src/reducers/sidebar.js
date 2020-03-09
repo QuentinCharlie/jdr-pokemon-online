@@ -13,7 +13,7 @@ const initialState = {
 
 // Reducer
 const sidebarReducer = (state = initialState, action = {}) => {
-  const bool = action.bool;
+  // const bool = action.bool;
   switch (action.type) {
     case CHANGE_SIDEBAR_VISIBILITY: {
       const sidebarToChange = `is${action.sidebarName}SidebarVisible`;

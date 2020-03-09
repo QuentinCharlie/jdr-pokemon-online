@@ -27,7 +27,7 @@ const App = () => (
         <Dices />
       </div>
     </div>
-    
+
     <div className="desktop-app">
       <Nav />
       <div className="main-wrapper">
@@ -36,9 +36,13 @@ const App = () => (
           <Log />
         </div>
         <div className="container container--trainer-to-dices">
-          <Trainer />
-          <Pokemon />
-          <Attacks />
+          <div className="bottom-left-wrapper">
+            <Trainer />
+            <div className="sub-left-wrapper">
+              <Pokemon />
+              <Attacks />
+            </div>
+          </div>
           <Dices />
         </div>
       </div>
