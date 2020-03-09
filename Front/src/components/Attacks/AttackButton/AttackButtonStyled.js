@@ -9,6 +9,7 @@ const AttackButtonStyled = styled.div`
     margin: 0 0em .5em 0;
   }
   .button {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -20,7 +21,7 @@ const AttackButtonStyled = styled.div`
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    background-color: #A3B2BD;
+    /* background-color: #A3B2BD; */
     font-size: 1.5em;
     /* border: 1px solid #2d6898; */
     cursor: pointer;
@@ -31,7 +32,7 @@ const AttackButtonStyled = styled.div`
     /* SHADOW */
     box-shadow: 0 0 15px rgba(117, 117, 117, .3);
     transition: 0.2s;
-
+    
     &:active {
       box-shadow: none;
       transform: translateY(3px);
@@ -70,25 +71,25 @@ const AttackButtonStyled = styled.div`
           .attack-distance {
             width: auto;
             height: 70%;
-          }
-          .melee {
-            content: url("https://i.imgur.com/bsvUkK6.png");
-            opacity: .8;
-          }
-          .rayon {
-            /*https://i.imgur.com/xgGwnku.png */
-          }
-          .contact {
-            /*https://i.imgur.com/xgGwnku.png */
-          }
-          .zone {
-            /*https://i.imgur.com/xgGwnku.png */
-          }
-          .cible {
-            /*https://i.imgur.com/xgGwnku.png */
-          }
-          .personnel {
-            /*https://i.imgur.com/xgGwnku.png */
+            &.melee {
+              content: url("https://i.imgur.com/bsvUkK6.png");
+              opacity: .8;
+            }
+            &.rayon {
+              /*https://i.imgur.com/xgGwnku.png */
+            }
+            &.contact {
+              /*https://i.imgur.com/xgGwnku.png */
+            }
+            &.zone {
+              /*https://i.imgur.com/xgGwnku.png */
+            }
+            &.cible {
+              /*https://i.imgur.com/xgGwnku.png */
+            }
+            &.personnel {
+              /*https://i.imgur.com/xgGwnku.png */
+            }
           }
           .attack-info {
             width: auto;

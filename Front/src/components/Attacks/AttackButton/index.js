@@ -4,9 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Popup } from 'semantic-ui-react';
 
+// == import files
 // == Import style
 import AttackButtonStyled from './AttackButtonStyled';
-
+// == Import components
 import InfoAttackPopUp from './InfoAttackPopUp';
 
 // == Composant
@@ -19,9 +20,10 @@ const AttackButton = ({
   distance,
   effect,
   type,
+  color,
 }) => (
   <AttackButtonStyled>
-    <div className={`button ${type}`}>
+    <div className={`button ${type}`} style={{ backgroundColor: color }}>
       <div className="attack">
         <div className="attack-name">{name}</div>
         <div className="attack-icons">
@@ -73,6 +75,7 @@ AttackButton.propTypes = {
   distance: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   effect: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 // == Export
