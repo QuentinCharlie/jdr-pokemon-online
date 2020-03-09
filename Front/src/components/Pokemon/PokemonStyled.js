@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const PokemonStyled = styled.div`
 
-
+  /* MOBIL-TABLET */
   @media (max-width : 1024px) {
     .desktop {
       display: none
@@ -25,6 +25,7 @@ const PokemonStyled = styled.div`
     }
   }
 
+  /* DESKTOP */
   @media (min-width: 1025px) {
     .mobile-tablet {
       display: none
@@ -33,15 +34,18 @@ const PokemonStyled = styled.div`
       width: calc((70vw - (30vh - 40px - 3em))/2 - 1.5em);
       height: calc(30vh - 40px - 3em);
       margin: 1em 1em 1em 0;
-      background-color: lightgray;
+      /* @todo background should vary according to the Pokemon main color */
+      background-color: #f6e652;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(117, 117, 117, .6);
       padding: .5em;
       display: flex;
       .pokemon-avatar {
         height: calc(30vh - 40px - 4em);
         width: calc(30vh - 40px - 4em);
-        margin-right: .5em;
+        margin-right: 1em;
         padding-bottom: 3em;
-        background-color: #fff;
         position: relative;
         .avatar-container {
           display: flex;
@@ -54,64 +58,91 @@ const PokemonStyled = styled.div`
           img {
             max-height: 100%;
             max-width: 100%;
+            -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
+            filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
           }
         }
-        /* BARRE GRISE */
-        .energy-container {
-          position: absolute;
-          bottom: 1.5em;
-          height: 1.5em;
-          width: 100%;
-          background-color: gray;
-          text-align: center;
-          span {
-            height: 100%;
-            position: relative;
-            top: calc(50% - .7em);
-            z-index: 5;
-          }
-          /* BARRE VERTE*/
-          .energy-bar {
-            position: absolute;
-            bottom: 0em;
-            height: 100%;
-            background-color: lightblue;
-          }
+      /* BARRE GRISE */
+      .energy-container {
+        position: absolute;
+        bottom: 1.8em;
+        height: 1.5em;
+        width: 100%;
+        background-color: rgba(20, 20, 20, 0.05);
+        border-radius: 10px;
+        text-align: center;
+        span {
+          color: white;
+          height: 100%;
+          position: relative;
+          top: calc(50% - .7em);
+          z-index: 5;
         }
-        /* BARRE GRISE */
-        .health-container {
+        img {
           position: absolute;
-          bottom: 0;
-          height: 1.5em;
-          width: 100%;
-          background-color: gray;
-          text-align: center;
-          span {
-            height: 100%;
-            position: relative;
-            top: calc(50% - .7em);
-            z-index: 5;
-          }
-          /* BARRE VERTE*/
-          .health-bar {
-            position: absolute;
-            bottom: 0em;
-            height: 100%;
-            background-color: green;
-          }
+          z-index: 5;
+          left: .3em;
+          bottom: .15em;
+          height: 80%;
+        }
+        /* BARRE VERTE*/
+        .energy-bar {
+          position: absolute;
+          bottom: 0em;
+          height: 100%;
+          background-color: #98bfe6;
+          border-radius: 10px 0 0 10px;
         }
       }
-      .exp {
+      /* BARRE GRISE */
+      .health-container {
         position: absolute;
-        top: 0; right: 0;
-        background-color: yellow;
+        bottom: 0;
+        height: 1.5em;
+        width: 100%;
+        background-color: rgba(20, 20, 20, 0.05);
+        border-radius: 10px;
+        text-align: center;
+        span {
+          color: white;
+          height: 100%;
+          position: relative;
+          top: calc(50% - .7em);
+          z-index: 5;
+        }
+        img {
+          position: absolute;
+          z-index: 5;
+          left: .3em;
+          bottom: .15em;
+          height: 80%;
+        }
+        /* BARRE VERTE*/
+        .health-bar {
+          position: absolute;
+          bottom: 0em;
+          height: 100%;
+          background-color: #19cd70;
+          border-radius: 10px 0 0 10px;
+        }
+      }
+    }
+      .exp {
+        /* font-weight: bold; */
+        color: white;
+        text-shadow: 1px 1px 2px rgba(20, 20, 20, .15);
+        position: absolute;
+        top: 0em; left: 0;
+        background-color: rgba(20, 20, 20, 0.05);
+        border-radius: 10px;
         padding: .2em .5em;
       }
 
 
       .pokemon-info {
         width: calc(100% - (30vh - 40px - 4em));
-        padding: 0.5em;
+        height: 100%;
+        /* padding: 0.5em; */
         overflow: auto;
         /* scrollbar hidden (IE/Edge) */
         -ms-overflow-style: none;
@@ -127,34 +158,46 @@ const PokemonStyled = styled.div`
           flex-direction: column;
           margin-bottom: .6em;
           .pokemon-name {
+            text-shadow: 1px 1px 2px rgba(20, 20, 20, .15);
             font-size: 2em;
             font-weight: bold;
           }
-          .pokemon-type {
-            font-style: italic;
-            img {
-              margin-top: .6em;
-              width: 15%;
+          .pokemon-types {
+            margin-top: .5em;
+            .pokemon-type {
+              &:first-child {
+                margin-right: .3em;
+              }
+              border-radius: 10px;
+              font-size: .8em;
+              display: inline-block;
+              padding: .07em .3em;
+              font-style: italic;
+              background-color: rgba(20, 20, 20, 0.05);
+
+              /* @todo one background-color per type (x16) */
             }
           }
         }
         .pokemon-stats {
           width: 100%;
-          max-height: 100%;
-          .stat {
-            display: flex;
-            align-items: center;
-            .title {
-              padding: .2em 0;
-              width: 30%;
-              /* text-align: center; */
-              abbr {
-                font-style: none;
-                text-decoration: none;
-              }
+          /* height: 100%; */
+        .stat {
+          display: flex;
+          align-items: flex-end;
+          .title {
+            color: white;
+            padding: .2em 0;
+            width: 30%;
+            text-shadow: 1px 1px 2px rgba(20, 20, 20, .15);
+            /* text-align: center; */
+            abbr {
+              font-style: none;
+              text-decoration: none;
             }
           }
         }
+      }
       }
     }
   }

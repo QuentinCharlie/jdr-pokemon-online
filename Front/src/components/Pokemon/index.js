@@ -13,6 +13,8 @@ import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
 import pokeAvatar from 'src/assets/images/25.png';
+import heartIcon from 'src/assets/images/heart.svg';
+import zapIcon from 'src/assets/images/zap.svg';
 // == Import components
 import PokemonModal from './PokemonModal';
 // Styles
@@ -37,7 +39,7 @@ const Pokemon = ({ visible, changeSidebarVisibility }) => {
           <div className="pokemon-sidebar">fiche pokémon ici</div>
         </Sidebar>
       </div>
-      
+
       <div className="desktop">
         <div className="pokemon-avatar">
           <Modal
@@ -53,40 +55,49 @@ const Pokemon = ({ visible, changeSidebarVisibility }) => {
           </div>
           <div className="energy-container">
             <span>45/50</span>
+            <img src={zapIcon} alt="energy logo" />
             <div className="energy-bar" style={{ width: '90%' }} />
           </div>
           <div className="health-container">
             <span>20/100</span>
+            <img src={heartIcon} alt="heart logo" />
             <div className="health-bar" style={{ width: '20%' }} />
           </div>
         </div>
         <div className="pokemon-info">
           <div className="pokemon-presentation">
             <span className="pokemon-name">Pikachu</span>
-            <span className="pokemon-type">
-              <img src="https://www.pokebip.com/pokedex-images/types/psy.png" alt="" />
-            </span>
+            <div className="pokemon-types">
+              <span className="pokemon-type electrik">
+                {/* <img src="https://www.pokebip.com/pokedex-images/types/psy.png" alt="" /> */}
+                Electrik
+              </span>
+              <span className="pokemon-type electrik">
+                {/* <img src="https://www.pokebip.com/pokedex-images/types/psy.png" alt="" /> */}
+                Electrik
+              </span>
+            </div>
           </div>
           <div className="pokemon-stats">
             <div className="stat">
               <span className="title"><abbr title="FORCE">FOR</abbr></span>
-              <ProgressBar color="yellow" number={2} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={2} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="ENDURANCE">END</abbr></span>
-              <ProgressBar color="yellow" number={2} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={2} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="CONCENTRATION">CON</abbr></span>
-              <ProgressBar color="yellow" number={11} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={11} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="VOLONTE">VOL</abbr></span>
-              <ProgressBar color="yellow" number={6} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={6} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="DEXTERITE">DEX</abbr></span>
-              <ProgressBar color="yellow" number={9} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={9} maxNumber={16} />
             </div>
           </div>
         </div>
