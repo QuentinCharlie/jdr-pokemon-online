@@ -3,14 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-
         {# BootStrap css link #}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-
       {# Navbar #}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="{{ path('game_list') }}">JDR Pokemon</a>
@@ -32,17 +30,16 @@
                     <a class="nav-link" href="{{ path('ressources') }}"><img src="{{asset('assets/images/ress_btn.png')}}" alt=""></a>
                 </li>          
                 <li class="nav-item">
+                  <a class="nav-link" href="{{ path('profil', {"id": app.user.id}) }}"><img src="{{asset('assets/images/profil_btn.png')}}" alt=""></a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{{ path('app_logout') }}"><img src="{{asset('assets/images/deco_btn2.png')}}" alt=""></a>
                 </li>
-               
-
               </ul>
             </div>
           </nav>
-
           {# Show flash message on oages #}
           <div class="container">
-
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }}">
@@ -50,12 +47,9 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-
           </div>
-
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
-
         {# BootStrap js link #}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

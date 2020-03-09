@@ -2,6 +2,15 @@
 
 {% block body %}
 
-<h2>hello</h2>
+	<div class="divTitle divProfil">
 
-{% endblock %}
+		<div class="profil_edit">
+			<img id="profil_img" src="{{asset('assets/images/'~ app.user.avatar.name ~'.png')}}" class="card-img-top" alt="...">
+
+            <h3>Pseudo</h3>
+            <p>{{ app.user.nickname }}</p>
+
+            <a class="delete_btn" href="{{ path("delete_profil", {"id": app.user.id }) }}" onclick=" return confirm('Etes-vous sure de vouloir supprimer ce compte ?')">Supprimer mon compte</a>
+		</div>
+
+	{% endblock %}
