@@ -16,7 +16,7 @@ const Board = () => {
   // const mapHeight = 2500 / 50;
   return (
     <BoardStyled>
-      <ScrollContainer className="scroll-container">
+      <ScrollContainer className="scroll-container" ignoreElements="img">
         <img className="map" src={map} alt="" />
         {/* <img className="pikachu" src={pokeGif} alt="" /> */}
         <div id="board">

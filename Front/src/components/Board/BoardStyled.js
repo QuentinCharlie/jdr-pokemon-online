@@ -26,7 +26,10 @@ const BoardStyled = styled.div`
     margin-left: 1em;
     background-color: lightgrey;
     box-shadow: inset 0 0 20px grey;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(117, 117, 117, .6);
     .scroll-container {
+      border-radius: 10px;
       height: 100%;
       width: 100%;
       position: relative;
