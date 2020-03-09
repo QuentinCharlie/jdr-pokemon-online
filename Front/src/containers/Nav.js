@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 // Du composant qui a besoin de data ou d'actions
-import Attacks from 'src/components/Attacks';
+import Nav from 'src/components/Nav';
 
 // Action Creators
 import { changeSidebarVisibility } from 'src/actions/sidebar';
@@ -11,15 +11,7 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  name: 'Tonnerre',
-  damage: 5,
-  accuracy: 5,
-  energy: 5,
-  category: 'statut',
-  distance: 'melee',
-  effect: 'Attaque pouvant paralyser',
-  type: 'Electrik',
-  visible: state.sidebar.isAttacksSidebarVisible,
+  visible: state.sidebar.isNavSidebarVisible,
 });
 
 // == Actions / dispatch
@@ -33,6 +25,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 // création du lien : container
 // connect(redux)(react) - connect(ce dont on a besoin)(qui en a besoin)
-const AttacksContainer = connect(mapStateToProps, mapDispatchToProps)(Attacks);
+const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
 
-export default AttacksContainer;
+export default NavContainer;

@@ -2,11 +2,11 @@
 import React from 'react';
 
 // == Import
-import Nav from 'src/components/Nav';
+import Nav from 'src/containers/Nav';
 import Board from 'src/components/Board';
-import Log from 'src/components/Log';
-import Trainer from 'src/components/Trainer';
-import Pokemon from 'src/components/Pokemon';
+import Log from 'src/containers/Log';
+import Trainer from 'src/containers/Trainer';
+import Pokemon from 'src/containers/Pokemon';
 import Attacks from 'src/containers/Attacks';
 import Dices from 'src/containers/Dices';
 
@@ -16,7 +16,19 @@ import AppStyled from './AppStyled';
 // == Composant
 const App = () => (
   <AppStyled>
-    <div className="desktop">
+    <div className="mobile-tablet-app">
+      <Board />
+      <div className="container container--nav-to-dices">
+        <Nav />
+        <Log />
+        <Trainer />
+        <Pokemon />
+        <Attacks />
+        <Dices />
+      </div>
+    </div>
+    
+    <div className="desktop-app">
       <Nav />
       <div className="main-wrapper">
         <div className="container container--board-log">
@@ -32,17 +44,6 @@ const App = () => (
       </div>
     </div>
 
-    <div className="mobile-tablet">
-      <Board />
-      <div className="container container--nav-to-dices">
-        <Nav />
-        <Log />
-        <Trainer />
-        <Pokemon />
-        <Attacks />
-        <Dices />
-      </div>
-    </div>
   </AppStyled>
 );
 
