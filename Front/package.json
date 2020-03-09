@@ -58,6 +58,8 @@
     "classnames": "^2.2.6",
     "prop-types": "*",
     "react": "*",
+    "react-dnd": "^10.0.2",
+    "react-dnd-html5-backend": "^10.0.2",
     "react-dom": "*",
     "react-indiana-drag-scroll": "^1.6.0",
     "react-redux": "^7.1.3",
