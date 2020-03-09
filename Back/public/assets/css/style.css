@@ -94,3 +94,7 @@ body{
     margin-bottom: 15px;
 }
 
+.card-pokemon{
+    min-width: 20%;
+}
+
