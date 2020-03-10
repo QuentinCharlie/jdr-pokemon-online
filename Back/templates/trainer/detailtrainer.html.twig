@@ -2,14 +2,31 @@
 
 {% block body %}
 
-<h2>Détaile du <'nom de dresseur'></h2>
+	<div class="divTitle divTrainer">
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-{% endblock %}
+		<div class="trainer_detail">
+			<img id="profil_img" src="{{asset('assets/images/'~ trainer.name ~'.png')}}" class="card-img-top" alt="{{ trainer.name }}">
+
+			<h3>{{ trainer.name }},
+				{{ trainer.age }}
+				ans.</h3>
+			<p>{{ trainer.background }}</p>
+
+			<div class="stats">
+				<h3>Statistiques</h3>
+				<ul>
+					<li>HP : {{trainer.vitality}}</li>
+					<li>Force : {{trainer.strength}}</li>
+					<li>Endurance : {{trainer.endurance}}</li>
+					<li>Concentration : {{trainer.concentration}}</li>
+					<li>Volonté : {{trainer.willpower}}</li>
+					<li>Dextérité : {{trainer.dexterity}}</li>
+				</ul>
+
+			</div>
+      <a href="{{ path('list_trainer') }}">Retour à la liste des dresseurs</a>
+
+
+		</div>
+
+	{% endblock %}

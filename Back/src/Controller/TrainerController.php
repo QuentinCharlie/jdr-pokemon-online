@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Trainer;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -19,15 +20,22 @@ class TrainerController extends AbstractController
     public function trainerList()
     {
 
-        return $this->render('trainer/trainerlist.html.twig');
+
+        $trainers = $this->getDoctrine()->getRepository(Trainer::class)->findAll();
+
+        return $this->render('trainer/trainerlist.html.twig', [
+            'trainers' => $trainers
+        ]);
     }
 
     /**
      * @Route("/{id}", name="detail_trainer")
      */
-    public function trainerById()
+    public function trainerById(Trainer $trainer)
     {
 
-        return $this->render('trainer/detailtrainer.html.twig');
+        return $this->render('trainer/detailtrainer.html.twig', [
+            'trainer' => $trainer
+        ]);
     }
 }

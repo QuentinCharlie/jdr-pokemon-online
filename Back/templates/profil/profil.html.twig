@@ -5,7 +5,7 @@
 	<div class="divTitle divProfil">
 
 		<div class="profil_edit">
-			<img id="profil_img" src="{{asset('assets/images/'~ app.user.avatar.name ~'.png')}}" class="card-img-top" alt="...">
+			<img id="profil_img" src="{{asset('assets/images/'~ app.user.avatar.name ~'.png')}}" class="card-img-top" alt="{{ app.user.avatar.name }}">
 
             <h3>Pseudo</h3>
             <p>{{ app.user.nickname }}</p>

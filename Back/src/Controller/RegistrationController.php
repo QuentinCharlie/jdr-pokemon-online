@@ -49,6 +49,7 @@ class RegistrationController extends AbstractController
 
         $avatar = $this->getDoctrine()->getRepository(Avatar::class)->findAll();
 
+       
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),

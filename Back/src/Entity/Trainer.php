@@ -54,7 +54,7 @@ class Trainer
     /**
      * @ORM\Column(type="integer")
      */
-    private $wildpower;
+    private $willpower;
 
     /**
      * @ORM\Column(type="integer")
@@ -260,14 +260,14 @@ class Trainer
         return $this;
     }
 
-    public function getWildpower(): ?int
+    public function getWillpower(): ?int
     {
-        return $this->wildpower;
+        return $this->willpower;
     }
 
-    public function setWildpower(int $wildpower): self
+    public function setWillpower(int $willpower): self
     {
-        $this->wildpower = $wildpower;
+        $this->willpower = $willpower;
 
         return $this;
     }
