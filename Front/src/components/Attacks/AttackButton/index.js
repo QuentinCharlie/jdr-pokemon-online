@@ -24,6 +24,7 @@ const AttackButton = ({
 }) => (
   <AttackButtonStyled>
     <div className={`button ${type}`} style={{ backgroundColor: color }}>
+      {/* <div className={`bg ${type}`} /> */}
       <div className="attack">
         <div className="attack-name">{name}</div>
         <div className="attack-icons">
