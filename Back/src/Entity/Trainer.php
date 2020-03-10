@@ -166,6 +166,11 @@ class Trainer
      */
     private $avatar;
 
+     /**
+     * @ORM\Column(type="text")
+     */
+    private $background;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -527,6 +532,26 @@ class Trainer
     public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of background
+     */ 
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    /**
+     * Set the value of background
+     *
+     * @return  self
+     */ 
+    public function setBackground($background)
+    {
+        $this->background = $background;
 
         return $this;
     }
