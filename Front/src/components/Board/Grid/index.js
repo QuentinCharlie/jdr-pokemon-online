@@ -2,8 +2,8 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from './Pokemon/Constants';
 
 // == Import
 import Pokemon from './Pokemon';
@@ -17,15 +17,31 @@ const Grid = ({ addPokemonToCell, trainer }) => {
   const handleGridDoubleClick = (e) => {
     const X = Number(e.target.className.replace('cell cell-', ''));
     const Y = Number(e.target.closest('.row').className.replace('row row-', ''));
-    addPokemonToCell(trainerName, pokemonName, X, Y, e.target);
+    addPokemonToCell(trainerName, pokemonName, X, Y);
   };
+  const [, drop] = useDrop({
+    accept: ItemTypes.POKEMON,
+    drop: (item, monitor) => {
+      const didDrop = monitor.didDrop();
+      if (didDrop === false) {
+        // console.log(monitor.getClientOffset());
+        const X = Math.floor((monitor.getClientOffset().x / 50) + 0.6);
+        const Y = Math.floor((monitor.getClientOffset().y / 50) - 0.1);
+        // console.log(item);
+        // console.log(Math.floor(monitor.getClientOffset().x / 50));
+        // console.log(Math.floor(monitor.getClientOffset().y / 50));
+
+        addPokemonToCell(trainerName, pokemonName, X, Y);
+      }
+    },
+  });
   return (
-    <DndProvider backend={Backend}>
-      <GridStyled>
-        {trainer.pokemon[pokemonName] !== undefined && (
-          <Pokemon X={trainer.pokemon[pokemonName].X} Y={trainer.pokemon[pokemonName].Y} />
-        )}
-        <div id="grid" onDoubleClick={handleGridDoubleClick}>
+    <GridStyled>
+      {trainer.pokemon[pokemonName] !== undefined && (
+        <Pokemon X={trainer.pokemon[pokemonName].X} Y={trainer.pokemon[pokemonName].Y} />
+      )}
+      <div id="grid" onDoubleClick={handleGridDoubleClick}>
+        <div ref={drop}>
           <div className="row row-1">
             <div className="cell cell-1"></div>
             <div className="cell cell-2"></div>
@@ -2627,8 +2643,8 @@ const Grid = ({ addPokemonToCell, trainer }) => {
             <div className="cell cell-50"></div>
           </div>
         </div>
-      </GridStyled>
-    </DndProvider>
+      </div>
+    </GridStyled>
   );
 };
 
