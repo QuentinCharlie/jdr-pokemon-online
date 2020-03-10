@@ -1,9 +1,11 @@
 // Action Types
-import { ADD_POKEMON_TO_CELL } from 'src/actions/grid';
+import { ADD_POKEMON_TO_CELL, CHANGE_DRAG_OVER_CELL } from 'src/actions/grid';
 
 const trainer = 'Sacha';
 // Initial State
 const initialState = {
+  dragOverCell: {
+  },
   [trainer]: {
     position: {
     },
@@ -31,6 +33,15 @@ const gridReducer = (state = initialState, action = {}) => {
         },
       };
     }
+    case CHANGE_DRAG_OVER_CELL:
+      return {
+        ...state,
+        dragOverCell: {
+          ...state.dragOverCell,
+          X: action.X,
+          Y: action.Y,
+        },
+      };
 
     default:
       return state;
