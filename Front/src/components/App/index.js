@@ -47,7 +47,6 @@ const App = () => (
         </div>
       </div>
     </div>
-
   </AppStyled>
 );
 

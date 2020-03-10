@@ -90,7 +90,7 @@ const TrainerStyled = styled.div`
       .money {
         color: white;
         position: absolute;
-        bottom: 2.5em;
+        bottom: 2.25em;
         left: 0;
         background-color: orange;
         border-radius: 10px;

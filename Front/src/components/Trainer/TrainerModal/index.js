@@ -260,9 +260,26 @@ const TrainerModal = () => (
           </div>
         </div>
         <div className="text">
-          <div className="text-background"></div>
-          <div className="text-history"></div>
-          <div className="text-notes"></div>
+          <div className="text-background">
+            {/* <div className="wrapper">
+              <p>
+                C'est un Dresseur Pokémon originaire du Bourg Palette qui rêve de devenir Maître Pokémon.
+                Sacha commence son voyage initiatique à l’âge de dix ans en tant que Dresseur Pokémon débutant et attentionné, mais têtu et éruptif.
+                Il est obligé d’accepter un Pikachu désobéissant de la part du Professeur Chen en guise de Pokémon de départ
+                car il s’est réveillé trop tard le jour où il devait recevoir son premier Pokémon et que Carapuce,
+                Bulbizarre et Salamèche ont déjà été choisis. Sacha est déterminé à atteindre son but et,
+                lorsque Pikachu voit qu’il est prêt à se mettre en danger pour le mettre en sécurité, tous deux forment un lien extrêmement fort,
+                remarqué par de nombreuses personnes au fil de leur voyage. À partir de ce moment,
+                Sacha a encore beaucoup de choses à apprendre pour devenir un véritable Dresseur.
+              </p>
+            </div> */}
+          </div>
+          <div className="text-history">
+            <textarea>Test</textarea>
+          </div>
+          <div className="text-notes">
+            <textarea>Test</textarea>
+          </div>
         </div>
       </div>
       <div className="wrapper-right">
