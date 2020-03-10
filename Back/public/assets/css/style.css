@@ -20,7 +20,7 @@ body{
 
 
 .divTitle{
-    margin: 9em 8em 2em 36em;
+    margin: 9em auto;
     padding-top: 6px;
     border-radius: 10px;
     background-color: white;
