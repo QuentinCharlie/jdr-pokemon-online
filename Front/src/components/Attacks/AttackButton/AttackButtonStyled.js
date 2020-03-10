@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-// import Electric from 'src/assets/images/types/Electric.svg';
+import Electric from 'src/assets/images/types/Electric.svg';
+import Normal from 'src/assets/images/types/normal.svg';
 
 const AttackButtonStyled = styled.div`
   width: 100%;
@@ -12,6 +13,7 @@ const AttackButtonStyled = styled.div`
   }
   .button {
     position: relative;
+    z-index: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -34,6 +36,16 @@ const AttackButtonStyled = styled.div`
     /* SHADOW */
     box-shadow: 0 0 15px rgba(117, 117, 117, .3);
     transition: 0.2s;
+    &.Electrik {
+      background: url(${Electric}) no-repeat;
+      background-size: 55%;
+      background-position: top -.5em right -.7em;
+    }
+    &.Normal {
+      background: url(${Normal}) no-repeat;
+      background-size: 55%;
+      background-position: top -.5em right -.7em;
+    }
 
     
     &:active {
