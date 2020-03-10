@@ -6,7 +6,7 @@ import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 
 // == import files
-import map from 'src/assets/images/map-town-width2500-height2500.png';
+import map from 'src/assets/images/map-town-light.jpg';
 
 import Grid from 'src/containers/Grid';
 // Styles

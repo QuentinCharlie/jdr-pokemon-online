@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Grid from 'src/components/Board/Grid';
 
 // Action Creators
-import { addPokemonToCell } from 'src/actions/grid';
+import { addPokemonToCell, changeDragOverCell } from 'src/actions/grid';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
@@ -12,6 +12,10 @@ import { addPokemonToCell } from 'src/actions/grid';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
   trainer: state.grid.Sacha,
+  dragOverCell: {
+    X: state.grid.dragOverCell.X,
+    Y: state.grid.dragOverCell.Y,
+  },
 });
 
 // == Actions / dispatch
@@ -20,6 +24,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addPokemonToCell: (trainerName, pokemonName, X, Y) => {
     dispatch(addPokemonToCell(trainerName, pokemonName, X, Y));
+  },
+  changeDragOverCell: (X, Y) => {
+    dispatch(changeDragOverCell(X, Y));
   },
 });
 
