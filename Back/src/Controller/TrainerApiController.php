@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Trainer;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -13,11 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class TrainerApiController extends AbstractController
 {
-    /**
-     *inventory : tous les items
-     *inventory/id : id, name, description, price, category
-     *inventory/category : liste des catégories
-     */
 
      /**
       * @Route("/trainers", name="api_trainers")
