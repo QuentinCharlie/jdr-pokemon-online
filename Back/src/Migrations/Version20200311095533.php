@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200311090352 extends AbstractMigration
+final class Version20200311095533 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,10 @@ final class Version20200311090352 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE trainer ADD vocation VARCHAR(255) NOT NULL, ADD height VARCHAR(255) NOT NULL, ADD weight VARCHAR(255) NOT NULL, ADD skin VARCHAR(255) NOT NULL, ADD eyes VARCHAR(255) NOT NULL, ADD hair VARCHAR(255) NOT NULL, ADD corpulence VARCHAR(255) NOT NULL, CHANGE wildpower willpower INT NOT NULL');
-        $this->addSql('ALTER TABLE pokemon ADD `primary` VARCHAR(6) NOT NULL, ADD secondary VARCHAR(6) NOT NULL, ADD tertiary VARCHAR(6) NOT NULL, ADD quaternary VARCHAR(6) NOT NULL');
+        $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE inventory ADD category_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE inventory ADD CONSTRAINT FK_B12D4A3612469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+        $this->addSql('CREATE INDEX IDX_B12D4A3612469DE2 ON inventory (category_id)');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +33,9 @@ final class Version20200311090352 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE pokemon DROP `primary`, DROP secondary, DROP tertiary, DROP quaternary');
-        $this->addSql('ALTER TABLE trainer DROP vocation, DROP height, DROP weight, DROP skin, DROP eyes, DROP hair, DROP corpulence, CHANGE willpower wildpower INT NOT NULL');
+        $this->addSql('ALTER TABLE inventory DROP FOREIGN KEY FK_B12D4A3612469DE2');
+        $this->addSql('DROP TABLE category');
+        $this->addSql('DROP INDEX IDX_B12D4A3612469DE2 ON inventory');
+        $this->addSql('ALTER TABLE inventory DROP category_id');
     }
 }
