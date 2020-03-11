@@ -36,6 +36,11 @@ class Inventory
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="items")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,26 @@ class Inventory
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category
+     */ 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */ 
+    public function setCategory($category)
+    {
+        $this->category = $category;
 
         return $this;
     }
