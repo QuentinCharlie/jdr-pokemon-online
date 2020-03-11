@@ -13,14 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class PokemonApiController extends AbstractController
 {
-    /**
-     *pokemon : tous les pokemon et sa couleur
-     *pokemon/id : un pokemon spécifique avec son type
-     *pokemon/id/attacks : set d’attaque d’un pokemon avec les types pour chaque attaque et couleurs
-     *inventory : tous les items
-     *inventory/id : id, name, description, price, category
-     *inventory/category : liste des catégories
-     */
 
      /**
       * @Route("/pokemons", name="api_pokemons")

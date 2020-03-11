@@ -14,7 +14,10 @@ class MainController extends AbstractController
      */
     public function welcome()
     {
-
+        if ($this->getUser()) {
+            return $this->redirectToRoute('game_list');
+       }
+       
         return $this->render('main/homepage.html.twig');
     }
 
