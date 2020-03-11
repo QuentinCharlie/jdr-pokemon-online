@@ -171,6 +171,41 @@ class Trainer
      */
     private $background;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $vocation;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $height;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $weight;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $skin;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $eyes;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hair;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $corpulence;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -552,6 +587,146 @@ class Trainer
     public function setBackground($background)
     {
         $this->background = $background;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of vocation
+     */ 
+    public function getVocation()
+    {
+        return $this->vocation;
+    }
+
+    /**
+     * Set the value of vocation
+     *
+     * @return  self
+     */ 
+    public function setVocation($vocation)
+    {
+        $this->vocation = $vocation;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of height
+     */ 
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set the value of height
+     *
+     * @return  self
+     */ 
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight
+     */ 
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set the value of weight
+     *
+     * @return  self
+     */ 
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of skin
+     */ 
+    public function getSkin()
+    {
+        return $this->skin;
+    }
+
+    /**
+     * Set the value of skin
+     *
+     * @return  self
+     */ 
+    public function setSkin($skin)
+    {
+        $this->skin = $skin;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of eyes
+     */ 
+    public function getEyes()
+    {
+        return $this->eyes;
+    }
+
+    /**
+     * Set the value of eyes
+     *
+     * @return  self
+     */ 
+    public function setEyes($eyes)
+    {
+        $this->eyes = $eyes;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hair
+     */ 
+    public function getHair()
+    {
+        return $this->hair;
+    }
+
+    /**
+     * Set the value of hair
+     *
+     * @return  self
+     */ 
+    public function setHair($hair)
+    {
+        $this->hair = $hair;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of corpulence
+     */ 
+    public function getCorpulence()
+    {
+        return $this->corpulence;
+    }
+
+    /**
+     * Set the value of corpulence
+     *
+     * @return  self
+     */ 
+    public function setCorpulence($corpulence)
+    {
+        $this->corpulence = $corpulence;
 
         return $this;
     }

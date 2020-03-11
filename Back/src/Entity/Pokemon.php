@@ -81,6 +81,26 @@ class Pokemon
      */
     private $attacks;
 
+    /**
+    * @ORM\Column(type="string", length=6, nullable=true)
+    */
+    private $primary;
+
+    /**
+    * @ORM\Column(type="string", length=6, nullable=true)
+    */
+    private $secondary;
+
+    /**
+    * @ORM\Column(type="string", length=6, nullable=true)
+    */
+    private $tertiary;
+
+    /**
+    * @ORM\Column(type="string", length=6, nullable=true)
+    */
+    private $quaternary;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -254,6 +274,86 @@ class Pokemon
     public function setAttacks($attacks)
     {
         $this->attacks = $attacks;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of primary
+     */ 
+    public function getPrimary()
+    {
+        return $this->primary;
+    }
+
+    /**
+     * Set the value of primary
+     *
+     * @return  self
+     */ 
+    public function setPrimary($primary)
+    {
+        $this->primary = $primary;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of secondary
+     */ 
+    public function getSecondary()
+    {
+        return $this->secondary;
+    }
+
+    /**
+     * Set the value of secondary
+     *
+     * @return  self
+     */ 
+    public function setSecondary($secondary)
+    {
+        $this->secondary = $secondary;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tertiary
+     */ 
+    public function getTertiary()
+    {
+        return $this->tertiary;
+    }
+
+    /**
+     * Set the value of tertiary
+     *
+     * @return  self
+     */ 
+    public function setTertiary($tertiary)
+    {
+        $this->tertiary = $tertiary;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of quaternary
+     */ 
+    public function getQuaternary()
+    {
+        return $this->quaternary;
+    }
+
+    /**
+     * Set the value of quaternary
+     *
+     * @return  self
+     */ 
+    public function setQuaternary($quaternary)
+    {
+        $this->quaternary = $quaternary;
 
         return $this;
     }
