@@ -1,3 +1,3 @@
 # yarn
-## yarn express@4.15.2
-### yarn socket.io
+## npm install express@4.15.2
+### npm install socket.io

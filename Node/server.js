@@ -45,99 +45,82 @@ app.get('/', (request, response) => {
 /*
  * Theme json
  */
-app.get('/theme/:email', (request, response) => {
-  const email = request.params.email;
-  if (!email) {
-    console.log('<< 400 BAD_REQUEST');
-    response.status(400).end();
-  }
+// app.get('/theme/:email', (request, response) => {
+//   const email = request.params.email;
+//   if (!email) {
+//     console.log('<< 400 BAD_REQUEST');
+//     response.status(400).end();
+//   }
 
-  let color;
-  if (db.users[email] && db.users[email].color) {
-    color = db.users[email].color;
-  }
+//   let color;
+//   if (db.users[email] && db.users[email].color) {
+//     color = db.users[email].color;
+//   }
 
-  // Réponse HTTP adaptée.
-  if (color) {
-    console.log('<< 200 OK', email, color);
-    response.send(color);
-  }
-  else {
-    console.log('<< 401 UNAUTHORIZED');
-    response.status(401).end();
-  }
-});
+//   // Réponse HTTP adaptée.
+//   if (color) {
+//     console.log('<< 200 OK', email, color);
+//     response.send(color);
+//   }
+//   else {
+//     console.log('<< 401 UNAUTHORIZED');
+//     response.status(401).end();
+//   }
+// });
+
+
+
 
 /*
  * Socket.io
  */
 let id = 0;
 io.on('connection', (ws) => {
-  console.log('>> socket.io - send_message');
-  ws.on('send_message', (message) => {
-    // eslint-disable-next-line no-plusplus
-    message.id = ++id;
-    io.emit('send_message', message);
-  });
-});
-io.on('connection', (ws) => {
-  console.log('>> socket.io - modify_message');
-  ws.on('modify_message', (info) => {
-    // eslint-disable-next-line no-plusplus
-    info.messageModified.id = ++id;
-    io.emit('modify_message', info);
-  });
-});
-io.on('connection', (ws) => {
-  console.log('>> socket.io - typing');
-  ws.on('typing', (info) => {
+  console.log('>> socket.io - action');
+  ws.on('move_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
     info.id = ++id;
-    io.emit('typing', info);
-  });
-});
-io.on('connection', (ws) => {
-  console.log('>> socket.io - not_typing');
-  ws.on('not_typing', (info) => {
-    // eslint-disable-next-line no-plusplus
-    io.emit('not_typing', info);
+    io.emit('move_pokemon', info);
   });
 });
 
-// Login avec vérification : POST /login
-app.post('/login', (request, response) => {
-  console.log('>> POST /login', request.body);
 
-  // Extraction des données de la requête provenant du client.
-  const { email, password } = request.body;
 
-  // Vérification des identifiants de connexion proposés auprès de la DB.
-  let username;
-  if (db.users[email] && db.users[email].password === password) {
-    username = db.users[email].username;
-  }
 
-  // Réponse HTTP adaptée.
-  if (username) {
-    console.log('<< 200 OK', username);
-    response.send(username);
-  }
-  else {
-    console.log('<< 401 UNAUTHORIZED');
-    response.status(401).end();
-  }
-});
+// // Login avec vérification : POST /login
+// app.post('/login', (request, response) => {
+//   console.log('>> POST /login', request.body);
 
-// Mot de passe oublié : POST /forgot
-app.post('/forgot', (request, response) => {
-  const { email } = request.body;
-  if (db.users[email]) {
-    response.send(db.users[email].username);
-  }
-  else {
-    response.status(400).end();
-  }
-});
+//   // Extraction des données de la requête provenant du client.
+//   const { email, password } = request.body;
+
+//   // Vérification des identifiants de connexion proposés auprès de la DB.
+//   let username;
+//   if (db.users[email] && db.users[email].password === password) {
+//     username = db.users[email].username;
+//   }
+
+//   // Réponse HTTP adaptée.
+//   if (username) {
+//     console.log('<< 200 OK', username);
+//     response.send(username);
+//   }
+//   else {
+//     console.log('<< 401 UNAUTHORIZED');
+//     response.status(401).end();
+//   }
+// });
+
+// // Mot de passe oublié : POST /forgot
+// app.post('/forgot', (request, response) => {
+//   const { email } = request.body;
+//   if (db.users[email]) {
+//     response.send(db.users[email].username);
+//   }
+//   else {
+//     response.status(400).end();
+//   }
+// });
 
 /*
  * Server
