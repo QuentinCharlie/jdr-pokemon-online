@@ -102,9 +102,11 @@ class User implements UserInterface
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
 
+        global $kernel;
+        $this->password = $kernel->getContainer()->get('security.password_encoder')->encodePassword($this, $password);
         return $this;
+
     }
 
     /**
@@ -126,7 +128,7 @@ class User implements UserInterface
 
     /**
      * Get the value of nickname
-     */ 
+     */
     public function getNickname()
     {
         return $this->nickname;
@@ -136,7 +138,7 @@ class User implements UserInterface
      * Set the value of nickname
      *
      * @return  self
-     */ 
+     */
     public function setNickname($nickname)
     {
         $this->nickname = $nickname;
@@ -146,7 +148,7 @@ class User implements UserInterface
 
     /**
      * Get the value of avatar
-     */ 
+     */
     public function getAvatar()
     {
         return $this->avatar;
@@ -156,7 +158,7 @@ class User implements UserInterface
      * Set the value of avatar
      *
      * @return  self
-     */ 
+     */
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
