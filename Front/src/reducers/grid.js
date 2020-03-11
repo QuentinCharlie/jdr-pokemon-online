@@ -2,6 +2,7 @@
 import { ADD_POKEMON_TO_CELL, CHANGE_DRAG_OVER_CELL } from 'src/actions/grid';
 
 const trainer = 'Sacha';
+const pokemon = 'Pikachu';
 // Initial State
 const initialState = {
   dragOverCell: {
@@ -10,6 +11,10 @@ const initialState = {
     position: {
     },
     pokemon: {
+      [pokemon]: {
+        position: {
+        },
+      },
     },
   },
 };
@@ -26,8 +31,11 @@ const gridReducer = (state = initialState, action = {}) => {
             ...state[action.trainerName].pokemon,
             [action.pokemonName]: {
               ...state[action.trainerName].pokemon[action.pokemonName],
-              X: action.X,
-              Y: action.Y,
+              position: {
+                ...state[action.trainerName].pokemon[action.pokemonName].position,
+                X: action.X,
+                Y: action.Y,
+              }
             },
           },
         },

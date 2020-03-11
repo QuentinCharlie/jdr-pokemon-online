@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Grid from 'src/components/Board/Grid';
 
 // Action Creators
-import { addPokemonToCell, changeDragOverCell } from 'src/actions/grid';
+import { movePokemon, changeDragOverCell } from 'src/actions/grid';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
@@ -22,8 +22,8 @@ const mapStateToProps = (state) => ({
 // Notre composant à besoin d'agir sur le state ?
 // On prépare un objet avec les props attendues par le composant
 const mapDispatchToProps = (dispatch) => ({
-  addPokemonToCell: (trainerName, pokemonName, X, Y) => {
-    dispatch(addPokemonToCell(trainerName, pokemonName, X, Y));
+  movePokemon: (trainerName, pokemonName, X, Y) => {
+    dispatch(movePokemon(trainerName, pokemonName, X, Y));
   },
   changeDragOverCell: (X, Y) => {
     dispatch(changeDragOverCell(X, Y));

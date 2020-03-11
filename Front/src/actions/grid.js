@@ -1,4 +1,5 @@
 // Types
+export const MOVE_POKEMON = 'MOVE_POKEMON';
 export const ADD_POKEMON_TO_CELL = 'ADD_POKEMON_TO_CELL';
 export const CHANGE_DRAG_OVER_CELL = 'CHANGE_DRAG_OVER_CELL';
 
@@ -9,12 +10,20 @@ export const changeDragOverCell = (X, Y) => ({
   Y,
 });
 
-export const addPokemonToCell = (trainerName, pokemonName, X, Y) => ({
-  type: ADD_POKEMON_TO_CELL,
+export const movePokemon = (trainerName, pokemonName, X, Y) => ({
+  type: MOVE_POKEMON,
   trainerName,
   pokemonName,
   X,
   Y,
+});
+
+export const addPokemonToCell = (info) => ({
+  type: ADD_POKEMON_TO_CELL,
+  trainerName: info.trainerName,
+  pokemonName: info.pokemonName,
+  X: info.X,
+  Y: info.Y,
 });
 
 

@@ -14,197 +14,235 @@ class Trainer
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"trainer:list"})
+     * @Groups("trainer:list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $gender;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $age;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $vitality;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $strength;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $endurance;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $concentration;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $willpower;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $dexterity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $do_it_yourself;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $charisma;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $fighting;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $driving;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $detection;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $furtivity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $expression;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $phychology;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $sport;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $survival;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $education;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $geography;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $computer_science;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $legend;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $medicine;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $pkmn_medicine;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $nature;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $phyche;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $science;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $pokelogy;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $avatar;
 
      /**
      * @ORM\Column(type="text")
+     * @Groups("trainer:list")
      */
     private $background;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $vocation;
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $height;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $weight;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $skin;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $eyes;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $hair;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $corpulence;
 

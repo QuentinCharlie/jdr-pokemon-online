@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InventoryRepository")
@@ -13,28 +14,39 @@ class Inventory
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("inventory:list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("inventory:list")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("inventory:list")
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("inventory:list")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("inventory:list")
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="items")
+     * @Groups("inventory:list")
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -85,6 +97,26 @@ class Inventory
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category
+     */ 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */ 
+    public function setCategory($category)
+    {
+        $this->category = $category;
 
         return $this;
     }
