@@ -3,7 +3,8 @@
 import React from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import Backend from 'react-dnd-html5-backend'
+// import TouchBackend from 'react-dnd-touch-backend';
 
 // == import files
 import map from 'src/assets/images/map-town-light.jpg';
