@@ -8,6 +8,11 @@ import 'semantic-ui-css/semantic.min.css';
 import App from 'src/components/App';
 import store from 'src/store';
 
+// action creator pour la connexion au WebSocket
+import { wsConnect } from 'src/actions/wsConnect';
+// dispactch la volonté de connecter le WebSocket
+store.dispatch(wsConnect());
+
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
 //    => crée une structure d'objets imbriqués (DOM virtuel)
