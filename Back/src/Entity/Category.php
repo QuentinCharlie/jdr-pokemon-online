@@ -32,7 +32,6 @@ class Category
         $this->users = new ArrayCollection();
     }
 
-
     /**
      * Get the value of name
      */ 
