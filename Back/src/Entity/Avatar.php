@@ -37,6 +37,10 @@ class Avatar
      */
     private $users;
 
+    public function __toString() {
+        return $this->getName();
+    }
+
     public function __construct() {
 
         $this->users = new ArrayCollection();
