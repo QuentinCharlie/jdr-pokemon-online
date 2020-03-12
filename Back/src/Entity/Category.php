@@ -56,7 +56,7 @@ class Category
     }
 
     /**
-     * 
+     * Get the value of items
      */ 
     public function getItems()
     {
@@ -64,8 +64,7 @@ class Category
     }
 
     /**
-     * 
-     *
+     * Set the value of items
      * @return  self
      */ 
     public function setItems($items)
