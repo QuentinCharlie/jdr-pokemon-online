@@ -107,9 +107,7 @@ class User implements UserInterface
 
     public function setPassword(string $password): self
     {
-
-        global $kernel;
-        $this->password = $kernel->getContainer()->get('security.password_encoder')->encodePassword($this, $password);
+        $this->password = $password;
         return $this;
 
     }
