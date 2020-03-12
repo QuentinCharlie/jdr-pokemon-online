@@ -32,7 +32,7 @@ class GameController extends AbstractController
 
       // $cmd = exec('node ../../Node/server.js 2>&1 | tee -a /var/www/logs_node/' . $id . '.log 2>/dev/null >/dev/null &');
       $timestamp = microtime(true)*1000;
-      $port = 3000 + $id;
+      $port = 6000 + $id;
       if (!@fsockopen('localhost', $port)) {
         exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $id . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
       } 

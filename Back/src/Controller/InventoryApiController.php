@@ -22,7 +22,7 @@ class InventoryApiController extends AbstractController
      {
          $inventories = $this->getDoctrine()->getRepository(Inventory::class)->findAll();
 
-         return $this->json($inventories, 200, ["Access-Control-Allow-Origin: *"], ["groups" => "inventory:list"]);
+         return $this->json($inventories, 200, ["Access-Control-Allow-Origin" => "*"], ["groups" => "inventory:list"]);
      }
 
      /**
@@ -31,6 +31,6 @@ class InventoryApiController extends AbstractController
       public function inventoryById (Inventory $inventory)
       {
           
-          return $this->json($inventory, 200, ["Access-Control-Allow-Origin: *"], ["groups" => "inventory:detail"]);
+          return $this->json($inventory, 200, ["Access-Control-Allow-Origin" => "*"], ["groups" => "inventory:detail"]);
       }
 }
