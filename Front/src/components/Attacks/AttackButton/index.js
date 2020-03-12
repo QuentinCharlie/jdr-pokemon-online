@@ -43,8 +43,10 @@ const AttackButton = ({
                 type={type}
               />
             )}
-            trigger={<div className="attack-info" />}
+            basic
+            hoverable
             wide="very"
+            trigger={<div className="attack-info" />}
           />
         </div>
       </div>
