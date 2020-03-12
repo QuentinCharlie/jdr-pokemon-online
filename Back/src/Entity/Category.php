@@ -53,7 +53,7 @@ class Category
     }
 
     /**
-     * Get *@ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="category")
+     * Get the value of items
      */ 
     public function getItems()
     {
@@ -61,7 +61,7 @@ class Category
     }
 
     /**
-     * Set *@ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="category")
+     * Set the value of items
      *
      * @return  self
      */ 
