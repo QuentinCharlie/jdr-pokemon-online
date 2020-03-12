@@ -21,7 +21,7 @@ class PokemonApiController extends AbstractController
      {
          $Pokemons = $this->getDoctrine()->getRepository(Pokemon::class)->findAll();
 
-         return $this->json($Pokemons, 200, [], ["groups" => "pokemon:list"]);
+         return $this->json($Pokemons, 200, ["Access-Control-Allow-Origin" => "*"], ["groups" => "pokemon:list"]);
      }
 
      /**
@@ -30,6 +30,6 @@ class PokemonApiController extends AbstractController
       public function pokemonById (Pokemon $pokemon)
       {
           
-          return $this->json($pokemon, 200, [], ["groups" => "pokemon:detail"]);
+          return $this->json($pokemon, 200, ["Access-Control-Allow-Origin" => "*"], ["groups" => "pokemon:detail"]);
       }
 }

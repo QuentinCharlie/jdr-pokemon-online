@@ -31,7 +31,6 @@ class GameController extends AbstractController
       // (donc de le supprimer de la table)
 
       // $cmd = exec('node ../../Node/server.js 2>&1 | tee -a /var/www/logs_node/' . $id . '.log 2>/dev/null >/dev/null &');
-      // $id = 1;
       $timestamp = microtime(true)*1000;
       $port = 6000 + $id;
       if (!@fsockopen('localhost', $port)) {

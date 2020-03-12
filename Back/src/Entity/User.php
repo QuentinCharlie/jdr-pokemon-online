@@ -46,6 +46,11 @@ class User implements UserInterface
      */
     private $password;
 
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,9 +107,7 @@ class User implements UserInterface
 
     public function setPassword(string $password): self
     {
-
-        global $kernel;
-        $this->password = $kernel->getContainer()->get('security.password_encoder')->encodePassword($this, $password);
+        $this->password = $password;
         return $this;
 
     }
