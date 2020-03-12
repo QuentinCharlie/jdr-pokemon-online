@@ -17,7 +17,8 @@
         "symfony/profiler-pack": "^1.0",
         "symfony/serializer": "5.0.*",
         "symfony/twig-pack": "^1.0",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+        "wisembly/elephant.io": "^3.3"
     },
     "require-dev": {
     },
