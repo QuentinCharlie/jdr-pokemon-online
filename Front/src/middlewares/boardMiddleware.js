@@ -7,6 +7,7 @@ let socket;
 const boardMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
   let port = document.querySelector('#root').dataset.port;
+  // let port = 3001;
   console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
   
@@ -15,7 +16,7 @@ const boardMiddleware = (store) => (next) => (action) => {
     // receive action from node.js serve
     // then dispatch to state with WS_CONNECT
     case WS_CONNECT:
-      socket = io.connect(`http://localhost:${port}`);
+      socket = io.connect(`http://54.89.22.26:${port}`);
       socket.on('move_pokemon', (info) => {
         console.log('Retour du serveur');
         store.dispatch(addPokemonToCell(info));
