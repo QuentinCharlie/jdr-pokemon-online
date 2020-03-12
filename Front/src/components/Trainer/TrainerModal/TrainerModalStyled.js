@@ -105,6 +105,7 @@ const TrainerModalStyled = styled.div`
               border-radius: 10px;
               background-color: lightgray;
               box-shadow: lightgrey 0 0 5px;
+              margin-bottom: 1em;
               .team-container {
                 height: 100%;
                 width: 100%;
@@ -151,13 +152,16 @@ const TrainerModalStyled = styled.div`
             .trainer-sprite {
               width: 25%;
               img {
-                transform: scale(1.5);
+                transform: scale(1);
               }
             }
           }
         }
       }
       .stats {
+        box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+        border-radius: 10px;
+        background-color: white;
         height: calc(100% / 2.5);
         min-height: calc(100% / 2.5);
         width: 100%;
@@ -168,13 +172,13 @@ const TrainerModalStyled = styled.div`
           position: relative;
           z-index: 5;
           color: #6c757d;
-          background-color: white; 
-          border-radius: 10px;
-          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+          /* background-color: white;  */
+          border-radius: 10px 0 0 10px;
+          /* box-shadow: 0 0 15px rgba(117, 117, 117, .6); */
           height: 100%;
           width: calc((100% / 3) - .25em);
           padding: .5em;
-          &::after {
+          /* &::after {
             position: absolute;
             top: -0.17em;
             right: .3em;
@@ -185,9 +189,9 @@ const TrainerModalStyled = styled.div`
             color: #6c757d;
             opacity: .3;
             text-transform: uppercase;
-          }
+          } */
           .stat-container {
-            padding-top: 2em;
+            padding-top: 1em;
             padding-bottom: 1em;
             width: 100%;
             height: 100%;
@@ -210,16 +214,14 @@ const TrainerModalStyled = styled.div`
         }
         .stats-skills {
           position: relative;
-          border-radius: 10px;
-          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
-          background-color: white;
+          border-radius: 0 10px 10px 0;
           color: #6c757d;
           height: 100%;
           width: calc((100% / 3) * 2);
           margin-left: .5em;
           padding: .5em;
-          padding-top: 2em;
-          &::after {
+          display: flex;
+          /* &::after {
             position: absolute;
             top: -0.17em;
             right: .3em;
@@ -230,12 +232,14 @@ const TrainerModalStyled = styled.div`
             color: #6c757d;
             opacity: .3;
             text-transform: uppercase;
-          }
+          } */
           table {
-            width: 100%;
+            width: 50%;
             height: 100%;
+            &:first-child {
+              margin-right: .5em;
+            }
             th {
-              padding-bottom: 1em;
               font-weight: bold;
             }
           }
@@ -247,17 +251,13 @@ const TrainerModalStyled = styled.div`
         display: flex;
         .text-background {
           position: relative;
-          /* background-color: lightcoral; */
           color: #6c757d;
-          /* padding: .5em; */
           border-radius: 10px;
-          /* box-shadow: 0 0 15px rgba(117, 117, 117, .6);
-          background-color: white;  */
           width: calc(100% / 3);
-          height: 100%;
+          height: calc(100% - .5em);
+          padding: 1.5em .5em .5em .5em;
+          display: flex;
           .wrapper {
-            background-color: lightblue;
-            padding: .5em;
             overflow: auto;
             /* scrollbar hidden (IE/Edge) */
             -ms-overflow-style: none;
@@ -265,9 +265,7 @@ const TrainerModalStyled = styled.div`
             &::-webkit-scrollbar {
               display: none;
             }
-            height: 100%;
             p {
-              background-color: lightgray;
               text-align: justify;
             }
           }
@@ -288,12 +286,11 @@ const TrainerModalStyled = styled.div`
           position: relative;
           color: #6c757d;
           border-radius: 10px;
-          /* box-shadow: 0 0 15px rgba(117, 117, 117, .6);
-          background-color: white;  */
           height: 100%;
           width: calc(100% / 3);
-          height: 100%;
+          height: calc(100% - .5em);
           margin: 0 .5em;
+          padding-bottom: .5em;
           &::after {
             position: absolute;
             top: -0.17em;
@@ -307,8 +304,10 @@ const TrainerModalStyled = styled.div`
             text-transform: uppercase;
           }
           textarea {
+            background-color: rgba(255, 255, 255, .6);
             padding: 2em 1em 0 1em;
             border-radius: 10px;
+            border: none;
             height: 100%;
             width: 100%!important;
             text-align: justify;
@@ -320,11 +319,9 @@ const TrainerModalStyled = styled.div`
           position: relative;
           color: #6c757d;
           border-radius: 10px;
-          /* box-shadow: 0 0 15px rgba(117, 117, 117, .6);
-          background-color: white;  */
-          height: 100%;
+          height: calc(100% - .5em);
           width: calc(100% / 3);
-          height: 100%;
+          padding-bottom: .5em;
           &::after {
             position: absolute;
             top: -0.17em;
@@ -338,8 +335,10 @@ const TrainerModalStyled = styled.div`
             text-transform: uppercase;
           }
           textarea {
+            background-color: rgba(255, 255, 255, .6);
             padding: 2em 1em 0 1em;
             border-radius: 10px;
+            border: none;
             height: 100%;
             width: 100%!important;
             text-align: justify;
@@ -437,6 +436,7 @@ const TrainerModalStyled = styled.div`
             transition: .2s;
             &:hover {
               background-color: #6c757d;
+              box-shadow: 2px 4px 8px rgba(117, 117, 117, .6);
               color: white;
               transition: .2s;
 

@@ -14,37 +14,37 @@ class Inventory
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("inventory:list")
+     * @Groups({"inventory:list", "inventory:detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("inventory:list")
+     * @Groups({"inventory:list", "inventory:detail"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("inventory:list")
+     * @Groups({"inventory:list", "inventory:detail"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("inventory:list")
+     * @Groups({"inventory:list", "inventory:detail"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("inventory:list")
+     * @Groups({"inventory:list", "inventory:detail"})
      */
     private $image;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="items")
-     * @Groups("inventory:list")
+     * @Groups("inventory:detail")
      */
     private $category;
 
