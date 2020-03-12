@@ -9,7 +9,8 @@ import {
 } from 'semantic-ui-react';
 
 // == Import files
-import avatar from 'src/assets/images/ash.png';
+// import * from 'src/assets/images/trainer/';
+import avatar from 'src/assets/images/trainer/1.png';
 import heartIcon from 'src/assets/images/heart.svg';
 // == Import utils
 import { getSidebarNameCapitalize } from 'src/utils/functions';
@@ -20,7 +21,7 @@ import TrainerModal from './TrainerModal';
 import TrainerStyled from './TrainerStyled';
 
 // == Composant
-const Trainer = ({ visible, changeSidebarVisibility }) => {
+const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
@@ -66,6 +67,7 @@ const Trainer = ({ visible, changeSidebarVisibility }) => {
 
 Trainer.propTypes = {
   visible: PropTypes.bool.isRequired,
+  trainer: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
 

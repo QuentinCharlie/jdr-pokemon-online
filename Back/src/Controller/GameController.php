@@ -13,7 +13,7 @@ class GameController extends AbstractController
     /**
      * @Route("/game/{id}", name="game_board")
      */
-    public function gameBoard()
+    public function gameBoard($id)
     {
       if (!is_dir("/var/www/logs_node")) {
         mkdir("/var/www/logs_node", 0777, true);
@@ -31,11 +31,16 @@ class GameController extends AbstractController
       // (donc de le supprimer de la table)
 
       // $cmd = exec('node ../../Node/server.js 2>&1 | tee -a /var/www/logs_node/' . $id . '.log 2>/dev/null >/dev/null &');
-      $id = 1;
+      // $id = 1;
       $timestamp = microtime(true)*1000;
-      $port = 3000 + $id;
+      $port = 6000 + $id;
       if (!@fsockopen('localhost', $port)) {
         exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $id . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
+        return $this->render('game/gameboard.html.twig', [
+          'port' => $port,
+          'isMJ' => true,
+          // 'user' => $user,
+        ]);  
       } 
       // $cmd = exec('pwd');
       // dd($cmd);

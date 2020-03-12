@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // == Import
 import Nav from 'src/containers/Nav';
@@ -14,41 +15,51 @@ import Dices from 'src/containers/Dices';
 import AppStyled from './AppStyled';
 
 // == Composant
-const App = () => (
-  <AppStyled>
-    <div className="mobile-tablet-app">
-      <Board />
-      <div className="container container--nav-to-dices">
-        <Nav />
-        <Log />
-        <Trainer />
-        <Pokemon />
-        <Attacks />
-        <Dices />
-      </div>
-    </div>
-
-    <div className="desktop-app">
-      <Nav />
-      <div className="main-wrapper">
-        <div className="container container--board-log">
-          <Board />
+const App = ({ isLoading }) => (
+  <>
+  {isLoading && (<div>Loading</div>)}
+  {!isLoading && (
+    <AppStyled>
+      <div className="mobile-tablet-app">
+        <Board />
+        <div className="container container--nav-to-dices">
+          <Nav />
           <Log />
-        </div>
-        <div className="container container--trainer-to-dices">
-          <div className="bottom-left-wrapper">
-            <Trainer />
-            <div className="sub-left-wrapper">
-              <Pokemon />
-              <Attacks />
-            </div>
-          </div>
+          <Trainer />
+          <Pokemon />
+          <Attacks />
           <Dices />
         </div>
       </div>
-    </div>
-  </AppStyled>
+
+      <div className="desktop-app">
+        <Nav />
+        <div className="main-wrapper">
+          <div className="container container--board-log">
+            <Board />
+            <Log />
+          </div>
+          <div className="container container--trainer-to-dices">
+            <div className="bottom-left-wrapper">
+              <Trainer />
+              <div className="sub-left-wrapper">
+                <Pokemon />
+                <Attacks />
+              </div>
+            </div>
+            <Dices />
+          </div>
+        </div>
+      </div>
+    </AppStyled>
+  )}
+  </>
 );
+
+// == validation
+App.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;
