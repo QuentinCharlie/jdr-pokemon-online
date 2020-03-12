@@ -143,6 +143,4 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-server.listen(port, () => {
-  console.log(`listening on *:${port}`);
-});
+server.listen(port, '54.89.22.26');

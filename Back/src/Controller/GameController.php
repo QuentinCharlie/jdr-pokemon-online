@@ -35,6 +35,11 @@ class GameController extends AbstractController
       $port = 6000 + $id;
       if (!@fsockopen('localhost', $port)) {
         exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $id . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
+        return $this->render('game/gameboard.html.twig', [
+          'port' => $port,
+          'isMJ' => true,
+          // 'user' => $user,
+        ]);  
       } 
       // $cmd = exec('pwd');
       // dd($cmd);

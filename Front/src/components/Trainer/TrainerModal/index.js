@@ -7,26 +7,26 @@ import { Modal, Popup } from 'semantic-ui-react';
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files for styles
-import avatar from 'src/assets/images/ash.png';
-import pokeAvatar from 'src/assets/images/25.png';
+import avatar from 'src/assets/images/trainer/1.png';
+import pokeAvatar from 'src/assets/images/pokemon/25.png';
 import greyPokeball from 'src/assets/images/pokeball.png';
 import trainer from 'src/assets/images/sacha.png';
 
 // == Items img Import
 // Balls
-import ballMenu from 'src/assets/images/balls/menu-balls.png';
-import pokeball from 'src/assets/images/balls/pokeball.png';
-import superball from 'src/assets/images/balls/superball.png';
+import ballMenu from 'src/assets/images/inventory/balls/menu-balls.png';
+import pokeball from 'src/assets/images/inventory/balls/pokeball.png';
+import superball from 'src/assets/images/inventory/balls/superball.png';
 // Materials
-import materialMenu from 'src/assets/images/materiel/menu-materiel.png';
-import map from 'src/assets/images/materiel/carte.png';
+import materialMenu from 'src/assets/images/inventory/materiel/menu-materiel.png';
+import map from 'src/assets/images/inventory/materiel/carte.png';
 // Medicine
-import medicMenu from 'src/assets/images/medicaments/menu-medicaments.png';
-import herbeRappel from 'src/assets/images/medicaments/herbe-rappel.png';
+import medicMenu from 'src/assets/images/inventory/medicaments/menu-medicaments.png';
+import herbeRappel from 'src/assets/images/inventory/medicaments/herbe-rappel.png';
 // Combat Items
-import combatItemMenu from 'src/assets/images/objets-combat/menu-objets-combat.png';
+import combatItemMenu from 'src/assets/images/inventory/objets-combat/menu-objets-combat.png';
 // Training Items
-import trainingItemMenu from 'src/assets/images/objets-entrainement/menu-objets-entrainement.png';
+import trainingItemMenu from 'src/assets/images/inventory/objets-entrainement/menu-objets-entrainement.png';
 
 // == Import style
 import TrainerModalStyled from './TrainerModalStyled';
@@ -299,10 +299,10 @@ const TrainerModal = () => (
             </div>
           </div>
           <div className="text-history">
-            <textarea>Test</textarea>
+            <textarea readOnly value="Test" />
           </div>
           <div className="text-notes">
-            <textarea>Test</textarea>
+            <textarea readOnly value="Test" />
           </div>
         </div>
       </div>

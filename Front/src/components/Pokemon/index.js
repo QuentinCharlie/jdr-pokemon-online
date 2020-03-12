@@ -12,7 +12,7 @@ import { getSidebarNameCapitalize } from 'src/utils/functions';
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
-import pokeAvatar from 'src/assets/images/25.png';
+import pokeAvatar from 'src/assets/images/pokemon/25.png';
 import heartIcon from 'src/assets/images/heart.svg';
 import zapIcon from 'src/assets/images/zap.svg';
 // == Import components

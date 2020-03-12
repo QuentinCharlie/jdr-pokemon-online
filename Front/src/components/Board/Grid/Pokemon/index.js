@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 
-import pokeGif from 'src/assets/images/pikachu.gif';
+import pokeGif from 'src/assets/images/pokemon/pikachu.gif';
 import { ItemTypes } from './Constants';
 
 // == Import
