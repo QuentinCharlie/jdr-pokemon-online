@@ -20,7 +20,7 @@ class TrainerApiController extends AbstractController
      {
          $trainers = $this->getDoctrine()->getRepository(Trainer::class)->findAll();
 
-         return $this->json($trainers, 200, [], ["groups" => "trainer:list"]);
+         return $this->json($trainers, 200, ["Access-Control-Allow-Origin: *"], ["groups" => "trainer:list"]);
      }
 
      /**
@@ -29,6 +29,6 @@ class TrainerApiController extends AbstractController
       public function trainerById (Trainer $trainer)
       {
           
-          return $this->json($trainer, 200, [], ["groups" => "trainer:list"]);
+          return $this->json($trainer, 200, ["Access-Control-Allow-Origin: *"], ["groups" => "trainer:list"]);
       }
 }
