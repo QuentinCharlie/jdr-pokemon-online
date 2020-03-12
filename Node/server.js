@@ -15,7 +15,8 @@ const app = express();
 const server = Server(app);
 const io = socket(server);
 // let port = 3001;
-let port = process.argv[2];
+// let port = process.argv[2];
+let port = 3001;
 let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 
 const db = {};

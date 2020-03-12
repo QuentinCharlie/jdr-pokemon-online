@@ -6,7 +6,8 @@ let socket;
 /* eslint-disable no-unused-vars, no-console */
 const boardMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
-  let port = document.querySelector('#root').dataset.port;
+  // let port = document.querySelector('#root').dataset.port;
+  let port = 3001;
   console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
   

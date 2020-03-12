@@ -164,38 +164,24 @@ const TrainerModal = () => (
           </div>
           <div className="stats-skills">
             <table>
-              <thead>
+              <tbody>
                 <tr>
                   <th>Comp&eacute;tences</th>
                   <th>Points</th>
-                  <th>Sp&eacute;cialisations</th>
-                  <th>Connaissances</th>
-                  <th>Points</th>
-                  <th>Sp&eacute;cialisations</th>
+                  <th>Sp&eacute;cialisation</th>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
                   <td>Bricolage</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td>Education</td>
-                  <td>2</td>
-                  <td>Dresseur</td>
                 </tr>
                 <tr>
                   <td>Charisme</td>
                   <td>1</td>
                   <td>&nbsp;</td>
-                  <td>G&eacute;ographie</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Combat</td>
-                  <td>1</td>
-                  <td>&nbsp;</td>
-                  <td>Informatique</td>
                   <td>1</td>
                   <td>&nbsp;</td>
                 </tr>
@@ -203,55 +189,93 @@ const TrainerModal = () => (
                   <td>Conduite</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td>L&eacute;gendes</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td>D&eacute;t&eacute;ction</td>
+                  <td>D&eacute;tection</td>
                   <td>2</td>
                   <td>Pokémon</td>
-                  <td>M&eacute;decines</td>
-                  <td>1</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td>Discretion</td>
+                  <td>Discr&eacute;tion</td>
                   <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>M&eacute;decine Pok&eacute;mon</td>
-                  <td>1</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Expression</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td>Nature</td>
-                  <td>1</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Psychologie</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td>Psychisme</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td>Sports</td>
+                  <td>Sport</td>
                   <td>2</td>
                   <td>Course</td>
-                  <td>Sciences</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Survie</td>
                   <td>1</td>
                   <td>&nbsp;</td>
-                  <td>Pok&eacute;logie</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Connaissances</th>
+                  <th>Points</th>
+                  <th>Sp&eacute;cialisation</th>
+                </tr>
+                <tr>
+                  <td>Education</td>
+                  <td>2</td>
+                  <td>Dresseur</td>
+                </tr>
+                <tr>
+                  <td>Géographie</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Informatique</td>
+                  <td>1</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Légendes</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Médicine</td>
+                  <td>1</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Médicine Pokémon</td>
+                  <td>1</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Nature</td>
+                  <td>1</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Psychisme</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Sciences</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Pokélogie</td>
                   <td>2</td>
                   <td>Table des types</td>
                 </tr>
@@ -261,7 +285,7 @@ const TrainerModal = () => (
         </div>
         <div className="text">
           <div className="text-background">
-            {/* <div className="wrapper">
+            <div className="wrapper">
               <p>
                 C'est un Dresseur Pokémon originaire du Bourg Palette qui rêve de devenir Maître Pokémon.
                 Sacha commence son voyage initiatique à l’âge de dix ans en tant que Dresseur Pokémon débutant et attentionné, mais têtu et éruptif.
@@ -272,7 +296,7 @@ const TrainerModal = () => (
                 remarqué par de nombreuses personnes au fil de leur voyage. À partir de ce moment,
                 Sacha a encore beaucoup de choses à apprendre pour devenir un véritable Dresseur.
               </p>
-            </div> */}
+            </div>
           </div>
           <div className="text-history">
             <textarea>Test</textarea>
