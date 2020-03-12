@@ -299,10 +299,10 @@ const TrainerModal = () => (
             </div>
           </div>
           <div className="text-history">
-            <textarea>Test</textarea>
+            <textarea readOnly value="Test" />
           </div>
           <div className="text-notes">
-            <textarea>Test</textarea>
+            <textarea readOnly value="Test" />
           </div>
         </div>
       </div>
