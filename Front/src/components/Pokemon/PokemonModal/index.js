@@ -9,6 +9,7 @@ import ProgressBar from 'src/components/ProgressBar';
 
 // Import Utils
 import { findPokemonImage } from 'src/utils/functions';
+import { typesColors } from 'src/utils/typesColors';
 import {
   affinityTable,
   getAttackMultiplicatorAndMessage,
@@ -29,10 +30,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
     type2 = pokemon.types[1].name;
   }
 
-  console.log(getAttackMultiplicatorAndMessage(
-    affinityTable.Plante[type1],
-    affinityTable.Plante[type2]
-  ));
+  console.log(typesColors);
 
   return (
     <PokemonModalStyled>
@@ -134,8 +132,11 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
               </div>
             </div>
             <div className="stats-sensibilities">
-              <div className="type">Sensibilités</div>
-              <div className="type">
+              <div className="type type-table-head">Sensibilités</div>
+              <div 
+                className="type type-combat"
+                style={{ backgroundColor: typesColors.Combat }}
+              >
                 Combat x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Combat[type1],
@@ -143,7 +144,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-dragon"
+                style={{ backgroundColor: typesColors.Dragon }}
+              >
                 Dragon x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Dragon[type1],
@@ -151,7 +154,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-eau"
+                style={{ backgroundColor: typesColors.Eau }}
+              >
                 Eau x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Eau[type1],
@@ -159,7 +164,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-electrik"
+                style={{ backgroundColor: typesColors.Electrik }}
+              >
                 Electrik x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Electrik[type1],
@@ -167,7 +174,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-feu"
+                style={{ backgroundColor: typesColors.Feu }}
+              >
                 Feu x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Feu[type1],
@@ -175,7 +184,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-glace"
+                style={{ backgroundColor: typesColors.Glace }}
+              >
                 Glace x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Glace[type1],
@@ -183,7 +194,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-insecte"
+                style={{ backgroundColor: typesColors.Insecte }}
+              >
                 Insecte x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Insecte[type1],
@@ -191,7 +204,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-normal"
+                style={{ backgroundColor: typesColors.Normal }}
+              >
                 Normal x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Normal[type1],
@@ -199,7 +214,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-plante"
+                style={{ backgroundColor: typesColors.Plante }}
+              >
                 Plante x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Plante[type1],
@@ -207,7 +224,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-poison"
+                style={{ backgroundColor: typesColors.Poison }}
+              >
                 Poison x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Poison[type1],
@@ -215,7 +234,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-psy"
+                style={{ backgroundColor: typesColors.Psy }}
+              >
                 Psy x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Psy[type1],
@@ -223,7 +244,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-roche"
+                style={{ backgroundColor: typesColors.Roche }}
+              >
                 Roche x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Roche[type1],
@@ -231,7 +254,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-sol"
+                style={{ backgroundColor: typesColors.Sol }}
+              >
                 Sol x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Sol[type1],
@@ -239,7 +264,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-spectre"
+                style={{ backgroundColor: typesColors.Dragon }}
+              >
                 Spectre x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Spectre[type1],
@@ -247,7 +274,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                   ).multiplicator
                 }
               </div>
-              <div className="type">
+              <div className="type type-vol"
+                style={{ backgroundColor: typesColors.Vol }}
+              >
                 Vol x{
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Vol[type1],

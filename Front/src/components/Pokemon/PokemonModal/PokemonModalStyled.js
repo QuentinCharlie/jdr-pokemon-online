@@ -157,7 +157,7 @@ const PokemonModalStyled = styled.div`
         .stats-sensibilities {
           border-radius: 10px;
           box-shadow: lightgrey 0 0 5px;
-          background-color: lightgreen; 
+          background-color: lightgray; 
           height: 100%;
           width: calc((100% / 3) * 2);
           margin-left: .5em;
@@ -168,6 +168,12 @@ const PokemonModalStyled = styled.div`
             width: calc(100% / 4);
             height: calc(100% / 4);
             border: 1px solid lightgray;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }
