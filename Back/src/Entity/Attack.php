@@ -14,55 +14,55 @@ class Attack
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $energy;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $distance;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $accuracy;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $damage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $effect;
 
     /**
     * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="attacks")
-    * @Groups("pokemon:detail")
+    * @Groups({"pokemon:list", "pokemon:detail"} )
     */
     private $type;
 

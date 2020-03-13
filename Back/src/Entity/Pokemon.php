@@ -86,13 +86,13 @@ class Pokemon
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Type", mappedBy="pokemons")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $types;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Attack", mappedBy="pokemons")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $attacks;
 
