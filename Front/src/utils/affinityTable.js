@@ -38,8 +38,6 @@ export const getAttackMultiplicatorAndMessage = (type1, type2) => {
     message = '';
   }
 
-
-
   return {multiplicator, message};
 };
 
@@ -112,9 +110,9 @@ export const affinityTable = {
     'Electrik' : 1,
     'Fée'      : 1,
     'Feu'      : 2,
-    'Glace'    : 0,
-    'Insecte'  : 0,
-    'Normal'   : 0,
+    'Glace'    : 1,
+    'Insecte'  : 1,
+    'Normal'   : 1,
     'Plante'   : 0.5,
     'Poison'   : 1,
     'Psy'      : 1,

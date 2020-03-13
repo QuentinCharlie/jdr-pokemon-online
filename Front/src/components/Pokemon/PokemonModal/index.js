@@ -30,8 +30,6 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
     type2 = pokemon.types[1].name;
   }
 
-  console.log(typesColors);
-
   return (
     <PokemonModalStyled>
       <Modal.Header className="modal-header"><h1>{pokemon.name}</h1></Modal.Header>
@@ -132,6 +130,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
               </div>
             </div>
             <div className="stats-sensibilities">
+              {/* @todo: refactor this  */}
               <div className="type type-table-head">Sensibilités</div>
               <div 
                 className="type type-combat"
@@ -294,7 +293,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
         </div>
         <div className="wrapper-right">
           <div className="xp">
-            {pokemon.xp}
+            {pokemon.xp} XP
           </div>
           <div className="attack-list">
             {pokemon.attacks.map((attack) => (
