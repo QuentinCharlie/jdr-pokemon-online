@@ -13,6 +13,7 @@ import App from 'src/components/App';
 const mapStateToProps = (state) => ({
   isLoading: state.trainer.isLoading,
   isUserReady: state.user.isUserReady,
+  hasTrainer: state.user.hasTrainer,
 });
 
 // == Actions / dispatch

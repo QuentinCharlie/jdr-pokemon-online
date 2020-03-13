@@ -5,6 +5,7 @@
 export const LOAD_USER = 'LOAD_USER';
 export const SAVE_USER = 'SAVE_USER';
 export const LINK_TRAINER_TO_USER = 'LINK_TRAINER_TO_USER';
+export const LINK_POKEMON_TO_USER = 'LINK_POKEMON_TO_USER';
 
 // Action creators
 export const loadUser = () => ({
@@ -19,4 +20,9 @@ export const saveUser = (user) => ({
 export const linkTrainerToUser = (trainer) => ({
   type: LINK_TRAINER_TO_USER,
   trainer,
+});
+
+export const linkPokemonToUser = (pokemon) => ({
+  type: LINK_POKEMON_TO_USER,
+  pokemon,
 });
