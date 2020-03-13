@@ -21,6 +21,20 @@ import PokemonStyled from './PokemonStyled';
 
 // == Composant
 const Pokemon = ({ visible, pokemon, changeSidebarVisibility, pokemonMaxHealth }) => {
+  const affinityTable = {
+    'Acier': 
+      {
+        'Acier': 0.5, 
+        'Combat': 1
+      },
+    'Combat':
+      {
+        'Dragon': 1,
+        'Glace': 2,
+      },
+  };
+  console.log(affinityTable);
+  
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
