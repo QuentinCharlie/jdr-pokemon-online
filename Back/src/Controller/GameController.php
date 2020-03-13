@@ -36,17 +36,19 @@ class GameController extends AbstractController
     // (donc de le supprimer de la table)
 
     // $cmd = exec('node ../../Node/server.js 2>&1 | tee -a /var/www/logs_node/' . $id . '.log 2>/dev/null >/dev/null &');
-    $timestamp = microtime(true)*1000;
+    $timestamp = microtime(true) * 1000;
 
     //$all_ports = [ 6000, 6001, 6002 ]; // Tout les ports en dur
-    $all_ports = range(6000,7000,1);
-    
+    $all_ports = range(6000, 7000, 1);
+ 
     //$used_ports = [  ]; // récupération via la DB des ports utilisés
 
-    $users = $connection->fetchAll('SELECT port FROM game_server');
+    $used_ports = $connection->fetchAll('SELECT port FROM game_server');
+    dd($used_ports);
+    $available_ports = array_diff($all_ports, $used_ports); // ==> [ 6002 ]
 
-    $available_ports = array_diff( $all_ports, $used_ports ); // ==> [ 6002 ]
-    sort( $available_ports );
+  
+    sort($available_ports);
     $port = $available_ports[0]; // <== 6000
 
     if (!@fsockopen('localhost', $port)) {
@@ -54,41 +56,22 @@ class GameController extends AbstractController
       exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $id . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
       // TODO : stocker le nom du MJ ici
       $is_new_game = true;
-    } 
+    }
     // $cmd = exec('pwd');
     // dd($cmd);
     // dd(file_get_contents("/var/www/logs_node/1.log"));
 
     $username = $this->getUser()->getNickname();
-    
-    if( $is_new_game || $username === $game_mj /* check if user is MJ */ )
-    {
+
+    if ($is_new_game || $username === $game_mj /* check if user is MJ */) {
       return $this->render('game/gameboard.html.twig', [
         'port' => $port,
         'is_mj' => true
       ]);
     }
-       
+
     return $this->render('game/gameboard.html.twig', [
       'port' => $port,
     ]);
-      
-    
-  }
-   
-  /**
-   * @Route("/game/{id}", name="game_board")
-   */
-  public function gameBoard(int $port)
-  {
-   
-
-  }
-
-   /**
-   * @Route("/game/{id}/delete", name="game_delete")
-   */
-  public function gameDelete(int $port)
-  {
   }
 }
