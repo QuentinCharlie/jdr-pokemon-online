@@ -10,6 +10,7 @@ import { findPokemonImage } from 'src/utils/functions';
 
 // == Import Components
 import ProgressBar from 'src/components/ProgressBar';
+import PokeballSpinner from 'src/components/PokemonSelector/PokeballSpinner';
 
 // == Import files
 import heartIcon from 'src/assets/images/heart.svg';
@@ -35,7 +36,11 @@ const PokemonSelector = ({
   
   return (
     <PokemonSelectorStyled>
-    {pokemons === undefined && <div className="loading">Chargement des Pokémon...</div>}
+    {pokemons === undefined && (
+      <div className="loading">
+        <PokeballSpinner />
+      </div>
+    )}
     {pokemons !== undefined && 
       <div className="pokemon-list">
         {pokemons.map((pokemon) => (
