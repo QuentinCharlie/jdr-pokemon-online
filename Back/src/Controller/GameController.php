@@ -14,7 +14,6 @@ class GameController extends AbstractController
   const PORT_STOP = 7000;
   const PORT_NB    = 2000;
 
-
   /**
    * @Route("/game/create", name="game_board")
    */

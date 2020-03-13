@@ -11,8 +11,8 @@ import {
 import { getSidebarNameCapitalize } from 'src/utils/functions';
 
 // == Import files
-import pokeGif from 'src/assets/images/pikachu.gif';
-import pokePng from 'src/assets/images/pikachu.png';
+import pokeGif from 'src/assets/images/pokemon/pikachu.gif';
+import pokePng from 'src/assets/images/pokemon/pikachu.png';
 import ashTrainer from 'src/assets/images/sacha-face.png';
 import ashTrainer2 from 'src/assets/images/sacha-droite.png';
 import backArrow from 'src/assets/images/left-arrow.png';

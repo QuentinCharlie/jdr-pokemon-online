@@ -9,7 +9,8 @@ import {
 } from 'semantic-ui-react';
 
 // == Import files
-import avatar from 'src/assets/images/ash.png';
+// import * from 'src/assets/images/trainer/';
+import avatar from 'src/assets/images/trainer/1.png';
 import heartIcon from 'src/assets/images/heart.svg';
 // == Import utils
 import { getSidebarNameCapitalize } from 'src/utils/functions';
@@ -20,7 +21,7 @@ import TrainerModal from './TrainerModal';
 import TrainerStyled from './TrainerStyled';
 
 // == Composant
-const Trainer = ({ visible, changeSidebarVisibility }) => {
+const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
@@ -47,17 +48,17 @@ const Trainer = ({ visible, changeSidebarVisibility }) => {
             trigger={<img className="trainer-avatar-img" src={avatar} alt="avatar" />}
             closeIcon
           >
-            <TrainerModal />
+            <TrainerModal trainer={trainer} />
           </Modal>
           <div className="health-container">
-            <span>40/100</span>
+            <span>{trainer.vitality}/10</span>
             <img src={heartIcon} alt="heart logo" />
             {/* The style in composant is require for dynamisation */}
-            <div className="health-bar" style={{ width: '40%' }} />
+            <div className="health-bar" style={{ width: `${trainer.vitality}0%` }} />
           </div>
         </div>
         <div className="money">
-          <span>5000 ₽</span>
+          <span>{trainer.money} ₽</span>
         </div>
       </div>
     </TrainerStyled>
@@ -66,6 +67,7 @@ const Trainer = ({ visible, changeSidebarVisibility }) => {
 
 Trainer.propTypes = {
   visible: PropTypes.bool.isRequired,
+  trainer: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
 

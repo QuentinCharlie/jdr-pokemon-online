@@ -7,8 +7,8 @@ import { Modal } from 'semantic-ui-react';
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files for styles
-import avatar from 'src/assets/images/25.png';
-import pokemonSprite from 'src/assets/images/pikachu.gif';
+import avatar from 'src/assets/images/pokemon/25.png';
+import pokemonSprite from 'src/assets/images/pokemon/pikachu.gif';
 import greyPokeball from 'src/assets/images/pokeball.png';
 
 // == Import style
