@@ -1,18 +1,16 @@
 import { connect } from 'react-redux';
 
 // Du composant qui a besoin de data ou d'actions
-import App from 'src/components/App';
+import TrainerSelector from 'src/components/TrainerSelector';
 
 // Action Creators
-// import {  } from 'src/actions/app';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  isLoading: state.trainer.isLoading,
-  isUserReady: state.user.isUserReady,
+  trainers: state.trainer.allTrainers,
 });
 
 // == Actions / dispatch
@@ -22,6 +20,6 @@ const mapDispatchToProps = (dispatch) => ({});
 
 // création du lien : container
 // connect(redux)(react) - connect(ce dont on a besoin)(qui en a besoin)
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const TrainerSelectorContainer = connect(mapStateToProps, mapDispatchToProps)(TrainerSelector);
 
-export default AppContainer;
+export default TrainerSelectorContainer;

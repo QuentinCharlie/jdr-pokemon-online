@@ -12,7 +12,7 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
   visible: state.sidebar.isTrainerSidebarVisible,
-  trainer: state.trainer.trainers.Sacha,
+  trainer: state.trainer.trainers,
 });
 
 // == Actions / dispatch

@@ -48,17 +48,17 @@ const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
             trigger={<img className="trainer-avatar-img" src={avatar} alt="avatar" />}
             closeIcon
           >
-            <TrainerModal />
+            <TrainerModal trainer={trainer} />
           </Modal>
           <div className="health-container">
-            <span>40/100</span>
+            <span>{trainer.vitality}/10</span>
             <img src={heartIcon} alt="heart logo" />
             {/* The style in composant is require for dynamisation */}
-            <div className="health-bar" style={{ width: '40%' }} />
+            <div className="health-bar" style={{ width: `${trainer.vitality}0%` }} />
           </div>
         </div>
         <div className="money">
-          <span>5000 ₽</span>
+          <span>{trainer.money} ₽</span>
         </div>
       </div>
     </TrainerStyled>

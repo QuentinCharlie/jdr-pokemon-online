@@ -14,21 +14,21 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
-// let port = 3001;
-let port = process.argv[2];
-let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
-const inactionTimer = 5; // 3600s => 1h
+let port = 3001;
+// let port = process.argv[2];
+// let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
+// const inactionTimer = 5; // 3600s => 1h
 
-setInterval( function() { 
-  if( timeSinceUse > inactionTimer ) {
-    // TODO : Better close socket connection before closing whole server.js (thus freeing port)
-    console.log( "Exiting due to inactivity" );
-    // TODO : Ajax BDD free port
-    process.exit();
-  }
-  console.log("Timesince : " + timeSinceUse + "s" );
-  timeSinceUse += 1; // 1s
-}, 1000 ); // 1000 ms
+// setInterval( function() { 
+//   if( timeSinceUse > inactionTimer ) {
+//     // TODO : Better close socket connection before closing whole server.js (thus freeing port)
+//     console.log( "Exiting due to inactivity" );
+//     // TODO : Ajax BDD free port
+//     process.exit();
+//   }
+//   console.log("Timesince : " + timeSinceUse + "s" );
+//   timeSinceUse += 1; // 1s
+// }, 1000 ); // 1000 ms
 
 const db = {};
 
@@ -143,4 +143,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-server.listen(port, '54.89.22.26');
+// server.listen(port, '54.89.22.26');
+server.listen(port, 'localhost');

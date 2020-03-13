@@ -1,5 +1,5 @@
 // Action Types
-import { SAVE_TRAINER } from 'src/actions/trainer';
+import { SAVE_TRAINER, DISPLAY_ALL_TRAINERS } from 'src/actions/trainer';
 
 // Initial State
 const initialState = {
@@ -17,11 +17,22 @@ const trainerReducer = (state = initialState, action = {}) => {
         isLoading: false,
         trainers: {
           ...state.trainers,
-          [action.trainer.name]: action.trainer,
+          [action.trainer.name]: {
+            ...action.trainer,
+            money: 5000,
+            exp: 0,
+            history: 'Historique des parties précédentes',
+            notes: 'Notes du dresseur',
+          },
         },
-      }
-      break;
+      };
     }
+    case DISPLAY_ALL_TRAINERS:
+      // console.log(action.trainer);
+      return {
+        ...state,
+        allTrainers: action.trainers,
+      };
 
     default:
       return state;
