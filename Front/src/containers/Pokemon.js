@@ -12,6 +12,8 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
   visible: state.sidebar.isPokemonSidebarVisible,
+  pokemon: state.user.pokemon,
+  pokemonMaxHealth: state.pokemon.allPokemons[state.user.pokemon.id - 1].vitality,
 });
 
 // == Actions / dispatch

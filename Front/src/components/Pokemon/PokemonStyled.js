@@ -36,7 +36,6 @@ const PokemonStyled = styled.div`
       width: 100%;
       height: calc(30vh - 40px - 3em);
       margin: 1em 1em 1em 0;
-      background-color: #f6e652;
       color: white;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(117, 117, 117, .6);

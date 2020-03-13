@@ -13,6 +13,7 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 const mapStateToProps = (state) => ({
   visible: state.sidebar.isTrainerSidebarVisible,
   trainer: state.user.trainer,
+  pokemon: state.user.pokemon,
 });
 
 // == Actions / dispatch

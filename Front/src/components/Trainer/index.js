@@ -13,7 +13,7 @@ import {
 import avatar from 'src/assets/images/trainer/1.png';
 import heartIcon from 'src/assets/images/heart.svg';
 // == Import utils
-import { getSidebarNameCapitalize } from 'src/utils/functions';
+import { getSidebarNameCapitalize, findTrainerImage } from 'src/utils/functions';
 // == Import components
 import TrainerModal from './TrainerModal';
 
@@ -21,14 +21,7 @@ import TrainerModal from './TrainerModal';
 import TrainerStyled from './TrainerStyled';
 
 // == Composant
-const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
-
-  function importAll(r) {
-    let images = {};
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-    return images;
-  }
-  const images = importAll(require.context('../../assets/images/trainer/', false, /\.(gif|png|jpe?g|svg)$/));
+const Trainer = ({ visible, trainer, pokemon, changeSidebarVisibility }) => { 
 
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
@@ -53,10 +46,10 @@ const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
           <Modal
             className="modal-trainer"
             style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
-            trigger={<img className="trainer-avatar-img" src={images['1.png'].default} alt="avatar" />}
+            trigger={<img className="trainer-avatar-img" src={findTrainerImage(`${trainer.id}.png`)} alt="avatar" />}
             closeIcon
           >
-            <TrainerModal trainer={trainer} />
+            <TrainerModal trainer={trainer} pokemon={pokemon} />
           </Modal>
           <div className="health-container">
             <span>{trainer.vitality}/10</span>
@@ -76,6 +69,7 @@ const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
 Trainer.propTypes = {
   visible: PropTypes.bool.isRequired,
   trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
 
