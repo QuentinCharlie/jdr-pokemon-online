@@ -23,8 +23,10 @@ const AttackButton = ({
   color,
 }) => (
   <AttackButtonStyled>
-    <div className={`button ${type}`} style={{ backgroundColor: color }}>
-      {/* <div className={`bg ${type}`} /> */}
+    <div 
+      className={`button ${type}`}
+      style={{ backgroundColor: `#${color}` }}
+    >
       <div className="attack">
         <div className="attack-name">{name}</div>
         <div className="attack-icons">
@@ -45,6 +47,8 @@ const AttackButton = ({
             )}
             basic
             hoverable
+            hideOnScroll
+            on="hover"
             wide="very"
             trigger={<div className="attack-info" />}
           />
@@ -72,7 +76,7 @@ const AttackButton = ({
 AttackButton.propTypes = {
   name: PropTypes.string.isRequired,
   damage: PropTypes.number.isRequired,
-  accuracy: PropTypes.string.isRequired,
+  accuracy: PropTypes.number.isRequired,
   energy: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,

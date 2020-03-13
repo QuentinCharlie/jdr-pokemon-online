@@ -51,13 +51,12 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                           <td style={{ textAlign: 'right' }}>#</td>
                           <td>{pokemon.id}</td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                           <td>Genre</td>
-                          {/* @todo: Generate random gender */}
                           <td>Mâle</td>
-                        </tr>
+                        </tr> */}
                         <tr>
-                          <td>Type(s)</td>
+                          <td>{pokemon.types.length < 2 ? 'Type' : 'Types'}</td>
                           <td>
                             {
                               pokemon.types.length < 2 ? 

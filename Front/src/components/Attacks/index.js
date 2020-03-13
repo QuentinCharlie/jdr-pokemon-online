@@ -39,19 +39,19 @@ const Attacks = ({
       </div>
 
       <div className="desktop">
-        {attacks.map((attack, index) => (
+        {attacks.map((attack) => (
           <AttackButton
             // eslint-disable-next-line react/no-array-index-key
-            key={index}
+            key={attack.id}
             name={attack.name}
-            damage={attack.damage}
-            accuracy={attack.accuracy}
             energy={attack.energy}
             category={attack.category}
             distance={attack.distance}
+            accuracy={attack.accuracy}
+            damage={attack.damage}
             effect={attack.effect}
-            type={attack.type}
-            color={attack.color}
+            type={attack.type.name}
+            color={attack.type.color}
           />
         ))}
       </div>
