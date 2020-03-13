@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AdminFormType;
+use App\Form\AdminUpdateFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,12 +67,11 @@ class AdminController extends AbstractController
      */
     public function userUpdate(Request $request, User $user)
     {
-        $form = $this->createForm(AdminFormType::class, $user);
+        $form = $this->createForm(AdminUpdateFormType::class, $user);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-
 
             $this->getDoctrine()->getManager()->flush();
 

@@ -35,6 +35,13 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ path('app_logout') }}"><img src="{{asset('assets/images/deco_btn2.png')}}" alt=""></a>
                 </li>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('admin_user_list') }}">Admin</a>
+                </li>
+                {% endif %}
+
               </ul>
             </div>
           </nav>

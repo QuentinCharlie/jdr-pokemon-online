@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class AdminFormType extends AbstractType
+class AdminUpdateFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,22 +34,6 @@ class AdminFormType extends AbstractType
                 'multiple' => false
             ])
 
-            ->add('plainPassword', PasswordType::class, [
-                'label' => 'Mot de passe',
-                'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer votre mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractère',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 100,
-                    ]),
-                ],
-            ])
-
             ->add('roles', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
@@ -62,8 +46,7 @@ class AdminFormType extends AbstractType
                     'user' => 'ROLE_USER',
                 ]
                 ))
-                
-
+  
             ->add(
                 'save',
                 SubmitType::class, 
