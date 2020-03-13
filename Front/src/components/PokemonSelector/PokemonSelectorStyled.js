@@ -3,9 +3,17 @@ import styled from 'styled-components';
 const PokemonSelectorStyled = styled.div `
   width: 100%;
   height: 100%;
+  overflow: auto;
+  padding: .5em 0 .5em .5em;
+  /* scrollbar hidden (IE/Edge) */
+  -ms-overflow-style: none;
+  /* scrollbar hidden (Chrome/Firefox/Safari) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .loading {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,9 +23,16 @@ const PokemonSelectorStyled = styled.div `
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin: .5em 0 0 .5em;
     .pokemon-card {
-      width: calc((100% / 3) - .5em);
+      @media (max-width : 700px) {
+        width: calc((100%) - .5em);
+      }
+      @media (max-width : 1200px) {
+        width: calc((100% / 2) - .5em);
+      }
+      @media (min-width : 1201px) {
+        width: calc((100% / 3) - .5em);
+      }
       margin: 0 .5em .5em 0;
       color: white;
       border-radius: 10px;
