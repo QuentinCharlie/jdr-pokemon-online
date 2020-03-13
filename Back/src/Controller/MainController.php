@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
@@ -37,7 +37,6 @@ class MainController extends AbstractController
      */
     public function ressources()
     {
-
         return $this->render('main/ressources.html.twig');
     }
 }

@@ -14,19 +14,19 @@ class Type
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pokemon:detail")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $color;
 
