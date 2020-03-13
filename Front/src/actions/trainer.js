@@ -24,5 +24,3 @@ export const displayAllTrainers = (trainers) => ({
   type: DISPLAY_ALL_TRAINERS,
   trainers,
 });
-
-

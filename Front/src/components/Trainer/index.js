@@ -22,6 +22,14 @@ import TrainerStyled from './TrainerStyled';
 
 // == Composant
 const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
+
+  function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+  }
+  const images = importAll(require.context('../../assets/images/trainer/', false, /\.(gif|png|jpe?g|svg)$/));
+
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
@@ -45,7 +53,7 @@ const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
           <Modal
             className="modal-trainer"
             style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
-            trigger={<img className="trainer-avatar-img" src={avatar} alt="avatar" />}
+            trigger={<img className="trainer-avatar-img" src={images['1.png'].default} alt="avatar" />}
             closeIcon
           >
             <TrainerModal trainer={trainer} />
