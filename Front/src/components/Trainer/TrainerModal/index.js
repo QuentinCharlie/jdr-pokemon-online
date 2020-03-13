@@ -1,6 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Popup } from 'semantic-ui-react';
 
 // Import Components
@@ -33,9 +34,9 @@ import TrainerModalStyled from './TrainerModalStyled';
 
 
 // == Composant
-const TrainerModal = () => (
+const TrainerModal = ({ trainer }) => (
   <TrainerModalStyled>
-    <Modal.Header className="modal-header"><h1>Sacha</h1></Modal.Header>
+    <Modal.Header className="modal-header"><h1>{trainer.name}</h1></Modal.Header>
     <Modal.Content className="modal-content">
       <div className="wrapper-left">
         <div className="trainer">
@@ -52,15 +53,15 @@ const TrainerModal = () => (
                     <tbody>
                       <tr>
                         <td>Age</td>
-                        <td>14 ans</td>
+                        <td>{trainer.age}</td>
                       </tr>
                       <tr>
                         <td>Genre</td>
-                        <td>Homme</td>
+                        <td>{trainer.gender === 'M' ? 'Homme' : 'Femme'}</td>
                       </tr>
                       <tr>
                         <td>Vocation</td>
-                        <td>Dresseur Pok&eacute;mon</td>
+                        <td>{trainer.vocation}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -102,27 +103,27 @@ const TrainerModal = () => (
                   <tbody>
                     <tr>
                       <td>Taille</td>
-                      <td>112cm</td>
+                      <td>{trainer.height}</td>
                     </tr>
                     <tr>
                       <td>Poids</td>
-                      <td>35kg</td>
+                      <td>{trainer.weight}</td>
                     </tr>
                     <tr>
                       <td>Peau</td>
-                      <td>Blanc</td>
+                      <td>{trainer.skin}</td>
                     </tr>
                     <tr>
                       <td>Yeux</td>
-                      <td>Noir</td>
+                      <td>{trainer.eyes}</td>
                     </tr>
                     <tr>
                       <td>Cheveux</td>
-                      <td>Noir</td>
+                      <td>{trainer.hair}</td>
                     </tr>
                     <tr>
                       <td>Corpulence</td>
-                      <td>Maigrichon</td>
+                      <td>{trainer.corpulence}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -138,27 +139,27 @@ const TrainerModal = () => (
             <div className="stat-container">
               <div className="stat">
                 <span className="title">FORCE</span>
-                <ProgressBar color="#19cd70" number={1} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.strength} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">ENDURANCE</span>
-                <ProgressBar color="#19cd70" number={2} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.endurance} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">CONCENTRATION</span>
-                <ProgressBar color="#19cd70" number={3} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.concentration} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">VOLONTÉ</span>
-                <ProgressBar color="#19cd70" number={4} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.willpower} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">DEXTERITÉ</span>
-                <ProgressBar color="#19cd70" number={5} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.dexterity} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">VITALITÉ</span>
-                <ProgressBar color="#19cd70" number={9} maxNumber={10} />
+                <ProgressBar color="#19cd70" number={trainer.vitality} maxNumber={10} />
               </div>
             </div>
           </div>
@@ -172,52 +173,52 @@ const TrainerModal = () => (
                 </tr>
                 <tr>
                   <td>Bricolage</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.do_it_yourself}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Charisme</td>
-                  <td>1</td>
+                  <td>{trainer.charisma}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Combat</td>
-                  <td>1</td>
+                  <td>{trainer.fighting}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Conduite</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.driving}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>D&eacute;tection</td>
-                  <td>2</td>
+                  <td>{trainer.detection}</td>
                   <td>Pokémon</td>
                 </tr>
                 <tr>
                   <td>Discr&eacute;tion</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.furtivity}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Expression</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.expression}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Psychologie</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.phychology}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Sport</td>
-                  <td>2</td>
+                  <td>{trainer.sport}</td>
                   <td>Course</td>
                 </tr>
                 <tr>
                   <td>Survie</td>
-                  <td>1</td>
+                  <td>{trainer.survival}</td>
                   <td>&nbsp;</td>
                 </tr>
               </tbody>
@@ -231,52 +232,52 @@ const TrainerModal = () => (
                 </tr>
                 <tr>
                   <td>Education</td>
-                  <td>2</td>
+                  <td>{trainer.education}</td>
                   <td>Dresseur</td>
                 </tr>
                 <tr>
                   <td>Géographie</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.geography}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Informatique</td>
-                  <td>1</td>
+                  <td>{trainer.computer_science}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Légendes</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.legend}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Médicine</td>
-                  <td>1</td>
+                  <td>{trainer.medicine}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Médicine Pokémon</td>
-                  <td>1</td>
+                  <td>{trainer.pkmn_medicine}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Nature</td>
-                  <td>1</td>
+                  <td>{trainer.nature}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Psychisme</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.phyche}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Sciences</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.science}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Pokélogie</td>
-                  <td>2</td>
+                  <td>{trainer.pokelogy}</td>
                   <td>Table des types</td>
                 </tr>
               </tbody>
@@ -287,32 +288,25 @@ const TrainerModal = () => (
           <div className="text-background">
             <div className="wrapper">
               <p>
-                C'est un Dresseur Pokémon originaire du Bourg Palette qui rêve de devenir Maître Pokémon.
-                Sacha commence son voyage initiatique à l’âge de dix ans en tant que Dresseur Pokémon débutant et attentionné, mais têtu et éruptif.
-                Il est obligé d’accepter un Pikachu désobéissant de la part du Professeur Chen en guise de Pokémon de départ
-                car il s’est réveillé trop tard le jour où il devait recevoir son premier Pokémon et que Carapuce,
-                Bulbizarre et Salamèche ont déjà été choisis. Sacha est déterminé à atteindre son but et,
-                lorsque Pikachu voit qu’il est prêt à se mettre en danger pour le mettre en sécurité, tous deux forment un lien extrêmement fort,
-                remarqué par de nombreuses personnes au fil de leur voyage. À partir de ce moment,
-                Sacha a encore beaucoup de choses à apprendre pour devenir un véritable Dresseur.
+                {trainer.background}
               </p>
             </div>
           </div>
           <div className="text-history">
-            <textarea readOnly value="Test" />
+            <textarea readOnly value={trainer.history} />
           </div>
           <div className="text-notes">
-            <textarea readOnly value="Test" />
+            <textarea readOnly value={trainer.notes} />
           </div>
         </div>
       </div>
       <div className="wrapper-right">
         <div className="spendables">
           <div className="spendables-money">
-            <span>5000 ₽</span>
+            <span>{trainer.money} ₽</span>
           </div>
           <div className="spendables-xp">
-            <span>25 XP</span>
+            <span>{trainer.exp} XP</span>
           </div>
         </div>
         <div className="inventory">
@@ -397,6 +391,10 @@ const TrainerModal = () => (
     </Modal.Content>
   </TrainerModalStyled>
 );
+
+TrainerModal.propTypes = {
+  trainer: PropTypes.object.isRequired,
+};
 
 // == Export
 export default TrainerModal;
