@@ -69,23 +69,53 @@ const TrainerSelector = ({
                     <div className="trainer-stats">
                       <div className="stat">
                         <span className="title"><abbr title="FORCE">FOR</abbr></span>
-                        <ProgressBar color="#f8cc53" number={trainer.strength} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                        <ProgressBar
+                          color="#f8cc53"
+                          number={trainer.strength}
+                          maxNumber={5}
+                          textColor="rgba(0,0,0,.6)"
+                          skewBar
+                        />
                       </div>
                       <div className="stat">
                         <span className="title"><abbr title="ENDURANCE">END</abbr></span>
-                        <ProgressBar color="#f8cc53" number={trainer.endurance} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                        <ProgressBar
+                          color="#f8cc53"
+                          number={trainer.endurance}
+                          maxNumber={5}
+                          textColor="rgba(0,0,0,.6)"
+                          skewBar
+                        />
                       </div>
                       <div className="stat">
                         <span className="title"><abbr title="CONCENTRATION">CON</abbr></span>
-                        <ProgressBar color="#f8cc53" number={trainer.concentration} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                        <ProgressBar
+                          color="#f8cc53"
+                          number={trainer.concentration}
+                          maxNumber={5}
+                          textColor="rgba(0,0,0,.6)"
+                          skewBar
+                        />
                       </div>
                       <div className="stat">
                         <span className="title"><abbr title="VOLONTE">VOL</abbr></span>
-                        <ProgressBar color="#f8cc53" number={trainer.willpower} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                        <ProgressBar
+                          color="#f8cc53"
+                          number={trainer.willpower}
+                          maxNumber={5}
+                          textColor="rgba(0,0,0,.6)"
+                          skewBar
+                        />
                       </div>
                       <div className="stat">
                         <span className="title"><abbr title="DEXTERITE">DEX</abbr></span>
-                        <ProgressBar color="#f8cc53" number={trainer.dexterity} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                        <ProgressBar
+                          color="#f8cc53"
+                          number={trainer.dexterity}
+                          maxNumber={5}
+                          textColor="rgba(0,0,0,.6)"
+                          skewBar
+                        />
                       </div>
                     </div>
                   </Card.Description>

@@ -11,18 +11,29 @@ const ProgressBar = ({
   number,
   maxNumber,
   textColor,
+  skewNumber,
+  skewBar,
 }) => {
   const barWidth = number / maxNumber * 100;
   return (
     <ProgressBarStyled>
-      <span style={{ color: textColor }}>{number}</span>
+      <span className={skewNumber ? 'skew-number' : 'hidden'} />
+      <span
+        style={{
+          color: textColor,
+        }}
+      >
+        {number}
+      </span>
       <div
         className="bar"
         style={{
           width: `${barWidth}%`,
           backgroundColor: color,
         }}
-      />
+      >
+        <span className={skewBar ? 'skew-bar' : 'hidden'} />
+      </div>
     </ProgressBarStyled>
   );
 };
@@ -33,10 +44,14 @@ ProgressBar.propTypes = {
   number: PropTypes.number.isRequired,
   maxNumber: PropTypes.number.isRequired,
   textColor: PropTypes.string,
+  skewNumber: PropTypes.bool,
+  skewBar: PropTypes.bool,
 };
 
 ProgressBar.defaultProps = {
   textColor: '#fff',
+  skewNumber: false,
+  skewBar: false,
 };
 
 // == Export

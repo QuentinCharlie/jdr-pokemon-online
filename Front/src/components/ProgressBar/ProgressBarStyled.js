@@ -4,10 +4,22 @@ const ProgressBarStyled = styled.div`
   height: 1.5em;
   width: 100%;
   color: white;
-  background-color: rgba(20, 20, 20, 0.05);
+  background-color: rgba(20, 20, 20, 0.1);
   text-align: center;
   position: relative;
   border-radius: 10px;
+  .hidden {
+    display: none;
+  }
+  .skew-number {
+    position: absolute;
+    top: calc(50% - 0.75em);
+    left: calc(50% - 17px);
+    background-color: rgb(248, 204, 83);
+    width: 25px;
+    height: 1.5em;
+    transform: skew(-20deg);
+  }
   span {
     color: white;
     height: 100%;
@@ -20,6 +32,17 @@ const ProgressBarStyled = styled.div`
     position: absolute;
     bottom: 0em;
     height: 100%;
+    .skew-bar {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -4px;
+      background-color: rgb(248, 204, 83);
+      width: 15px;
+      height: 1.5em;
+      transform: skew(-20deg);
+      z-index: 3;
+    }
   }
 
   /* @media (max-width: 1350px) {

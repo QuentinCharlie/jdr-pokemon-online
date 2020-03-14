@@ -80,23 +80,53 @@ const PokemonSelector = ({
                 <div className="pokemon-stats">
                   <div className="stat">
                     <span className="title"><abbr title="FORCE">FOR</abbr></span>
-                    <ProgressBar color="#f8cc53" number={pokemon.strength} maxNumber={16} />
+                    <ProgressBar
+                      color="#f8cc53"
+                      number={pokemon.strength}
+                      maxNumber={16}
+                      skewNumber={pokemon.strength === 8}
+                      skewBar={pokemon.strength !== 8}
+                    />
                   </div>
                   <div className="stat">
                     <span className="title"><abbr title="ENDURANCE">END</abbr></span>
-                    <ProgressBar color="#f8cc53" number={pokemon.endurance} maxNumber={16} />
+                    <ProgressBar
+                      color="#f8cc53"
+                      number={pokemon.endurance}
+                      maxNumber={16}
+                      skewNumber={pokemon.endurance === 8}
+                      skewBar={pokemon.endurance !== 8}
+                    />
                   </div>
                   <div className="stat">
                     <span className="title"><abbr title="CONCENTRATION">CON</abbr></span>
-                    <ProgressBar color="#f8cc53" number={pokemon.concentration} maxNumber={16} />
+                    <ProgressBar
+                      color="#f8cc53"
+                      number={pokemon.concentration}
+                      maxNumber={16}
+                      skewNumber={pokemon.concentration === 8}
+                      skewBar={pokemon.concentration !== 8}
+                    />
                   </div>
                   <div className="stat">
                     <span className="title"><abbr title="VOLONTE">VOL</abbr></span>
-                    <ProgressBar color="#f8cc53" number={pokemon.willpower} maxNumber={16} />
+                    <ProgressBar
+                      color="#f8cc53"
+                      number={pokemon.willpower}
+                      maxNumber={16}
+                      skewNumber={pokemon.willpower === 8}
+                      skewBar={pokemon.willpower !== 8}
+                    />
                   </div>
                   <div className="stat">
                     <span className="title"><abbr title="DEXTERITE">DEX</abbr></span>
-                    <ProgressBar color="#f8cc53" number={pokemon.dexterity} maxNumber={16} />
+                    <ProgressBar
+                      color="#f8cc53"
+                      number={pokemon.dexterity}
+                      maxNumber={16}
+                      skewNumber={pokemon.dexterity === 8}
+                      skewBar={pokemon.dexterity !== 8}
+                    />
                   </div>
                 </div>
               </div>
