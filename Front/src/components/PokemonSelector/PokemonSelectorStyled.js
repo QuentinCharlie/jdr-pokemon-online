@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const PokemonSelectorStyled = styled.div `
+const PokemonSelectorStyled = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -25,7 +25,9 @@ const PokemonSelectorStyled = styled.div `
     flex-wrap: wrap;
     .selection-header {
       width: 100%;
-      background-color: #222224;
+      background: #cb2d3e;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       margin: 0 .5em .5em 0;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(117, 117, 117, .6);
