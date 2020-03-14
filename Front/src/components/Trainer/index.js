@@ -9,8 +9,6 @@ import {
 } from 'semantic-ui-react';
 
 // == Import files
-// import * from 'src/assets/images/trainer/';
-import avatar from 'src/assets/images/trainer/1.png';
 import heartIcon from 'src/assets/images/heart.svg';
 // == Import utils
 import { getSidebarNameCapitalize, findTrainerImage } from 'src/utils/functions';
@@ -46,7 +44,7 @@ const Trainer = ({ visible, trainer, pokemon, changeSidebarVisibility }) => {
           <Modal
             className="modal-trainer"
             style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
-            trigger={<img className="trainer-avatar-img" src={findTrainerImage(`${trainer.id}.png`)} alt="avatar" />}
+            trigger={<img className="trainer-avatar-img" src={findTrainerImage(`${trainer.name}.png`)} alt="avatar" />}
             closeIcon
           >
             <TrainerModal trainer={trainer} pokemon={pokemon} />

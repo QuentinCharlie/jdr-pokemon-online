@@ -177,16 +177,15 @@ const PokemonSelectorStyled = styled.div `
               margin-top: .5em;
               .pokemon-type {
                 &:first-child {
-                  margin-right: .3em;
+                  margin-right: .5em;
                 }
-                border-radius: 10px;
+                border-radius: 8px;
                 font-size: .8em;
                 display: inline-block;
-                padding: .07em .3em;
+                padding: .2em .5em;
                 font-style: italic;
+                font-weight: bold;
                 background-color: rgba(20, 20, 20, 0.05);
-
-                /* @todo one background-color per type (x16) */
               }
             }
           }

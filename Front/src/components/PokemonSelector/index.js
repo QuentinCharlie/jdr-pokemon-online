@@ -69,7 +69,11 @@ const PokemonSelector = ({
                 <span className="pokemon-name">{pokemon.name}</span>
                 <div className="pokemon-types">
                   {pokemon.types.map((type) => (
-                    <span className="pokemon-type" key={type.id}>
+                    <span 
+                      key={type.id}
+                      className="pokemon-type"
+                      style={{ backgroundColor: `#${type.color}` }}
+                    >
                       {type.name}
                     </span>
                   ))}
