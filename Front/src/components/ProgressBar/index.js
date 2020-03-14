@@ -6,11 +6,16 @@ import PropTypes from 'prop-types';
 import ProgressBarStyled from './ProgressBarStyled';
 
 // == Composant
-const ProgressBar = ({ color, number, maxNumber }) => {
+const ProgressBar = ({
+  color,
+  number,
+  maxNumber,
+  textColor,
+}) => {
   const barWidth = number / maxNumber * 100;
   return (
     <ProgressBarStyled>
-      <span>{number}</span>
+      <span style={{ color: textColor }}>{number}</span>
       <div
         className="bar"
         style={{
@@ -27,6 +32,11 @@ ProgressBar.propTypes = {
   color: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
   maxNumber: PropTypes.number.isRequired,
+  textColor: PropTypes.string,
+};
+
+ProgressBar.defaultProps = {
+  textColor: '#fff',
 };
 
 // == Export

@@ -39,6 +39,24 @@ const TrainerSelectorStyled = styled.div`
         .img {
         }
       }
+      .trainer-stats {
+        width: 100%;
+        /* height: 100%; */
+        .stat {
+          display: flex;
+          align-items: flex-end;
+          .title {
+            padding: .2em 0;
+            width: 30%;
+            text-shadow: 1px 1px 2px rgba(20, 20, 20, .15);
+            /* text-align: center; */
+            abbr {
+              font-style: none;
+              text-decoration: none;
+            }
+          }
+        }
+      }
       .background-container {
         height: 150px;
         overflow: auto;

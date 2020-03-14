@@ -7,6 +7,7 @@ import { Card, Icon } from 'semantic-ui-react';
 import { findTrainerImage } from 'src/utils/functions';
 
 // == Import Components
+import ProgressBar from 'src/components/ProgressBar';
 import PokeballSpinner from 'src/components/PokemonSelector/PokeballSpinner';
 
 // == Import style
@@ -58,9 +59,35 @@ const TrainerSelector = ({
                 <Card.Content>
                   <Card.Header>{trainer.name}</Card.Header>
                   <Card.Meta>
-                    <span className="date">Joined in 2015</span>
+                    <Icon name={trainer.gender === 'M' ? 'man' : 'woman'} />
+                    <span className="age">{trainer.age} ans</span>
+                    <br />
+                    <Icon name="target" />
+                    <span>{trainer.vocation}</span>
                   </Card.Meta>
                   <Card.Description>
+                    <div className="trainer-stats">
+                      <div className="stat">
+                        <span className="title"><abbr title="FORCE">FOR</abbr></span>
+                        <ProgressBar color="#f8cc53" number={trainer.strength} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                      </div>
+                      <div className="stat">
+                        <span className="title"><abbr title="ENDURANCE">END</abbr></span>
+                        <ProgressBar color="#f8cc53" number={trainer.endurance} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                      </div>
+                      <div className="stat">
+                        <span className="title"><abbr title="CONCENTRATION">CON</abbr></span>
+                        <ProgressBar color="#f8cc53" number={trainer.concentration} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                      </div>
+                      <div className="stat">
+                        <span className="title"><abbr title="VOLONTE">VOL</abbr></span>
+                        <ProgressBar color="#f8cc53" number={trainer.willpower} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                      </div>
+                      <div className="stat">
+                        <span className="title"><abbr title="DEXTERITE">DEX</abbr></span>
+                        <ProgressBar color="#f8cc53" number={trainer.dexterity} maxNumber={5} textColor="rgba(0,0,0,.6)" />
+                      </div>
+                    </div>
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
