@@ -43,6 +43,9 @@ const PokemonSelector = ({
     )}
     {pokemons !== undefined && 
       <div className="pokemon-list">
+        <div className="selection-header">
+          <span>Choisis ton pokémon !</span>
+        </div>
         {pokemons.map((pokemon) => (
           <div 
             className="pokemon-card"

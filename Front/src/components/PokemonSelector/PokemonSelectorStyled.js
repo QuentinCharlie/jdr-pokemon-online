@@ -23,14 +23,27 @@ const PokemonSelectorStyled = styled.div `
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    .selection-header {
+      width: 100%;
+      background-color: #222224;
+      margin: 0 .5em .5em 0;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        font-size: 2em;
+        font-weight: bold;
+        color: #f0f0f0;
+        padding: 1em;
+      }
+    }
     .pokemon-card {
-      @media (max-width : 700px) {
-        width: calc((100%) - .5em);
-      }
-      @media (max-width : 1200px) {
+      width: calc((100%) - .5em);
+      @media (min-width: 700px) {
         width: calc((100% / 2) - .5em);
-      }
-      @media (min-width : 1201px) {
+      }@media (min-width: 1150px) {
         width: calc((100% / 3) - .5em);
       }
       margin: 0 .5em .5em 0;
@@ -40,8 +53,8 @@ const PokemonSelectorStyled = styled.div `
       padding: 1em;
       display: flex;
       .pokemon-avatar {
-        height: calc(30vh - 40px - 4em);
-        width: calc(30vh - 40px - 4em);
+        height: 100%;
+        width: 40%;
         margin-right: 1em;
         padding-bottom: 3em;
         position: relative;
@@ -138,7 +151,7 @@ const PokemonSelectorStyled = styled.div `
 
 
         .pokemon-info {
-          width: calc(100% - (30vh - 40px - 4em));
+          width: 60%;
           height: 100%;
           /* padding: 0.5em; */
           overflow: auto;
