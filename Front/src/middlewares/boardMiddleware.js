@@ -10,7 +10,7 @@ const boardMiddleware = (store) => (next) => (action) => {
   let port = 3001;
   console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
-  
+
   switch (action.type) {
     // Happened after case SOMETHING
     // receive action from node.js serve
@@ -23,14 +23,14 @@ const boardMiddleware = (store) => (next) => (action) => {
         store.dispatch(addPokemonToCell(info));
       });
       break;
-      
+
       // Happened before WS_CONNECT, send action to node.js server
     case MOVE_POKEMON: {
-      console.log('Envoi au serveur');    
+      console.log('Envoi au serveur');
       socket.emit('move_pokemon', action);
       break;
     }
-  
+
     default:
       break;
   }

@@ -1,3 +1,6 @@
+/* eslint-disable quote-props */
+/* eslint-disable key-spacing */
+// eslint-disable-next-line import/prefer-default-export
 export const typesColors = {
   'Acier'    : '#B7B7CE',
   'Combat'   : '#bb5544',
@@ -13,7 +16,7 @@ export const typesColors = {
   'Poison'   : '#aa5599',
   'Psy'      : '#ff5599',
   'Roche'    : '#bbaa66',
-  'Sol'      : '#ddbb55',   
+  'Sol'      : '#ddbb55',
   'Spectre'  : '#6666bb',
   'Tenebres' : '#705746',
   'Vol'      : '#6699ff',
