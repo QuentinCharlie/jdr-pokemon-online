@@ -46,7 +46,7 @@ const PokemonSelector = ({
           </div>
           {pokemons.map((pokemon) => (
             <div
-              className="pokemon-card"
+              className="pokemon-card shiny-effect"
               style={{ backgroundColor: `#${pokemon.primary}` }}
               key={pokemon.id}
               onClick={handleClick}
