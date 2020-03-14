@@ -11,7 +11,9 @@ import { movePokemon, changeDragOverCell } from 'src/actions/grid';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  trainer: state.grid.Sacha,
+  trainer: state.user.trainer,
+  pokemon: state.user.pokemon,
+  grid: state.grid,
   dragOverCell: {
     X: state.grid.dragOverCell.X,
     Y: state.grid.dragOverCell.Y,

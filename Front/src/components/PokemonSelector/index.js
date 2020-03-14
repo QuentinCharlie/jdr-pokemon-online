@@ -17,9 +17,11 @@ import PokemonSelectorStyled from './PokemonSelectorStyled';
 
 // == Composant
 const PokemonSelector = ({
+  trainer,
   pokemons,
   loadAllPokemons,
   linkPokemonToUser,
+  loadPokemonInGrid,
 }) => {
   useEffect(() => {
     loadAllPokemons();
@@ -29,6 +31,7 @@ const PokemonSelector = ({
     const pokemonName = e.currentTarget.dataset.name;
     const pokemonSelected = pokemons.find((pokemon) => pokemon.name === pokemonName);
     linkPokemonToUser(pokemonSelected);
+    loadPokemonInGrid(trainer, pokemonSelected);
   };
   const pokemonMaxHealth = 125;
 
@@ -141,9 +144,11 @@ const PokemonSelector = ({
 
 // == Validation
 PokemonSelector.propTypes = {
+  trainer: PropTypes.object.isRequired,
   pokemons: PropTypes.array,
   loadAllPokemons: PropTypes.func.isRequired,
   linkPokemonToUser: PropTypes.func.isRequired,
+  loadPokemonInGrid: PropTypes.func.isRequired,
 };
 
 PokemonSelector.defaultProps = {

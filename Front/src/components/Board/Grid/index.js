@@ -12,13 +12,15 @@ import GridStyled from './GridStyled';
 
 // == Composant
 const Grid = ({
-  movePokemon,
   trainer,
+  pokemon,
+  grid,
+  movePokemon,
   changeDragOverCell,
   dragOverCell,
 }) => {
-  const trainerName = 'Sacha';
-  const pokemonName = 'Pikachu';
+  const trainerName = trainer.name;
+  const pokemonName = pokemon.name;
   const handleGridDoubleClick = (e) => {
     const X = Number(e.target.className.replace('cell cell-', ''));
     const Y = Number(e.target.closest('.row').className.replace('row row-', ''));
@@ -43,8 +45,12 @@ const Grid = ({
   });
   return (
     <GridStyled>
-      {trainer.pokemon[pokemonName].position.X !== undefined && (
-        <Pokemon X={trainer.pokemon[pokemonName].position.X} Y={trainer.pokemon[pokemonName].position.Y} />
+      {grid[trainerName].pokemon[pokemonName].position.X !== undefined && (
+        <Pokemon
+          pokemon={pokemon}
+          X={grid[trainerName].pokemon[pokemonName].position.X}
+          Y={grid[trainerName].pokemon[pokemonName].position.Y}
+        />
       )}
       <div id="grid" onDoubleClick={handleGridDoubleClick}>
         <div ref={drop}>
@@ -2655,8 +2661,10 @@ const Grid = ({
 };
 
 Grid.propTypes = {
-  movePokemon: PropTypes.func.isRequired,
   trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
+  grid: PropTypes.object.isRequired,
+  movePokemon: PropTypes.func.isRequired,
   changeDragOverCell: PropTypes.func.isRequired,
   dragOverCell: PropTypes.object.isRequired,
 };
