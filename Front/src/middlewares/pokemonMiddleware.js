@@ -7,15 +7,15 @@ const pokemonMiddleware = (store) => (next) => (action) => {
     case LOAD_ALL_POKEMONS:
       axios({
         method: 'GET',
-        url: `http://54.89.22.26/api/pokemons`,
+        url: 'http://54.89.22.26/api/pokemons',
       })
-      .then((response) => {
-        console.log(response.data);
-        store.dispatch(displayAllPokemons(response.data));       
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((response) => {
+          // console.log(response.data);
+          store.dispatch(displayAllPokemons(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       break;
     default:
       break;

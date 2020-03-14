@@ -12,7 +12,7 @@ import { linkPokemonToUser } from 'src/actions/user';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  pokemons: state.pokemon.allPokemons,
+  pokemons: state.pokemon.starterPokemons,
 });
 
 // == Actions / dispatch
