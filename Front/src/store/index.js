@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // middlewares
 import boardMiddleware from 'src/middlewares/boardMiddleware';
+import userMiddleware from 'src/middlewares/userMiddleware';
 import trainerMiddleware from 'src/middlewares/trainerMiddleware';
 import pokemonMiddleware from 'src/middlewares/pokemonMiddleware';
 
@@ -12,6 +13,7 @@ import rootReducer from 'src/reducers';
 const enhancers = composeWithDevTools(
   applyMiddleware(
     boardMiddleware,
+    userMiddleware,
     trainerMiddleware,
     pokemonMiddleware,
     // ... autres middlewares

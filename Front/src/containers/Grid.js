@@ -13,11 +13,8 @@ import { movePokemon, changeDragOverCell } from 'src/actions/grid';
 const mapStateToProps = (state) => ({
   trainer: state.user.trainer,
   pokemon: state.user.pokemon,
+  pokemons: state.pokemon.allPokemons,
   grid: state.grid,
-  dragOverCell: {
-    X: state.grid.dragOverCell.X,
-    Y: state.grid.dragOverCell.Y,
-  },
 });
 
 // == Actions / dispatch

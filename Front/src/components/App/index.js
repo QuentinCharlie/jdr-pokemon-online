@@ -17,13 +17,13 @@ import PokemonSelector from 'src/containers/PokemonSelector';
 import AppStyled from './AppStyled';
 
 // == Composant
-const App = ({ isLoading, isUserReady, hasTrainer }) => (
+const App = ({ isUserReady, hasTrainer, hasPokemon }) => (
   <AppStyled>
   
   {!isUserReady && 
     <div className="selector">
       {!hasTrainer && <TrainerSelector />}
-      {hasTrainer && <PokemonSelector />}
+      {hasTrainer && !hasPokemon && <PokemonSelector />}
     </div>
   }
   
@@ -68,9 +68,9 @@ const App = ({ isLoading, isUserReady, hasTrainer }) => (
 
 // == validation
 App.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  isUserReady: PropTypes.bool.isRequired,
   hasTrainer: PropTypes.bool.isRequired,
+  hasPokemon: PropTypes.bool.isRequired,
+  isUserReady: PropTypes.bool.isRequired,
 };
 
 // == Export

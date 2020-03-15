@@ -25,6 +25,7 @@ const Pokemon = ({ pokemon, X, Y }) => {
       src={findPokemonImage(`${pokemon.id}.gif`)}
       alt=""
       style={{
+        height: '49px',
         left: `calc( (50 * ${X}px) - 50px )`,
         top: `calc( (50 * ${Y}px) - 50px )`,
         position: 'absolute',

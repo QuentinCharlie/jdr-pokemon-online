@@ -5,14 +5,18 @@ import PokemonSelector from 'src/components/PokemonSelector';
 
 // Action Creators
 import { loadAllPokemons } from 'src/actions/pokemon';
-import { linkPokemonToUser } from 'src/actions/user';
-import { loadPokemonInGrid } from 'src/actions/grid';
+import {
+  linkPokemonToUser,
+  shareSelectedTrainerAndPokemonToUsers
+} from 'src/actions/user';
+// import { loadPokemonInGrid } from 'src/actions/grid';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
+  username: state.user.username,
   trainer: state.user.trainer,
   pokemons: state.pokemon.starterPokemons,
 });
@@ -27,8 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
   linkPokemonToUser: (pokemon) => {
     dispatch(linkPokemonToUser(pokemon));
   },
-  loadPokemonInGrid: (trainer, pokemon) => {
-    dispatch(loadPokemonInGrid(trainer, pokemon));
+  shareSelectedTrainerAndPokemonToUsers: (trainer, pokemon, username) => {
+    dispatch(shareSelectedTrainerAndPokemonToUsers(trainer, pokemon, username));
   },
 });
 

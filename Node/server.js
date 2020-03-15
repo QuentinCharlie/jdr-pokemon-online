@@ -14,8 +14,8 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
-let port = 3001;
-// let port = process.argv[2];
+let port = 3002; // dev
+// let port = process.argv[2]; // prod
 // let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 // const inactionTimer = 5; // 3600s => 1h
 
@@ -94,6 +94,15 @@ app.get('/', (request, response) => {
 let id = 0;
 io.on('connection', (ws) => {
   console.log('>> socket.io - action');
+
+  ws.on('share_selected_trainer_and_pokemon', (info) => {
+    // eslint-disable-next-line no-plusplus
+    info.id = ++id;
+    timeSinceUse = 0;
+    state = info;
+    io.emit('share_selected_trainer_and_pokemon', info);
+  });
+  
   ws.on('move_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
     info.id = ++id;
@@ -143,5 +152,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-// server.listen(port, '54.89.22.26');
-server.listen(port, 'localhost');
+// server.listen(port, '54.89.22.26'); //prod
+server.listen(port, 'localhost'); //dev

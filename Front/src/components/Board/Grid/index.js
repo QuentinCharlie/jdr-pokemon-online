@@ -1,6 +1,6 @@
 /* eslint-disable react/self-closing-comp */
 // == Import npm
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from './Pokemon/Constants';
@@ -15,10 +15,11 @@ const Grid = ({
   trainer,
   pokemon,
   grid,
+  pokemons,
   movePokemon,
   changeDragOverCell,
-  dragOverCell,
 }) => {
+
   const trainerName = trainer.name;
   const pokemonName = pokemon.name;
   const handleGridDoubleClick = (e) => {
@@ -36,8 +37,8 @@ const Grid = ({
     drop: (item, monitor) => {
       const didDrop = monitor.didDrop();
       if (didDrop === false) {
-        const { X } = dragOverCell;
-        const { Y } = dragOverCell;
+        const { X } = grid.dragOverCell;
+        const { Y } = grid.dragOverCell;
         // console.log(item);
         movePokemon(trainerName, pokemonName, X, Y);
       }
@@ -45,13 +46,16 @@ const Grid = ({
   });
   return (
     <GridStyled>
-      {grid[trainerName].pokemon[pokemonName].position.X !== undefined && (
-        <Pokemon
-          pokemon={pokemon}
-          X={grid[trainerName].pokemon[pokemonName].position.X}
-          Y={grid[trainerName].pokemon[pokemonName].position.Y}
-        />
-      )}
+      {[grid.trainers][0] !== undefined && 
+      grid.trainers.map((trainr) => (
+          <Pokemon
+            key={`${trainr.name}${trainr.pokemon.name}`}
+            pokemon={pokemons.find((pkmn) => pkmn.name === trainr.pokemon[0].name)}
+            X={trainr.pokemon[0].position.X}
+            Y={trainr.pokemon[0].position.Y}
+          />
+        ))
+      }
       <div id="grid" onDoubleClick={handleGridDoubleClick}>
         <div ref={drop}>
           <div className="row row-1">
@@ -2664,9 +2668,12 @@ Grid.propTypes = {
   trainer: PropTypes.object.isRequired,
   pokemon: PropTypes.object.isRequired,
   grid: PropTypes.object.isRequired,
+  pokemons: PropTypes.array.isRequired,
   movePokemon: PropTypes.func.isRequired,
   changeDragOverCell: PropTypes.func.isRequired,
-  dragOverCell: PropTypes.object.isRequired,
+};
+
+Grid.defaultProps = {
 };
 
 // == Export
