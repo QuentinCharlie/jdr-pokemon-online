@@ -39,7 +39,7 @@ const Grid = ({
       if (didDrop === false) {
         const { X } = grid.dragOverCell;
         const { Y } = grid.dragOverCell;
-        // console.log(item);
+        console.log(item);
         movePokemon(trainerName, pokemonName, X, Y);
       }
     },
@@ -50,6 +50,8 @@ const Grid = ({
       grid.trainers.map((trainr) => (
           <Pokemon
             key={`${trainr.name}${trainr.pokemon.name}`}
+            userTrainer={trainer}
+            pokemonTrainer={trainr}
             pokemon={pokemons.find((pkmn) => pkmn.name === trainr.pokemon[0].name)}
             X={trainr.pokemon[0].position.X}
             Y={trainr.pokemon[0].position.Y}
