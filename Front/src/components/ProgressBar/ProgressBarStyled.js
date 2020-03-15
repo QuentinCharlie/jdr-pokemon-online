@@ -32,6 +32,9 @@ const ProgressBarStyled = styled.div`
     position: absolute;
     bottom: 0em;
     height: 100%;
+    &.rounded {
+      border-radius: 10px;
+    }
     .skew-bar {
       content: "";
       position: absolute;

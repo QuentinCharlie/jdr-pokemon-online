@@ -6,7 +6,7 @@ let socket;
 /* eslint-disable no-unused-vars, no-console */
 const userMiddleware = (store) => (next) => (action) => {
   // let port = document.querySelector('#root').dataset.port; // prod
-  let port = 3002; // dev
+  let port = 3001; // dev
   console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
 

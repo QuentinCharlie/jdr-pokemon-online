@@ -53,7 +53,7 @@ const Trainer = ({ visible, trainer, pokemon, changeSidebarVisibility }) => {
             <span>{trainer.vitality}/10</span>
             <img src={heartIcon} alt="heart logo" />
             {/* The style in composant is require for dynamisation */}
-            <div className="health-bar" style={{ width: `${trainer.vitality}0%` }} />
+            <div className={(trainer.vitality === 10) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${trainer.vitality}0%` }} />
           </div>
         </div>
         <div className="money">

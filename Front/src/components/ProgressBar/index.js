@@ -1,6 +1,7 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
+// import classNames from 'classnames';
 
 // == Import
 import ProgressBarStyled from './ProgressBarStyled';
@@ -26,7 +27,7 @@ const ProgressBar = ({
         {number}
       </span>
       <div
-        className="bar"
+        className={(barWidth === 100) ? 'bar rounded' : 'bar'}
         style={{
           width: `${barWidth}%`,
           backgroundColor: color,

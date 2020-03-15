@@ -57,12 +57,12 @@ const Pokemon = ({ visible, pokemon, changeSidebarVisibility, pokemonMaxHealth }
           <div className="energy-container">
             <span>{pokemon.energy}/50</span>
             <img src={zapIcon} alt="energy logo" />
-            <div className="energy-bar" style={{ width: `${Math.ceil(pokemon.energy * 2)}%` }} />
+            <div className={(pokemon.energy === 50) ? 'energy-bar rounded' : 'energy-bar'} style={{ width: `${Math.ceil(pokemon.energy * 2)}%` }} />
           </div>
           <div className="health-container">
             <span>{pokemon.vitality}/{pokemonMaxHealth}</span>
             <img src={heartIcon} alt="heart logo" />
-            <div className="health-bar" style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} />
+            <div className={(pokemon.vitality === pokemonMaxHealth) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} />
           </div>
         </div>
         <div className="pokemon-info">

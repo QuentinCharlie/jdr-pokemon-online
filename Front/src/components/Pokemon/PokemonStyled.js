@@ -92,6 +92,9 @@ const PokemonStyled = styled.div`
           height: 100%;
           background-color: #98bfe6;
           border-radius: 10px 0 0 10px;
+          &.rounded {
+            border-radius: 10px;
+          }
         }
       }
       /* BARRE GRISE */
@@ -124,6 +127,9 @@ const PokemonStyled = styled.div`
           height: 100%;
           background-color: #19cd70;
           border-radius: 10px 0 0 10px;
+          &.rounded {
+            border-radius: 10px;
+          }
         }
       }
     }

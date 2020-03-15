@@ -14,8 +14,8 @@ const boardMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case WS_CONNECT:
       // socket = io.connect(`http://54.89.22.26:${port}`);
-      // socket = io.connect(`http://localhost:${port}`);
-      socket = window.io(`http://localhost:${port}`);
+      socket = io.connect(`http://localhost:${port}`);
+      // socket = window.io(`http://localhost:${port}`);
       // Happened after case SOMETHING
       // receive action from node.js serve
       // then dispatch to state with WS_CONNECT
