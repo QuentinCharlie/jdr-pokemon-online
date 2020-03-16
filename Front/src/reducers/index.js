@@ -5,6 +5,7 @@ import sidebarReducer from './sidebar';
 import gridReducer from './grid';
 import trainerReducer from './trainer';
 import userReducer from './user';
+import usersReducer from './users';
 import pokemonReducer from './pokemon';
 import logReducer from './log';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   grid: gridReducer,
   trainer: trainerReducer,
   user: userReducer,
+  users: usersReducer,
   pokemon: pokemonReducer,
   log: logReducer,
   // ... autres reducers

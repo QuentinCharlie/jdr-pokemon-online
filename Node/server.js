@@ -14,8 +14,8 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
-let port = 3001; // dev
-// let port = process.argv[2]; // prod
+let port = 3001; // @change dev
+// let port = process.argv[2]; // @change prod
 // let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 // const inactionTimer = 5; // 3600s => 1h
 
@@ -63,7 +63,10 @@ let id = 0;
 let entryId = 1;
 let state = {
   grid: {
-
+    dragOverCell: {
+    },
+    trainers: [
+    ],
   },
   log: {
     entries: [
@@ -249,7 +252,10 @@ let state = {
         },
       ],
   },
-}
+  users : [
+
+  ],
+};
 io.on('connection', (ws) => {
   console.log('>> socket.io - action');
 
@@ -263,6 +269,74 @@ io.on('connection', (ws) => {
     io.emit('load_state', info);
   });
 
+  ws.on('add_pokemon_and_trainer_to_users_state', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('add new trainer and pokemon to node users state');
+    state.users = {
+      ...state.users,
+      [info.username]: {
+        trainer: info.trainer,
+        pokemon: [
+          {
+            ...info.pokemon,
+          },
+        ],          
+      },
+    };
+    info = state.users;
+    timeSinceUse = 0;
+    console.log(info);
+    io.emit('add_pokemon_and_trainer_to_users_state', info);
+  });
+
+  
+  ws.on('add_user_trainer_and_pokemon_to_grid', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('add new trainer and pokemon to node grid');
+    console.log(info);
+    // info: {
+    //   trainer : {},
+    //   pokemon: {},
+    //   username: '',
+    // }
+
+    // state.grid: {
+    //   dragOverCell: {
+    //   },
+    //   trainers: [
+    //   ],
+    // },
+    const trainerName = info.trainer.name;
+    const pokemonName = info.pokemon.name;
+    const isTrainerAlreadyInGrid = state.grid.trainers.find((trainr) => trainr.name === trainerName)
+
+    if (!isTrainerAlreadyInGrid) {
+      const stateTrainers = [
+        ...state.grid.trainers,
+        {
+          name: trainerName,
+          position: {
+          },
+          pokemon: [
+            {
+              name: pokemonName,
+              position: {
+                X: info.trainer.id,
+                Y: info.trainer.id,
+              },
+            },
+          ],
+        },
+      ];
+                
+      state.grid.trainers = stateTrainers;
+    }
+    info = state;
+    timeSinceUse = 0;
+    console.log(info);
+    io.emit('add_user_trainer_and_pokemon_to_grid', info);
+  });
+  
   ws.on('share_selected_trainer_and_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
     info.id = ++id;

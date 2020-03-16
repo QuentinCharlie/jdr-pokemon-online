@@ -4,7 +4,7 @@ import {
   ADD_POKEMON_TO_CELL,
   CHANGE_DRAG_OVER_CELL,
 } from 'src/actions/grid';
-import { ADD_USER_TRAINER_AND_POKEMON_TO_STATE } from 'src/actions/user';
+// import { ADD_USER_TRAINER_AND_POKEMON_TO_GRID } from 'src/actions/user';
 
 // const trainer = 'Sacha';
 // const pokemon = 'Pikachu';
@@ -20,40 +20,40 @@ const initialState = {
 const gridReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case UPDATE_GRID_STATE: {
-      console.log(action.gridState);
+      console.log(action.grid);
       return {
-        ...state,
-      }
-    }
-    case ADD_USER_TRAINER_AND_POKEMON_TO_STATE: {
-      const trainerName = action.trainer.name;
-      const pokemonName = action.pokemon.name;
-      const stateTrainers = [
-        ...state.trainers,
-        {
-          name: trainerName,
-          position: {
-          },
-          pokemon: [
-            {
-              name: pokemonName,
-              position: {
-                X: action.trainer.id,
-                Y: action.trainer.id,
-              },
-            },
-          ],
-        },
-      ];
-
-      return {
-        ...state,
-        dragOverCell: {
-          ...state.dragOverCell,
-        },
-        trainers: stateTrainers,
+        ...action.grid,
       };
     }
+    // case ADD_USER_TRAINER_AND_POKEMON_TO_GRID: {
+    //   const trainerName = action.trainer.name;
+    //   const pokemonName = action.pokemon.name;
+    //   const stateTrainers = [
+    //     ...state.trainers,
+    //     {
+    //       name: trainerName,
+    //       position: {
+    //       },
+    //       pokemon: [
+    //         {
+    //           name: pokemonName,
+    //           position: {
+    //             X: action.trainer.id,
+    //             Y: action.trainer.id,
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ];
+
+    //   return {
+    //     ...state,
+    //     dragOverCell: {
+    //       ...state.dragOverCell,
+    //     },
+    //     trainers: stateTrainers,
+    //   };
+    // }
     case ADD_POKEMON_TO_CELL: {
       let trainerIndex = state.trainers.findIndex((trainer) => (
         trainer.name === action.trainerName

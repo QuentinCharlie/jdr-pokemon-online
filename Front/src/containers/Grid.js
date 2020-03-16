@@ -10,12 +10,15 @@ import { movePokemon, changeDragOverCell } from 'src/actions/grid';
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
-  trainer: state.user.trainer,
-  pokemon: state.user.pokemon,
-  pokemons: state.pokemon.allPokemons,
-  grid: state.grid,
-});
+const mapStateToProps = (state) => {
+  const playerName = state.user.username;
+  return ({
+    trainer: state.users[playerName].trainer,
+    pokemon: state.users[playerName].pokemon[0],
+    pokemons: state.pokemon.allPokemons,
+    grid: state.grid,
+  })
+};
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?

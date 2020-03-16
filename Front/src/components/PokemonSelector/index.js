@@ -67,7 +67,7 @@ const PokemonSelector = ({
               </div>
               <div className="pokemon-info">
                 <div className="pokemon-presentation">
-                  <span className="pokemon-name">{pokemon.name}</span>
+                  <span className="pokemon-name">#{pokemon.id} {pokemon.name}</span>
                   <div className="pokemon-types">
                     {pokemon.types.map((type) => (
                       <span

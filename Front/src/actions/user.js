@@ -9,7 +9,7 @@ export const SAVE_USER = 'SAVE_USER';
 export const LINK_TRAINER_TO_USER = 'LINK_TRAINER_TO_USER';
 export const LINK_POKEMON_TO_USER = 'LINK_POKEMON_TO_USER';
 export const SHARE_SELECTED_TRAINER_AND_POKEMON = 'SHARE_SELECTED_TRAINER_AND_POKEMON';
-export const ADD_USER_TRAINER_AND_POKEMON_TO_STATE = 'ADD_USER_TRAINER_AND_POKEMON_TO_STATE';
+export const ADD_USER_TRAINER_AND_POKEMON_TO_GRID = 'ADD_USER_TRAINER_AND_POKEMON_TO_GRID';
 
 // Action creators
 export const loadState = () => ({
@@ -46,8 +46,8 @@ export const shareSelectedTrainerAndPokemonToUsers = (trainer, pokemon, username
   username,
 });
 
-export const addUserTrainerAndPokemonToState = ({ trainer, pokemon, username }) => ({
-  type: ADD_USER_TRAINER_AND_POKEMON_TO_STATE,
+export const addUserTrainerAndPokemonToGrid = ({ trainer, pokemon, username }) => ({
+  type: ADD_USER_TRAINER_AND_POKEMON_TO_GRID,
   trainer,
   pokemon,
   username,

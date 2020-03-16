@@ -7,9 +7,9 @@ export const UPDATE_GRID_STATE = 'UPDATE_GRID_STATE';
 
 
 // Creators
-export const updateGridState = (gridState) => ({
+export const updateGridState = (grid) => ({
   type: UPDATE_GRID_STATE,
-  gridState,
+  grid,
 });
 
 export const loadPokemonInGrid = (trainer, pokemon) => ({

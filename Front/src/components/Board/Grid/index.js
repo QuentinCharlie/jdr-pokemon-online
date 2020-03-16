@@ -47,9 +47,9 @@ const Grid = ({
   return (
     <GridStyled>
       {[grid.trainers][0] !== undefined && 
-      grid.trainers.map((trainr) => (
+      grid.trainers.map((trainr, index) => (
           <Pokemon
-            key={`${trainr.name}${trainr.pokemon.name}`}
+            key={`gridPokemon-${index}`}
             userTrainer={trainer}
             pokemonTrainer={trainr}
             pokemon={pokemons.find((pkmn) => pkmn.name === trainr.pokemon[0].name)}
