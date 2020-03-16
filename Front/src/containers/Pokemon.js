@@ -10,9 +10,15 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
-  visible: state.sidebar.isPokemonSidebarVisible,
-});
+
+const mapStateToProps = (state) => {
+  const playerName = state.user.username;
+  return ({
+    visible: state.sidebar.isPokemonSidebarVisible,
+    pokemon: state.users[playerName].pokemon[0],
+    pokemonMaxHealth: state.pokemon.allPokemons[state.user.pokemon.id - 1].vitality,
+  })
+};
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?

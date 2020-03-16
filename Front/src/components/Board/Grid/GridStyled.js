@@ -14,9 +14,6 @@ const GridStyled = styled.div`
           width: 50px;
           height: 50px;
           position: relative;
-          .pikachu {
-            position: absolute;
-          }
         }
       }
     }
@@ -35,13 +32,10 @@ const GridStyled = styled.div`
           width: 50px;
           height: 50px;
           position: relative;
-          .pikachu {
-            position: absolute;
-          }
         }
-        .pokemon {
+        /* .pokemon {
           content: url(${pokeGif});
-        }
+        } */
       }
     }
   }

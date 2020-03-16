@@ -7,6 +7,9 @@ import { Modal, Popup } from 'semantic-ui-react';
 // Import Components
 import ProgressBar from 'src/components/ProgressBar';
 
+// == Import Utils
+import { findTrainerImage, findPokemonImage } from 'src/utils/functions';
+
 // == Import files for styles
 import avatar from 'src/assets/images/trainer/1.png';
 import pokeAvatar from 'src/assets/images/pokemon/25.png';
@@ -34,7 +37,7 @@ import TrainerModalStyled from './TrainerModalStyled';
 
 
 // == Composant
-const TrainerModal = ({ trainer }) => (
+const TrainerModal = ({ trainer, pokemon }) => (
   <TrainerModalStyled>
     <Modal.Header className="modal-header"><h1>{trainer.name}</h1></Modal.Header>
     <Modal.Content className="modal-content">
@@ -42,7 +45,7 @@ const TrainerModal = ({ trainer }) => (
         <div className="trainer">
           <div className="trainer-avatar">
             <div className="trainer-avatar-container">
-              <img className="modal-trainer-avatar" src={avatar} alt="trainer avatar" />
+              <img className="modal-trainer-avatar" src={findTrainerImage(`${trainer.id}.png`)} alt="trainer avatar" />
             </div>
           </div>
           <div className="trainer-description">
@@ -71,8 +74,8 @@ const TrainerModal = ({ trainer }) => (
                 <div className="team-container">
                   <div className="pokemon">
                     <img
-                      src={pokeAvatar}
-                      style={{ backgroundColor: '#FFE629' }}
+                      src={findPokemonImage(`${pokemon.id}.png`)}
+                      style={{ backgroundColor: `${pokemon.primary}` ? `#${pokemon.primary}` : 'lightgray' }}
                       alt=""
                     />
                   </div>
@@ -194,7 +197,7 @@ const TrainerModal = ({ trainer }) => (
                 <tr>
                   <td>D&eacute;tection</td>
                   <td>{trainer.detection}</td>
-                  <td>Pokémon</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Discr&eacute;tion</td>
@@ -214,7 +217,7 @@ const TrainerModal = ({ trainer }) => (
                 <tr>
                   <td>Sport</td>
                   <td>{trainer.sport}</td>
-                  <td>Course</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Survie</td>
@@ -233,7 +236,7 @@ const TrainerModal = ({ trainer }) => (
                 <tr>
                   <td>Education</td>
                   <td>{trainer.education}</td>
-                  <td>Dresseur</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Géographie</td>
@@ -278,7 +281,7 @@ const TrainerModal = ({ trainer }) => (
                 <tr>
                   <td>Pokélogie</td>
                   <td>{trainer.pokelogy}</td>
-                  <td>Table des types</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -394,6 +397,7 @@ const TrainerModal = ({ trainer }) => (
 
 TrainerModal.propTypes = {
   trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
 };
 
 // == Export

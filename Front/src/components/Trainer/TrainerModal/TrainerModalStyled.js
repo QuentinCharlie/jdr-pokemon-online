@@ -73,6 +73,7 @@ const TrainerModalStyled = styled.div`
               bottom: -1em;
               left: 50%;
               transform: translateX(-50%);
+              height: 100%;
               /* object-position: 50% 50%;
               objet-fit: cover; */
               -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));

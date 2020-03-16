@@ -9,11 +9,9 @@ import {
 } from 'semantic-ui-react';
 
 // == Import files
-// import * from 'src/assets/images/trainer/';
-import avatar from 'src/assets/images/trainer/1.png';
 import heartIcon from 'src/assets/images/heart.svg';
 // == Import utils
-import { getSidebarNameCapitalize } from 'src/utils/functions';
+import { getSidebarNameCapitalize, findTrainerImage } from 'src/utils/functions';
 // == Import components
 import TrainerModal from './TrainerModal';
 
@@ -21,7 +19,8 @@ import TrainerModal from './TrainerModal';
 import TrainerStyled from './TrainerStyled';
 
 // == Composant
-const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
+const Trainer = ({ visible, trainer, pokemon, changeSidebarVisibility }) => { 
+
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
@@ -45,16 +44,16 @@ const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
           <Modal
             className="modal-trainer"
             style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
-            trigger={<img className="trainer-avatar-img" src={avatar} alt="avatar" />}
+            trigger={<img className="trainer-avatar-img" src={findTrainerImage(`${trainer.name}.png`)} alt="avatar" />}
             closeIcon
           >
-            <TrainerModal trainer={trainer} />
+            <TrainerModal trainer={trainer} pokemon={pokemon} />
           </Modal>
           <div className="health-container">
             <span>{trainer.vitality}/10</span>
             <img src={heartIcon} alt="heart logo" />
             {/* The style in composant is require for dynamisation */}
-            <div className="health-bar" style={{ width: `${trainer.vitality}0%` }} />
+            <div className={(trainer.vitality === 10) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${trainer.vitality}0%` }} />
           </div>
         </div>
         <div className="money">
@@ -68,6 +67,7 @@ const Trainer = ({ visible, trainer, changeSidebarVisibility }) => {
 Trainer.propTypes = {
   visible: PropTypes.bool.isRequired,
   trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
 

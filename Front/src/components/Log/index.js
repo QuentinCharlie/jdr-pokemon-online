@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Segment,
@@ -12,7 +12,10 @@ import LogStyled from './LogStyled';
 
 
 // == Composant
-const Log = ({ visible, changeSidebarVisibility }) => {
+const Log = ({ visible, entries, changeSidebarVisibility }) => {
+  useEffect(() => {
+    logContainer.current.scrollTo(0, logContainer.current.scrollHeight);
+  }, [entries]);
   const logContainer = useRef(null);
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
@@ -132,93 +135,41 @@ const Log = ({ visible, changeSidebarVisibility }) => {
         <svg className="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#19cd70" fillOpacity="1" d="M0,320L1440,96L1440,0L0,0Z" /></svg>
         <svg className="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#60eca3" fillOpacity="1" d="M0,160L1440,32L1440,0L0,0Z" /></svg>
         <div className="log">
-          <div className="entry" id="1">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
+          <div className="entries" ref={logContainer}>
+            {entries.map((entry) =>
+              <div 
+                className="entry"
+                key={entry.id}   
+              >
+                {entry.isAttack &&
+                  <div 
+                    className="attack-entry"
+                    id={entry.id}
+                  >
+                    <p className="title">{entry.attack.title}</p>
+                    <div className="turn">
+                      <p className="attack">{entry.attack.attack}</p>
+                      <p className="dices-roll">Jet d'attaque : {entry.attack.dicesRoll}</p>
+                      <div className="result">
+                        <p className="result-damage">Degats infligés :{entry.attack.resultDamage}</p>
+                        <p className="result-status">Statut : {entry.attack.resultStatus}</p>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                {entry.isDice &&
+                  <div 
+                    className="dice-entry"
+                  > 
+                    <p className="title">{entry.dice.title}</p>
+                    <div className="turn">
+                      <p className="dices-roll">Jet : {entry.dice.diceRoll} </p>
+                    </div>
+                  </div>
+                }
               </div>
-            </div>
-          </div>
-          <div className="entry" id="2">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
-          </div>
-          <div className="entry" id="3">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
-          </div>
-          <div className="entry" id="4">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
-          </div>
-          <div className="entry" id="5">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
-          </div>
-          <div className="entry" id="6">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
-          </div>
-          <div className="entry" id="7">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
-          </div>
-          <div className="entry" id="8">
-            <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-            <div className="turn">
-              <p className="action">Attaque Tonnerre</p>
-              <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-              <div className="result">
-                <p className="result-damage">Degats infligés : 2</p>
-                <p className="result-status">Statut : Paralysé</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
         <div className="current-player">
@@ -232,6 +183,7 @@ const Log = ({ visible, changeSidebarVisibility }) => {
 
 Log.propTypes = {
   visible: PropTypes.bool.isRequired,
+  entries: PropTypes.array.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
 

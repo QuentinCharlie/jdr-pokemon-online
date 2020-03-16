@@ -11,7 +11,8 @@ import App from 'src/components/App';
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
-  isLoading: state.trainer.isLoading,
+  hasTrainer: state.user.hasTrainer,
+  hasPokemon: state.user.hasPokemon,
   isUserReady: state.user.isUserReady,
 });
 

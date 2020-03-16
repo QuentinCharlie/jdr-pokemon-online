@@ -1,23 +1,40 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
+// import classNames from 'classnames';
 
 // == Import
 import ProgressBarStyled from './ProgressBarStyled';
 
 // == Composant
-const ProgressBar = ({ color, number, maxNumber }) => {
+const ProgressBar = ({
+  color,
+  number,
+  maxNumber,
+  textColor,
+  skewNumber,
+  skewBar,
+}) => {
   const barWidth = number / maxNumber * 100;
   return (
     <ProgressBarStyled>
-      <span>{number}</span>
+      <span className={skewNumber ? 'skew-number' : 'hidden'} />
+      <span
+        style={{
+          color: textColor,
+        }}
+      >
+        {number}
+      </span>
       <div
-        className="bar"
+        className={(barWidth === 100) ? 'bar rounded' : 'bar'}
         style={{
           width: `${barWidth}%`,
           backgroundColor: color,
         }}
-      />
+      >
+        <span className={skewBar ? 'skew-bar' : 'hidden'} />
+      </div>
     </ProgressBarStyled>
   );
 };
@@ -27,6 +44,15 @@ ProgressBar.propTypes = {
   color: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
   maxNumber: PropTypes.number.isRequired,
+  textColor: PropTypes.string,
+  skewNumber: PropTypes.bool,
+  skewBar: PropTypes.bool,
+};
+
+ProgressBar.defaultProps = {
+  textColor: '#fff',
+  skewNumber: false,
+  skewBar: false,
 };
 
 // == Export

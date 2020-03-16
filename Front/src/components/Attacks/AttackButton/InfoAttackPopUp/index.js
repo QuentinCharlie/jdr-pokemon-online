@@ -31,7 +31,7 @@ const InfoAttackPopUp = ({
 InfoAttackPopUp.propTypes = {
   name: PropTypes.string.isRequired,
   damage: PropTypes.number.isRequired,
-  accuracy: PropTypes.string.isRequired,
+  accuracy: PropTypes.number.isRequired,
   energy: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,
