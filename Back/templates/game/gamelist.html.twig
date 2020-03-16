@@ -13,9 +13,9 @@
           Liste des parties en cours
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">game / 1</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
+        {% for game in games %}
+          <li class="list-group-item">Partie : <a href="{{ path('game_board', {'port' : game.port}) }}">{{game.port}}</a></li>
+        {% endfor %}
         </ul>
     </div>
 
