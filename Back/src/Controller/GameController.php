@@ -101,11 +101,13 @@ class GameController extends AbstractController
     } elseif ($username === $gameMj /* check if user is MJ */) {
       return $this->render('game/gameboard.html.twig', [
         'port' => $port,
+        'username' => $username,
         'is_mj' => true
       ]);
     } else {
       return $this->render('game/gameboard.html.twig', [
         'port' => $port,
+        'username' => $username,
         'is_mj' => false
       ]);
     }
