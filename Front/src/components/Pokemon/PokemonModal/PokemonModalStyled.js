@@ -6,6 +6,7 @@ const PokemonModalStyled = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-image: radial-gradient( circle farthest-corner at 1.3% 2.8%,  rgba(239,249,249,1) 0%, rgba(182,199,226,1) 100.2% );
   .modal-header {
     height: 5%;
     border-bottom: 1px solid black;
@@ -56,10 +57,8 @@ const PokemonModalStyled = styled.div`
           height: 100%;
           width: 20%;
           padding: .5em;
-          background-color: lightblue;
           margin-right: .5em;
           border-radius: 10px;
-          box-shadow: lightgrey 0 0 5px;
           .pokemon-avatar-container {
             overflow: hidden;
             height: 100%;
@@ -83,35 +82,26 @@ const PokemonModalStyled = styled.div`
             margin-right: .5em;
             .pokemon-description-infos-basics {
               height: 50%;
-              background-color: lightblue;
               margin-bottom: .5em;
               padding: .5em;
-              /* box-shadow: inset 2px 2px 5px grey; */
               border-radius: 10px;
-              box-shadow: lightgrey 0 0 5px;
-              color: white;
+              color: #6c757d;
               font-size: 1.5em;
             }
             .pokemon-description-infos-vital {
               height: 50%; 
-              background-color: lightgray;
+              padding: .5em;
               border-radius: 10px;
-              box-shadow: lightgrey 0 0 5px;
-              .stat {
-
-              }
             }
           }
           .pokemon-description-appearance {
             display: flex;
             align-items: center;
-            background-color: lightblue;
             width: 50%;
             height: 100%;              
-            padding:.5em;
+            padding: .5em;
             border-radius: 10px;
-            box-shadow: lightgrey 0 0 5px;
-            color: white;
+            color: #6c757d;
             font-size: 1.5em;
             .table-container {
               width: 75%;
@@ -208,17 +198,40 @@ const PokemonModalStyled = styled.div`
       width: 30%;
       height: 100%;
       .xp {
+        position: relative;
         height: calc(100% / 14);
-        margin-bottom: .5em;
+        margin: 0 auto .5em auto;
         display: flex;
-        background-color: lightblue;
+        background-color: white;
+        border-radius: 10px;
+        width: 100%;
+        span {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          color: #6c757d;
+          font-size: 1.5em;
+        }
       }
       .attack-list {
         height: calc(100% - (100% / 14));
         width: 100%;
         padding: .5em;
-        background-color: coral;
+        background-color: white;
+        color: #6c757d;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(117, 117, 117, .6);
         overflow: auto;
+        /* scrollbar hidden (IE/Edge) */
+        -ms-overflow-style: none;
+        /* scrollbar hidden (Chrome/Firefox/Safari) */
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .AttackButton {
+          width: 100%;
+        }
         .attack {
           height: 15%;
           width: 100%;

@@ -6,6 +6,7 @@ import { Modal } from 'semantic-ui-react';
 
 // Import Components
 import ProgressBar from 'src/components/ProgressBar';
+import AttackButton from 'src/components/Attacks/AttackButton';
 
 // Import Utils
 import { findPokemonImage } from 'src/utils/functions';
@@ -23,7 +24,7 @@ import PokemonModalStyled from './PokemonModalStyled';
 
 
 // == Composant
-const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
+const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
   const type1 = pokemon.types[0].name;
   let type2 = null;
   if (pokemon.types.length > 1) {
@@ -51,17 +52,13 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
                           <td style={{ textAlign: 'right' }}>#</td>
                           <td>{pokemon.id}</td>
                         </tr>
-                        {/* <tr>
-                          <td>Genre</td>
-                          <td>Mâle</td>
-                        </tr> */}
                         <tr>
                           <td>{pokemon.types.length < 2 ? 'Type' : 'Types'}</td>
                           <td>
                             {
-                              pokemon.types.length < 2 ? 
-                              type1 : 
-                              `${type1} ${type2}`
+                              pokemon.types.length < 2 ?
+                                type1 :
+                                `${type1} ${type2}`
                             }
                           </td>
                         </tr>
@@ -131,7 +128,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
             <div className="stats-sensibilities">
               {/* @todo: refactor this  */}
               <div className="type type-table-head">Sensibilités</div>
-              <div 
+              <div
                 className="type type-combat"
                 style={{ backgroundColor: typesColors.Combat }}
               >
@@ -292,11 +289,24 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth}) => {
         </div>
         <div className="wrapper-right">
           <div className="xp">
-            {pokemon.xp} XP
+            <span>{pokemon.xp} XP</span>
           </div>
           <div className="attack-list">
             {pokemon.attacks.map((attack) => (
-              <div className="attack" key={attack.id}>{attack.name}</div>
+              <AttackButton
+                className="AttackButton"
+                // eslint-disable-next-line react/no-array-index-key
+                key={attack.id}
+                name={attack.name}
+                energy={attack.energy}
+                category={attack.category}
+                distance={attack.distance}
+                accuracy={attack.accuracy}
+                damage={attack.damage}
+                effect={attack.effect}
+                type={attack.type.name}
+                color={attack.type.color}
+              />
             ))}
           </div>
         </div>
