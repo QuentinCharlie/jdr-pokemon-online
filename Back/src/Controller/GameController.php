@@ -11,18 +11,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GameController extends AbstractController
 {
-  const PORT_START = 6000;
-  const PORT_STOP = 7000;
-  const PORT_NB    = 2000;
+  /**
+   * @Route("/play", name="game_list")
+   * @IsGranted("ROLE_USER")
+   */
+  public function gameList()
+  {
+    $games = $this->getDoctrine()->getRepository(GameServer::class)->findAll();
+
+    return $this->render('game/gamelist.html.twig', [
+      'games' => $games
+    ]);
+  }
+
 
   /**
    * @Route("/game/create", name="game_create")
    */
   public function gameCreate(Connection $connection)
   {
-    if (!is_dir("/var/www/logs_node")) {
-      mkdir("/var/www/logs_node", 0777, true);
-    }
+
     // @todo
     // Le $id correspond à l'id de la game
     // La variable $port sera une concaténation 3000 + $id (sans le timestamp)
@@ -39,21 +47,21 @@ class GameController extends AbstractController
     $timestamp = microtime(true) * 1000;
 
     //$all_ports = [ 6000, 6001, 6002 ]; // Tout les ports en dur
-    $all_ports = range(6000,7000);
-    
+    $all_ports = range(6000, 7000);
+
     //$used_ports = [  ]; // récupération via la DB des ports utilisés
 
     $used_ports = $connection->fetchAll('SELECT port FROM game_server');
     $databasePorts = [];
-    foreach($used_ports as $array) {
-      $databasePorts[] = (int)$array['port'];
+    foreach ($used_ports as $array) {
+      $databasePorts[] = (int) $array['port'];
     }
 
-    $available_ports = array_diff($all_ports,$databasePorts );
+    $available_ports = array_diff($all_ports, $databasePorts);
     sort($available_ports);
-  
+
     $port = $available_ports[0]; // <== 6000
-    
+
     $username = $this->getUser()->getNickname();
 
     if (!@fsockopen('localhost', $port)) {
@@ -62,7 +70,7 @@ class GameController extends AbstractController
       $newGame->setPort($port);
       $newGame->setMJ($username);
 
-      $manager= $this->getDoctrine()->getManager();
+      $manager = $this->getDoctrine()->getManager();
       $manager->persist($newGame);
       $manager->flush();
 
@@ -74,16 +82,9 @@ class GameController extends AbstractController
     // dd($cmd);
     // dd(file_get_contents("/var/www/logs_node/1.log"));
 
-    $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port='.$port .'');
-    
-    if ($is_new_game /* check if user is MJ */) {
-      return $this->redirectToRoute('game_board', [
-        'id' => $port,
-        'is_mj' => true
-        ]);
-    }
-
-    return $this->redirectToRoute('game_board', ['id' => $port]);
+    return $this->redirectToRoute('game_board', [
+      'port' => $port,
+    ]);
   }
 
   /**
@@ -91,22 +92,22 @@ class GameController extends AbstractController
    */
   public function gameBoard(Connection $connection, $port)
   {
-
     $username = $this->getUser()->getNickname();
 
-    $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port='.$port .'');
+    $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port=' . $port . '');
 
-    if ($username === $gameMj /* check if user is MJ */) {
-      return $this->redirectToRoute('game_board', [
+    if ($gameMj == null) {
+      throw $this->createNotFoundException("Error");
+    } elseif ($username === $gameMj /* check if user is MJ */) {
+      return $this->render('game/gameboard.html.twig', [
         'port' => $port,
         'is_mj' => true
-        ]);
+      ]);
+    } else {
+      return $this->render('game/gameboard.html.twig', [
+        'port' => $port,
+        'is_mj' => false
+      ]);
     }
-    return $this->render('game/gameboard.html.twig', [
-      'port' => $port,
-    ]);
-
   }
-
 }
-
