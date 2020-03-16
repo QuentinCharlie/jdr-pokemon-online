@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\GameServer;
 use Doctrine\DBAL\Driver\Connection;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -15,7 +16,7 @@ class GameController extends AbstractController
   const PORT_NB    = 2000;
 
   /**
-   * @Route("/game/create", name="game_board")
+   * @Route("/game/create", name="game_create")
    */
   public function gameCreate(Connection $connection)
   {
@@ -53,27 +54,59 @@ class GameController extends AbstractController
   
     $port = $available_ports[0]; // <== 6000
     
+    $username = $this->getUser()->getNickname();
+
     if (!@fsockopen('localhost', $port)) {
-      // TODO : Ajouter le port réservé (et qui sera utilisé dans la ligne suivante) par ce serveur en base
-      exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $id . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
-      // TODO : stocker le nom du MJ ici
+
+      $newGame = new GameServer();
+      $newGame->setPort($port);
+      $newGame->setMJ($username);
+
+      $manager= $this->getDoctrine()->getManager();
+      $manager->persist($newGame);
+      $manager->flush();
+
+      exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $port . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
+
       $is_new_game = true;
     }
     // $cmd = exec('pwd');
     // dd($cmd);
     // dd(file_get_contents("/var/www/logs_node/1.log"));
 
-    $username = $this->getUser()->getNickname();
-
-    if ($is_new_game || $username === $game_mj /* check if user is MJ */) {
-      return $this->render('game/gameboard.html.twig', [
-        'port' => $port,
+    $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port='.$port .'');
+    
+    if ($is_new_game /* check if user is MJ */) {
+      return $this->redirectToRoute('game_board', [
+        'id' => $port,
         'is_mj' => true
-      ]);
+        ]);
     }
 
+    return $this->redirectToRoute('game_board', ['id' => $port]);
+  }
+
+  /**
+   * @Route("game/{port}", name="game_board")
+   */
+  public function gameBoard(Connection $connection, $port)
+  {
+
+    $username = $this->getUser()->getNickname();
+
+    $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port='.$port .'');
+
+    if ($username === $gameMj /* check if user is MJ */) {
+      return $this->redirectToRoute('game_board', [
+        'port' => $port,
+        'is_mj' => true
+        ]);
+    }
     return $this->render('game/gameboard.html.twig', [
       'port' => $port,
     ]);
+
   }
+
 }
+
