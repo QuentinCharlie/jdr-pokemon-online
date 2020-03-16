@@ -27,10 +27,13 @@ class GameController extends AbstractController
 
   /**
    * @Route("/game/create", name="game_create")
+   * @IsGranted("ROLE_USER")
    */
   public function gameCreate(Connection $connection)
   {
-
+    if (!is_dir("/var/www/logs_node")) {
+      mkdir("/var/www/logs_node", 0777, true);
+    }
     // @todo
     // Le $id correspond à l'id de la game
     // La variable $port sera une concaténation 3000 + $id (sans le timestamp)
@@ -75,8 +78,6 @@ class GameController extends AbstractController
       $manager->flush();
 
       exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $port . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
-
-      $is_new_game = true;
     }
     // $cmd = exec('pwd');
     // dd($cmd);
@@ -89,6 +90,7 @@ class GameController extends AbstractController
 
   /**
    * @Route("game/{port}", name="game_board")
+   * @IsGranted("ROLE_USER")
    */
   public function gameBoard(Connection $connection, $port)
   {
