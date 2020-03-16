@@ -19,20 +19,6 @@ class GameServerRepository extends ServiceEntityRepository
         parent::__construct($registry, GameServer::class);
     }
 
-    public function findAllPort()
-    {
-        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
-
-        $queryBuilder->select('p.port')
-            ->from(GameServer::class, 'p')
-            ->getQuery()
-            ->getResult();
-
-        dd($queryBuilder);
-
-      
-    }
-
     // /**
     //  * @return GameServer[] Returns an array of GameServer objects
     //  */
