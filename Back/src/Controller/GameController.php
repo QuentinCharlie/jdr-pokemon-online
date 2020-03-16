@@ -38,18 +38,21 @@ class GameController extends AbstractController
     $timestamp = microtime(true) * 1000;
 
     //$all_ports = [ 6000, 6001, 6002 ]; // Tout les ports en dur
-    $all_ports = range(6000, 7000, 1);
- 
+    $all_ports = range(6000,7000);
+    
     //$used_ports = [  ]; // récupération via la DB des ports utilisés
 
     $used_ports = $connection->fetchAll('SELECT port FROM game_server');
-    dd($used_ports);
-    $available_ports = array_diff($all_ports, $used_ports); // ==> [ 6002 ]
+    $databasePorts = [];
+    foreach($used_ports as $array) {
+      $databasePorts[] = (int)$array['port'];
+    }
 
-  
+    $available_ports = array_diff($all_ports,$databasePorts );
     sort($available_ports);
+  
     $port = $available_ports[0]; // <== 6000
-
+    
     if (!@fsockopen('localhost', $port)) {
       // TODO : Ajouter le port réservé (et qui sera utilisé dans la ligne suivante) par ce serveur en base
       exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $id . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
