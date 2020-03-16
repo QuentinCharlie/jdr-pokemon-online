@@ -1,6 +1,6 @@
 // Action Types
 import {
-  // LOAD_POKEMON_IN_GRID,
+  UPDATE_GRID_STATE,
   ADD_POKEMON_TO_CELL,
   CHANGE_DRAG_OVER_CELL,
 } from 'src/actions/grid';
@@ -19,6 +19,12 @@ const initialState = {
 // Reducer
 const gridReducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case UPDATE_GRID_STATE: {
+      console.log(action.gridState);
+      return {
+        ...state,
+      }
+    }
     case ADD_USER_TRAINER_AND_POKEMON_TO_STATE: {
       const trainerName = action.trainer.name;
       const pokemonName = action.pokemon.name;

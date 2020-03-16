@@ -6,7 +6,6 @@ import TrainerSelector from 'src/components/TrainerSelector';
 // Action Creators
 import { loadAllTrainers } from 'src/actions/trainer';
 import { linkTrainerToUser } from 'src/actions/user';
-import { getstate } from 'src/actions/wsConnect';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?

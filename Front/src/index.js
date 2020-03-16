@@ -11,10 +11,11 @@ import store from 'src/store';
 // action creator pour la connexion au WebSocket
 import { wsConnect } from 'src/actions/wsConnect';
 // import des data de l'API
-import { loadUser } from 'src/actions/user';
+import { loadUser, loadState } from 'src/actions/user';
 // dispactch la volonté de connecter le WebSocket
 store.dispatch(wsConnect());
 store.dispatch(loadUser());
+store.dispatch(loadState());
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)

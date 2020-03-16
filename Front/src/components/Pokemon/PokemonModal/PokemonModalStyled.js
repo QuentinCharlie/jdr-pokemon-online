@@ -229,14 +229,14 @@ const PokemonModalStyled = styled.div`
         &::-webkit-scrollbar {
           display: none;
         }
-        .AttackButton {
+        .button {
           width: 100%;
-        }
-        .attack {
-          height: 15%;
-          width: 100%;
-          background-color: lightcoral;
-          margin-bottom: .2em;
+          .attack {
+            height: 15%;
+            width: 100%;
+            background-color: lightcoral;
+            margin-bottom: .2em;
+          }
         }
       }
     }

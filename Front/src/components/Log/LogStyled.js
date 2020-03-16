@@ -78,31 +78,35 @@ const LogStyled = styled.div`
       padding-top: .5em;
       /* background-color: lightgray; */
       .log {
-        border-radius: 10px;
         width: 100%;
         height: 90%;
+        border-radius: 10px;
         padding: 2em .5em 0 .5em;
         margin-bottom: .5em;
-        overflow: auto;
-        /* scrollbar hidden (IE/Edge) */
-        -ms-overflow-style: none;
-        /* scrollbar hidden (Chrome/Firefox/Safari) */
-        &::-webkit-scrollbar {
-          display: none;
-        }
-        p {
-          margin-bottom: 0;
-        } 
-        .entry {
-          box-shadow: 0 0 7px rgba(117, 117, 117, .2);
-          border-radius: 10px;
-          position: relative;
-          z-index: 6;
-          background-color: white;
-          margin-bottom: .3em;
-          padding: .5em;
-          .turn {
-            padding: 0 1em;
+        .entries {        
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          /* scrollbar hidden (IE/Edge) */
+          -ms-overflow-style: none;
+          /* scrollbar hidden (Chrome/Firefox/Safari) */
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          p {
+            margin-bottom: 0;
+          } 
+          .entry {
+            box-shadow: 0 0 7px rgba(117, 117, 117, .2);
+            border-radius: 10px;
+            position: relative;
+            z-index: 6;
+            background-color: white;
+            margin-bottom: .3em;
+            padding: .5em;
+            .turn {
+              padding: 0 1em;
+            }
           }
         }
       }

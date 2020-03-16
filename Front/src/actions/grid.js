@@ -3,9 +3,15 @@ export const LOAD_POKEMON_IN_GRID = 'LOAD_POKEMON_IN_GRID';
 export const ADD_POKEMON_TO_CELL = 'ADD_POKEMON_TO_CELL';
 export const CHANGE_DRAG_OVER_CELL = 'CHANGE_DRAG_OVER_CELL';
 export const MOVE_POKEMON = 'MOVE_POKEMON';
+export const UPDATE_GRID_STATE = 'UPDATE_GRID_STATE';
 
 
 // Creators
+export const updateGridState = (gridState) => ({
+  type: UPDATE_GRID_STATE,
+  gridState,
+});
+
 export const loadPokemonInGrid = (trainer, pokemon) => ({
   type: LOAD_POKEMON_IN_GRID,
   trainer,

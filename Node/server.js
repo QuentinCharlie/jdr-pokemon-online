@@ -55,51 +55,218 @@ app.get('/', (request, response) => {
   `);
 });
 
-// AJAX
-// if (timeSinceUse === 10)
-// process.exit();
-
-/*
- * Theme json
- */
-// app.get('/theme/:email', (request, response) => {
-//   const email = request.params.email;
-//   if (!email) {
-//     console.log('<< 400 BAD_REQUEST');
-//     response.status(400).end();
-//   }
-
-//   let color;
-//   if (db.users[email] && db.users[email].color) {
-//     color = db.users[email].color;
-//   }
-
-//   // Réponse HTTP adaptée.
-//   if (color) {
-//     console.log('<< 200 OK', email, color);
-//     response.send(color);
-//   }
-//   else {
-//     console.log('<< 401 UNAUTHORIZED');
-//     response.status(401).end();
-//   }
-// });
-
-
-
 
 /*
  * Socket.io
  */
 let id = 0;
+let entryId = 1;
+let state = {
+  grid: {
+
+  },
+  log: {
+    entries: [
+        {
+          id : 1,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 2,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 3,
+          isAttack: false,
+          isDice: true,
+          attack : 
+          {
+            title: null,
+            attack: null,
+            dicesRoll: null,
+            resultDamage: null,
+            resultStatus: null,
+          },
+          dice : 
+          {
+            title: 'Chance',
+            diceroll: 99,
+          },   
+        },
+        {
+          id : 4,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 5,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 6,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 7,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 8,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 9,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+        {
+          id : 10,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+            attack: 'Tonnerre',
+            dicesRoll: '10, 10, 10',
+            resultDamage: 170,
+            resultStatus: 'DEAD',
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        },
+      ],
+  },
+}
 io.on('connection', (ws) => {
   console.log('>> socket.io - action');
+
+  ws.on('load_state', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('loading state');
+    entryId = ++entryId;
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('load_state', info);
+  });
 
   ws.on('share_selected_trainer_and_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
     info.id = ++id;
     timeSinceUse = 0;
-    state = info;
     io.emit('share_selected_trainer_and_pokemon', info);
   });
   
@@ -111,43 +278,6 @@ io.on('connection', (ws) => {
   });
 });
 
-
-
-
-// // Login avec vérification : POST /login
-// app.post('/login', (request, response) => {
-//   console.log('>> POST /login', request.body);
-
-//   // Extraction des données de la requête provenant du client.
-//   const { email, password } = request.body;
-
-//   // Vérification des identifiants de connexion proposés auprès de la DB.
-//   let username;
-//   if (db.users[email] && db.users[email].password === password) {
-//     username = db.users[email].username;
-//   }
-
-//   // Réponse HTTP adaptée.
-//   if (username) {
-//     console.log('<< 200 OK', username);
-//     response.send(username);
-//   }
-//   else {
-//     console.log('<< 401 UNAUTHORIZED');
-//     response.status(401).end();
-//   }
-// });
-
-// // Mot de passe oublié : POST /forgot
-// app.post('/forgot', (request, response) => {
-//   const { email } = request.body;
-//   if (db.users[email]) {
-//     response.send(db.users[email].username);
-//   }
-//   else {
-//     response.status(400).end();
-//   }
-// });
 
 /*
  * Server
