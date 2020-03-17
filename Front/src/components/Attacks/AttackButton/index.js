@@ -15,7 +15,7 @@ import {
 import AttackButtonStyled from './AttackButtonStyled';
 // == Import components
 import InfoAttackPopUp from './InfoAttackPopUp';
-import TargetsModal from './TargetsModal';
+import TargetsModal from 'src/containers/TargetsModal';
 
 // == Composant
 const AttackButton = ({
@@ -40,13 +40,7 @@ const AttackButton = ({
   const allTargets = usersKeys.map((userKey) => users[userKey]);
   // console.log(allTargets);
   const handleClick = (e) => {
-    const attackLog = {
-      title: `${pokemon.name} de ${trainer.name} attaque Bidule de Machin :`,
-      attack: name,
-      dicesRoll: '',
-      resultDamage: '',
-      resultStatus: '',
-    };
+    //
   };
 
   return (

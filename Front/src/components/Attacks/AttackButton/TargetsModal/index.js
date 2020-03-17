@@ -10,7 +10,7 @@ import {
 } from 'src/utils/functions';
 
 // == Import style
-import TargetModalStyled from './TargetModalStyled';
+import TargetsModalStyled from './TargetsModalStyled';
 
 // == Import utils
 import { damageCalc } from 'src/utils/attacks';
@@ -18,6 +18,7 @@ import { damageCalc } from 'src/utils/attacks';
 // == Composant
 const TargetsModal = ({
   allTargets,
+  trainer,
   pokemon,
   name,
   type,
@@ -26,6 +27,7 @@ const TargetsModal = ({
   energy,
   category,
   distance,
+  addAttackResultsToLog,
  }) => {
  
   const handleTrainerClick = (e) => {
@@ -37,7 +39,9 @@ const TargetsModal = ({
         const targetObject = {
           target: target.trainer,
         }
-       console.log(damageCalc(pokemon, attack, targetObject));
+      //  console.log(damageCalc(pokemon, attack, targetObject));
+      const attackResults = damageCalc(pokemon, attack, targetObject);
+      addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
       }      
     });
 
@@ -51,12 +55,14 @@ const TargetsModal = ({
           target: target.pokemon[0],
           trainer: target.trainer,
         }
-        console.log(damageCalc(pokemon, attack, targetObject));
+      // console.log(damageCalc(pokemon, attack, targetObject));
+      const attackResults = damageCalc(pokemon, attack, targetObject);
+      addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
       }      
     });
   }
   return (
-    <TargetModalStyled>
+    <TargetsModalStyled>
       <Header icon='crosshairs' content='Choissisez la cible' />
       <Modal.Content>
         <div className='target-container'>
@@ -88,13 +94,14 @@ const TargetsModal = ({
           ))}
         </div>
       </Modal.Content>
-    </TargetModalStyled>
+    </TargetsModalStyled>
   );
 };
 
 TargetsModal.propTypes = {
   allTargets: PropTypes.array.isRequired,
   pokemon: PropTypes.object.isRequired,
+  trainer: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   damage: PropTypes.number.isRequired,
@@ -102,6 +109,7 @@ TargetsModal.propTypes = {
   energy: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,
+  addAttackResultsToLog: PropTypes.func.isRequired,
 };
 
 // == Export

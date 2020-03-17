@@ -1,4 +1,6 @@
 import { WS_CONNECT } from 'src/actions/wsConnect';
+import { ADD_ATTACK_RESULTS_TO_LOG } from 'src/actions/attacks';
+import { updateLogState } from 'src/actions/log';
 
 let socket;
 
@@ -20,9 +22,19 @@ const logMiddleware = (store) => (next) => (action) => {
       socket.on('load_state', (info) => {
         console.log('Retour du serveur: ...');
       });
+      socket.on('add_attack_results_to_log', (info) => {
+        console.log('Retour du serveur: add_attack_results_to_log');
+        console.log(info);
+        store.dispatch(updateLogState(info.log));
+      });
       break;
-
-    // Happened before WS_CONNECT socket.on(), send action to node.js server
+      // Happened before WS_CONNECT socket.on(), send action to node.js server
+    case ADD_ATTACK_RESULTS_TO_LOG:
+      console.log('Envoi au serveur : add_attack_results_to_log');
+      socket.emit('add_attack_results_to_log', action);
+      console.log(action);
+      break;
+      
 
     default:
       break;

@@ -5,6 +5,7 @@ import {
 
 export function damageCalc(pokemon, attack, targetObject) 
 {
+  // console.log(pokemon);
   const pokemonType1 = pokemon.types[0].name;
   const pokemonType2 = pokemon.types.length === 2 ? pokemon.types[1].name : null;
   const pokemonFOR = pokemon.strength;
