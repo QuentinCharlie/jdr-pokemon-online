@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Inventory;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -14,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class InventoryApiController extends AbstractController
 {
     
-
      /**
       * @Route("/inventories", name="api_inventories")
       */
