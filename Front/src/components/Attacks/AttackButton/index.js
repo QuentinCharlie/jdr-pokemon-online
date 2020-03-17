@@ -135,10 +135,16 @@ AttackButton.propTypes = {
   type: PropTypes.string.isRequired,
   effect: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  pokemon: PropTypes.object.isRequired,
-  trainer: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
+  pokemon: PropTypes.object,
+  trainer: PropTypes.object,
+  users: PropTypes.object,
 };
+
+AttackButton.defaultProps = {
+  pokemon: {},
+  trainers: {},
+  users: {},
+}
 
 // == Export
 export default AttackButton;
