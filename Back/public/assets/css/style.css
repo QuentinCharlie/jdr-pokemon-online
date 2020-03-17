@@ -1,5 +1,6 @@
 body{
     background-image: url("../images/map2.png");
+    background-repeat: no-repeat;
 }
 
 @font-face
