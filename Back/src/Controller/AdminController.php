@@ -19,7 +19,8 @@ class AdminController extends AbstractController
      * @Route("/users/list", name="admin_user_list")
      */
     public function userList()
-    {
+    {   
+        // Récupère tous les USERS dans la BDD
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->render('admin/userList.html.twig', [
@@ -28,45 +29,12 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/create", name="user_create")
-     */
-    public function userCreate(Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $newUser = new User();
-
-        $form = $this->createForm(AdminFormType::class, $newUser);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-
-            $newUser->setPassword(
-                $passwordEncoder->encodePassword(
-                    $newUser,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($newUser);
-            $manager->flush();
-
-            $this->addFlash("success", "L'utilisateur a bien été créé");
-
-            return $this->redirectToRoute('admin_user_list');
-        }
-
-        return $this->render('admin/userCreate.html.twig', [
-            "formView" => $form->createView(),
-        ]);
-    }
-
-
-    /**
      * @Route("/user/update/{id}", name="user_update")
      */
     public function userUpdate(Request $request, User $user)
-    {
+    {   
+
+        // Récupère l'utilisateur grâce à son ID et pré-rempli le formulaire
         $form = $this->createForm(AdminUpdateFormType::class, $user);
 
         $form->handleRequest($request);
@@ -92,6 +60,7 @@ class AdminController extends AbstractController
     public function userDelete(User $user) {
 
         $entityManager = $this->getDoctrine()->getManager();
+        // Supprime l'utilisateur que l'on retrouve grâce à son ID
         $entityManager->remove($user);
         $entityManager->flush();
 
