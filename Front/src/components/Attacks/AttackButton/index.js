@@ -46,11 +46,9 @@ const AttackButton = ({
       dicesRoll: '',
       resultDamage: '',
       resultStatus: '',
-    }
-    console.log(attackLog);
-    // console.log(users);
-    
-  }
+    };
+  };
+
   return (
     <AttackButtonStyled>
       <Modal 
@@ -115,26 +113,17 @@ const AttackButton = ({
         dimmer='inverted'
         className='modal-attack-targets'
       >
-        {/* <Header icon='crosshairs' content='Choissisez la cible' />
-        <Modal.Content>
-          <div className='target-container'>
-            {allTargets.map((target, index) => (
-              <div 
-                key={`target-${index}`}
-                className="target-group"
-              >
-                <div className="target-trainer">
-                  <img src={findTrainerImage(`${target.trainer.name}.png`)} alt='avatar dresseur' />  
-                </div>
-                <div className="target-pokemon">
-                  <img src={findPokemonImage(`${target.pokemon[0].id}.gif`)} alt='pokemon sprite gif' />
-                </div>
-              </div>
-            ))}
-          </div>
-        </Modal.Content> */}
         <TargetsModal 
           allTargets={allTargets} 
+          pokemon={pokemon}
+          name={name}
+          type={type}
+          damage={damage}
+          accuracy={accuracy}
+          energy={energy}
+          category={category}
+          distance={distance}
+          effect={effect}
         />
       </Modal>
     </AttackButtonStyled>

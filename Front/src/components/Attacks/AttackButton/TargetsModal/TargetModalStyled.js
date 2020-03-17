@@ -10,12 +10,17 @@ const TargetsModalStyled = styled.div`
       .target-trainer {
         width: 100px;
         height: 100px;
+        cursor: pointer;
+        margin-right: 1em;
         img {
           width: 100%;
           height: 100%;
         }
       }
       .target-pokemon {
+        img {
+          cursor: pointer;
+        }
       }
     }
   }
