@@ -14,8 +14,8 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
-// let port = 3001; // @change dev
-let port = process.argv[2]; // @change prod
+let port = 3001; // @change dev
+// let port = process.argv[2]; // @change prod
 // let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 // const inactionTimer = 5; // 3600s => 1h
 
