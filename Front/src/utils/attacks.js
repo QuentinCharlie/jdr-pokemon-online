@@ -3,7 +3,7 @@ import {
   affinityTable,
 } from 'src/utils/affinityTable';
 
-export function damageCalc(pokemon, attack, target) 
+export function damageCalc(pokemon, attack, targetObject) 
 {
   const pokemonType1 = pokemon.types[0].name;
   const pokemonType2 = pokemon.types.length === 2 ? pokemon.types[1].name : null;
@@ -17,10 +17,10 @@ export function damageCalc(pokemon, attack, target)
   const attackCategory = attack.category.trim();
   const attackType = attack.type.trim();
   
-  const targetType1 = target.types !== undefined ? target.types[0].name : 'Normal';
-  const targetType2 = target.types !== undefined && target.types.length === 2 ? target.types[1].name : null;
-  const targetEND = target.endurance;
-  const targetVOL = target.willpower;
+  const targetType1 = targetObject.target.types !== undefined ? targetObject.target.types[0].name : 'Normal';
+  const targetType2 = targetObject.target.types !== undefined && targetObject.target.types.length === 2 ? targetObject.target.types[1].name : null;
+  const targetEND = targetObject.target.endurance;
+  const targetVOL = targetObject.target.willpower;
 
   // console.log(`pokemonFOR ${pokemonFOR}`);
   // console.log(`pokemonCON ${pokemonCON}`);
@@ -65,7 +65,7 @@ export function damageCalc(pokemon, attack, target)
 
   const energy = pokemonENE - attack.energy;
 
-  return { damage, message, energy };
+  return { damage, message, energy, dicesRollResult, targetObject };
 };
 
 

@@ -34,7 +34,10 @@ const TargetsModal = ({
     const attack = {name, type, damage, accuracy, energy, category, distance};
     allTargets.find((target) => {
       if (target.trainer.name === trainerNameTarget) {
-       console.log(damageCalc(pokemon, attack, target.trainer));
+        const targetObject = {
+          target: target.trainer,
+        }
+       console.log(damageCalc(pokemon, attack, targetObject));
       }      
     });
 
@@ -44,7 +47,11 @@ const TargetsModal = ({
     const attack = {name, type, damage, accuracy, energy, category, distance};
     allTargets.find((target) => {
       if (target.pokemon[0].name === pokemonNameTarget) {
-        console.log(damageCalc(pokemon, attack, target.pokemon[0]));
+        const targetObject = {
+          target: target.pokemon[0],
+          trainer: target.trainer,
+        }
+        console.log(damageCalc(pokemon, attack, targetObject));
       }      
     });
   }
