@@ -9,10 +9,10 @@ import {
 } from 'semantic-ui-react';
 
 import { getSidebarNameCapitalize } from 'src/utils/functions';
+// == import utils
+import { findTrainerImage, findPokemonImage } from 'src/utils/functions';
 
 // == Import files
-import pokeGif from 'src/assets/images/pokemon/pikachu.gif';
-import pokePng from 'src/assets/images/pokemon/pikachu.png';
 import ashTrainer from 'src/assets/images/sacha-face.png';
 import ashTrainer2 from 'src/assets/images/sacha-droite.png';
 import backArrow from 'src/assets/images/left-arrow.png';
@@ -27,16 +27,53 @@ const Dices = ({
   isTrainerDicesActive,
   isPokemonDicesActive,
   visible,
+  trainer, 
+  pokemon,
   changeSidebarVisibility,
+  addDiceRollsToLog,
 }) => {
   const handleDiceClick = (e) => {
     const diceListToOpen = e.currentTarget.className;
     openDiceList(diceListToOpen);
   };
+
   const handleSidebarButtonClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
   };
+
+  const handleTrainerDiceClick = (e) => {
+
+    let skillLevel = e.target.className.replace('dice-button level-' , '');
+    const skill = e.target.textContent;
+    let diceRolls = [];
+    if (skillLevel === 'null') { 
+      diceRolls.push(Math.floor(Math.random() * 7 + 1));
+    }
+    else {
+      for (let i = 1 ; i <= skillLevel; i++){
+        diceRolls.push(Math.floor(Math.random() * 10 + 1));
+      };
+    }
+    addDiceRollsToLog(trainer, skill, diceRolls)
+  }
+
+  const handlePokemonDiceClick = (e) => {
+    let skillLevel = 1;
+    const skill = e.target.textContent;
+    let diceRolls = [];
+    for (let i = 1 ; i <= skillLevel; i++){
+      diceRolls.push(Math.floor(Math.random() * 10 + 1));
+    };
+    addDiceRollsToLog(pokemon, skill, diceRolls);
+  }
+
+  const handleLuckDiceClick = (e) => {
+    let diceRolls = [];
+    diceRolls.push(Math.floor(Math.random() * 100 + 1));
+    addDiceRollsToLog(trainer, 'Chance', diceRolls);
+  }
+  
 
   const cssTrainerStyle = {
     dice: true,
@@ -100,26 +137,126 @@ const Dices = ({
                     <span>5</span>
                   </div>
                   <div className="dice-button-list">
-                    <button className="dice-button level-2">Bricolage</button>
-                    <button className="dice-button level-1">Charisme</button>
-                    <button className="dice-button level-3">Combat</button>
-                    <button className="dice-button level-1">Conduite</button>
-                    <button className="dice-button level-5">Dédection</button>
-                    <button className="dice-button level-1">Discrétion</button>
-                    <button className="dice-button level-0">Expression</button>
-                    <button className="dice-button level-2">Psychologie</button>
-                    <button className="dice-button level-4">Sport</button>
-                    <button className="dice-button level-1">Survie</button>
-                    <button className="dice-button level-0">Education</button>
-                    <button className="dice-button level-1">Géographie</button>
-                    <button className="dice-button level-1">Informatique</button>
-                    <button className="dice-button level-5">Légende</button>
-                    <button className="dice-button level-0">Médecine</button>
-                    <button className="dice-button level-1">Médecine Pokémon</button>
-                    <button className="dice-button level-0">Nature</button>
-                    <button className="dice-button level-1">Psychisme</button>
-                    <button className="dice-button level-3">Science</button>
-                    <button className="dice-button level-0">Pokélogie</button>
+                    <button
+                      className={`dice-button level-${trainer.do_it_yourself}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Bricolage
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.charisma}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Charisme
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.fighting}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Combat
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.driving}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Conduite
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.detection}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Détection
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.furtivity}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Discrétion
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.expression}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Expression
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.phychology}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Psychologie
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.sport}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Sport
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.survival}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Survie
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.education}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Education
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.geography}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Géographie
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.computer_science}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Informatique
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.legend}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Légendes
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.medicine}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Médecine
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.pkmn_medicine}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Médecine Pokémon
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.nature}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Nature
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.phyche}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Psychisme
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.science}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Sciences
+                    </button>
+                    <button
+                      className={`dice-button level-${trainer.pokelogy}`}
+                      onClick={handleTrainerDiceClick}
+                    >
+                      Pokélogie
+                    </button>
                   </div>
                 </div>
               </>
@@ -129,7 +266,7 @@ const Dices = ({
           <div className={classNames(cssPokemonStyle)}>
             {isPokemonDicesActive === false && (
               <>
-                <img className="avatar-dice pokemon" src={pokePng} alt="" />
+                <img className="avatar-dice pokemon" src={findPokemonImage(`${pokemon.id}drag.png`)} alt="" />
                 <button className="roll-button pokemon" onClick={handleDiceClick}>
                   Dés Pokémon
                   <span />
@@ -138,7 +275,7 @@ const Dices = ({
             )}
             {isPokemonDicesActive && (
               <>
-                <img className="avatar-dice pokemon" src={pokeGif} alt="" />
+                <img className="avatar-dice pokemon" src={findPokemonImage(`${pokemon.id}.gif`)} alt="" />
                 <button className="roll-button pokemon" onClick={handleDiceClick}>
                   <img className="back-arrow pokemon" src={backArrow} alt="arrow back to dices" />
                   <span />
@@ -152,26 +289,52 @@ const Dices = ({
                     <span>5</span>
                   </div>
                   <div className="dice-button-list">
-                    <button className="dice-button level-2">Bricolage</button>
-                    <button className="dice-button level-1">Charisme</button>
-                    <button className="dice-button level-3">Combat</button>
-                    <button className="dice-button level-1">Conduite</button>
-                    <button className="dice-button level-5">Dédection</button>
-                    <button className="dice-button level-1">Discrétion</button>
-                    <button className="dice-button level-0">Expression</button>
-                    <button className="dice-button level-2">Psychologie</button>
-                    <button className="dice-button level-4">Sport</button>
-                    <button className="dice-button level-1">Survie</button>
-                    <button className="dice-button level-0">Education</button>
-                    <button className="dice-button level-1">Géographie</button>
-                    <button className="dice-button level-1">Informatique</button>
-                    <button className="dice-button level-5">Légende</button>
-                    <button className="dice-button level-0">Médecine</button>
-                    <button className="dice-button level-1">Médecine Pokémon</button>
-                    <button className="dice-button level-0">Nature</button>
-                    <button className="dice-button level-1">Psychisme</button>
-                    <button className="dice-button level-3">Science</button>
-                    <button className="dice-button level-0">Pokélogie</button>
+                    <button 
+                      className="dice-button level-null"
+                      onClick={handlePokemonDiceClick}
+                    >
+                      Odorat
+                    </button>
+                    <button 
+                      className="dice-button level-null"
+                      onClick={handlePokemonDiceClick}
+                    >
+                      Déplacement Rapide
+                      </button>
+                    <button 
+                      className="dice-button level-null"
+                      onClick={handlePokemonDiceClick}
+                    >
+                      Détection
+                    </button>
+                    { pokemon.types[0].name === 'Psy' ||
+                      (pokemon.types[1] !== undefined &&
+                      pokemon.types[1].name === 'Psy') &&
+                        <button 
+                          className="dice-button level-null"
+                          onClick={handlePokemonDiceClick}
+                          >
+                          Télépathie
+                        </button>
+                    }
+                    { pokemon.types[0].name === 'Spectre' ||
+                      (pokemon.types[1] !== undefined &&
+                      pokemon.types[1].name === 'Spectre') &&
+                      <>
+                        <button 
+                          className="dice-button level-null"
+                          onClick={handlePokemonDiceClick}
+                        >
+                          Intangibilité
+                        </button>
+                        <button
+                          className="dice-button level-null"
+                          onClick={handlePokemonDiceClick}
+                        >
+                          Invisibilité
+                        </button>
+                      </>
+                    }             
                   </div>
                 </div>
               </>
@@ -180,8 +343,8 @@ const Dices = ({
           </div>
 
           <div className={classNames(cssLuckStyle)}>
-            <img className="avatar-dice" src="https://img.pokemondb.net/sprites/black-white/normal/chansey.png" alt="" />
-            <button className="roll-button luck" onClick={handleDiceClick}>
+            <img className="avatar-dice" src={findPokemonImage('113drag.png')} alt="" />
+            <button className="roll-button luck" onClick={handleLuckDiceClick}>
               Roll Chance
               <span />
             </button>
@@ -198,7 +361,10 @@ Dices.propTypes = {
   isTrainerDicesActive: PropTypes.bool.isRequired,
   isPokemonDicesActive: PropTypes.bool.isRequired,
   visible: PropTypes.bool.isRequired,
+  pokemon: PropTypes.object.isRequired,
+  trainer: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
+  addDiceRollsToLog: PropTypes.func.isRequired,
 };
 // == Export
 export default Dices;

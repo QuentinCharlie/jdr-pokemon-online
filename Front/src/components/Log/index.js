@@ -101,9 +101,13 @@ const Log = ({
                   <div 
                     className="dice-entry"
                   > 
-                    <p className="title">{entry.dice.title}</p>
+                    <p className="title">
+                      {`${entry.dice.roller.name} fait un jet de ${entry.dice.skill} :`}
+                    </p>
                     <div className="turn">
-                      <p className="dices-roll">Jet : {entry.dice.diceRoll} </p>
+                      <p className="dices-roll">
+                        {entry.dice.diceRolls} 
+                      </p>
                     </div>
                   </div>
                 }

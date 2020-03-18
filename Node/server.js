@@ -125,6 +125,40 @@ io.on('connection', (ws) => {
     io.emit('load_state', info);
   });
 
+  ws.on('add_dice_rolls_to_log', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('loading state');
+    entryId = ++entryId;
+
+    const roller = info.roller;
+    const skill = info.skill;
+    const diceRolls = info.diceRolls.join(', ');
+
+    state.log = {
+      ...state.log,
+      entries: [
+        ...state.log.entries,
+        {
+          id : entryId,
+          isAttack: false,
+          isDice: true,
+          dice : 
+          {
+            roller,
+            skill,
+            diceRolls,
+          },   
+        }
+      ]
+    }
+
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('add_dice_rolls_to_log', info);
+  });
+
   ws.on('add_attack_results_to_log', (info) => {
     // eslint-disable-next-line no-plusplus
     console.log('add_attack_results_to_log state');

@@ -55,10 +55,10 @@ export function damageCalc(pokemon, attack, targetObject)
 
   damage = hit(dicesRollResult, difficulty, attackType, pokemonType1, pokemonType2);
 
-  damage = damage * getAttackMultiplicatorAndMessage(
+  damage = Math.ceil(damage * getAttackMultiplicatorAndMessage(
     affinityTable[attackType][targetType1], 
     affinityTable[attackType][targetType2]
-  ).multiplicator;
+  ).multiplicator);
   message = getAttackMultiplicatorAndMessage(
     affinityTable[attackType][targetType1], 
     affinityTable[attackType][targetType2]
@@ -120,7 +120,7 @@ function diceRolls (attackDamage) {
     const dicesNumber = attackDamage;
     let diceRolls = [];
     for (let i = 1 ; i <= dicesNumber; i++){
-      diceRolls.push(Math.floor(Math.random() * (10 - 1)) + 1);
+      diceRolls.push(Math.floor(Math.random() * 10 + 1));
     }
     // function numberDes(a,b) {
     //   return b-a;
