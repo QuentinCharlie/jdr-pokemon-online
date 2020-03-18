@@ -15,6 +15,7 @@
         <ul class="list-group list-group-flush">
         {% for game in games %}
           <li class="list-group-item">Partie : <a href="{{ path('game_board', {'port' : game.port}) }}">{{game.port}}</a></li>
+          <a href="{{ path('game_mj_delete', {'port' : game.port})}}"> Supprimer la partie</a>
         {% endfor %}
         </ul>
     </div>

@@ -15,6 +15,7 @@ const usersReducer = (state = initialState, action = {}) => {
     case UPDATE_USERS_STATE: {
       console.log(action.users);
       return {
+        ...state,
         ...action.users,
       };
     }

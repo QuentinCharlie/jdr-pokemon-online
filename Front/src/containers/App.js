@@ -10,11 +10,16 @@ import App from 'src/components/App';
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+  function isNotEmpty(obj) {
+    return Object.keys(obj).length > 0;
+  } 
+  return ({
   hasTrainer: state.user.hasTrainer,
   hasPokemon: state.user.hasPokemon,
   isUserReady: state.user.isUserReady,
-});
+  isUsersNotEmpty: isNotEmpty(state.users),
+});}
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?

@@ -69,6 +69,16 @@ const TrainerStyled = styled.div`
             position: relative;
             z-index: 5;
           }
+          .span {
+            color: white;
+            height: 100%;
+            position: relative;
+            top: calc(50% - .7em);
+            z-index: 5;
+            .text {
+              color: #6c757d;
+            }
+          }
           img {
             position: absolute;
             z-index: 5;

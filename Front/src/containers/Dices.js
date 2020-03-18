@@ -14,7 +14,20 @@ import { addDiceRollsToLog } from 'src/actions/dices';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => {
   const playerName = state.user.username;
+  const mjName = state.mj.mjName;
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
 
+  if (playerName === mjName) {
+    return ({
+      isTrainerDicesActive: state.dices.isTrainerDicesActive,
+      isPokemonDicesActive: state.dices.isPokemonDicesActive,
+      visible: state.sidebar.isDicesSidebarVisible,
+      trainer: allUsers[index].trainer,
+      pokemon: allUsers[index].pokemon[0],
+    })
+  }
   return ({
     isTrainerDicesActive: state.dices.isTrainerDicesActive,
     isPokemonDicesActive: state.dices.isPokemonDicesActive,

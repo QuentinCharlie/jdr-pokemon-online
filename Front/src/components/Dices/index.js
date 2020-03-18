@@ -366,5 +366,6 @@ Dices.propTypes = {
   changeSidebarVisibility: PropTypes.func.isRequired,
   addDiceRollsToLog: PropTypes.func.isRequired,
 };
+
 // == Export
 export default Dices;
