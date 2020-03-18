@@ -9,7 +9,7 @@ import ProgressBar from 'src/components/ProgressBar';
 import AttackButton from 'src/components/Attacks/AttackButton';
 
 // Import Utils
-import { findPokemonImage } from 'src/utils/functions';
+import { findPokemonImage, findTypeImage } from 'src/utils/functions';
 import { typesColors } from 'src/utils/typesColors';
 import {
   affinityTable,
@@ -17,6 +17,8 @@ import {
 } from 'src/utils/affinityTable';
 
 // == Import files for styles
+import heartIcon from 'src/assets/images/heart.svg';
+import zapIcon from 'src/assets/images/zap.svg';
 import pokemonSprite from 'src/assets/images/pokemon/pikachu.gif';
 
 // == Import style
@@ -68,19 +70,20 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                 </div>
                 <div className="pokemon-description-infos-vital">
                   <div className="stat">
-                    <span className="title">ÉNERGIE</span>
-                    <ProgressBar color="lightblue" number={pokemon.energy} maxNumber={50} />
+                    {/* <span className="title">ÉNERGIE</span> */}
+                    <ProgressBar color="#98bfe6" number={pokemon.energy} maxNumber={50} />
+                    <img src={zapIcon} alt="energy logo" />
                   </div>
                   <div className="stat">
-                    <span className="title">VITALITÉ</span>
-                    <ProgressBar color="lightgreen" number={pokemon.vitality} maxNumber={pokemonMaxHealth} />
+                    {/* <span className="title">VITALITÉ</span> */}
+                    <ProgressBar color="#19cd70" number={pokemon.vitality} maxNumber={pokemonMaxHealth} />
+                    <img src={heartIcon} alt="health logo" />
                   </div>
                 </div>
               </div>
               <div className="pokemon-description-appearance">
-                <div className="table-container">
+                {/* <div className="table-container">
                   <table>
-                    {/* @todo: see with product-owner if needed because not in DB */}
                     <tbody>
                       <tr>
                         <td>Taille</td>
@@ -92,10 +95,9 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </div> */}
                 <div className="pokemon-sprite">
-                  {/* @todo: dynamize when sprite folder ready */}
-                  <img src={pokemonSprite} alt="" />
+                  <img src={findPokemonImage(`${pokemon.id}.gif`)} alt="" />
                 </div>
               </div>
             </div>
@@ -105,29 +107,30 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
               <div className="stat-container">
                 <div className="stat">
                   <span className="title">FORCE</span>
-                  <ProgressBar color="yellow" number={pokemon.strength} maxNumber={16} />
+                  <ProgressBar color={`#${pokemon.primary}`} number={pokemon.strength} maxNumber={16} />
                 </div>
                 <div className="stat">
                   <span className="title">ENDURANCE</span>
-                  <ProgressBar color="yellow" number={pokemon.endurance} maxNumber={16} />
+                  <ProgressBar color={`#${pokemon.primary}`} number={pokemon.endurance} maxNumber={16} />
                 </div>
                 <div className="stat">
                   <span className="title">CONCENTRATION</span>
-                  <ProgressBar color="yellow" number={pokemon.concentration} maxNumber={16} />
+                  <ProgressBar color={`#${pokemon.primary}`} number={pokemon.concentration} maxNumber={16} />
                 </div>
                 <div className="stat">
                   <span className="title">VOLONTÉ</span>
-                  <ProgressBar color="yellow" number={pokemon.willpower} maxNumber={16} />
+                  <ProgressBar color={`#${pokemon.primary}`} number={pokemon.willpower} maxNumber={16} />
                 </div>
                 <div className="stat">
                   <span className="title">DEXTERITÉ</span>
-                  <ProgressBar color="yellow" number={pokemon.dexterity} maxNumber={16} />
+                  <ProgressBar color={`#${pokemon.primary}`} number={pokemon.dexterity} maxNumber={16} />
                 </div>
               </div>
             </div>
             <div className="stats-sensibilities">
-              {/* @todo: refactor this  */}
-              <div className="type type-table-head">Sensibilités</div>
+              <div className="type-table-head">
+                <span>Faiblesses</span>
+              </div>
               <div
                 className="type type-combat"
                 style={{ backgroundColor: typesColors.Combat }}
@@ -136,8 +139,8 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                   getAttackMultiplicatorAndMessage(
                     affinityTable.Combat[type1],
                     affinityTable.Combat[type2]
-                  ).multiplicator
-                }
+                  ).multiplicator}
+                <img src={findTypeImage(`Combat.png`)} alt="logo type" />
               </div>
               <div className="type type-dragon"
                 style={{ backgroundColor: typesColors.Dragon }}
@@ -148,6 +151,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Dragon[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Dragon.png`)} alt="logo type" />
               </div>
               <div className="type type-eau"
                 style={{ backgroundColor: typesColors.Eau }}
@@ -158,6 +162,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Eau[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Eau.png`)} alt="logo type" />
               </div>
               <div className="type type-electrik"
                 style={{ backgroundColor: typesColors.Electrik }}
@@ -168,6 +173,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Electrik[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Electrik.png`)} alt="logo type" />
               </div>
               <div className="type type-feu"
                 style={{ backgroundColor: typesColors.Feu }}
@@ -178,6 +184,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Feu[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Feu.png`)} alt="logo type" />
               </div>
               <div className="type type-glace"
                 style={{ backgroundColor: typesColors.Glace }}
@@ -188,6 +195,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Glace[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Glace.png`)} alt="logo type" />
               </div>
               <div className="type type-insecte"
                 style={{ backgroundColor: typesColors.Insecte }}
@@ -198,6 +206,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Insecte[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Insecte.png`)} alt="logo type" />
               </div>
               <div className="type type-normal"
                 style={{ backgroundColor: typesColors.Normal }}
@@ -208,6 +217,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Normal[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Normal.png`)} alt="logo type" />
               </div>
               <div className="type type-plante"
                 style={{ backgroundColor: typesColors.Plante }}
@@ -218,6 +228,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Plante[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Plante.png`)} alt="logo type" />
               </div>
               <div className="type type-poison"
                 style={{ backgroundColor: typesColors.Poison }}
@@ -228,6 +239,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Poison[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Poison.png`)} alt="logo type" />
               </div>
               <div className="type type-psy"
                 style={{ backgroundColor: typesColors.Psy }}
@@ -238,6 +250,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Psy[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Psy.png`)} alt="logo type" />
               </div>
               <div className="type type-roche"
                 style={{ backgroundColor: typesColors.Roche }}
@@ -248,6 +261,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Roche[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Roche.png`)} alt="logo type" />
               </div>
               <div className="type type-sol"
                 style={{ backgroundColor: typesColors.Sol }}
@@ -258,6 +272,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Sol[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Sol.png`)} alt="logo type" />
               </div>
               <div className="type type-spectre"
                 style={{ backgroundColor: typesColors.Dragon }}
@@ -268,6 +283,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Spectre[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Spectre.png`)} alt="logo type" />
               </div>
               <div className="type type-vol"
                 style={{ backgroundColor: typesColors.Vol }}
@@ -278,6 +294,7 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
                     affinityTable.Vol[type2]
                   ).multiplicator
                 }
+                <img src={findTypeImage(`Vol.png`)} alt="logo type" />
               </div>
             </div>
           </div>
@@ -293,20 +310,35 @@ const PokemonModal = ({ pokemon, pokemonMaxHealth }) => {
           </div>
           <div className="attack-list">
             {pokemon.attacks.map((attack) => (
-              <AttackButton
-                className="AttackButton"
-                // eslint-disable-next-line react/no-array-index-key
-                key={attack.id}
-                name={attack.name}
-                energy={attack.energy}
-                category={attack.category}
-                distance={attack.distance}
-                accuracy={attack.accuracy}
-                damage={attack.damage}
-                effect={attack.effect}
-                type={attack.type.name}
-                color={attack.type.color}
-              />
+              <div className="attack" style={{ backgroundColor: `#${attack.type.color}`}} key={attack.id}>
+                <div className="attack-name">{attack.name}</div>
+                <div className="attack-icons">
+                  <div className={`attack-category ${attack.category}`}>
+                    {attack.category}
+                  </div>
+                  <div className={`attack-distance ${attack.distance}`}>
+                    {attack.distance}
+                  </div>
+                </div>
+                <div className="effect">
+                  {attack.effect}
+                </div>
+                <div className="attack-stats">
+                  <div className="attack-stat">
+                    <div>Dégats</div>
+                    <div>{attack.damage}</div>
+                  </div>
+                  <div className="attack-stat">
+                    <div>Précision</div>
+                    <div>{attack.accuracy}</div>
+                  </div>
+                  <div className="attack-stat">
+                    <div>Energie</div>
+                    <div>{attack.energy}</div>
+                  </div>
+                </div>
+                <img className="type" src={findTypeImage(`${attack.type.name}.png`)} alt="type logo" />
+              </div>
             ))}
           </div>
         </div>

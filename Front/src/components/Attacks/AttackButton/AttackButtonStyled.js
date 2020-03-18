@@ -37,41 +37,12 @@ const AttackButtonStyled = styled.div`
     img.type {
       height: 98%;
       position: absolute;
+      z-index: 1;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
       opacity: .2;
     }
-
-    /* SHINY EFFECT */
-    /* &::before {
-      position: absolute;
-      top: 0;
-      left: -75%;
-      z-index: 2;
-      display: block;
-      content: '';
-      width: 50%;
-      height: 100%;
-      background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
-      -webkit-transform: skewX(-25deg);
-      transform: skewX(-25deg);
-    }
-    &:hover::before {
-      -webkit-animation: shine .75s;
-      animation: shine .75s;
-    }
-    @-webkit-keyframes shine {
-      100% {
-        left: 125%;
-      }
-    }
-    @keyframes shine {
-      100% {
-        left: 125%;
-      }
-    } */
     
     &:active {
       box-shadow: none;
@@ -80,6 +51,8 @@ const AttackButtonStyled = styled.div`
     }
     @media (min-height: 960px) {
       .attack {
+        position: relative;
+        z-index: 10;
         display: flex;
         flex-direction: column;
         .attack-name {
@@ -92,44 +65,28 @@ const AttackButtonStyled = styled.div`
           height: 1em;
           align-items: center;
           .attack-category {
+            display: flex;
+            align-items: center;
+            font-size: .5em;
+            font-weight: normal;
+            font-style: italic;
+            background-color: rgba(20, 20, 20, 0.05);
             width: auto;
             height: 70%;
             padding-right: .3em;
-            /* &.Statut {
-              content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
-              opacity: .8;
-            }
-            &.Special {
-              content: url("https://www.pokebip.com/pokedex-images/types/speciale.png");
-              opacity: .8;
-            }
-            &.Physique {
-              content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
-              opacity: .8;
-            } */
           }
           .attack-distance {
+            display: flex;
+            align-items: center;
+            margin-left: .5em;
+            font-size: .5em;
+            font-weight: normal;
+            font-style: italic;
+            border-radius: 10px;
+            padding: .2em .4em;
+            background-color: rgba(20, 20, 20, 0.05);
             width: auto;
             height: 70%;
-            &.melee {
-              content: url("https://i.imgur.com/bsvUkK6.png");
-              opacity: .8;
-            }
-            &.Rayon {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Contact {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Zone {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Cible {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Personnel {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
           }
           .attack-info {
             width: auto;
@@ -144,6 +101,8 @@ const AttackButtonStyled = styled.div`
       .attack-stats {
         display: flex;
         justify-content: flex-start;
+        position: relative;
+        z-index: 10;
         /* overflow: auto; */
         /* scrollbar hidden (IE/Edge)
         -ms-overflow-style: none;
@@ -165,6 +124,8 @@ const AttackButtonStyled = styled.div`
 
   @media (max-height: 959px) {
     .attack {
+      position: relative;
+      z-index: 10;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -173,6 +134,12 @@ const AttackButtonStyled = styled.div`
         height: 1.3em;
         display: flex;
         align-items: center;
+        .attack-category {
+          display: none;
+        }
+        .attack-distance {
+          display: none;
+        }
         .attack-info {
           width: auto;
           height: 70%;
@@ -183,6 +150,8 @@ const AttackButtonStyled = styled.div`
       }
     }
     .attack-stats {
+      position: relative;
+      z-index: 10;
       display: none;
     }
   }

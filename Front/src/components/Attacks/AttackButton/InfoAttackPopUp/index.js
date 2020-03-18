@@ -19,7 +19,7 @@ const InfoAttackPopUp = ({
   <InfoAttackPopUpStyled>
     <h3 className="low-height">{name}</h3>
     <p className="low-height">{effect}</p>
-    <p className="high-height">Type: {type}</p>
+    <p className="low-height">Type: {type}</p>
     <p className="high-height">Categorie : {category}</p>
     <p className="high-height">Portée : {distance}</p>
     <p className="high-height">Dégats: {damage}</p>

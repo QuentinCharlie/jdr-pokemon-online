@@ -6,8 +6,11 @@ import {
   Sidebar,
 } from 'semantic-ui-react';
 
+// == Import utils
 import { getSidebarNameCapitalize } from 'src/utils/functions';
-// Styles
+// == Import files
+import pokeball from 'src/assets/images/pokeball.png';
+// == Import Styles
 import LogStyled from './LogStyled';
 
 
@@ -16,6 +19,7 @@ const Log = ({
   visible, 
   entries, 
   changeSidebarVisibility,
+  pokemon,
 }) => {
   useEffect(() => {
     logContainer.current.scrollTo(0, logContainer.current.scrollHeight);
@@ -27,6 +31,11 @@ const Log = ({
     // logContainer.current.scrollTo(0, 50);
     logContainer.current.scrollTo(0, logContainer.current.scrollHeight);
   };
+
+  // Color definition
+  const primaryColor = pokemon.primary;
+  const secondaryColor = pokemon.secondary;
+
   return (
     <LogStyled>
       <div className="mobile-tablet">
@@ -70,10 +79,12 @@ const Log = ({
       </div>
 
       <div className="desktop">
-        <svg className="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#19cd70" fillOpacity="1" d="M0,320L1440,96L1440,0L0,0Z" /></svg>
-        <svg className="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#60eca3" fillOpacity="1" d="M0,160L1440,32L1440,0L0,0Z" /></svg>
+        <svg className="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill={`#${primaryColor}`} fillOpacity="1" d="M0,320L1440,96L1440,0L0,0Z" /></svg>
+        <svg className="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill={`#${secondaryColor}`} fillOpacity="1" d="M0,160L1440,32L1440,0L0,0Z" /></svg>
         <div className="log">
+          <img src={pokeball} alt="pokemon background" className="pokeball-background" />
           <div className="entries" ref={logContainer}>
+          <div className="blank-space" />
             {entries.map((entry) =>
               <div 
                 className="entry"
@@ -115,10 +126,10 @@ const Log = ({
             )}
           </div>
         </div>
-        <div className="current-player">
+        <div className="current-player" style={{ backgroundColor: `#${primaryColor}` }}>
           <p className="turn-name">C'est au tour de Ondine</p>
         </div>
-        <svg className="svg3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220"><path fill="#19cd70" fillOpacity="1" d="M0,0L1440,32L1440,320L0,320Z" /></svg>
+        {/* <svg className="svg3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220"><path fill="#19cd70" fillOpacity="1" d="M0,0L1440,32L1440,320L0,320Z" /></svg> */}
       </div>
     </LogStyled>
   );
@@ -128,6 +139,7 @@ Log.propTypes = {
   visible: PropTypes.bool.isRequired,
   entries: PropTypes.array.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
+  pokemon: PropTypes.object.isRequired,
 };
 
 // == Export

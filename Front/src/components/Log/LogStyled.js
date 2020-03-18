@@ -75,14 +75,24 @@ const LogStyled = styled.div`
       width: calc(30vw - 2em);
       height: 70vh;
       margin: 0 1em;
-      padding-top: .5em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       /* background-color: lightgray; */
       .log {
         width: 100%;
         height: 90%;
         border-radius: 10px;
-        padding: 2em .5em 0 .5em;
-        margin-bottom: .5em;
+        /* padding: 0em .5em 0em .5em; */
+        /* margin-bottom: .5em; */
+        .pokeball-background {
+          width: 80%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: .1;
+        }
         .entries {        
           width: 100%;
           height: 100%;
@@ -102,20 +112,23 @@ const LogStyled = styled.div`
             position: relative;
             z-index: 6;
             background-color: white;
-            margin-bottom: .3em;
+            margin: 0 .5em .5em .5em;
             padding: .5em;
             .turn {
               padding: 0 1em;
             }
           }
+          .blank-space {
+            height: 4em;
+          }
         }
       }
       .svg1 {
-      border-radius: 10px 10px 0 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5;
+        border-radius: 10px 10px 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
       }
       .svg2 {
         border-radius: 10px 10px 0 0;
@@ -125,9 +138,8 @@ const LogStyled = styled.div`
         z-index: 7;
         -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
         filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .5));
-
       }
-      .svg3 {
+      /* .svg3 {
         border-radius: 0 0 10px 10px;
         position: absolute;
         bottom: .25em;
@@ -135,23 +147,23 @@ const LogStyled = styled.div`
         z-index: 7;
         -webkit-filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .3));
         filter: drop-shadow(0px 0px 15px rgba(117, 117, 117, .5));
-      }
+      } */
     }
     .current-player {
+      position: relative;
       border-radius: 0 0 10px 10px;
-      /* background-color: lightgray; */
+      /* background-color: #19cd70; */
       width: 100%;
-      height: calc(10% - .5em);
-      /* border-top: solid gray 2px; */
+      height: 10%;
+      box-shadow: 0 0 7px rgba(117, 117, 117, .2);
       padding: .5em;
       .turn-name {
         width: 100%;
-        margin-bottom: 0;
         color: white;
         position: absolute;
+        top: 50%;
         left: 50%;
-        bottom: 1.5em;
-        transform: translate(-50%, 50%);
+        transform: translate(-50%, -50%);
         z-index: 10;
         font-size: 1.5em;
         text-align: center;

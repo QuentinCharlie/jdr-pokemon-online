@@ -92,11 +92,23 @@ const PokemonModalStyled = styled.div`
               height: 50%; 
               padding: .5em;
               border-radius: 10px;
+              .stat {
+                position: relative;
+                margin-bottom: .5em;
+                img {
+                  height: 90%;
+                  position: absolute;
+                  top: 50%;
+                  left: .2em;
+                  transform: translateY(-50%);
+                }
+              }
             }
           }
           .pokemon-description-appearance {
             display: flex;
             align-items: center;
+            justify-content: center;
             width: 50%;
             height: 100%;              
             padding: .5em;
@@ -120,16 +132,22 @@ const PokemonModalStyled = styled.div`
         width: 100%;
         margin: .5em 0;
         display: flex;
+        box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+        border-radius: 10px;
+        background-color: white;
         .stats-stat {
-          background-color: lightgreen; 
+          /* background-color: lightgreen;  */
           border-radius: 10px;
-          box-shadow: lightgrey 0 0 5px;
+          /* box-shadow: lightgrey 0 0 5px; */
           height: 100%;
           width: calc((100% / 3) - .25em);
           padding: .5em;
           .stat-container {
             width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             .stat {
               height: calc(100% / 6);
               .title {
@@ -146,24 +164,54 @@ const PokemonModalStyled = styled.div`
         }
         .stats-sensibilities {
           border-radius: 10px;
-          box-shadow: lightgrey 0 0 5px;
-          background-color: lightgray; 
+          /* box-shadow: lightgrey 0 0 5px; */
+          /* background-color: lightgray;  */
           height: 100%;
           width: calc((100% / 3) * 2);
           margin-left: .5em;
           padding: .5em;
           display: flex;
           flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: space-between;
+          .type-table-head {
+            position: relative;
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: flex-end;
+            span {
+              position: absolute;
+              top: .2em;
+              text-transform: uppercase;
+              font-size: 2em;
+              color: lightgrey;
+            }
+          }
           .type {
-            width: calc(100% / 4);
-            height: calc(100% / 4);
-            border: 1px solid lightgray;
+            position: relative;
+            border-radius: 40px;
+            box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+            width: 19%;
+            height: 25%;
             color: white;
             font-size: 1.3em;
             font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
+            filter: saturate(60%);
+            /* .multi {
+              position: relative;
+            } */
+            img {
+              position: absolute;
+              height: 85%;
+              top: 50%;
+              right: .5em;
+              transform: translateY(-50%);
+              opacity: .1;
+            }
           }
         }
       }
@@ -172,19 +220,19 @@ const PokemonModalStyled = styled.div`
         width: 100%;
         display: flex;
         .text-background {
-          background-color: lightcoral; 
+          /* background-color: lightcoral;  */
           width: calc(100% / 3);
           height: 100%;
         }
         .text-history {
-          background-color: lightcoral; 
+          /* background-color: lightcoral;  */
           height: 100%;
           width: calc(100% / 3);
           height: 100%;
           margin: 0 .5em;
         }
         .text-notes {
-          background-color: lightcoral; 
+          /* background-color: lightcoral;  */
           height: 100%;
           width: calc(100% / 3);
           height: 100%;
@@ -229,13 +277,81 @@ const PokemonModalStyled = styled.div`
         &::-webkit-scrollbar {
           display: none;
         }
-        .button {
+        .attack {
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+          position: relative;
+          height: 25%;
           width: 100%;
-          .attack {
-            height: 15%;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: .5em;    
+          padding: .5em;
+          color: white;
+          .attack-name {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: .3em;
+          }
+          .attack-icons {
+            display: flex;
             width: 100%;
-            background-color: lightcoral;
-            margin-bottom: .2em;
+            height: 1em;
+            align-items: center;
+            margin-bottom: 2em;
+            .attack-category {
+              display: flex;
+              align-items: center;
+              font-size: 1em;
+              font-weight: normal;
+              font-style: italic;
+              background-color: rgba(20, 20, 20, 0.05);
+              width: auto;
+              height: 70%;
+              padding-right: .3em;
+            }
+            .attack-distance {
+              display: flex;
+              align-items: center;
+              margin-left: .5em;
+              font-size: 1em;
+              font-weight: normal;
+              font-style: italic;
+              border-radius: 10px;
+              padding: .2em .4em;
+              background-color: rgba(20, 20, 20, 0.05);
+              width: auto;
+              height: 70%;
+            }
+          }
+          .effect {
+            width: 70%;
+            margin: 0 auto 2em 0;
+          }
+          .attack-stats {
+            position: absolute;
+            bottom: .5em;
+            left: .5em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 50%;
+            height: 20%;
+            .attack-stat {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: space-between;
+            }
+          }
+          img {
+            position: absolute;
+            height: 85%;
+            top: 50%;
+            right: .5em;
+            transform: translateY(-50%);
+            opacity: .1;
           }
         }
       }
