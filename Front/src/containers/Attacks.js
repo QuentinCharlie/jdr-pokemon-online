@@ -15,12 +15,13 @@ const mapStateToProps = (state) => {
   const mjName = state.mj.mjName;
   const usersKeys = Object.keys(state.users);
   const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
 
   if (playerName === mjName) {
     return ({
-      attacks: allUsers[0].pokemon[0].attacks,
-      pokemon: allUsers[0].pokemon[0],
-      trainer: allUsers[0].trainer,
+      attacks: allUsers[index].pokemon[0].attacks,
+      pokemon: allUsers[index].pokemon[0],
+      trainer: allUsers[index].trainer,
       users: state.users,
       visible: state.sidebar.isAttacksSidebarVisible,
     })

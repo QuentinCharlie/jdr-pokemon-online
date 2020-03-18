@@ -18,13 +18,14 @@ const mapStateToProps = (state) => {
   const mjName = state.mj.mjName;
   const usersKeys = Object.keys(state.users);
   const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
 
   if (playerName === mjName) {
     return ({
-      trainer: allUsers[0].trainer,
-      pokemon: allUsers[0].pokemon[0],
+      trainer: allUsers[index].trainer,
+      pokemon: allUsers[index].pokemon[0],
       isMj: state.user.isMj,
-      username: usersKeys[0],
+      username: usersKeys[index],
     })
   }
   return ({

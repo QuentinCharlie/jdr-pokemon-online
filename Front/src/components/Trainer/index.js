@@ -70,6 +70,5 @@ Trainer.propTypes = {
   pokemon: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };
-
 // == Export
 export default Trainer;

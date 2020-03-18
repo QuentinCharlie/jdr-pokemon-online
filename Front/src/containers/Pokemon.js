@@ -16,12 +16,13 @@ const mapStateToProps = (state) => {
   const mjName = state.mj.mjName;
   const usersKeys = Object.keys(state.users);
   const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
 
   if (playerName === mjName) {
     return ({
       visible: state.sidebar.isTrainerSidebarVisible,
-      pokemonMaxHealth: state.pokemon.allPokemons[allUsers[0].pokemon[0].id - 1].vitality,
-      pokemon: allUsers[0].pokemon[0],
+      pokemonMaxHealth: state.pokemon.allPokemons[allUsers[index].pokemon[0].id - 1].vitality,
+      pokemon: allUsers[index].pokemon[0],
     })
   }
   return ({
