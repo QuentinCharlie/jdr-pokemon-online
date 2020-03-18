@@ -9,7 +9,7 @@ import {
 
 import { getSidebarNameCapitalize } from 'src/utils/functions';
 // == Import Components
-import AttackButton from 'src/components/Attacks/AttackButton';
+import AttackButton from 'src/containers/AttackButton';
 
 // Styles
 import AttacksStyled from './AttacksStyled';

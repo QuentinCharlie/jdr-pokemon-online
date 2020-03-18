@@ -39,9 +39,6 @@ const AttackButton = ({
   const usersKeys = Object.keys(users);
   const allTargets = usersKeys.map((userKey) => users[userKey]);
   // console.log(allTargets);
-  const handleClick = (e) => {
-    //
-  };
 
   return (
     <AttackButtonStyled>
@@ -51,7 +48,6 @@ const AttackButton = ({
             className={`button ${type}`}
             style={{ backgroundColor: `#${color}`,
             }}
-            onClick={handleClick}
           >
             {console.log(type)}
             <div className="attack">
@@ -101,6 +97,7 @@ const AttackButton = ({
           </div>     
         } 
         // basic 
+        // open={isTargetModalOpen}
         size='small'
         centered
         closeIcon

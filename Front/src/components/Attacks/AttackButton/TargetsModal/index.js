@@ -31,9 +31,12 @@ const TargetsModal = ({
   addAttackResultsToLog,
   substractEnergy,
  }) => {
- 
+  const closeModal = () => {
+    document.body.querySelector('.modal-attack-targets').closest('.page').classList.remove('active', 'visible');
+  };
   const handleTrainerClick = (e) => {
     // console.log(damageCalc(pokemon, attack, target));
+    closeModal();
     const trainerNameTarget = e.currentTarget.dataset.trainer;
     const attack = {name, type, damage, accuracy, energy, category, distance};
     allTargets.find((target) => {
@@ -41,14 +44,15 @@ const TargetsModal = ({
         const targetObject = {
           target: target.trainer,
         }
-      //  console.log(damageCalc(pokemon, attack, targetObject));
-      const attackResults = damageCalc(pokemon, attack, targetObject);
-      addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
-      substractEnergy(username, pokemon, energy);
-      }      
+        //  console.log(damageCalc(pokemon, attack, targetObject));
+        const attackResults = damageCalc(pokemon, attack, targetObject);
+        addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
+        substractEnergy(username, pokemon, energy);
+      }    
     });
   }
   const handlePokemonClick = (e) => {
+    closeModal();
     const pokemonNameTarget = e.currentTarget.dataset.pokemon;
     const attack = {name, type, damage, accuracy, energy, category, distance};
     allTargets.find((target) => {
@@ -57,10 +61,10 @@ const TargetsModal = ({
           target: target.pokemon[0],
           trainer: target.trainer,
         }
-      // console.log(damageCalc(pokemon, attack, targetObject));
-      const attackResults = damageCalc(pokemon, attack, targetObject);
-      addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
-      substractEnergy(username, pokemon, energy);
+        // console.log(damageCalc(pokemon, attack, targetObject));
+        const attackResults = damageCalc(pokemon, attack, targetObject);
+        addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
+        substractEnergy(username, pokemon, energy);
       }      
     });
   }

@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import TargetsModal from 'src/components/Attacks/AttackButton/TargetsModal';
 
 // Action Creators
-import { addAttackResultsToLog, substractEnergy } from 'src/actions/attacks';
+import {
+  addAttackResultsToLog,
+  substractEnergy,
+  toggleTargetModal,
+} from 'src/actions/attacks';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
