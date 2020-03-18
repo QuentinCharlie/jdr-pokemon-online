@@ -13,7 +13,7 @@ import { UPDATE_MJ_STATE } from 'src/actions/mj';
 const initialState = {
   hasTrainer: false,
   hasPokemon: false,
-  isUserReady: true,
+  isUserReady: false,
   isMj: true,
 };
 
@@ -47,6 +47,15 @@ const userReducer = (state = initialState, action = {}) => {
           hasPokemon: false,
           isUserReady: true,
           isMj: true,
+        };
+      }
+      if (state.isUserReady) {
+        return {
+          ...state,
+          hasTrainer: true,
+          hasPokemon: true,
+          isUserReady: true,
+          isMj: false,
         };
       }
       return {
