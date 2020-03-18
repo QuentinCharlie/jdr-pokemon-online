@@ -17,6 +17,7 @@ class GameController extends AbstractController
    */
   public function gameList()
   {
+    // Récupère toutes les parties en cours de la BDD
     $games = $this->getDoctrine()->getRepository(GameServer::class)->findAll();
 
     return $this->render('game/gamelist.html.twig', [
@@ -30,46 +31,40 @@ class GameController extends AbstractController
    * @IsGranted("ROLE_USER")
    */
   public function gameCreate(Connection $connection)
-  {
+  { 
+    // Vérifie si le dossier logs-node est existant, sinon le créé avec les droits associés
     if (!is_dir("/var/www/logs_node")) {
       mkdir("/var/www/logs_node", 0777, true);
     }
-    // @todo
-    // Le $id correspond à l'id de la game
-    // La variable $port sera une concaténation 3000 + $id (sans le timestamp)
-
-    // BDD: Il faut une table qui stocke les ports utilisés (6.000 -> 7.000)
-    // Il faut hydrater la BDD avant le exec() pour réserver le port
-    // avant de lancer le script node server.js
-    // Il faut un endpoint API pour que le serveur 
-    // qui est sur le point de se fermer tout seul puisse notifier 
-    // à l'api que le port est disponible pour les prochaines instanciations 
-    // (donc de le supprimer de la table)
-
-    // $cmd = exec('node ../../Node/server.js 2>&1 | tee -a /var/www/logs_node/' . $id . '.log 2>/dev/null >/dev/null &');
+    
+    // Créé un identificateur en micro-secondes
     $timestamp = microtime(true) * 1000;
 
-    //$all_ports = [ 6000, 6001, 6002 ]; // Tout les ports en dur
+    // Créer un tableau en dur pour récupérer l'ensemble des ports
     $all_ports = range(6000, 7000);
 
-    //$used_ports = [  ]; // récupération via la DB des ports utilisés
-
+    // Récupération via la BDD des ports utilisés
     $used_ports = $connection->fetchAll('SELECT port FROM game_server');
     $databasePorts = [];
+    // Insère les données dans un tableau d'integer
     foreach ($used_ports as $array) {
       $databasePorts[] = (int) $array['port'];
     }
 
+    // Compare et range dans l'ordre les ports disponibles
     $available_ports = array_diff($all_ports, $databasePorts);
     sort($available_ports);
 
+    // Choisit le premier port disponible dans la BDD
     $port = $available_ports[0]; // <== 6000
 
+    // Récupère l'utilisateur connecté via son pseudo
     $username = $this->getUser()->getNickname();
 
     // if (!@fsockopen('localhost', $port)) { // @change dev
     if (!@fsockopen('54.89.22.26', $port)) {
 
+      // Insère en BDD l'utilisateur et le port choisi
       $newGame = new GameServer();
       $newGame->setPort($port);
       $newGame->setMJ($username);
@@ -80,9 +75,6 @@ class GameController extends AbstractController
 
       exec('node ../../Node/server.js ' . $port . ' 2>&1 | tee -a /var/www/logs_node/' . $port . '-' . $timestamp . '.log 2>/dev/null >/dev/null &');
     }
-    // $cmd = exec('pwd');
-    // dd($cmd);
-    // dd(file_get_contents("/var/www/logs_node/1.log"));
 
     return $this->redirectToRoute('game_board', [
       'port' => $port,
@@ -97,11 +89,15 @@ class GameController extends AbstractController
   {
     $username = $this->getUser()->getNickname();
 
+    // Récupère tous les noms d'utilisateurs qui sont dans la colonne "MJ"
     $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port=' . $port . '');
 
+    // Vérifie si le MJ est existant: Si pas le cas, aucune partie existe (404)
     if ($gameMj == null) {
       throw $this->createNotFoundException("Error");
-    } elseif ($username === $gameMj /* check if user is MJ */) {
+    } 
+    // Vérifie si l'utilisateur est MJ
+    elseif ($username === $gameMj) {
       return $this->render('game/gameboard.html.twig', [
         'port' => $port,
         'username' => $username,

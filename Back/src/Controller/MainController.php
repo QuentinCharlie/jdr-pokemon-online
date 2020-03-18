@@ -14,7 +14,8 @@ class MainController extends AbstractController
      * @Route("/", name="homepage")
      */
     public function welcome()
-    {
+    {   
+        // Si l'utilisateur est connecté alors redirection de la route sur la liste des parties
         if ($this->getUser()) {
             return $this->redirectToRoute('game_list');
        }
