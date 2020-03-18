@@ -5,26 +5,59 @@ import {
   LINK_TRAINER_TO_USER,
   LINK_POKEMON_TO_USER,
   USER_IS_READY,
+  UPDATE_USER,
 } from 'src/actions/user';
+import { UPDATE_MJ_STATE } from 'src/actions/mj';
 
 // Initial State
 const initialState = {
   hasTrainer: false,
   hasPokemon: false,
-  isUserReady: false,
+  isUserReady: true,
+  isMj: true,
 };
 
 // Reducer
 const userReducer = (state = initialState, action = {}) => {
   console.log('userReducer');
   // let user = document.querySelector('#root').dataset.user;
+  // const isMj = document.querySelector('#root').dataset.mj;
 
   switch (action.type) {
     case LOAD_USER:
       return {
         ...state,
-        username: `${Math.floor(Math.random() * (100000000000 - 1 +1)) + 1}`,
+          username: `${Math.floor(Math.random() * (100000000000 - 1 +1)) + 1}`,
+
       };
+
+    case UPDATE_USER:
+      return {
+        ...state,
+        isMj: false,
+        isUserReady: false,
+      }
+    
+    case UPDATE_MJ_STATE: {
+      console.log(action);
+      if (action.username === action.mjName) {
+        return {
+          ...state,
+          hasTrainer: false,
+          hasPokemon: false,
+          isUserReady: true,
+          isMj: true,
+        };
+      }
+      return {
+        ...state,
+        hasTrainer: false,
+        hasPokemon: false,
+        isUserReady: false,
+        isMj: false,
+      };
+    }
+    
 
     case LINK_TRAINER_TO_USER:
       return {

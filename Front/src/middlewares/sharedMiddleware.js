@@ -2,7 +2,10 @@ import { WS_CONNECT } from 'src/actions/wsConnect';
 import { LOAD_STATE } from 'src/actions/user';
 import { updateGridState } from 'src/actions/grid';
 import { updateLogState } from 'src/actions/log';
-import { userIsReady } from 'src/actions/user';
+import { userIsReady, updateUser } from 'src/actions/user';
+import { loadAllTrainers } from 'src/actions/trainer';
+import { loadAllPokemons } from 'src/actions/pokemon';
+import { changeMjState, updateMjState, CHANGE_MJ_STATE } from 'src/actions/mj';
 import { 
   ADD_USER_TRAINER_AND_POKEMON_TO_USERS_STATE,
   updateUsersState,
@@ -28,9 +31,26 @@ const sharedMiddleware = (store) => (next) => (action) => {
       // then dispatch to state with WS_CONNECT
       socket.on('load_state', (info) => {
         console.log('Retour du serveur: load_state');
-        store.dispatch(updateGridState(info.grid));
+        console.log(info);
+        store.dispatch(loadAllTrainers());
+        store.dispatch(loadAllPokemons());
+
+        const state = store.getState();
+        store.dispatch(updateMjState(state.user.username, info.mj.mjName));
+        if (state.mj.mjName === undefined) {
+        store.dispatch(changeMjState(state.user.username));  
+        }
+        // store.dispatch(updateMjState(state.user.username, info.mj.mjName));         
+        // store.dispatch(updateUser());
+
+        store.dispatch(updateGridState(info.grid));        
         store.dispatch(updateLogState(info.log));
         store.dispatch(updateUsersState(info.users));
+      });
+      socket.on('change_mj_state', (info) => {
+        console.log('Retour du serveur: change_mj_state');
+        const state = store.getState();
+        store.dispatch(updateMjState(state.user.username, info.mj.mjName)); 
       });
       socket.on('add_pokemon_and_trainer_to_users_state', (info) => {
         console.log('Retour du serveur: add_pokemon_and_trainer_to_users_state');
@@ -51,6 +71,11 @@ const sharedMiddleware = (store) => (next) => (action) => {
     case LOAD_STATE: {
       console.log('Envoi au serveur: load_state');
       socket.emit('load_state');
+      break;
+    }
+    case CHANGE_MJ_STATE: {
+      console.log('Envoi au serveur: change_mj_state');
+      socket.emit('change_mj_state', (action));
       break;
     }
 

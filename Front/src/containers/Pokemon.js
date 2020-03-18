@@ -13,6 +13,17 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 
 const mapStateToProps = (state) => {
   const playerName = state.user.username;
+  const mjName = state.mj.mjName;
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+
+  if (playerName === mjName) {
+    return ({
+      visible: state.sidebar.isTrainerSidebarVisible,
+      pokemonMaxHealth: state.pokemon.allPokemons[allUsers[0].pokemon[0].id - 1].vitality,
+      pokemon: allUsers[0].pokemon[0],
+    })
+  }
   return ({
     visible: state.sidebar.isPokemonSidebarVisible,
     pokemon: state.users[playerName].pokemon[0],

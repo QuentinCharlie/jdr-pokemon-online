@@ -62,13 +62,11 @@ app.get('/', (request, response) => {
  * Socket.io
  */
 let id = 0;
-let entryId = 2;
+let entryId = 0;
 let state = {
   grid: {
-    dragOverCell: {
-    },
-    trainers: [
-    ],
+    dragOverCell: {},
+    trainers: [],
   },
   log: {
     entries: [
@@ -110,8 +108,9 @@ let state = {
         // },     
       ],
   },
-  users : {
-
+  users : {},
+  mj: { 
+    isAlreadyMj: false,
   },
 };
 io.on('connection', (ws) => {
@@ -120,11 +119,29 @@ io.on('connection', (ws) => {
   ws.on('load_state', (info) => {
     // eslint-disable-next-line no-plusplus
     console.log('loading state');
+    console.log(state.mj.isAlreadyMj)
     entryId = ++entryId;
     info = state;
     info.id = ++id;
     timeSinceUse = 0;
     io.emit('load_state', info);
+  });
+
+  ws.on('change_mj_state', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('loading state');
+    entryId = ++entryId;
+    if (state.mj.mjName === undefined) {
+      state.mj = {
+        isAlreadyMj: true,
+        mjName: info.mjName,
+      };
+    };
+    info = state;
+    console.log(info);
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('change_mj_state', info);
   });
 
   ws.on('substract_energy', (info) => {
