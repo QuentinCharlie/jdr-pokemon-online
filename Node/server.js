@@ -108,9 +108,9 @@ let state = {
         // },     
       ],
   },
-  users : [
+  users : {
 
-  ],
+  },
 };
 io.on('connection', (ws) => {
   console.log('>> socket.io - action');
@@ -123,6 +123,36 @@ io.on('connection', (ws) => {
     info.id = ++id;
     timeSinceUse = 0;
     io.emit('load_state', info);
+  });
+
+  ws.on('substract_energy', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('substract energy');
+    entryId = ++entryId;
+
+    const username = info.username;
+    // const pokemon = info.pokemon;
+    const energy = state.users[username].pokemon[0].energy - info.energy;
+
+    state.users = {
+      ...state.users,
+      [username]: {
+        ...state.users[username],
+        pokemon: [
+          ...state.users[username].pokemon.splice(0, 0),
+          {
+            ...state.users[username].pokemon[0],
+            energy,
+          },
+          ...state.users[username].pokemon.splice(1),
+        ],
+      },
+    };
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('substract_energy', info);
   });
 
   ws.on('add_dice_rolls_to_log', (info) => {

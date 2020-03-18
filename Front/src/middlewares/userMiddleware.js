@@ -27,11 +27,10 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     // Happened before WS_CONNECT socket.on(), send action to node.js server
-    case SHARE_SELECTED_TRAINER_AND_POKEMON: {
+    case SHARE_SELECTED_TRAINER_AND_POKEMON:
       console.log('Envoi au serveur: share_selected_trainer_and_pokemon');
       socket.emit('share_selected_trainer_and_pokemon', action);
       break;
-    }
 
     default:
       break;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import TargetsModal from 'src/components/Attacks/AttackButton/TargetsModal';
 
 // Action Creators
-import { addAttackResultsToLog } from 'src/actions/attacks';
+import { addAttackResultsToLog, substractEnergy } from 'src/actions/attacks';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
@@ -12,6 +12,7 @@ import { addAttackResultsToLog } from 'src/actions/attacks';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
   trainer: state.user.trainer,
+  username: state.user.username,
 });
 
 // == Actions / dispatch
@@ -20,6 +21,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addAttackResultsToLog: (trainer, pokemon, attackName, attackResults) => {
     dispatch(addAttackResultsToLog(trainer, pokemon, attackName, attackResults));
+  },
+  substractEnergy: (username, pokemon, energy) => {
+    dispatch(substractEnergy(username, pokemon, energy));
   },
 });
 

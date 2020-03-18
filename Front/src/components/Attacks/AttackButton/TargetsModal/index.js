@@ -20,6 +20,7 @@ const TargetsModal = ({
   allTargets,
   trainer,
   pokemon,
+  username,
   name,
   type,
   damage,
@@ -28,6 +29,7 @@ const TargetsModal = ({
   category,
   distance,
   addAttackResultsToLog,
+  substractEnergy,
  }) => {
  
   const handleTrainerClick = (e) => {
@@ -42,9 +44,9 @@ const TargetsModal = ({
       //  console.log(damageCalc(pokemon, attack, targetObject));
       const attackResults = damageCalc(pokemon, attack, targetObject);
       addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
+      substractEnergy(username, pokemon, energy);
       }      
     });
-
   }
   const handlePokemonClick = (e) => {
     const pokemonNameTarget = e.currentTarget.dataset.pokemon;
@@ -58,6 +60,7 @@ const TargetsModal = ({
       // console.log(damageCalc(pokemon, attack, targetObject));
       const attackResults = damageCalc(pokemon, attack, targetObject);
       addAttackResultsToLog(trainer, pokemon, attack.name, attackResults);
+      substractEnergy(username, pokemon, energy);
       }      
     });
   }
@@ -102,6 +105,7 @@ TargetsModal.propTypes = {
   allTargets: PropTypes.array.isRequired,
   pokemon: PropTypes.object.isRequired,
   trainer: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   damage: PropTypes.number.isRequired,
@@ -110,6 +114,7 @@ TargetsModal.propTypes = {
   category: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,
   addAttackResultsToLog: PropTypes.func.isRequired,
+  substractEnergy: PropTypes.func.isRequired,
 };
 
 // == Export
