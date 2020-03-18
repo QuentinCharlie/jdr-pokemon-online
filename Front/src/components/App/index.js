@@ -27,7 +27,9 @@ const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty }) => {
         {hasTrainer && !hasPokemon && <PokemonSelector />}
       </div>
     }
-    
+    {isUserReady && !isUsersNotEmpty && (
+      <div>En attente d'un dresseur pour commencer l'aventure !</div>
+    )}
     {isUserReady && isUsersNotEmpty && (
       <>
         <div className="mobile-tablet-app">

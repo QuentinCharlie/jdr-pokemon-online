@@ -10,11 +10,17 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
-  visible: state.sidebar.isLogSidebarVisible,
-  entries: state.log.entries,
-  pokemon: state.user.pokemon,
-});
+const mapStateToProps = (state) => {
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
+
+  return ({
+    visible: state.sidebar.isLogSidebarVisible,
+    entries: state.log.entries,
+    pokemon: allUsers[index].pokemon[0],
+  });
+};
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?
