@@ -30,7 +30,6 @@ const Pokemon = ({
   changePokemonHealth,
   mjTrainerUsername,
 }) => {
-
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
@@ -97,7 +96,7 @@ const Pokemon = ({
                 <Dropdown.Menu >
                   {options.map((option) => (
                     <Dropdown.Item 
-                      key={option.key}
+                      key={`pokemon-option-key-${option.key}`}
                       onClick={handleOptionClick}
                       data-value={option.value}
                     >

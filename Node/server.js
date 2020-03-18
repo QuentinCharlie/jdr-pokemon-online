@@ -144,6 +144,31 @@ io.on('connection', (ws) => {
     io.emit('change_mj_state', info);
   });
 
+  ws.on('change_trainer_health', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('substract energy');
+    entryId = ++entryId;
+
+    const username = info.mjTrainerUsername;
+    const vitality = info.healthNumber;
+
+    state.users = {
+      ...state.users,
+      [username]: {
+        ...state.users[username],
+        trainer: {
+          ...state.users[username].trainer,
+          vitality,
+        }
+      },
+    };
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('change_trainer_health', info);
+  });
+
   ws.on('change_pokemon_health', (info) => {
     // eslint-disable-next-line no-plusplus
     console.log('substract energy');

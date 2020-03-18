@@ -2,8 +2,8 @@ import { WS_CONNECT } from 'src/actions/wsConnect';
 import { LOAD_STATE } from 'src/actions/user';
 import { updateGridState } from 'src/actions/grid';
 import { updateLogState } from 'src/actions/log';
-import { userIsReady, updateUser } from 'src/actions/user';
-import { loadAllTrainers } from 'src/actions/trainer';
+import { userIsReady } from 'src/actions/user';
+import { loadAllTrainers, CHANGE_TRAINER_HEALTH } from 'src/actions/trainer';
 import { loadAllPokemons, CHANGE_POKEMON_HEALTH } from 'src/actions/pokemon';
 import { changeMjState, updateMjState, CHANGE_MJ_STATE } from 'src/actions/mj';
 import { 
@@ -30,28 +30,26 @@ const sharedMiddleware = (store) => (next) => (action) => {
       // receive action from node.js serve
       // then dispatch to state with WS_CONNECT
       socket.on('load_state', (info) => {
+        const state = store.getState();
         console.log('Retour du serveur: load_state');
         console.log(info);
         store.dispatch(loadAllTrainers());
         store.dispatch(loadAllPokemons());
-
-        const state = store.getState();
         store.dispatch(updateMjState(state.user.username, info.mj.mjName));
         if (state.mj.mjName === undefined) {
           store.dispatch(changeMjState(state.user.username));  
         }
-        // store.dispatch(updateMjState(state.user.username, info.mj.mjName));         
-        // store.dispatch(updateUser());
-
         store.dispatch(updateGridState(info.grid));        
         store.dispatch(updateLogState(info.log));
         store.dispatch(updateUsersState(info.users));
       });
+
       socket.on('change_mj_state', (info) => {
         console.log('Retour du serveur: change_mj_state');
         const state = store.getState();
         store.dispatch(updateMjState(state.user.username, info.mj.mjName)); 
       });
+
       socket.on('add_pokemon_and_trainer_to_users_state', (info) => {
         console.log('Retour du serveur: add_pokemon_and_trainer_to_users_state');
         store.dispatch(updateUsersState(info)) 
@@ -60,11 +58,19 @@ const sharedMiddleware = (store) => (next) => (action) => {
           store.dispatch(userIsReady());
         }
       });
+
+      socket.on('change_trainer_health', (info) => {
+        console.log('Retour du serveur: change_trainer_health');
+        console.log(info);
+        store.dispatch(updateUsersState(info.users));
+      });
+
       socket.on('change_pokemon_health', (info) => {
         console.log('Retour du serveur: change_pokemon_health');
         console.log(info);
         store.dispatch(updateUsersState(info.users)); 
       });
+
       socket.on('substract_energy', (info) => {
         console.log('Retour du serveur: substract_energy');
         console.log(info);
@@ -87,6 +93,12 @@ const sharedMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TRAINER_AND_POKEMON_TO_USERS_STATE: {
       console.log('Envoi au serveur: add_pokemon_and_trainer_to_users_state');
       socket.emit('add_pokemon_and_trainer_to_users_state', (action));
+      break;
+    }
+    case CHANGE_TRAINER_HEALTH: {
+      console.log('Envoi au serveur: change_trainer_health');
+      console.log(action);
+      socket.emit('change_trainer_health', (action));
       break;
     }
 

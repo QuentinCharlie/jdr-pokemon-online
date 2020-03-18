@@ -65,7 +65,7 @@ const Nav = ({
                 {users.map((user) =>
                   <Dropdown.Item 
                     content={user.trainer.name} 
-                    key={user.trainer.id}
+                    key={`dropdown-item-key-${user.trainer.id}`}
                     onClick={handleTrainerClick}
                   />
                 )}

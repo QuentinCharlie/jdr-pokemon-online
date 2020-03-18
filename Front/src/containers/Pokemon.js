@@ -23,8 +23,8 @@ const mapStateToProps = (state) => {
     return ({
       visible: state.sidebar.isTrainerSidebarVisible,
       pokemonMaxHealth: state.pokemon.allPokemons[allUsers[index].pokemon[0].id - 1].vitality,
-      mjTrainerUsername: usersKeys[index],
       pokemon: allUsers[index].pokemon[0],
+      mjTrainerUsername: usersKeys[index],
       isMj: state.user.isMj,
     })
   }
