@@ -7,17 +7,32 @@ import TargetsModal from 'src/components/Attacks/AttackButton/TargetsModal';
 import {
   addAttackResultsToLog,
   substractEnergy,
-  toggleTargetModal,
 } from 'src/actions/attacks';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
-  trainer: state.user.trainer,
-  username: state.user.username,
-});
+const mapStateToProps = (state) => {
+  const playerName = state.user.username;
+  const mjName = state.mj.mjName;
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+
+  if (playerName === mjName) {
+    return ({
+      trainer: allUsers[0].trainer,
+      pokemon: allUsers[0].pokemon[0],
+      isMj: state.user.isMj,
+      username: usersKeys[0],
+    })
+  }
+  return ({
+    trainer: state.user.trainer,
+    username: state.user.username,
+    isMj: state.user.isMj,
+  })
+};
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?

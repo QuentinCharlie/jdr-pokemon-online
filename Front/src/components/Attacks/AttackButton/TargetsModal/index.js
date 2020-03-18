@@ -30,6 +30,7 @@ const TargetsModal = ({
   distance,
   addAttackResultsToLog,
   substractEnergy,
+  isMj,
  }) => {
   const closeModal = () => {
     document.body.querySelector('.modal-attack-targets').closest('.page').classList.remove('active', 'visible');
@@ -119,6 +120,7 @@ TargetsModal.propTypes = {
   distance: PropTypes.string.isRequired,
   addAttackResultsToLog: PropTypes.func.isRequired,
   substractEnergy: PropTypes.func.isRequired,
+  isMj: PropTypes.bool.isRequired,
 };
 
 // == Export
