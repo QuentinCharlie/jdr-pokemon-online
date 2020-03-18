@@ -4,6 +4,10 @@ const AttackButtonStyled = styled.div`
   width: 100%;
   height: 48%;
   margin: 0 0 .5em 0;
+
+  /* Modal */
+  
+
   @media (min-width: 1400px) {
     width: 49%;
   }

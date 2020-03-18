@@ -8,6 +8,7 @@ import userReducer from './user';
 import usersReducer from './users';
 import pokemonReducer from './pokemon';
 import logReducer from './log';
+import attacksReducer from './attacks';
 
 const rootReducer = combineReducers({
   dices: dicesReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   pokemon: pokemonReducer,
   log: logReducer,
+  attacks: attacksReducer,
   // ... autres reducers
 });
 

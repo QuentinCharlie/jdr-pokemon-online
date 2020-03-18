@@ -7,6 +7,7 @@ import {
   ADD_USER_TRAINER_AND_POKEMON_TO_USERS_STATE,
   updateUsersState,
 } from 'src/actions/users';
+import { SUBSTRACT_ENERGY } from 'src/actions/attacks';
 
 let socket;
 
@@ -19,8 +20,8 @@ const sharedMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case WS_CONNECT:
-      // socket = io.connect(`http://54.89.22.26:${port}`);
-      socket = io.connect(`http://localhost:${port}`); // @change prod
+      socket = io.connect(`http://54.89.22.26:${port}`); // @change prod
+      // socket = io.connect(`http://localhost:${port}`); 
       // socket = window.io(`http://localhost:${port}`); // @change dev
       // Happened after case SOMETHING
       // receive action from node.js serve
@@ -39,6 +40,11 @@ const sharedMiddleware = (store) => (next) => (action) => {
           store.dispatch(userIsReady());
         }
       });
+      socket.on('substract_energy', (info) => {
+        console.log('Retour du serveur: substract_energy');
+        console.log(info);
+        store.dispatch(updateUsersState(info.users)); 
+      });
       break;
 
     // Happened before WS_CONNECT socket.on(), send action to node.js server
@@ -51,6 +57,13 @@ const sharedMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TRAINER_AND_POKEMON_TO_USERS_STATE: {
       console.log('Envoi au serveur: add_pokemon_and_trainer_to_users_state');
       socket.emit('add_pokemon_and_trainer_to_users_state', (action));
+      break;
+    }
+
+    case SUBSTRACT_ENERGY: {
+      console.log('Envoi au serveur: substract_energy');
+      console.log(action);
+      socket.emit('substract_energy', (action));
       break;
     }
 

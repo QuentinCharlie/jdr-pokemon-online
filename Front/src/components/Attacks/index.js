@@ -9,7 +9,7 @@ import {
 
 import { getSidebarNameCapitalize } from 'src/utils/functions';
 // == Import Components
-import AttackButton from 'src/components/Attacks/AttackButton';
+import AttackButton from 'src/containers/AttackButton';
 
 // Styles
 import AttacksStyled from './AttacksStyled';
@@ -17,6 +17,9 @@ import AttacksStyled from './AttacksStyled';
 // == Composant
 const Attacks = ({
   attacks,
+  trainer,
+  pokemon,
+  users,
   visible,
   changeSidebarVisibility,
 }) => {
@@ -52,6 +55,9 @@ const Attacks = ({
             effect={attack.effect}
             type={attack.type.name}
             color={attack.type.color}
+            pokemon={pokemon}
+            trainer={trainer}
+            users={users}
           />
         ))}
       </div>
@@ -61,6 +67,9 @@ const Attacks = ({
 
 Attacks.propTypes = {
   attacks: PropTypes.array.isRequired,
+  pokemon: PropTypes.object.isRequired,
+  trainer: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };

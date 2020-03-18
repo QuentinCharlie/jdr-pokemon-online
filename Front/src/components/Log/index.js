@@ -12,7 +12,11 @@ import LogStyled from './LogStyled';
 
 
 // == Composant
-const Log = ({ visible, entries, changeSidebarVisibility }) => {
+const Log = ({ 
+  visible, 
+  entries, 
+  changeSidebarVisibility,
+}) => {
   useEffect(() => {
     logContainer.current.scrollTo(0, logContainer.current.scrollHeight);
   }, [entries]);
@@ -57,72 +61,6 @@ const Log = ({ visible, entries, changeSidebarVisibility }) => {
                   </div>
                 </div>
               </div>
-              <div className="entry" id="3">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
-              <div className="entry" id="4">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
-              <div className="entry" id="5">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
-              <div className="entry" id="6">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
-              <div className="entry" id="7">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
-              <div className="entry" id="8">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className="current-player">
               <p className="turn-name">C'est au tour de Ondine</p>
@@ -148,11 +86,12 @@ const Log = ({ visible, entries, changeSidebarVisibility }) => {
                   >
                     <p className="title">{entry.attack.title}</p>
                     <div className="turn">
-                      <p className="attack">{entry.attack.attack}</p>
+                      <p className="attack">Attaque {entry.attack.attack} !</p>
                       <p className="dices-roll">Jet d'attaque : {entry.attack.dicesRoll}</p>
                       <div className="result">
-                        <p className="result-damage">Degats infligés :{entry.attack.resultDamage}</p>
-                        <p className="result-status">Statut : {entry.attack.resultStatus}</p>
+                        <p className="result-damage">Degats infligés : {entry.attack.resultDamage}</p>
+                        {/* <p className="result-status">Statut : {entry.attack.resultStatus}</p> */}
+                        <p className="result-message"> {entry.attack.message}</p>
                       </div>
                     </div>
                   </div>
@@ -162,9 +101,13 @@ const Log = ({ visible, entries, changeSidebarVisibility }) => {
                   <div 
                     className="dice-entry"
                   > 
-                    <p className="title">{entry.dice.title}</p>
+                    <p className="title">
+                      {`${entry.dice.roller.name} fait un jet de ${entry.dice.skill} :`}
+                    </p>
                     <div className="turn">
-                      <p className="dices-roll">Jet : {entry.dice.diceRoll} </p>
+                      <p className="dices-roll">
+                        {entry.dice.diceRolls} 
+                      </p>
                     </div>
                   </div>
                 }

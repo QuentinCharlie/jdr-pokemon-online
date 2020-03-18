@@ -16,9 +16,11 @@ const server = Server(app);
 const io = socket(server);
 // let port = 3001; // @change dev
 let port = process.argv[2]; // @change prod
+io.set('origins', '*:*');
+
+
 // let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 // const inactionTimer = 5; // 3600s => 1h
-
 // setInterval( function() { 
 //   if( timeSinceUse > inactionTimer ) {
 //     // TODO : Better close socket connection before closing whole server.js (thus freeing port)
@@ -60,7 +62,7 @@ app.get('/', (request, response) => {
  * Socket.io
  */
 let id = 0;
-let entryId = 1;
+let entryId = 2;
 let state = {
   grid: {
     dragOverCell: {
@@ -70,191 +72,47 @@ let state = {
   },
   log: {
     entries: [
-        {
-          id : 1,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 2,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 3,
-          isAttack: false,
-          isDice: true,
-          attack : 
-          {
-            title: null,
-            attack: null,
-            dicesRoll: null,
-            resultDamage: null,
-            resultStatus: null,
-          },
-          dice : 
-          {
-            title: 'Chance',
-            diceroll: 99,
-          },   
-        },
-        {
-          id : 4,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 5,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 6,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 7,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 8,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 9,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
-        {
-          id : 10,
-          isAttack: true,
-          isDice: false,
-          attack : 
-          {
-            title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-            attack: 'Tonnerre',
-            dicesRoll: '10, 10, 10',
-            resultDamage: 170,
-            resultStatus: 'DEAD',
-          },
-          dice : 
-          {
-            title: null,
-            diceroll: null,
-          },   
-        },
+        // {
+        //   id : 1,
+        //   isAttack: true,
+        //   isDice: false,
+        //   attack : 
+        //   {
+        //     title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+        //     attack: 'Tonnerre',
+        //     dicesRoll: '10, 10, 10',
+        //     resultDamage: 170,
+        //     resultStatus: 'DEAD',
+        //   },
+        //   dice : 
+        //   {
+        //     title: null,
+        //     diceroll: null,
+        //   },   
+        // },
+        // {
+        //   id : 2,
+        //   isAttack: false,
+        //   isDice: true,
+        //   attack : 
+        //   {
+        //     title: null,
+        //     attack: null,
+        //     dicesRoll: null,
+        //     resultDamage: null,
+        //     resultStatus: null,
+        //   },
+        //   dice : 
+        //   {
+        //     title: 'Chance',
+        //     diceroll: 99,
+        //   },   
+        // },     
       ],
   },
-  users : [
+  users : {
 
-  ],
+  },
 };
 io.on('connection', (ws) => {
   console.log('>> socket.io - action');
@@ -267,6 +125,126 @@ io.on('connection', (ws) => {
     info.id = ++id;
     timeSinceUse = 0;
     io.emit('load_state', info);
+  });
+
+  ws.on('substract_energy', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('substract energy');
+    entryId = ++entryId;
+
+    const username = info.username;
+    // const pokemon = info.pokemon;
+    const energy = state.users[username].pokemon[0].energy - info.energy;
+
+    state.users = {
+      ...state.users,
+      [username]: {
+        ...state.users[username],
+        pokemon: [
+          ...state.users[username].pokemon.splice(0, 0),
+          {
+            ...state.users[username].pokemon[0],
+            energy,
+          },
+          ...state.users[username].pokemon.splice(1),
+        ],
+      },
+    };
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('substract_energy', info);
+  });
+
+  ws.on('add_dice_rolls_to_log', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('loading state');
+    entryId = ++entryId;
+
+    const roller = info.roller;
+    const skill = info.skill;
+    const diceRolls = info.diceRolls.join(', ');
+
+    state.log = {
+      ...state.log,
+      entries: [
+        ...state.log.entries,
+        {
+          id : entryId,
+          isAttack: false,
+          isDice: true,
+          dice : 
+          {
+            roller,
+            skill,
+            diceRolls,
+          },   
+        }
+      ]
+    }
+
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('add_dice_rolls_to_log', info);
+  });
+
+  ws.on('add_attack_results_to_log', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('add_attack_results_to_log state');
+    entryId = ++entryId;
+    const pokemonName = info.pokemon.name;
+    const trainerName = info.trainer.name;
+    const target = info.attackResults.targetObject.target.name;
+    let trainerTarget;
+    if (info.attackResults.targetObject.trainer !== undefined) {
+      trainerTarget = info.attackResults.targetObject.trainer.name;
+    }
+    const dicesRoll = info.attackResults.dicesRollResult.join(', ');
+    const attack = info.attackName;
+    const resultDamage = info.attackResults.damage;
+    const message = info.attackResults.message;
+
+    let title;
+    if (info.attackResults.targetObject.trainer === undefined) {
+      title = `${pokemonName} de ${trainerName} attaque ${target} :`;
+    } 
+    else {
+      title = `${pokemonName} de ${trainerName} attaque ${target} de ${trainerTarget} :`;
+    }
+
+    state.log = {
+      ...state.log,
+      entries: [
+        ...state.log.entries,
+        {
+          id : entryId,
+          isAttack: true,
+          isDice: false,
+          attack : 
+          {
+            title,
+            attack,
+            dicesRoll,
+            resultDamage,
+            // resultStatus: '',
+            message,
+          },
+          dice : 
+          {
+            title: null,
+            diceroll: null,
+          },   
+        }
+      ]
+    }
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('add_attack_results_to_log', info);
   });
 
   ws.on('add_pokemon_and_trainer_to_users_state', (info) => {
@@ -285,7 +263,6 @@ io.on('connection', (ws) => {
     };
     info = state.users;
     timeSinceUse = 0;
-    console.log(info);
     io.emit('add_pokemon_and_trainer_to_users_state', info);
   });
 
@@ -293,7 +270,6 @@ io.on('connection', (ws) => {
   ws.on('add_user_trainer_and_pokemon_to_grid', (info) => {
     // eslint-disable-next-line no-plusplus
     console.log('add new trainer and pokemon to node grid');
-    console.log(info);
     // info: {
     //   trainer : {},
     //   pokemon: {},
@@ -333,7 +309,6 @@ io.on('connection', (ws) => {
     }
     info = state;
     timeSinceUse = 0;
-    console.log(info);
     io.emit('add_user_trainer_and_pokemon_to_grid', info);
   });
   
@@ -356,5 +331,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-// server.listen(port, '54.89.22.26'); //prod
-server.listen(port, 'localhost'); //dev
+server.listen(port); //prod
+// server.listen(port, 'localhost'); //dev
