@@ -6,8 +6,11 @@ import {
   Sidebar,
 } from 'semantic-ui-react';
 
+// == Import utils
 import { getSidebarNameCapitalize } from 'src/utils/functions';
-// Styles
+// == Import files
+import pokeball from 'src/assets/images/pokeball.png';
+// == Import Styles
 import LogStyled from './LogStyled';
 
 
@@ -79,6 +82,7 @@ const Log = ({
         <svg className="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill={`#${primaryColor}`} fillOpacity="1" d="M0,320L1440,96L1440,0L0,0Z" /></svg>
         <svg className="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill={`#${secondaryColor}`} fillOpacity="1" d="M0,160L1440,32L1440,0L0,0Z" /></svg>
         <div className="log">
+          <img src={pokeball} alt="pokemon background" className="pokeball-background" />
           <div className="entries" ref={logContainer}>
           <div className="blank-space" />
             {entries.map((entry) =>

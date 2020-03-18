@@ -85,6 +85,14 @@ const LogStyled = styled.div`
         border-radius: 10px;
         /* padding: 0em .5em 0em .5em; */
         /* margin-bottom: .5em; */
+        .pokeball-background {
+          width: 80%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: .1;
+        }
         .entries {        
           width: 100%;
           height: 100%;
@@ -116,11 +124,11 @@ const LogStyled = styled.div`
         }
       }
       .svg1 {
-      border-radius: 10px 10px 0 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5;
+        border-radius: 10px 10px 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
       }
       .svg2 {
         border-radius: 10px 10px 0 0;
