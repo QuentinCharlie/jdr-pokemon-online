@@ -24,9 +24,9 @@ const PokemonSelector = ({
   linkPokemonToUser,
   shareSelectedTrainerAndPokemonToUsers,
 }) => {
-  useEffect(() => {
-    loadAllPokemons();
-  }, []);
+  // useEffect(() => {
+  //   loadAllPokemons();
+  // }, []);
   const handleClick = (e) => {
     const pokemonName = e.currentTarget.dataset.name;
     const pokemonSelected = pokemons.find((pokemon) => pokemon.name === pokemonName);

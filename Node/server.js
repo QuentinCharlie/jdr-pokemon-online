@@ -15,6 +15,7 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
+//let port = 3001; // @change dev
 //let port = 7001; // @change dev
 let port = process.argv[2]; // @change prod
 io.set('origins', '*:*');
@@ -69,13 +70,11 @@ app.get('/', (request, response) => {
  * Socket.io
  */
 let id = 0;
-let entryId = 2;
+let entryId = 0;
 let state = {
   grid: {
-    dragOverCell: {
-    },
-    trainers: [
-    ],
+    dragOverCell: {},
+    trainers: [],
   },
   log: {
     entries: [
@@ -117,8 +116,9 @@ let state = {
         // },     
       ],
   },
-  users : {
-
+  users : {},
+  mj: { 
+    isAlreadyMj: false,
   },
 };
 io.on('connection', (ws) => {
@@ -127,11 +127,83 @@ io.on('connection', (ws) => {
   ws.on('load_state', (info) => {
     // eslint-disable-next-line no-plusplus
     console.log('loading state');
+    console.log(state.mj.isAlreadyMj)
     entryId = ++entryId;
     info = state;
     info.id = ++id;
     timeSinceUse = 0;
     io.emit('load_state', info);
+  });
+
+  ws.on('change_mj_state', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('loading state');
+    entryId = ++entryId;
+    if (state.mj.mjName === undefined) {
+      state.mj = {
+        isAlreadyMj: true,
+        mjName: info.mjName,
+      };
+    };
+    info = state;
+    console.log(info);
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('change_mj_state', info);
+  });
+
+  ws.on('change_trainer_health', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('substract energy');
+    entryId = ++entryId;
+
+    const username = info.mjTrainerUsername;
+    const vitality = info.healthNumber;
+
+    state.users = {
+      ...state.users,
+      [username]: {
+        ...state.users[username],
+        trainer: {
+          ...state.users[username].trainer,
+          vitality,
+        }
+      },
+    };
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('change_trainer_health', info);
+  });
+
+  ws.on('change_pokemon_health', (info) => {
+    // eslint-disable-next-line no-plusplus
+    console.log('substract energy');
+    entryId = ++entryId;
+
+    const username = info.mjTrainerUsername;
+    const vitality = info.healthNumber;
+
+    state.users = {
+      ...state.users,
+      [username]: {
+        ...state.users[username],
+        pokemon: [
+          ...state.users[username].pokemon.splice(0, 0),
+          {
+            ...state.users[username].pokemon[0],
+            vitality,
+          },
+          ...state.users[username].pokemon.splice(1),
+        ],
+      },
+    };
+
+    info = state;
+    info.id = ++id;
+    timeSinceUse = 0;
+    io.emit('change_pokemon_health', info);
   });
 
   ws.on('substract_energy', (info) => {
@@ -338,5 +410,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-server.listen(port); //prod
-// server.listen(port, 'localhost'); //dev
+// server.listen(port); //prod
+server.listen(port, 'localhost'); //dev

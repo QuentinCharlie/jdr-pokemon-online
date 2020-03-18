@@ -5,6 +5,7 @@ import {
   Segment,
   Sidebar,
   Modal,
+  Dropdown,
 } from 'semantic-ui-react';
 
 import { getSidebarNameCapitalize, findPokemonImage } from 'src/utils/functions';
@@ -20,11 +21,28 @@ import PokemonModal from './PokemonModal';
 import PokemonStyled from './PokemonStyled';
 
 // == Composant
-const Pokemon = ({ visible, pokemon, changeSidebarVisibility, pokemonMaxHealth }) => {
-
+const Pokemon = ({
+  visible,
+  pokemon,
+  changeSidebarVisibility,
+  pokemonMaxHealth,
+  isMj,
+  changePokemonHealth,
+  mjTrainerUsername,
+}) => {
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
+  };
+
+  let options = [];
+  for (let i = 0 ; i <= pokemonMaxHealth; i++){
+    options.push({ key: i, text: `${i}`, value: i });
+  };
+
+  const handleOptionClick = (e) => {
+    const healthNumber = e.target.dataset.value;
+    changePokemonHealth(mjTrainerUsername, Number(healthNumber));
   };
 
   return (
@@ -57,13 +75,50 @@ const Pokemon = ({ visible, pokemon, changeSidebarVisibility, pokemonMaxHealth }
           <div className="energy-container">
             <span>{pokemon.energy}/50</span>
             <img src={zapIcon} alt="energy logo" />
-            <div className={(pokemon.energy === 50) ? 'energy-bar rounded' : 'energy-bar'} style={{ width: `${Math.ceil(pokemon.energy * 2)}%` }} />
+            <div 
+              className={(pokemon.energy === 50) ? 'energy-bar rounded' : 'energy-bar'} 
+              style={{ width: `${Math.ceil(pokemon.energy * 2)}%` }} 
+            />
           </div>
-          <div className="health-container">
-            <span>{pokemon.vitality}/{pokemonMaxHealth}</span>
-            <img src={heartIcon} alt="heart logo" />
-            <div className={(pokemon.vitality === pokemonMaxHealth) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} />
-          </div>
+          {isMj && 
+            <div className="health-container">
+              <Dropdown
+                className="span"
+                upward
+                icon={null}
+                scrolling
+                trigger={
+                  <span style={{ cursor: 'pointer' }}>
+                    {pokemon.vitality}/{pokemonMaxHealth}
+                  </span>
+                }
+              >
+                <Dropdown.Menu >
+                  {options.map((option) => (
+                    <Dropdown.Item 
+                      key={`pokemon-option-key-${option.key}`}
+                      onClick={handleOptionClick}
+                      data-value={option.value}
+                    >
+                      {option.text}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <img src={heartIcon} alt="heart logo" />
+              <div 
+                className={(pokemon.vitality === pokemonMaxHealth) ? 'health-bar rounded' : 'health-bar'} 
+                style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} 
+              /> 
+            </div>
+          }
+          {!isMj &&
+            <div className="health-container">
+              <span>{pokemon.vitality}/{pokemonMaxHealth}</span>
+              <img src={heartIcon} alt="heart logo" />
+              <div className={(pokemon.vitality === pokemonMaxHealth) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} />
+            </div>
+          }
         </div>
         <div className="pokemon-info">
           <div className="pokemon-presentation">
@@ -113,7 +168,14 @@ Pokemon.propTypes = {
   pokemon: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
   pokemonMaxHealth: PropTypes.number.isRequired,
+  isMj: PropTypes.bool.isRequired,
+  changePokemonHealth: PropTypes.func.isRequired,
+  mjTrainerUsername: PropTypes.string,
 };
+
+Pokemon.defaultProps = {
+  mjTrainerUsername: '',
+}
 
 
 // == Export

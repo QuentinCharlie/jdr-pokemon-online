@@ -2675,8 +2675,5 @@ Grid.propTypes = {
   changeDragOverCell: PropTypes.func.isRequired,
 };
 
-Grid.defaultProps = {
-};
-
 // == Export
 export default Grid;

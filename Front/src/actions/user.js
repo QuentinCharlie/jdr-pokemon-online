@@ -10,6 +10,7 @@ export const LINK_TRAINER_TO_USER = 'LINK_TRAINER_TO_USER';
 export const LINK_POKEMON_TO_USER = 'LINK_POKEMON_TO_USER';
 export const SHARE_SELECTED_TRAINER_AND_POKEMON = 'SHARE_SELECTED_TRAINER_AND_POKEMON';
 export const ADD_USER_TRAINER_AND_POKEMON_TO_GRID = 'ADD_USER_TRAINER_AND_POKEMON_TO_GRID';
+export const UPDATE_USER = 'UPDATE_USER';
 
 // Action creators
 export const loadState = () => ({
@@ -23,6 +24,10 @@ export const userIsReady = () => ({
 export const loadUser = () => ({
   type: LOAD_USER,
 });
+
+export const updateUser = () => ({
+  type: UPDATE_USER,
+})
 
 export const saveUser = (user) => ({
   type: SAVE_USER,

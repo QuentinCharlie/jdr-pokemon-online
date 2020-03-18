@@ -12,7 +12,20 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => {
   const playerName = state.user.username;
+  const mjName = state.mj.mjName;
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
 
+  if (playerName === mjName) {
+    return ({
+      attacks: allUsers[index].pokemon[0].attacks,
+      pokemon: allUsers[index].pokemon[0],
+      trainer: allUsers[index].trainer,
+      users: state.users,
+      visible: state.sidebar.isAttacksSidebarVisible,
+    })
+  }
   return ({
     attacks: state.users[playerName].pokemon[0].attacks,
     pokemon: state.users[playerName].pokemon[0],

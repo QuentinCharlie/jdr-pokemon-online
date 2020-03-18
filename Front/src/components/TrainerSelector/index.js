@@ -19,9 +19,9 @@ const TrainerSelector = ({
   loadAllTrainers,
   linkTrainerToUser,
 }) => {
-  useEffect(() => {
-    loadAllTrainers();
-  }, []);
+  // useEffect(() => {
+  //   loadAllTrainers();
+  // }, []);
 
   const handleClick = (e) => {
     const trainerName = e.currentTarget.dataset.name;
