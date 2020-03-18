@@ -4,7 +4,7 @@ import { updateGridState } from 'src/actions/grid';
 import { updateLogState } from 'src/actions/log';
 import { userIsReady, updateUser } from 'src/actions/user';
 import { loadAllTrainers } from 'src/actions/trainer';
-import { loadAllPokemons } from 'src/actions/pokemon';
+import { loadAllPokemons, CHANGE_POKEMON_HEALTH } from 'src/actions/pokemon';
 import { changeMjState, updateMjState, CHANGE_MJ_STATE } from 'src/actions/mj';
 import { 
   ADD_USER_TRAINER_AND_POKEMON_TO_USERS_STATE,
@@ -38,7 +38,7 @@ const sharedMiddleware = (store) => (next) => (action) => {
         const state = store.getState();
         store.dispatch(updateMjState(state.user.username, info.mj.mjName));
         if (state.mj.mjName === undefined) {
-        store.dispatch(changeMjState(state.user.username));  
+          store.dispatch(changeMjState(state.user.username));  
         }
         // store.dispatch(updateMjState(state.user.username, info.mj.mjName));         
         // store.dispatch(updateUser());
@@ -59,6 +59,11 @@ const sharedMiddleware = (store) => (next) => (action) => {
         if (info[playerName] !== undefined) {
           store.dispatch(userIsReady());
         }
+      });
+      socket.on('change_pokemon_health', (info) => {
+        console.log('Retour du serveur: change_pokemon_health');
+        console.log(info);
+        store.dispatch(updateUsersState(info.users)); 
       });
       socket.on('substract_energy', (info) => {
         console.log('Retour du serveur: substract_energy');
@@ -82,6 +87,13 @@ const sharedMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TRAINER_AND_POKEMON_TO_USERS_STATE: {
       console.log('Envoi au serveur: add_pokemon_and_trainer_to_users_state');
       socket.emit('add_pokemon_and_trainer_to_users_state', (action));
+      break;
+    }
+
+    case CHANGE_POKEMON_HEALTH: {
+      console.log('Envoi au serveur: change_pokemon_health');
+      console.log(action);
+      socket.emit('change_pokemon_health', (action));
       break;
     }
 

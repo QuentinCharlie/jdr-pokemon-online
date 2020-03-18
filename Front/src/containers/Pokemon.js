@@ -5,6 +5,7 @@ import Pokemon from 'src/components/Pokemon';
 
 // Action Creators
 import { changeSidebarVisibility } from 'src/actions/sidebar';
+import { changePokemonHealth } from 'src/actions/pokemon';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
@@ -22,13 +23,16 @@ const mapStateToProps = (state) => {
     return ({
       visible: state.sidebar.isTrainerSidebarVisible,
       pokemonMaxHealth: state.pokemon.allPokemons[allUsers[index].pokemon[0].id - 1].vitality,
+      mjTrainerUsername: usersKeys[index],
       pokemon: allUsers[index].pokemon[0],
+      isMj: state.user.isMj,
     })
   }
   return ({
     visible: state.sidebar.isPokemonSidebarVisible,
     pokemon: state.users[playerName].pokemon[0],
     pokemonMaxHealth: state.pokemon.allPokemons[state.user.pokemon.id - 1].vitality,
+    isMj: state.user.isMj,
   })
 };
 
@@ -38,6 +42,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   changeSidebarVisibility: (sidebarName, visible) => {
     dispatch(changeSidebarVisibility(sidebarName, visible));
+  },
+  changePokemonHealth: (mjTrainerUsername, healthNumber) => {
+    dispatch(changePokemonHealth(mjTrainerUsername, healthNumber));
   },
 });
 
