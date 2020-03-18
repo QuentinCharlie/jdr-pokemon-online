@@ -35,10 +35,7 @@ const Pokemon = ({
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
   };
-  
-  const handleHealthClick = (e) => {
-    console.log('healthbar');
-  };
+
   let options = [];
   for (let i = 0 ; i <= pokemonMaxHealth; i++){
     options.push({ key: i, text: `${i}`, value: i });
@@ -85,17 +82,17 @@ const Pokemon = ({
             />
           </div>
           {isMj && 
-            <div 
-              className="health-container"
-              onClick={handleHealthClick} 
-              style={{ cursor: 'pointer' }}
-            >
+            <div className="health-container">
               <Dropdown
                 className="span"
                 upward
                 icon={null}
                 scrolling
-                trigger={<span>{pokemon.vitality}/{pokemonMaxHealth}</span>}
+                trigger={
+                  <span style={{ cursor: 'pointer' }}>
+                    {pokemon.vitality}/{pokemonMaxHealth}
+                  </span>
+                }
               >
                 <Dropdown.Menu >
                   {options.map((option) => (
