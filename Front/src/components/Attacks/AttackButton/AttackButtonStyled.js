@@ -37,41 +37,12 @@ const AttackButtonStyled = styled.div`
     img.type {
       height: 98%;
       position: absolute;
+      z-index: 1;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
       opacity: .2;
     }
-
-    /* SHINY EFFECT */
-    /* &::before {
-      position: absolute;
-      top: 0;
-      left: -75%;
-      z-index: 2;
-      display: block;
-      content: '';
-      width: 50%;
-      height: 100%;
-      background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
-      -webkit-transform: skewX(-25deg);
-      transform: skewX(-25deg);
-    }
-    &:hover::before {
-      -webkit-animation: shine .75s;
-      animation: shine .75s;
-    }
-    @-webkit-keyframes shine {
-      100% {
-        left: 125%;
-      }
-    }
-    @keyframes shine {
-      100% {
-        left: 125%;
-      }
-    } */
     
     &:active {
       box-shadow: none;
@@ -80,6 +51,8 @@ const AttackButtonStyled = styled.div`
     }
     @media (min-height: 960px) {
       .attack {
+        position: relative;
+        z-index: 10;
         display: flex;
         flex-direction: column;
         .attack-name {
@@ -144,6 +117,8 @@ const AttackButtonStyled = styled.div`
       .attack-stats {
         display: flex;
         justify-content: flex-start;
+        position: relative;
+        z-index: 10;
         /* overflow: auto; */
         /* scrollbar hidden (IE/Edge)
         -ms-overflow-style: none;
@@ -165,6 +140,8 @@ const AttackButtonStyled = styled.div`
 
   @media (max-height: 959px) {
     .attack {
+      position: relative;
+      z-index: 10;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -183,6 +160,8 @@ const AttackButtonStyled = styled.div`
       }
     }
     .attack-stats {
+      position: relative;
+      z-index: 10;
       display: none;
     }
   }
