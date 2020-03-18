@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\GameServer;
 use Doctrine\DBAL\Driver\Connection;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +42,7 @@ class GameController extends AbstractController
     $timestamp = microtime(true) * 1000;
 
     // Créer un tableau en dur pour récupérer l'ensemble des ports
-    $all_ports = range(6000, 7000);
+    $all_ports = range(7000, 7999);
 
     // Récupération via la BDD des ports utilisés
     $used_ports = $connection->fetchAll('SELECT port FROM game_server');
@@ -61,8 +62,8 @@ class GameController extends AbstractController
     // Récupère l'utilisateur connecté via son pseudo
     $username = $this->getUser()->getNickname();
 
-    // if (!@fsockopen('localhost', $port)) { // @change dev
-    if (!@fsockopen('54.89.22.26', $port)) {
+     if (!@fsockopen('localhost', $port)) { // @change dev
+    //if (!@fsockopen('54.89.22.26', $port)) {
 
       // Insère en BDD l'utilisateur et le port choisi
       $newGame = new GameServer();
@@ -111,4 +112,56 @@ class GameController extends AbstractController
       ]);
     }
   }
-}
+
+  /**
+   * @Route("game/{port}/delete", name="game_delete")
+   * @IsGranted("ROLE_USER")
+   */
+  public function gameDelete(GameServer $gameServer, Request $request)
+  {
+    $password = "M%P'c~]&7XBdz^Pe";
+    $serverToken = "M%P'c~]&7XBdz^Pe";
+    //$serverToken = $request->isXmlHttpRequest()->get('token');
+    //new Response($request->request->get("variable");
+
+    if ($password === $serverToken){
+    $entityManager = $this->getDoctrine()->getManager();
+    // Supprime l'utilisateur que l'on retrouve grâce à son ID
+    $entityManager->remove($gameServer);
+    $entityManager->flush();
+
+    $this->addFlash("danger", "La partie a bien été supprimée");
+
+    return $this->redirectToRoute("game_list");
+    }throw $this->createNotFoundException("T'as rien à foutre la !");
+ 
+  } 
+
+  
+  /**
+   * @Route("game/{port}/mj/delete", name="game_mj_delete")
+   * @IsGranted("ROLE_USER")
+   */
+  public function gameMJDelete(Connection $connection, GameServer $gameServer, $port)
+  {
+    $username = $this->getUser()->getNickname();
+
+    // Récupère tous les noms d'utilisateurs qui sont dans la colonne "MJ"
+    $gameMj = $connection->fetchColumn('SELECT mj FROM game_server WHERE port=' . $port . '');
+
+    if ($username === $gameMj) {
+    $entityManager = $this->getDoctrine()->getManager();
+    // Supprime l'utilisateur que l'on retrouve grâce à son ID
+    $entityManager->remove($gameServer);
+    $entityManager->flush();
+
+    $this->addFlash("danger", "La partie a bien été supprimée");
+
+    return $this->redirectToRoute("game_list");
+
+    }throw $this->createNotFoundException("T'as rien à foutre la !");
+      
+    } 
+  }
+  
+
