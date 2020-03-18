@@ -54,9 +54,11 @@ const AttackButton = ({
               <div className="attack-name">{name}</div>
               <div className="attack-icons">
                 <div className={`attack-category ${category}`}>
-                  {/* <img src={`${categoryImage}`} alt="category logo" className="category-logo"/> */}
+                  {category}
                 </div>
-                <div className={`attack-distance ${distance}`} />
+                <div className={`attack-distance ${distance}`}>
+                  {distance}
+                </div>
                 <Popup
                   content={(
                     <InfoAttackPopUp

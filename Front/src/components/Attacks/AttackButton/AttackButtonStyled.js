@@ -65,44 +65,28 @@ const AttackButtonStyled = styled.div`
           height: 1em;
           align-items: center;
           .attack-category {
+            display: flex;
+            align-items: center;
+            font-size: .5em;
+            font-weight: normal;
+            font-style: italic;
+            background-color: rgba(20, 20, 20, 0.05);
             width: auto;
             height: 70%;
             padding-right: .3em;
-            /* &.Statut {
-              content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
-              opacity: .8;
-            }
-            &.Special {
-              content: url("https://www.pokebip.com/pokedex-images/types/speciale.png");
-              opacity: .8;
-            }
-            &.Physique {
-              content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
-              opacity: .8;
-            } */
           }
           .attack-distance {
+            display: flex;
+            align-items: center;
+            margin-left: .5em;
+            font-size: .5em;
+            font-weight: normal;
+            font-style: italic;
+            border-radius: 10px;
+            padding: .2em .4em;
+            background-color: rgba(20, 20, 20, 0.05);
             width: auto;
             height: 70%;
-            &.melee {
-              content: url("https://i.imgur.com/bsvUkK6.png");
-              opacity: .8;
-            }
-            &.Rayon {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Contact {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Zone {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Cible {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
-            &.Personnel {
-              /*https://i.imgur.com/xgGwnku.png */
-            }
           }
           .attack-info {
             width: auto;
@@ -150,6 +134,12 @@ const AttackButtonStyled = styled.div`
         height: 1.3em;
         display: flex;
         align-items: center;
+        .attack-category {
+          display: none;
+        }
+        .attack-distance {
+          display: none;
+        }
         .attack-info {
           width: auto;
           height: 70%;
