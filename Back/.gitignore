@@ -58,4 +58,10 @@
 # Embedded web-server pid file
 /.web-server-pid
 
-
+#Migration for dev
+/app/src/Migrations/*
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

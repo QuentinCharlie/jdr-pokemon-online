@@ -1,0 +1,33 @@
+{% extends "baseAdmin.html.twig" %}
+
+{% block body %}
+
+<h2>Liste des utilisateurs</h2>
+<h3>Connecté en tant que : {{app.user.nickname}}</h3>
+
+<table class="table table-dark">
+    <tr>
+        <th>Id</th> 
+        <th>Pseudo</th> 
+        <th>Email</th> 
+        <th>Avatar</th> 
+        <th>MDP</th>
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.nickname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.avatar }}</td>
+            <td>{{ user.password }}</td>
+            <td>
+                <button type="button" class="btn btn-warning"><a href="{{ path("user_update", {"id": user.id }) }}"> Modifier l'utilisateur</a></button>
+                <button type="button" class="btn btn-danger"><a href="{{ path("user_delete", {"id": user.id }) }}" onclick=" return confirm('Etes-vous sure de vouloir supprimer ce compte ?')">Supprimer mon compte</a></button>
+                 </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<a href="{{ path("game_list") }}">Retour à la liste des parties</a>
+
+{% endblock %}

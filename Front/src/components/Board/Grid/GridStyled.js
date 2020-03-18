@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import pokeGif from 'src/assets/images/pikachu.gif';
+import pokeGif from 'src/assets/images/pokemon/pikachu.gif';
 
 const GridStyled = styled.div`
   @media (max-width : 1024px) {
@@ -14,9 +14,6 @@ const GridStyled = styled.div`
           width: 50px;
           height: 50px;
           position: relative;
-          .pikachu {
-            position: absolute;
-          }
         }
       }
     }
@@ -35,13 +32,10 @@ const GridStyled = styled.div`
           width: 50px;
           height: 50px;
           position: relative;
-          .pikachu {
-            position: absolute;
-          }
         }
-        .pokemon {
+        /* .pokemon {
           content: url(${pokeGif});
-        }
+        } */
       }
     }
   }

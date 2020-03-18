@@ -9,7 +9,7 @@ import {
 
 import { getSidebarNameCapitalize } from 'src/utils/functions';
 // == Import Components
-import AttackButton from 'src/components/Attacks/AttackButton';
+import AttackButton from 'src/containers/AttackButton';
 
 // Styles
 import AttacksStyled from './AttacksStyled';
@@ -17,6 +17,9 @@ import AttacksStyled from './AttacksStyled';
 // == Composant
 const Attacks = ({
   attacks,
+  trainer,
+  pokemon,
+  users,
   visible,
   changeSidebarVisibility,
 }) => {
@@ -39,19 +42,22 @@ const Attacks = ({
       </div>
 
       <div className="desktop">
-        {attacks.map((attack, index) => (
+        {attacks.map((attack) => (
           <AttackButton
             // eslint-disable-next-line react/no-array-index-key
-            key={index}
+            key={attack.id}
             name={attack.name}
-            damage={attack.damage}
-            accuracy={attack.accuracy}
             energy={attack.energy}
             category={attack.category}
             distance={attack.distance}
+            accuracy={attack.accuracy}
+            damage={attack.damage}
             effect={attack.effect}
-            type={attack.type}
-            color={attack.color}
+            type={attack.type.name}
+            color={attack.type.color}
+            pokemon={pokemon}
+            trainer={trainer}
+            users={users}
           />
         ))}
       </div>
@@ -61,6 +67,9 @@ const Attacks = ({
 
 Attacks.propTypes = {
   attacks: PropTypes.array.isRequired,
+  pokemon: PropTypes.object.isRequired,
+  trainer: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
 };

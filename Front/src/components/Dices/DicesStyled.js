@@ -56,8 +56,11 @@ const DicesStyled = styled.div`
           object-fit: contain;
           height: 48%;
           margin-bottom: .6em;
+          &.pokemon {
+            padding: .5em;
+          }
           &.trainer {
-            padding: 1.1em;
+            padding: .8em;
           }
         }
         .roll-button {
@@ -162,7 +165,7 @@ const DicesStyled = styled.div`
               box-shadow: 0 0 5px lightgrey;
               color: #fff;
               padding: .8em .4em;
-              &.level-0 {
+              &.level-null {
                 background-color: white;
                 color: grey;
               }

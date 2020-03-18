@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TypeRepository")
@@ -13,16 +14,19 @@ class Type
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pokemon:list", "pokemon:detail"} )
      */
     private $color;
 

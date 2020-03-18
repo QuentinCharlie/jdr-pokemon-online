@@ -6,13 +6,13 @@ import {
   Segment,
   Sidebar,
   Modal,
+  Dropdown,
 } from 'semantic-ui-react';
 
 // == Import files
-import avatar from 'src/assets/images/ash.png';
 import heartIcon from 'src/assets/images/heart.svg';
 // == Import utils
-import { getSidebarNameCapitalize } from 'src/utils/functions';
+import { getSidebarNameCapitalize, findTrainerImage } from 'src/utils/functions';
 // == Import components
 import TrainerModal from './TrainerModal';
 
@@ -20,10 +20,29 @@ import TrainerModal from './TrainerModal';
 import TrainerStyled from './TrainerStyled';
 
 // == Composant
-const Trainer = ({ visible, changeSidebarVisibility }) => {
+const Trainer = ({
+  visible,
+  trainer,
+  pokemon,
+  changeSidebarVisibility,
+  isMj,
+  changeTrainerHealth,
+  mjTrainerUsername
+}) => { 
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
+  };
+  let options = [];
+  for (let i = 0 ; i <= 10; i++){
+    options.push({ key: i, text: `${i}`, value: i });
+  };
+
+  const handleOptionClick = (e) => {
+    const healthNumber = e.target.dataset.value;
+    console.log(mjTrainerUsername);
+    console.log(healthNumber);
+    changeTrainerHealth(mjTrainerUsername, Number(healthNumber));
   };
   return (
     <TrainerStyled>
@@ -44,20 +63,52 @@ const Trainer = ({ visible, changeSidebarVisibility }) => {
           <Modal
             className="modal-trainer"
             style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
-            trigger={<img className="trainer-avatar-img" src={avatar} alt="avatar" />}
+            trigger={<img className="trainer-avatar-img" src={findTrainerImage(`${trainer.name}.png`)} alt="avatar" />}
             closeIcon
           >
-            <TrainerModal />
+            <TrainerModal trainer={trainer} pokemon={pokemon} />
           </Modal>
-          <div className="health-container">
-            <span>40/100</span>
-            <img src={heartIcon} alt="heart logo" />
-            {/* The style in composant is require for dynamisation */}
-            <div className="health-bar" style={{ width: '40%' }} />
-          </div>
+          {isMj && 
+            <div className="health-container">
+              <Dropdown
+                  className="span"
+                  upward
+                  icon={null}
+                  scrolling
+                  trigger={
+                    <span style={{ cursor: 'pointer' }}>
+                      {trainer.vitality}/10
+                    </span>
+                  }
+                >
+                <Dropdown.Menu >
+                  {options.map((option) => (
+                    <Dropdown.Item 
+                      key={`trainer-option-key-${option.key}`}
+                      onClick={handleOptionClick}
+                      data-value={option.value}
+                    >
+                      {option.text}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <img src={heartIcon} alt="heart logo" />
+              {/* The style in composant is require for dynamisation */}
+              <div className={(trainer.vitality === 10) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${trainer.vitality}0%` }} />
+            </div>
+          }
+          {!isMj &&
+            <div className="health-container">
+              <span>{trainer.vitality}/10</span>
+              <img src={heartIcon} alt="heart logo" />
+              {/* The style in composant is require for dynamisation */}
+              <div className={(trainer.vitality === 10) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${trainer.vitality}0%` }} />
+            </div>
+          }
         </div>
         <div className="money">
-          <span>5000 ₽</span>
+          <span>{trainer.money} ₽</span>
         </div>
       </div>
     </TrainerStyled>
@@ -66,8 +117,17 @@ const Trainer = ({ visible, changeSidebarVisibility }) => {
 
 Trainer.propTypes = {
   visible: PropTypes.bool.isRequired,
+  trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
+  isMj: PropTypes.bool.isRequired,
+  changeTrainerHealth: PropTypes.func.isRequired,
+  mjTrainerUsername: PropTypes.string,
 };
 
+
+Trainer.defaultProps = {
+  mjTrainerUsername: '',
+}
 // == Export
 export default Trainer;

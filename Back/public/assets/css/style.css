@@ -1,5 +1,6 @@
 body{
-    background-image: url("../images/map.png");
+    background-image: url("../images/map2.png");
+    background-repeat: no-repeat;
 }
 
 @font-face
@@ -20,7 +21,7 @@ body{
 
 
 .divTitle{
-    margin: 9em 8em 2em 36em;
+    margin: 9em auto;
     padding-top: 6px;
     border-radius: 10px;
     background-color: white;
@@ -34,6 +35,14 @@ body{
     color: #343a40;
     font-family: "PokemonClassic";
 
+}
+
+.divTrainer{
+    height: fit-content;
+}
+
+.divPokemon{
+    height: fit-content;
 }
 
 .divForm{
@@ -140,6 +149,24 @@ body{
     margin-bottom: 3em; 
 }
 
+.trainer_detail h3 {
+    margin-bottom: 2em; 
+}
+
+.trainer_detail p {
+    margin-top: 1em;
+    margin-bottom: 3em;
+}
+
+.pokemon_detail h3 {
+    margin-bottom: 2em;
+}
+
+.pokemon_detail p {
+    margin-top: 1em;
+    margin-bottom: 3em;
+}
+
 .delete_btn {
     padding: 0.7em;
     border-radius: 12px 12px 12px 12px;
@@ -159,4 +186,13 @@ body{
     padding: 0.7em;
     background-color: white;
     margin: 0 10em;
+}
+
+.stats {
+    text-align: center;
+}
+
+.stats li{
+    list-style-type: none;
+    margin : 0;
 }

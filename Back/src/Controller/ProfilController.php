@@ -31,9 +31,11 @@ class ProfilController extends AbstractController
      */
     public function userDelete(User $user) {
 
+        // Supprime l'user grâce à son ID
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($user);
 
+        // Ferme la session de l'utilisateur en cours
         $session = new Session();
         $session->invalidate();
 

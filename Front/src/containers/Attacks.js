@@ -10,55 +10,30 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
-  attacks: [
-    {
-      name: 'Éclair',
-      damage: 40,
-      accuracy: '100%',
-      energy: 1,
-      category: 'special',
-      distance: 'rayon',
-      effect: 'Sur 10, paralyse la cible',
-      type: 'Electrik',
-      color: '#ffbb33',
-    },
-    {
-      name: 'Vive-Attaque',
-      damage: 40,
-      accuracy: '100%',
-      energy: 1,
-      category: 'physical',
-      distance: 'rayon',
-      effect: 'Initiative +10',
-      type: 'Normal',
-      color: '#bbaabb',
-    },
-    {
-      name: 'Mimi-Queue',
-      damage: 0,
-      accuracy: '100%',
-      energy: 1,
-      category: 'statut',
-      distance: 'cible',
-      effect: 'END-1 jusqu\'à la fin du combat ou au rappel du Pokemon adversaire',
-      type: 'Normal',
-      color: '#bbaabb',
-    },
-    {
-      name: 'Rugissement',
-      damage: 0,
-      accuracy: '100%',
-      energy: 1,
-      category: 'statut',
-      distance: 'cible',
-      effect: 'FOR-1 jusqu\'à la fin du combat ou au rappel du pokemon adversaire',
-      type: 'Normal',
-      color: '#bbaabb',
-    },
-  ],
-  visible: state.sidebar.isAttacksSidebarVisible,
-});
+const mapStateToProps = (state) => {
+  const playerName = state.user.username;
+  const mjName = state.mj.mjName;
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
+
+  if (playerName === mjName) {
+    return ({
+      attacks: allUsers[index].pokemon[0].attacks,
+      pokemon: allUsers[index].pokemon[0],
+      trainer: allUsers[index].trainer,
+      users: state.users,
+      visible: state.sidebar.isAttacksSidebarVisible,
+    })
+  }
+  return ({
+    attacks: state.users[playerName].pokemon[0].attacks,
+    pokemon: state.users[playerName].pokemon[0],
+    trainer: state.users[playerName].trainer,
+    users: state.users,
+    visible: state.sidebar.isAttacksSidebarVisible,
+  })
+};
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?

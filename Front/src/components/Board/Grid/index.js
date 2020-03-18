@@ -1,9 +1,9 @@
 /* eslint-disable react/self-closing-comp */
 // == Import npm
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from './Pokemon/Constants';
 
 // == Import
 import Pokemon from './Pokemon';
@@ -11,2630 +11,2668 @@ import Pokemon from './Pokemon';
 import GridStyled from './GridStyled';
 
 // == Composant
-const Grid = ({ addPokemonToCell, trainer }) => {
-  const trainerName = 'Sacha';
-  const pokemonName = 'Pikachu';
+const Grid = ({
+  trainer,
+  pokemon,
+  grid,
+  pokemons,
+  movePokemon,
+  changeDragOverCell,
+}) => {
+
+  const trainerName = trainer.name;
+  const pokemonName = pokemon.name;
   const handleGridDoubleClick = (e) => {
     const X = Number(e.target.className.replace('cell cell-', ''));
     const Y = Number(e.target.closest('.row').className.replace('row row-', ''));
-    addPokemonToCell(trainerName, pokemonName, X, Y, e.target);
+    movePokemon(trainerName, pokemonName, X, Y);
   };
+  const handleDragOver = (e) => {
+    const X = Number(e.target.className.replace('cell cell-', ''));
+    const Y = Number(e.target.closest('.row').className.replace('row row-', ''));
+    changeDragOverCell(X, Y);
+  };
+  const [, drop] = useDrop({
+    accept: ItemTypes.POKEMON,
+    drop: (item, monitor) => {
+      const didDrop = monitor.didDrop();
+      if (didDrop === false) {
+        const { X } = grid.dragOverCell;
+        const { Y } = grid.dragOverCell;
+        console.log(item);
+        movePokemon(trainerName, pokemonName, X, Y);
+      }
+    },
+  });
   return (
-    <DndProvider backend={Backend}>
-      <GridStyled>
-        {trainer.pokemon[pokemonName] !== undefined && (
-          <Pokemon X={trainer.pokemon[pokemonName].X} Y={trainer.pokemon[pokemonName].Y} />
-        )}
-        <div id="grid" onDoubleClick={handleGridDoubleClick}>
+    <GridStyled>
+      {[grid.trainers][0] !== undefined && 
+      grid.trainers.map((trainr, index) => (
+          <Pokemon
+            key={`gridPokemon-${index}`}
+            userTrainer={trainer}
+            pokemonTrainer={trainr}
+            pokemon={pokemons.find((pkmn) => pkmn.name === trainr.pokemon[0].name)}
+            X={trainr.pokemon[0].position.X}
+            Y={trainr.pokemon[0].position.Y}
+          />
+        ))
+      }
+      <div id="grid" onDoubleClick={handleGridDoubleClick}>
+        <div ref={drop}>
           <div className="row row-1">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-2">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-3">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-4">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-5">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-6">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-7">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-8">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-9">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-10">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-11">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-12">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-13">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-14">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-15">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-16">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-17">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-18">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-19">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-20">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-21">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-22">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-23">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-24">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-25">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-26">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-27">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-28">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-29">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-30">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-31">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-32">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-33">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-34">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-35">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-36">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-37">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-38">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-39">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-40">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-41">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-42">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-43">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-44">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-45">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-46">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-47">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-48">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-49">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
           <div className="row row-50">
-            <div className="cell cell-1"></div>
-            <div className="cell cell-2"></div>
-            <div className="cell cell-3"></div>
-            <div className="cell cell-4"></div>
-            <div className="cell cell-5"></div>
-            <div className="cell cell-6"></div>
-            <div className="cell cell-7"></div>
-            <div className="cell cell-8"></div>
-            <div className="cell cell-9"></div>
-            <div className="cell cell-10"></div>
-            <div className="cell cell-11"></div>
-            <div className="cell cell-12"></div>
-            <div className="cell cell-13"></div>
-            <div className="cell cell-14"></div>
-            <div className="cell cell-15"></div>
-            <div className="cell cell-16"></div>
-            <div className="cell cell-17"></div>
-            <div className="cell cell-18"></div>
-            <div className="cell cell-19"></div>
-            <div className="cell cell-20"></div>
-            <div className="cell cell-21"></div>
-            <div className="cell cell-22"></div>
-            <div className="cell cell-23"></div>
-            <div className="cell cell-24"></div>
-            <div className="cell cell-25"></div>
-            <div className="cell cell-26"></div>
-            <div className="cell cell-27"></div>
-            <div className="cell cell-28"></div>
-            <div className="cell cell-29"></div>
-            <div className="cell cell-30"></div>
-            <div className="cell cell-31"></div>
-            <div className="cell cell-32"></div>
-            <div className="cell cell-33"></div>
-            <div className="cell cell-34"></div>
-            <div className="cell cell-35"></div>
-            <div className="cell cell-36"></div>
-            <div className="cell cell-37"></div>
-            <div className="cell cell-38"></div>
-            <div className="cell cell-39"></div>
-            <div className="cell cell-40"></div>
-            <div className="cell cell-41"></div>
-            <div className="cell cell-42"></div>
-            <div className="cell cell-43"></div>
-            <div className="cell cell-44"></div>
-            <div className="cell cell-45"></div>
-            <div className="cell cell-46"></div>
-            <div className="cell cell-47"></div>
-            <div className="cell cell-48"></div>
-            <div className="cell cell-49"></div>
-            <div className="cell cell-50"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-1"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-2"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-3"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-4"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-5"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-6"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-7"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-8"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-9"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-10"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-11"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-12"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-13"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-14"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-15"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-16"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-17"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-18"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-19"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-20"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-21"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-22"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-23"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-24"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-25"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-26"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-27"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-28"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-29"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-30"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-31"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-32"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-33"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-34"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-35"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-36"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-37"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-38"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-39"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-40"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-41"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-42"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-43"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-44"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-45"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-46"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-47"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-48"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-49"></div>
+            <div onDragEnter={handleDragOver} className="cell cell-50"></div>
           </div>
         </div>
-      </GridStyled>
-    </DndProvider>
+      </div>
+    </GridStyled>
   );
 };
 
 Grid.propTypes = {
-  addPokemonToCell: PropTypes.func.isRequired,
   trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
+  grid: PropTypes.object.isRequired,
+  pokemons: PropTypes.array.isRequired,
+  movePokemon: PropTypes.func.isRequired,
+  changeDragOverCell: PropTypes.func.isRequired,
 };
 
 // == Export

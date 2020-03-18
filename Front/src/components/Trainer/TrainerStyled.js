@@ -69,6 +69,16 @@ const TrainerStyled = styled.div`
             position: relative;
             z-index: 5;
           }
+          .span {
+            color: white;
+            height: 100%;
+            position: relative;
+            top: calc(50% - .7em);
+            z-index: 5;
+            .text {
+              color: #6c757d;
+            }
+          }
           img {
             position: absolute;
             z-index: 5;
@@ -84,13 +94,16 @@ const TrainerStyled = styled.div`
             height: 100%;
             background-color: #19cd70;
             border-radius: 10px 0 0 10px;
+            &.rounded {
+              border-radius: 10px;
+            }
           }
         }
       }
       .money {
         color: white;
         position: absolute;
-        bottom: 2.5em;
+        bottom: 2.25em;
         left: 0;
         background-color: orange;
         border-radius: 10px;

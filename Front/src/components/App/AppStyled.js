@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 const AppStyled = styled.div`
+  .selector {
+    width: 100%;
+    height: 100%;
+    background-color: #F3FCFF;
+  }
   @media (max-width : 1024px) {
     .desktop-app {
       display: none;

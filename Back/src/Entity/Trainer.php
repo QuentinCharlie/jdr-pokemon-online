@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrainerRepository")
@@ -13,158 +14,237 @@ class Trainer
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $gender;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $age;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $vitality;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $strength;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $endurance;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $concentration;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
-    private $wildpower;
+    private $willpower;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("trainer:list")
      */
     private $dexterity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $do_it_yourself;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $charisma;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $fighting;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $driving;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $detection;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $furtivity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $expression;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $phychology;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $sport;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $survival;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $education;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $geography;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $computer_science;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $legend;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $medicine;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $pkmn_medicine;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $nature;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $phyche;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $science;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("trainer:list")
      */
     private $pokelogy;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
      */
     private $avatar;
+
+     /**
+     * @ORM\Column(type="text")
+     * @Groups("trainer:list")
+     */
+    private $background;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $vocation;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $height;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $weight;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $skin;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $eyes;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $hair;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("trainer:list")
+     */
+    private $corpulence;
 
     public function getId(): ?int
     {
@@ -255,14 +335,14 @@ class Trainer
         return $this;
     }
 
-    public function getWildpower(): ?int
+    public function getWillpower(): ?int
     {
-        return $this->wildpower;
+        return $this->willpower;
     }
 
-    public function setWildpower(int $wildpower): self
+    public function setWillpower(int $willpower): self
     {
-        $this->wildpower = $wildpower;
+        $this->willpower = $willpower;
 
         return $this;
     }
@@ -527,6 +607,166 @@ class Trainer
     public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of background
+     */ 
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    /**
+     * Set the value of background
+     *
+     * @return  self
+     */ 
+    public function setBackground($background)
+    {
+        $this->background = $background;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of vocation
+     */ 
+    public function getVocation()
+    {
+        return $this->vocation;
+    }
+
+    /**
+     * Set the value of vocation
+     *
+     * @return  self
+     */ 
+    public function setVocation($vocation)
+    {
+        $this->vocation = $vocation;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of height
+     */ 
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set the value of height
+     *
+     * @return  self
+     */ 
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of weight
+     */ 
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set the value of weight
+     *
+     * @return  self
+     */ 
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of skin
+     */ 
+    public function getSkin()
+    {
+        return $this->skin;
+    }
+
+    /**
+     * Set the value of skin
+     *
+     * @return  self
+     */ 
+    public function setSkin($skin)
+    {
+        $this->skin = $skin;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of eyes
+     */ 
+    public function getEyes()
+    {
+        return $this->eyes;
+    }
+
+    /**
+     * Set the value of eyes
+     *
+     * @return  self
+     */ 
+    public function setEyes($eyes)
+    {
+        $this->eyes = $eyes;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hair
+     */ 
+    public function getHair()
+    {
+        return $this->hair;
+    }
+
+    /**
+     * Set the value of hair
+     *
+     * @return  self
+     */ 
+    public function setHair($hair)
+    {
+        $this->hair = $hair;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of corpulence
+     */ 
+    public function getCorpulence()
+    {
+        return $this->corpulence;
+    }
+
+    /**
+     * Set the value of corpulence
+     *
+     * @return  self
+     */ 
+    public function setCorpulence($corpulence)
+    {
+        $this->corpulence = $corpulence;
 
         return $this;
     }

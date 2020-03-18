@@ -49,6 +49,9 @@ class RegistrationController extends AbstractController
 
         $avatar = $this->getDoctrine()->getRepository(Avatar::class)->findAll();
 
+        if ($this->getUser()) {
+            return $this->redirectToRoute('game_list');
+       }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),

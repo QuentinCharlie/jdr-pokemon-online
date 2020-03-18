@@ -4,22 +4,43 @@ import { connect } from 'react-redux';
 import Grid from 'src/components/Board/Grid';
 
 // Action Creators
-import { addPokemonToCell } from 'src/actions/grid';
+import { movePokemon, changeDragOverCell } from 'src/actions/grid';
 
 // == Data / state
 // Notre composant à besoin de données depuis le state ?
 // On prépare un objet avec les props attendues par le composant
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = (state) => ({
-  trainer: state.grid.Sacha,
-});
+const mapStateToProps = (state) => {
+  const playerName = state.user.username;
+  const mjName = state.mj.mjName;
+  const usersKeys = Object.keys(state.users);
+  const allUsers = usersKeys.map((userKey) => state.users[userKey]);
+  const index = state.mj.mjTrainerIndex;
+  if (playerName === mjName) {
+    return ({
+      trainer: allUsers[index].trainer,
+      pokemon: allUsers[index].pokemon[0],
+      pokemons: state.pokemon.allPokemons,
+      grid: state.grid,
+    })
+  }
+  return ({
+    trainer: state.users[playerName].trainer,
+    pokemon: state.users[playerName].pokemon[0],
+    pokemons: state.pokemon.allPokemons,
+    grid: state.grid,
+  })
+};
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?
 // On prépare un objet avec les props attendues par le composant
 const mapDispatchToProps = (dispatch) => ({
-  addPokemonToCell: (trainerName, pokemonName, X, Y) => {
-    dispatch(addPokemonToCell(trainerName, pokemonName, X, Y));
+  movePokemon: (trainerName, pokemonName, X, Y) => {
+    dispatch(movePokemon(trainerName, pokemonName, X, Y));
+  },
+  changeDragOverCell: (X, Y) => {
+    dispatch(changeDragOverCell(X, Y));
   },
 });
 

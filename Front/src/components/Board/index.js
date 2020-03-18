@@ -1,9 +1,12 @@
+/* eslint-disable arrow-body-style */
 // == Import npm
 import React from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
 
 // == import files
-import map from 'src/assets/images/map-town-width2500-height2500.png';
+import map from 'src/assets/images/map-town-light.jpg';
 
 import Grid from 'src/containers/Grid';
 // Styles
@@ -15,15 +18,17 @@ const Board = () => {
   // const mapWidth =  2500 / 50;
   // const mapHeight = 2500 / 50;
   return (
-    <BoardStyled>
-      <ScrollContainer className="scroll-container" ignoreElements="img">
-        <img className="map" src={map} alt="" />
-        {/* <img className="pikachu" src={pokeGif} alt="" /> */}
-        <div id="board">
-          <Grid />
-        </div>
-      </ScrollContainer>
-    </BoardStyled>
+    <DndProvider backend={Backend}>
+      <BoardStyled>
+        <ScrollContainer className="scroll-container" ignoreElements="img">
+          <img className="map" src={map} alt="" />
+          {/* <img className="pikachu" src={pokeGif} alt="" /> */}
+          <div id="board">
+            <Grid />
+          </div>
+        </ScrollContainer>
+      </BoardStyled>
+    </DndProvider>
   );
 };
 

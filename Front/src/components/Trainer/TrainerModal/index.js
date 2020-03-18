@@ -1,47 +1,51 @@
 /* eslint-disable react/self-closing-comp */
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Popup } from 'semantic-ui-react';
 
 // Import Components
 import ProgressBar from 'src/components/ProgressBar';
 
+// == Import Utils
+import { findTrainerImage, findPokemonImage } from 'src/utils/functions';
+
 // == Import files for styles
-import avatar from 'src/assets/images/red.jpg';
-import pokeAvatar from 'src/assets/images/25.png';
+import avatar from 'src/assets/images/trainer/1.png';
+import pokeAvatar from 'src/assets/images/pokemon/25.png';
 import greyPokeball from 'src/assets/images/pokeball.png';
 import trainer from 'src/assets/images/sacha.png';
 
 // == Items img Import
 // Balls
-import ballMenu from 'src/assets/images/balls/menu-balls.png';
-import pokeball from 'src/assets/images/balls/pokeball.png';
-import superball from 'src/assets/images/balls/superball.png';
+import ballMenu from 'src/assets/images/inventory/balls/menu-balls.png';
+import pokeball from 'src/assets/images/inventory/balls/pokeball.png';
+import superball from 'src/assets/images/inventory/balls/superball.png';
 // Materials
-import materialMenu from 'src/assets/images/materiel/menu-materiel.png';
-import map from 'src/assets/images/materiel/carte.png';
+import materialMenu from 'src/assets/images/inventory/materiel/menu-materiel.png';
+import map from 'src/assets/images/inventory/materiel/carte.png';
 // Medicine
-import medicMenu from 'src/assets/images/medicaments/menu-medicaments.png';
-import herbeRappel from 'src/assets/images/medicaments/herbe-rappel.png';
+import medicMenu from 'src/assets/images/inventory/medicaments/menu-medicaments.png';
+import herbeRappel from 'src/assets/images/inventory/medicaments/herbe-rappel.png';
 // Combat Items
-import combatItemMenu from 'src/assets/images/objets-combat/menu-objets-combat.png';
+import combatItemMenu from 'src/assets/images/inventory/objets-combat/menu-objets-combat.png';
 // Training Items
-import trainingItemMenu from 'src/assets/images/objets-entrainement/menu-objets-entrainement.png';
+import trainingItemMenu from 'src/assets/images/inventory/objets-entrainement/menu-objets-entrainement.png';
 
 // == Import style
 import TrainerModalStyled from './TrainerModalStyled';
 
 
 // == Composant
-const TrainerModal = () => (
+const TrainerModal = ({ trainer, pokemon }) => (
   <TrainerModalStyled>
-    <Modal.Header className="modal-header"><h1>Sacha</h1></Modal.Header>
+    <Modal.Header className="modal-header"><h1>{trainer.name}</h1></Modal.Header>
     <Modal.Content className="modal-content">
       <div className="wrapper-left">
         <div className="trainer">
           <div className="trainer-avatar">
             <div className="trainer-avatar-container">
-              <img className="modal-trainer-avatar" src={avatar} alt="" />
+              <img className="modal-trainer-avatar" src={findTrainerImage(`${trainer.id}.png`)} alt="trainer avatar" />
             </div>
           </div>
           <div className="trainer-description">
@@ -52,15 +56,15 @@ const TrainerModal = () => (
                     <tbody>
                       <tr>
                         <td>Age</td>
-                        <td>14 ans</td>
+                        <td>{trainer.age}</td>
                       </tr>
                       <tr>
                         <td>Genre</td>
-                        <td>Homme</td>
+                        <td>{trainer.gender === 'M' ? 'Homme' : 'Femme'}</td>
                       </tr>
                       <tr>
                         <td>Vocation</td>
-                        <td>Dresseur Pok&eacute;mon</td>
+                        <td>{trainer.vocation}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -70,8 +74,8 @@ const TrainerModal = () => (
                 <div className="team-container">
                   <div className="pokemon">
                     <img
-                      src={pokeAvatar}
-                      style={{ backgroundColor: '#FFE629' }}
+                      src={findPokemonImage(`${pokemon.id}.png`)}
+                      style={{ backgroundColor: `${pokemon.primary}` ? `#${pokemon.primary}` : 'lightgray' }}
                       alt=""
                     />
                   </div>
@@ -102,27 +106,27 @@ const TrainerModal = () => (
                   <tbody>
                     <tr>
                       <td>Taille</td>
-                      <td>112cm</td>
+                      <td>{trainer.height}</td>
                     </tr>
                     <tr>
                       <td>Poids</td>
-                      <td>35kg</td>
+                      <td>{trainer.weight}</td>
                     </tr>
                     <tr>
                       <td>Peau</td>
-                      <td>Blanc</td>
+                      <td>{trainer.skin}</td>
                     </tr>
                     <tr>
                       <td>Yeux</td>
-                      <td>Noir</td>
+                      <td>{trainer.eyes}</td>
                     </tr>
                     <tr>
                       <td>Cheveux</td>
-                      <td>Noir</td>
+                      <td>{trainer.hair}</td>
                     </tr>
                     <tr>
                       <td>Corpulence</td>
-                      <td>Maigrichon</td>
+                      <td>{trainer.corpulence}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -138,165 +142,203 @@ const TrainerModal = () => (
             <div className="stat-container">
               <div className="stat">
                 <span className="title">FORCE</span>
-                <ProgressBar color="yellow" number={1} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.strength} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">ENDURANCE</span>
-                <ProgressBar color="yellow" number={2} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.endurance} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">CONCENTRATION</span>
-                <ProgressBar color="yellow" number={3} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.concentration} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">VOLONTÉ</span>
-                <ProgressBar color="yellow" number={4} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.willpower} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">DEXTERITÉ</span>
-                <ProgressBar color="yellow" number={5} maxNumber={5} />
+                <ProgressBar color="#19cd70" number={trainer.dexterity} maxNumber={5} />
               </div>
               <div className="stat">
                 <span className="title">VITALITÉ</span>
-                <ProgressBar color="yellow" number={9} maxNumber={10} />
+                <ProgressBar color="#19cd70" number={trainer.vitality} maxNumber={10} />
               </div>
             </div>
           </div>
           <div className="stats-skills">
             <table>
-              <thead>
+              <tbody>
                 <tr>
                   <th>Comp&eacute;tences</th>
                   <th>Points</th>
-                  <th>Sp&eacute;cialisations</th>
-                  <th>Connaissances</th>
-                  <th>Points</th>
-                  <th>Sp&eacute;cialisations</th>
+                  <th>Sp&eacute;cialisation</th>
                 </tr>
-              </thead>
-              <tbody>
                 <tr>
                   <td>Bricolage</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>Education</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.do_it_yourself}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Charisme</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>G&eacute;ographie</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.charisma}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Combat</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>Informatique</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.fighting}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Conduite</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>L&eacute;gendes</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.driving}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td>D&eacute;t&eacute;ction</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>M&eacute;decines</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td>D&eacute;tection</td>
+                  <td>{trainer.detection}</td>
+                  <td></td>
                 </tr>
                 <tr>
-                  <td>Discretion</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>M&eacute;decine Pok&eacute;mon</td>
-                  <td>&nbsp;</td>
+                  <td>Discr&eacute;tion</td>
+                  <td>{trainer.furtivity}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Expression</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>Nature</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.expression}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>Psychologie</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>Psychisme</td>
-                  <td>&nbsp;</td>
+                  <td>{trainer.phychology}</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td>Sports</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>Sciences</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td>Sport</td>
+                  <td>{trainer.sport}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Survie</td>
+                  <td>{trainer.survival}</td>
                   <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Connaissances</th>
+                  <th>Points</th>
+                  <th>Sp&eacute;cialisation</th>
+                </tr>
+                <tr>
+                  <td>Education</td>
+                  <td>{trainer.education}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Géographie</td>
+                  <td>{trainer.geography}</td>
                   <td>&nbsp;</td>
-                  <td>Pok&eacute;logie</td>
+                </tr>
+                <tr>
+                  <td>Informatique</td>
+                  <td>{trainer.computer_science}</td>
                   <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Légendes</td>
+                  <td>{trainer.legend}</td>
                   <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Médicine</td>
+                  <td>{trainer.medicine}</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Médicine Pokémon</td>
+                  <td>{trainer.pkmn_medicine}</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Nature</td>
+                  <td>{trainer.nature}</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Psychisme</td>
+                  <td>{trainer.phyche}</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Sciences</td>
+                  <td>{trainer.science}</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Pokélogie</td>
+                  <td>{trainer.pokelogy}</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
         <div className="text">
-          <div className="text-background"></div>
-          <div className="text-history"></div>
-          <div className="text-notes"></div>
+          <div className="text-background">
+            <div className="wrapper">
+              <p>
+                {trainer.background}
+              </p>
+            </div>
+          </div>
+          <div className="text-history">
+            <textarea readOnly value={trainer.history} />
+          </div>
+          <div className="text-notes">
+            <textarea readOnly value={trainer.notes} />
+          </div>
         </div>
       </div>
       <div className="wrapper-right">
         <div className="spendables">
-          <div className="spendables-money">5000 ₽</div>
-          <div className="spendables-xp">25 XP</div>
+          <div className="spendables-money">
+            <span>{trainer.money} ₽</span>
+          </div>
+          <div className="spendables-xp">
+            <span>{trainer.exp} XP</span>
+          </div>
         </div>
         <div className="inventory">
           <div className="inventory-nav">
             <div className="menu-item">
-              <img className="menu-item-img" src={ballMenu} alt="balls"/>
+              <img className="menu-item-img" src={ballMenu} alt="balls" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={materialMenu} alt=""/>
+              <img className="menu-item-img" src={materialMenu} alt="" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={medicMenu} alt=""/>
+              <img className="menu-item-img" src={medicMenu} alt="" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={combatItemMenu} alt=""/>
+              <img className="menu-item-img" src={combatItemMenu} alt="" />
             </div>
             <div className="menu-item">
-              <img className="menu-item-img" src={trainingItemMenu} alt=""/>
+              <img className="menu-item-img" src={trainingItemMenu} alt="" />
             </div>
           </div>
           <div className="inventory-content">
             <div className="inventory-item">
               <div className="item-infos">
-                <Popup 
+                <Popup
                   content={
                     <div className="item-description">Cela sert à emprisonner un pokémon inoncent contre son gré afin de le faire combattre d'autres pokémon capturés à ma guise"</div>
                   }
                   trigger={
-                    <img className="item-img" src={pokeball} alt=""/>
+                    <img className="item-img" src={pokeball} alt="" />
                   }
                 />
                 <div className="item-name">Pokéball</div>
@@ -305,12 +347,12 @@ const TrainerModal = () => (
             </div>
             <div className="inventory-item">
               <div className="item-infos">
-                <Popup 
+                <Popup
                   content={
                     <div className="item-description">Cela sert à emprisonner un pokémon inoncent contre son gré afin de le faire combattre d'autres pokémon capturés à ma guise"</div>
                   }
                   trigger={
-                    <img className="item-img" src={superball} alt=""/>
+                    <img className="item-img" src={superball} alt="" />
                   }
                 />
                 <div className="item-name">Superball</div>
@@ -318,40 +360,45 @@ const TrainerModal = () => (
               <div className="item-quantity">x3</div>
             </div>
             <div className="inventory-item">
-                <Popup 
-                  content={
-                    <div className="item-description">Cela sert à se repérer dans les contrées perdues de Hyrule"</div>
-                  }
-                  trigger={
-                    <div className="item-infos">
-                      <img className="item-img" src={map} alt=""/>
-                      <div className="item-name">Carte</div>
-                    </div>
-                  }
-                />
+              <Popup
+                content={
+                  <div className="item-description">Cela sert à se repérer dans les contrées perdues de Hyrule"</div>
+                }
+                trigger={(
+                  <div className="item-infos">
+                    <img className="item-img" src={map} alt="" />
+                    <div className="item-name">Carte</div>
+                  </div>
+                )}
+              />
               <div className="item-quantity">x1</div>
             </div>
             <div className="inventory-item">
-                <Popup 
-                  content={
-                    <div className="item-description">Her</div>
-                  }
-                  trigger={
-                    <div className="item-infos">
-                      <img className="item-img" src={herbeRappel} alt=""/>
-                      <div className="item-name">Herbe Rappel</div>
-                    </div>
-                  }
-                />
+              <Popup
+                content={
+                  <div className="item-description">Her</div>
+                }
+                trigger={(
+                  <div className="item-infos">
+                    <img className="item-img" src={herbeRappel} alt="" />
+                    <div className="item-name">Herbe Rappel</div>
+                  </div>
+                )}
+              />
               <div className="item-quantity">x6</div>
             </div>
-            
+
           </div>
         </div>
       </div>
     </Modal.Content>
   </TrainerModalStyled>
 );
+
+TrainerModal.propTypes = {
+  trainer: PropTypes.object.isRequired,
+  pokemon: PropTypes.object.isRequired,
+};
 
 // == Export
 export default TrainerModal;

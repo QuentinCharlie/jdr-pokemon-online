@@ -12,6 +12,7 @@ import { changeSidebarVisibility } from 'src/actions/sidebar';
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state) => ({
   visible: state.sidebar.isLogSidebarVisible,
+  entries: state.log.entries,
 });
 
 // == Actions / dispatch

@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 
-// import Electric from 'src/assets/images/types/Electric.svg';
-
 const AttackButtonStyled = styled.div`
   width: 100%;
   height: 48%;
   margin: 0 0 .5em 0;
+
+  /* Modal */
+  
+
   @media (min-width: 1400px) {
     width: 49%;
-    /* margin: 0 0em .5em 0; */
   }
   .button {
     position: relative;
+    z-index: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,9 +25,7 @@ const AttackButtonStyled = styled.div`
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    /* background-color: #A3B2BD; */
     font-size: 1.5em;
-    /* border: 1px solid #2d6898; */
     cursor: pointer;
     /* BORDER RADIUS */
     -webkit-border-radius: 5px;
@@ -34,7 +34,44 @@ const AttackButtonStyled = styled.div`
     /* SHADOW */
     box-shadow: 0 0 15px rgba(117, 117, 117, .3);
     transition: 0.2s;
+    img.type {
+      height: 98%;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .2;
+    }
 
+    /* SHINY EFFECT */
+    /* &::before {
+      position: absolute;
+      top: 0;
+      left: -75%;
+      z-index: 2;
+      display: block;
+      content: '';
+      width: 50%;
+      height: 100%;
+      background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+      -webkit-transform: skewX(-25deg);
+      transform: skewX(-25deg);
+    }
+    &:hover::before {
+      -webkit-animation: shine .75s;
+      animation: shine .75s;
+    }
+    @-webkit-keyframes shine {
+      100% {
+        left: 125%;
+      }
+    }
+    @keyframes shine {
+      100% {
+        left: 125%;
+      }
+    } */
     
     &:active {
       box-shadow: none;
@@ -58,18 +95,18 @@ const AttackButtonStyled = styled.div`
             width: auto;
             height: 70%;
             padding-right: .3em;
-            &.statut {
+            /* &.Statut {
               content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
               opacity: .8;
             }
-            &.special {
+            &.Special {
               content: url("https://www.pokebip.com/pokedex-images/types/speciale.png");
               opacity: .8;
             }
-            &.physical {
+            &.Physique {
               content: url("https://www.pokebip.com/pokedex-images/types/statut.png");
               opacity: .8;
-            }
+            } */
           }
           .attack-distance {
             width: auto;
@@ -78,19 +115,19 @@ const AttackButtonStyled = styled.div`
               content: url("https://i.imgur.com/bsvUkK6.png");
               opacity: .8;
             }
-            &.rayon {
+            &.Rayon {
               /*https://i.imgur.com/xgGwnku.png */
             }
-            &.contact {
+            &.Contact {
               /*https://i.imgur.com/xgGwnku.png */
             }
-            &.zone {
+            &.Zone {
               /*https://i.imgur.com/xgGwnku.png */
             }
-            &.cible {
+            &.Cible {
               /*https://i.imgur.com/xgGwnku.png */
             }
-            &.personnel {
+            &.Personnel {
               /*https://i.imgur.com/xgGwnku.png */
             }
           }

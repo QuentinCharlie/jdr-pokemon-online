@@ -5,14 +5,14 @@ import {
   Segment,
   Sidebar,
   Modal,
+  Dropdown,
 } from 'semantic-ui-react';
 
-import { getSidebarNameCapitalize } from 'src/utils/functions';
+import { getSidebarNameCapitalize, findPokemonImage } from 'src/utils/functions';
 // == Import Components
 import ProgressBar from 'src/components/ProgressBar';
 
 // == Import files
-import pokeAvatar from 'src/assets/images/25.png';
 import heartIcon from 'src/assets/images/heart.svg';
 import zapIcon from 'src/assets/images/zap.svg';
 // == Import components
@@ -21,11 +21,30 @@ import PokemonModal from './PokemonModal';
 import PokemonStyled from './PokemonStyled';
 
 // == Composant
-const Pokemon = ({ visible, changeSidebarVisibility }) => {
+const Pokemon = ({
+  visible,
+  pokemon,
+  changeSidebarVisibility,
+  pokemonMaxHealth,
+  isMj,
+  changePokemonHealth,
+  mjTrainerUsername,
+}) => {
   const handleClick = (e) => {
     const sidebarNameCapitalize = getSidebarNameCapitalize(e.currentTarget.className);
     changeSidebarVisibility(sidebarNameCapitalize, visible);
   };
+
+  let options = [];
+  for (let i = 0 ; i <= pokemonMaxHealth; i++){
+    options.push({ key: i, text: `${i}`, value: i });
+  };
+
+  const handleOptionClick = (e) => {
+    const healthNumber = e.target.dataset.value;
+    changePokemonHealth(mjTrainerUsername, Number(healthNumber));
+  };
+
   return (
     <PokemonStyled>
       <div className="mobile-tablet">
@@ -40,64 +59,102 @@ const Pokemon = ({ visible, changeSidebarVisibility }) => {
         </Sidebar>
       </div>
 
-      <div className="desktop">
+      <div className="desktop" style={{ backgroundColor: `#${pokemon.primary}` }}>
         <div className="pokemon-avatar">
           <Modal
             className="modal-pokemon"
             style={{ width: '95vw', height: '90vh', margin: '4vh auto' }}
-            trigger={<div className="avatar-container"><img src={pokeAvatar} alt="avatar pokemon" /></div>}
+            trigger={<div className="avatar-container"><img src={findPokemonImage(`${pokemon.id}.png`)} alt="avatar pokemon" /></div>}
             closeIcon
           >
-            <PokemonModal />
+            <PokemonModal pokemon={pokemon} pokemonMaxHealth={pokemonMaxHealth}/>
           </Modal>
           <div className="exp">
-            <span>50 XP</span>
+            <span>{pokemon.xp} XP</span>
           </div>
           <div className="energy-container">
-            <span>45/50</span>
+            <span>{pokemon.energy}/50</span>
             <img src={zapIcon} alt="energy logo" />
-            <div className="energy-bar" style={{ width: '90%' }} />
+            <div 
+              className={(pokemon.energy === 50) ? 'energy-bar rounded' : 'energy-bar'} 
+              style={{ width: `${Math.ceil(pokemon.energy * 2)}%` }} 
+            />
           </div>
-          <div className="health-container">
-            <span>20/100</span>
-            <img src={heartIcon} alt="heart logo" />
-            <div className="health-bar" style={{ width: '20%' }} />
-          </div>
+          {isMj && 
+            <div className="health-container">
+              <Dropdown
+                className="span"
+                upward
+                icon={null}
+                scrolling
+                trigger={
+                  <span style={{ cursor: 'pointer' }}>
+                    {pokemon.vitality}/{pokemonMaxHealth}
+                  </span>
+                }
+              >
+                <Dropdown.Menu >
+                  {options.map((option) => (
+                    <Dropdown.Item 
+                      key={`pokemon-option-key-${option.key}`}
+                      onClick={handleOptionClick}
+                      data-value={option.value}
+                    >
+                      {option.text}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <img src={heartIcon} alt="heart logo" />
+              <div 
+                className={(pokemon.vitality === pokemonMaxHealth) ? 'health-bar rounded' : 'health-bar'} 
+                style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} 
+              /> 
+            </div>
+          }
+          {!isMj &&
+            <div className="health-container">
+              <span>{pokemon.vitality}/{pokemonMaxHealth}</span>
+              <img src={heartIcon} alt="heart logo" />
+              <div className={(pokemon.vitality === pokemonMaxHealth) ? 'health-bar rounded' : 'health-bar'} style={{ width: `${Math.ceil(pokemon.vitality / pokemonMaxHealth * 100)}%` }} />
+            </div>
+          }
         </div>
         <div className="pokemon-info">
           <div className="pokemon-presentation">
-            <span className="pokemon-name">Pikachu</span>
+            <span className="pokemon-name">{pokemon.name}</span>
             <div className="pokemon-types">
-              <span className="pokemon-type electrik">
-                {/* <img src="https://www.pokebip.com/pokedex-images/types/psy.png" alt="" /> */}
-                Electrik
-              </span>
-              <span className="pokemon-type electrik">
-                {/* <img src="https://www.pokebip.com/pokedex-images/types/psy.png" alt="" /> */}
-                Electrik
-              </span>
+              {pokemon.types.map((type) => (
+                <span 
+                  key={type.id}
+                  className="pokemon-type"
+                  style={{ backgroundColor: `#${type.color}` }}
+                >
+                  {type.name}
+                </span>
+              ))}
             </div>
           </div>
           <div className="pokemon-stats">
             <div className="stat">
               <span className="title"><abbr title="FORCE">FOR</abbr></span>
-              <ProgressBar color="#f8cc53" number={2} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={pokemon.strength} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="ENDURANCE">END</abbr></span>
-              <ProgressBar color="#f8cc53" number={2} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={pokemon.endurance} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="CONCENTRATION">CON</abbr></span>
-              <ProgressBar color="#f8cc53" number={11} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={pokemon.concentration} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="VOLONTE">VOL</abbr></span>
-              <ProgressBar color="#f8cc53" number={6} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={pokemon.willpower} maxNumber={16} />
             </div>
             <div className="stat">
               <span className="title"><abbr title="DEXTERITE">DEX</abbr></span>
-              <ProgressBar color="#f8cc53" number={9} maxNumber={16} />
+              <ProgressBar color="#f8cc53" number={pokemon.dexterity} maxNumber={16} />
             </div>
           </div>
         </div>
@@ -108,8 +165,17 @@ const Pokemon = ({ visible, changeSidebarVisibility }) => {
 
 Pokemon.propTypes = {
   visible: PropTypes.bool.isRequired,
+  pokemon: PropTypes.object.isRequired,
   changeSidebarVisibility: PropTypes.func.isRequired,
+  pokemonMaxHealth: PropTypes.number.isRequired,
+  isMj: PropTypes.bool.isRequired,
+  changePokemonHealth: PropTypes.func.isRequired,
+  mjTrainerUsername: PropTypes.string,
 };
+
+Pokemon.defaultProps = {
+  mjTrainerUsername: '',
+}
 
 
 // == Export
