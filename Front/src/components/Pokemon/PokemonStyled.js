@@ -85,7 +85,7 @@ const PokemonStyled = styled.div`
           bottom: .15em;
           height: 80%;
         }
-        /* BARRE VERTE*/
+        /* BARRE BLEUE*/
         .energy-bar {
           position: absolute;
           bottom: 0em;
