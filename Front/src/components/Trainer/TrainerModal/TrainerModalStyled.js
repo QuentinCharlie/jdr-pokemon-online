@@ -13,6 +13,8 @@ const TrainerModalStyled = styled.div`
     padding-bottom: .5em;
     h1 {
       text-align: center;
+      font-weight: bold;
+      font-size: 2em;
     }
   }
   .modal-content {

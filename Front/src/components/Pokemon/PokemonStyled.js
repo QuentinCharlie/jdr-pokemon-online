@@ -177,6 +177,7 @@ const PokemonStyled = styled.div`
             text-shadow: 1px 1px 2px rgba(20, 20, 20, .15);
             font-size: 2em;
             font-weight: bold;
+            line-height: 1;
           }
           .pokemon-types {
             margin-top: .5em;

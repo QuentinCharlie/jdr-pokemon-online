@@ -13,6 +13,8 @@ const PokemonModalStyled = styled.div`
     padding-bottom: .5em;
     h1 {
       text-align: center;
+      font-weight: bold;
+      font-size: 2em;
     }
   }
   .modal-content {
@@ -195,12 +197,13 @@ const PokemonModalStyled = styled.div`
             width: 19%;
             height: 25%;
             color: white;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
             filter: saturate(60%);
+            text-align: center;
             /* .multi {
               position: relative;
             } */
@@ -292,13 +295,14 @@ const PokemonModalStyled = styled.div`
             font-size: 2em;
             font-weight: bold;
             margin-bottom: .3em;
+            line-height: 1;
           }
           .attack-icons {
             display: flex;
             width: 100%;
             height: 1em;
             align-items: center;
-            margin-bottom: 2em;
+            margin-bottom: 1em;
             .attack-category {
               display: flex;
               align-items: center;
@@ -325,8 +329,9 @@ const PokemonModalStyled = styled.div`
             }
           }
           .effect {
-            width: 70%;
+            width: 90%;
             margin: 0 auto 2em 0;
+            font-size: .8em;
           }
           .attack-stats {
             position: absolute;

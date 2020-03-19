@@ -107,6 +107,7 @@ const LogStyled = styled.div`
             margin-bottom: 0;
           } 
           .entry {
+            animation: grow .3s cubic-bezier(.26,.34,.53,1.51);
             box-shadow: 0 0 7px rgba(117, 117, 117, .2);
             border-radius: 10px;
             position: relative;

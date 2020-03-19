@@ -58,6 +58,7 @@ const AttackButtonStyled = styled.div`
         .attack-name {
           width: calc(100% - .2em);
           padding-bottom: .2em;
+          line-height: 1;
           }
         .attack-icons {
           display: flex;
