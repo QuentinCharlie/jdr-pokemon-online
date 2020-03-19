@@ -65,7 +65,7 @@ class GameController extends AbstractController
     $username = $this->getUser()->getNickname();
 
     // if (!@fsockopen('localhost', $port)) { // @change dev
-      if (!@fsockopen('54.89.22.26', $port)) {
+      if (!@fsockopen('54.89.22.26', $port)) { // @change prod
 
       // Insère en BDD l'utilisateur et le port choisi
       $newGame = new GameServer();
