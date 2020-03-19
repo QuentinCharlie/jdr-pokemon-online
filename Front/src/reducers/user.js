@@ -20,15 +20,15 @@ const initialState = {
 // Reducer
 const userReducer = (state = initialState, action = {}) => {
   console.log('userReducer');
-  // let username = document.querySelector('#root').dataset.username; // @ change prod
+  let username = document.querySelector('#root').dataset.username; // @ change prod
   // const isMj = document.querySelector('#root').dataset.mj;
 
   switch (action.type) {
     case LOAD_USER:
       return {
         ...state,
-          username: `${Math.floor(Math.random() * (100000000000 - 1 +1)) + 1}`, // @change prod
-          // username, // @change dev
+          // username: `${Math.floor(Math.random() * (100000000000 - 1 +1)) + 1}`, // @change dev
+          username, // @change prod
 
       };
 

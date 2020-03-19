@@ -6,16 +6,16 @@ let socket;
 
 /* eslint-disable no-unused-vars, no-console */
 const userMiddleware = (store) => (next) => (action) => {
-  // let port = document.querySelector('#root').dataset.port; // @change prod
-  let port = 3001; // @change dev
+  let port = document.querySelector('#root').dataset.port; // @change prod
+  // let port = 3001; // @change dev
   // console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
 
   switch (action.type) {
     case WS_CONNECT:
-      // socket = io.connect(`http://54.89.22.26:${port}`); // @change prod
+      socket = io.connect(`http://54.89.22.26:${port}`); // @change prod
       // socket = io.connect(`http://localhost:${port}`); 
-      socket = window.io(`http://localhost:${port}`); // @change dev
+      // socket = window.io(`http://localhost:${port}`); // @change dev
       // Happened after case SOMETHING
       // receive action from node.js serve
       // then dispatch to state with WS_CONNECT
