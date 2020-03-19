@@ -2,7 +2,7 @@ import { WS_CONNECT } from 'src/actions/wsConnect';
 import { LOAD_STATE } from 'src/actions/user';
 import { updateGridState } from 'src/actions/grid';
 import { updateLogState } from 'src/actions/log';
-import { userIsReady } from 'src/actions/user';
+import { userIsReady, linkTrainerToUser, linkPokemonToUser } from 'src/actions/user';
 import { loadAllTrainers, CHANGE_TRAINER_HEALTH } from 'src/actions/trainer';
 import { loadAllPokemons, CHANGE_POKEMON_HEALTH } from 'src/actions/pokemon';
 import { changeMjState, updateMjState, CHANGE_MJ_STATE } from 'src/actions/mj';
@@ -16,16 +16,16 @@ let socket;
 
 /* eslint-disable no-unused-vars, no-console */
 const sharedMiddleware = (store) => (next) => (action) => {
-  let port = document.querySelector('#root').dataset.port; // @change prod
-  // let port = 3001; // @change dev
+  // let port = document.querySelector('#root').dataset.port; // @change prod
+  let port = 3001; // @change dev
   console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
 
   switch (action.type) {
     case WS_CONNECT:
-      socket = io.connect(`http://54.89.22.26:${port}`); // @change prod
+      // socket = io.connect(`http://54.89.22.26:${port}`); // @change prod
       // socket = io.connect(`http://localhost:${port}`); 
-      // socket = window.io(`http://localhost:${port}`); // @change dev
+      socket = window.io(`http://localhost:${port}`); // @change dev
       // Happened after case SOMETHING
       // receive action from node.js serve
       // then dispatch to state with WS_CONNECT
@@ -33,15 +33,45 @@ const sharedMiddleware = (store) => (next) => (action) => {
         const state = store.getState();
         console.log('Retour du serveur: load_state');
         console.log(info);
-        store.dispatch(loadAllTrainers());
-        store.dispatch(loadAllPokemons());
-        store.dispatch(updateMjState(state.user.username, info.mj.mjName));
-        if (state.mj.mjName === undefined) {
-          store.dispatch(changeMjState(state.user.username));  
+
+        const playerName = state.user.username;
+        const mjName = state.mj.mjName;
+        const usersKeys = Object.keys(state.users);
+        const isThisAnUserReconnection = usersKeys.includes(playerName);
+        const isThisAnMjReconnection = playerName === mjName;
+
+        if (mjName !== undefined && isThisAnMjReconnection) 
+        {
+          store.dispatch(updateGridState(info.grid));        
+          store.dispatch(updateLogState(info.log));
+          store.dispatch(updateUsersState(info.users));
         }
-        store.dispatch(updateGridState(info.grid));        
-        store.dispatch(updateLogState(info.log));
-        store.dispatch(updateUsersState(info.users));
+        else if (mjName !== undefined && isThisAnUserReconnection) 
+        {
+          const pokemon = state.pokemon.allPokemons.find((pokemon) => (
+            pokemon.id === state.users[playerName].pokemon[0].id
+          ));
+          const trainer = state.trainer.allTrainers.find((trainer) => (
+            trainer.id === state.users[playerName].trainer.id
+          ));
+          store.dispatch(updateGridState(info.grid));        
+          store.dispatch(updateLogState(info.log));
+          store.dispatch(updateUsersState(info.users));
+          store.dispatch(linkTrainerToUser(trainer));
+          store.dispatch(linkPokemonToUser(pokemon));
+        }
+        else 
+        {
+          store.dispatch(loadAllTrainers());
+          store.dispatch(loadAllPokemons());
+          store.dispatch(updateMjState(playerName, info.mj.mjName));
+          if (mjName === undefined) {
+            store.dispatch(changeMjState(playerName));  
+          }
+          store.dispatch(updateGridState(info.grid));        
+          store.dispatch(updateLogState(info.log));
+          store.dispatch(updateUsersState(info.users));
+        }
       });
 
       socket.on('change_mj_state', (info) => {

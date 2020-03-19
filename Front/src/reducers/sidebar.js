@@ -18,6 +18,7 @@ const sidebarReducer = (state = initialState, action = {}) => {
     case CHANGE_SIDEBAR_VISIBILITY: {
       const sidebarToChange = `is${action.sidebarName}SidebarVisible`;
       return {
+        ...state,
         isNavSidebarVisible: false,
         isLogSidebarVisible: false,
         isTrainerSidebarVisible: false,
