@@ -15,7 +15,7 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
-//let port = 3001; // @change dev
+// let port = 3001; // @change dev
 //let port = 7001; // @change dev
 let port = process.argv[2]; // @change prod
 io.set('origins', '*:*');
@@ -23,19 +23,18 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
 let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
-const inactionTimer = 2; // 3600s => 1h
-setInterval(function () {
-  if (timeSinceUse > inactionTimer) {
+
+const inactionTimer = 300; // 3600s => 1h
+setInterval( function() { 
+  if( timeSinceUse > inactionTimer ) {
     // TODO : Better close socket connection before closing whole server.js (thus freeing port)
     console.log("Exiting due to inactivity");
     // TODO : Ajax BDD free port
-
-    //TODO const url = `http://54.89.22.26./game/${port}/delete`;
-    const url = `http://localhost:8000/game/${port}/delete`;
-    axios.delete(url, { data: { token: "M%P'c~]&7XBdz^Pe" } })
-      .then((response) => { console.log(response.data); process.exit(); })
-      .catch((error) => { console.log(error.response.statusText); process.exit(); });
-
+    const url = `http://54.89.22.26./game/${port}/delete`; // @change prod
+    // const url = `http://localhost:8000/game/${port}/delete`;
+    axios.delete(url,{ data: { token: "M%P'c~]&7XBdz^Pe" }})
+    .then((response) => {console.log(response.data); process.exit();}) 
+    .catch((error) => {console.log(error.response.statusText); process.exit();});
   }
   console.log("Timesince : " + timeSinceUse + "s");
   timeSinceUse += 1; // 1s
@@ -411,5 +410,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-// server.listen(port); //prod
-server.listen(port, 'localhost'); //dev
+server.listen(port); //prod
+// server.listen(port, 'localhost'); //dev

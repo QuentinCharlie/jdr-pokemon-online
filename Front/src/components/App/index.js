@@ -12,6 +12,8 @@ import Attacks from 'src/containers/Attacks';
 import Dices from 'src/containers/Dices';
 import TrainerSelector from 'src/containers/TrainerSelector';
 import PokemonSelector from 'src/containers/PokemonSelector';
+import PokeballSpinner from 'src/components/PokemonSelector/PokeballSpinner';
+
 
 // Styles
 import AppStyled from './AppStyled';
@@ -27,7 +29,9 @@ const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty }) => {
         {hasTrainer && !hasPokemon && <PokemonSelector />}
       </div>
     }
-    
+    {isUserReady && !isUsersNotEmpty && (
+      <div>En attente d'un dresseur pour commencer l'aventure !</div>
+    )}
     {isUserReady && isUsersNotEmpty && (
       <>
         <div className="mobile-tablet-app">
