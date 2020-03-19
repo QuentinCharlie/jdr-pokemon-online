@@ -12,6 +12,8 @@ import Attacks from 'src/containers/Attacks';
 import Dices from 'src/containers/Dices';
 import TrainerSelector from 'src/containers/TrainerSelector';
 import PokemonSelector from 'src/containers/PokemonSelector';
+import PokeballSpinner from 'src/components/PokemonSelector/PokeballSpinner';
+
 
 // Styles
 import AppStyled from './AppStyled';
