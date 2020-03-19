@@ -65,7 +65,7 @@ const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty }) => {
             </div>
           </div>
         </div>
-      )}
+      )}     
       {isUserReady && isUsersNotEmpty && (
         <>
           <div className="mobile-tablet-app">

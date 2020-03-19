@@ -13,13 +13,14 @@ import App from 'src/components/App';
 const mapStateToProps = (state) => {
   function isNotEmpty(obj) {
     return Object.keys(obj).length > 0;
-  } 
+  }
   return ({
-  hasTrainer: state.user.hasTrainer,
-  hasPokemon: state.user.hasPokemon,
-  isUserReady: state.user.isUserReady,
-  isUsersNotEmpty: isNotEmpty(state.users),
-});}
+    hasTrainer: state.user.hasTrainer,
+    hasPokemon: state.user.hasPokemon,
+    isUserReady: state.user.isUserReady,
+    isUsersNotEmpty: isNotEmpty(state.users),
+  });
+}
 
 // == Actions / dispatch
 // Notre composant à besoin d'agir sur le state ?
