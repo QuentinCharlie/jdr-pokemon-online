@@ -41,6 +41,8 @@ const AttacksStyled = styled.div`
       overflow: auto;
       /* scrollbar hidden (IE/Edge) */
       -ms-overflow-style: none;
+        /* scrollbar hidden (Firefox) */
+        scrollbar-width: none;
       /* scrollbar hidden (Chrome/Firefox/Safari) */
       &::-webkit-scrollbar {
         display: none;
