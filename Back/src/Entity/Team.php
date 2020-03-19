@@ -46,6 +46,11 @@ class Team
      */
     private $avatar;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $linkedin;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +132,26 @@ class Team
     public function setRole($role)
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of linkedin
+     */ 
+    public function getLinkedin()
+    {
+        return $this->linkedin;
+    }
+
+    /**
+     * Set the value of linkedin
+     *
+     * @return  self
+     */ 
+    public function setLinkedin($linkedin)
+    {
+        $this->linkedin = $linkedin;
 
         return $this;
     }
