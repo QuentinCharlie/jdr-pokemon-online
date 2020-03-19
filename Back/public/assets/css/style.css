@@ -26,7 +26,7 @@ body{
     border-radius: 10px;
     background-color: white;
     width: 45em;
-    height: 15em;
+    height: auto!important;
     border: 2px solid #343a40;
     -webkit-box-shadow: 11px 13px 7px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 11px 13px 7px -5px rgba(0,0,0,0.75);
@@ -35,6 +35,16 @@ body{
     color: #343a40;
     font-family: "PokemonClassic";
 
+
+}
+
+
+#inputEmail.form-control {
+    font-family: Arial;
+}
+
+#inputPassword.form-control {
+    font-family: Arial;
 }
 
 .divTrainer{
@@ -195,4 +205,204 @@ body{
 .stats li{
     list-style-type: none;
     margin : 0;
+}
+
+.nav-item a{
+    margin: 0 2px 0 2px;
+}
+
+.nav-item a:hover{
+    text-decoration: underline;
+}
+
+#navbarNav {
+    margin-left: 65em;
+}
+
+a#gamelistbtn {
+    color: #ffffff;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #E27F6A 0, #8F3B29 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+a#listtrainerbtn {
+    color: #ffffff;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #D3DB57 0, #898F29 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+a#listpokemonbtn {
+    color: #ffffff;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #67DB57 0, #31A321 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+a#ressourcesbtn {
+    color: #ffffff;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #56DCBD 0, #21A385 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+a#profilbtn {
+    color: #ffffff;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #569FDC 0, #23659C 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+a#logoutbtn {
+    color: #ffffff;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #727679 0, #3A3B3C 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+a#adminbtn {
+    color: #696969;
+    padding: 0.4em;
+    background-image: linear-gradient(-45deg, #DCDCDC 0, #BEBEBE 100%);
+    border-radius: 3px;
+    box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+.col-5{
+    background-color: rgba(255,255,255,0.7);
+}
+
+.list-group-flush .list-group-item {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 20px;
+    margin: 0.3em;
+    text-align: center;
+}
+
+.list-group-flush .list-group-item a {
+color: #343a40;
+}
+
+.list-group:last-child .list-group-item:last-child {
+     border-bottom-right-radius: none!important; 
+     border-bottom-left-radius: none!important;  
+}
+
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-left: 14px;
+    text-decoration: underline;
+    text-align: center;
+    margin-bottom: 0;
+    background-color: rgba(255,255,255,1);
+}
+
+.myButton {
+	box-shadow:inset 0px 39px 0px -24px #e67a73;
+	background-color:#e4685d;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff!important;
+	font-family:Arial;
+	font-size:0.8em;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.myButton:hover {
+	background-color:#eb675e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+.joinButton {
+	box-shadow:inset 0px 36px 0px -24px #73e6b2;
+	background-color:#5de388;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff!important;
+	font-family:Arial;
+    font-size:0.8em;
+    margin-left: 35em;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #34b06a;
+}
+.joinButton:hover {
+	background-color:#5eeb9b;
+}
+.joinButton:active {
+	position:relative;
+	top:1px;
+}
+
+.createButton {
+	box-shadow:inset 0px 36px 0px -24px #738fe6;
+	background-color:#5d8ae3;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+    color:#ffffff!important;
+    margin-left: 35em;
+	font-family:Arial;
+	font-size:0.8em;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #345eb0;
+}
+.createButton:hover {
+	background-color:#735eeb;
+}
+.createButton:active {
+	position:relative;
+	top:1px;
+}
+
+#profil_img_gameboard{
+    margin: 2em auto;
+    width : 200px; height : 200px;
+    border: none;
+    -moz-border-radius : 100px;
+    -webkit-border-radius : 100px;
+    border-radius : 100px;
+    -webkit-box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.4);
+    -moz-box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.4);
+    box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.4);
+}
+
+#nickname_gameboard{
+    color: blue;
+}
+
+.col-3 h2 {
+    margin: 2em auto;
+}
+
+.col-3 p {
+    margin: 2em auto;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+#question {
+    margin-top: 22em;
+    text-align: right;
+    font-size: 0.6em;
 }
