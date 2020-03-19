@@ -120,10 +120,9 @@ class GameController extends AbstractController
    */
   public function gameDelete($port)
   {
-    //$ajax = $this->json($request->request->all());
+  
     $request = json_decode(Request::createFromGlobals()->getContent(), true);
     
-
     if ("M%P'c~]&7XBdz^Pe" === $request["token"]) {
       
       $gameServer = $this->getDoctrine()->getRepository(GameServer::class)->find($port);

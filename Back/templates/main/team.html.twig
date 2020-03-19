@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<h2 class="pokemonTitle">L'équipe de Happy Dev</h2>
+
+<div class="card-deck">
+  {% for team in team %}
+    <div class="card pokemonCard">
+      <img src="{{asset('assets/images/team/'~ team.avatar ~'.jpg')}}" class="card-img-top" alt="{{ team.name }}">
+      <div class="card-body">
+        <h5 class="card-title">{{team.name}} </h5>
+        <p class="card-body" style="font-family:Arial"> <strong> Rôle dans le projet :</strong>  {{team.role}}
+            <br>
+             <strong> Spécialité : </strong> {{team.skills}}
+             <br>
+            <strong>Localisation : </strong> {{team.city}}
+            <br>
+            <strong>Mail : </strong> {{team.mail}}
+            <br>
+            <strong> <a href="{{team.linkedin}}">Linkedin </a> </strong> 
+        </p>
+     
+        
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

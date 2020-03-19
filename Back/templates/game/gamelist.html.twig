@@ -20,7 +20,7 @@
         <img id="profil_img_gameboard" src="{{asset('assets/images/'~ app.user.avatar.name ~'.png')}}" class="card-img-top" alt="...">
         <h2> Hey ! Mais <span id="nickname_gameboard">{{app.user.nickname}}</span> est arrivé !</h2>
         <p> Nous te souhaitons de passer de bonnes parties de Jeu de Rôles en notre compagnie ! </p>
-        <p id="question">Une question ? Contacte l'équipe du site en cliquant sur ce lien.</p>
+        <p id="question">Une question ? Contacte l'équipe du site en cliquant sur ce <a href="{{ path('team')}}">lien </a>.</p>
       </div>
     </div>
 </div>

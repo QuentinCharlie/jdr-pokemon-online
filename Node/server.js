@@ -19,26 +19,27 @@ const io = socket(server);
 //let port = 7001; // @change dev
 let port = process.argv[2]; // @change prod
 io.set('origins', '*:*');
-process.env.NODE_TLS_REJECT_UNAUTHORIZED="0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
 let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 const inactionTimer = 2; // 3600s => 1h
-setInterval( function() { 
-  if( timeSinceUse > inactionTimer ) {
+setInterval(function () {
+  if (timeSinceUse > inactionTimer) {
     // TODO : Better close socket connection before closing whole server.js (thus freeing port)
-    console.log( "Exiting due to inactivity" );
+    console.log("Exiting due to inactivity");
     // TODO : Ajax BDD free port
+
     //TODO const url = `http://54.89.22.26./game/${port}/delete`;
     const url = `http://localhost:8000/game/${port}/delete`;
-    axios.delete(url,{ data: { token: "M%P'c~]&7XBdz^Pe" }})
-    .then((response) => {console.log(response.data); process.exit();}) 
-    .catch((error) => {console.log(error.response.statusText); process.exit();});
-   
+    axios.delete(url, { data: { token: "M%P'c~]&7XBdz^Pe" } })
+      .then((response) => { console.log(response.data); process.exit(); })
+      .catch((error) => { console.log(error.response.statusText); process.exit(); });
+
   }
-  console.log("Timesince : " + timeSinceUse + "s" );
+  console.log("Timesince : " + timeSinceUse + "s");
   timeSinceUse += 1; // 1s
-}, 1000 ); // 1000 ms
+}, 1000); // 1000 ms
 
 const db = {};
 
@@ -78,46 +79,46 @@ let state = {
   },
   log: {
     entries: [
-        // {
-        //   id : 1,
-        //   isAttack: true,
-        //   isDice: false,
-        //   attack : 
-        //   {
-        //     title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
-        //     attack: 'Tonnerre',
-        //     dicesRoll: '10, 10, 10',
-        //     resultDamage: 170,
-        //     resultStatus: 'DEAD',
-        //   },
-        //   dice : 
-        //   {
-        //     title: null,
-        //     diceroll: null,
-        //   },   
-        // },
-        // {
-        //   id : 2,
-        //   isAttack: false,
-        //   isDice: true,
-        //   attack : 
-        //   {
-        //     title: null,
-        //     attack: null,
-        //     dicesRoll: null,
-        //     resultDamage: null,
-        //     resultStatus: null,
-        //   },
-        //   dice : 
-        //   {
-        //     title: 'Chance',
-        //     diceroll: 99,
-        //   },   
-        // },     
-      ],
+      // {
+      //   id : 1,
+      //   isAttack: true,
+      //   isDice: false,
+      //   attack : 
+      //   {
+      //     title: 'Pikachu de Sacha attaque Magicarpe de Reblochon :',
+      //     attack: 'Tonnerre',
+      //     dicesRoll: '10, 10, 10',
+      //     resultDamage: 170,
+      //     resultStatus: 'DEAD',
+      //   },
+      //   dice : 
+      //   {
+      //     title: null,
+      //     diceroll: null,
+      //   },   
+      // },
+      // {
+      //   id : 2,
+      //   isAttack: false,
+      //   isDice: true,
+      //   attack : 
+      //   {
+      //     title: null,
+      //     attack: null,
+      //     dicesRoll: null,
+      //     resultDamage: null,
+      //     resultStatus: null,
+      //   },
+      //   dice : 
+      //   {
+      //     title: 'Chance',
+      //     diceroll: 99,
+      //   },   
+      // },     
+    ],
   },
-  users : {},
-  mj: { 
+  users: {},
+  mj: {
     isAlreadyMj: false,
   },
 };
@@ -250,15 +251,15 @@ io.on('connection', (ws) => {
       entries: [
         ...state.log.entries,
         {
-          id : entryId,
+          id: entryId,
           isAttack: false,
           isDice: true,
-          dice : 
+          dice:
           {
             roller,
             skill,
             diceRolls,
-          },   
+          },
         }
       ]
     }
@@ -289,7 +290,7 @@ io.on('connection', (ws) => {
     let title;
     if (info.attackResults.targetObject.trainer === undefined) {
       title = `${pokemonName} de ${trainerName} attaque ${target} :`;
-    } 
+    }
     else {
       title = `${pokemonName} de ${trainerName} attaque ${target} de ${trainerTarget} :`;
     }
@@ -299,10 +300,10 @@ io.on('connection', (ws) => {
       entries: [
         ...state.log.entries,
         {
-          id : entryId,
+          id: entryId,
           isAttack: true,
           isDice: false,
-          attack : 
+          attack:
           {
             title,
             attack,
@@ -311,11 +312,11 @@ io.on('connection', (ws) => {
             // resultStatus: '',
             message,
           },
-          dice : 
+          dice:
           {
             title: null,
             diceroll: null,
-          },   
+          },
         }
       ]
     }
@@ -337,7 +338,7 @@ io.on('connection', (ws) => {
           {
             ...info.pokemon,
           },
-        ],          
+        ],
       },
     };
     info = state.users;
@@ -345,7 +346,7 @@ io.on('connection', (ws) => {
     io.emit('add_pokemon_and_trainer_to_users_state', info);
   });
 
-  
+
   ws.on('add_user_trainer_and_pokemon_to_grid', (info) => {
     // eslint-disable-next-line no-plusplus
     console.log('add new trainer and pokemon to node grid');
@@ -383,21 +384,21 @@ io.on('connection', (ws) => {
           ],
         },
       ];
-                
+
       state.grid.trainers = stateTrainers;
     }
     info = state;
     timeSinceUse = 0;
     io.emit('add_user_trainer_and_pokemon_to_grid', info);
   });
-  
+
   ws.on('share_selected_trainer_and_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
     info.id = ++id;
     timeSinceUse = 0;
     io.emit('share_selected_trainer_and_pokemon', info);
   });
-  
+
   ws.on('move_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
     info.id = ++id;
