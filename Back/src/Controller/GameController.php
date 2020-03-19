@@ -163,6 +163,6 @@ class GameController extends AbstractController
 
       return $this->redirectToRoute("game_list");
     }
-    throw $this->createNotFoundException("T'as rien à foutre la !");
+    throw $this->createNotFoundException("Not authorized");
   }
 }
