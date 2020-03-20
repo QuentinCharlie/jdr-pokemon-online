@@ -7,7 +7,7 @@ import { Modal } from 'semantic-ui-react';
 
 // == import files
 // == Import utils
-import { 
+import {
   findTypeImage,
   findCategoryImage,
 } from 'src/utils/functions';
@@ -42,11 +42,12 @@ const AttackButton = ({
 
   return (
     <AttackButtonStyled>
-      <Modal 
+      <Modal
         trigger={
           <div
             className={`button ${type}`}
-            style={{ backgroundColor: `#${color}`,
+            style={{
+              backgroundColor: `#${color}`,
             }}
           >
             {console.log(type)}
@@ -60,6 +61,7 @@ const AttackButton = ({
                   {distance}
                 </div>
                 <Popup
+                  className="attack-popup-ui"
                   content={(
                     <InfoAttackPopUp
                       name={name}
@@ -96,8 +98,8 @@ const AttackButton = ({
               </div>
             </div>
             <img className="type" src={typeImage} alt="type logo" />
-          </div>     
-        } 
+          </div>
+        }
         // basic 
         // open={isTargetModalOpen}
         size='small'
@@ -106,8 +108,8 @@ const AttackButton = ({
         dimmer='inverted'
         className='modal-attack-targets'
       >
-        <TargetsModal 
-          allTargets={allTargets} 
+        <TargetsModal
+          allTargets={allTargets}
           pokemon={pokemon}
           name={name}
           type={type}
