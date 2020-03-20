@@ -8,13 +8,22 @@ const NavStyled = styled.nav`
     }
     .mobile-tablet {
       .nav-button {
-      width: calc(7vw - .5em);
-      height: calc(7vw - .5em);
-      margin-bottom: .5em;
-      background-color: lightgray;
+        width: calc(7vw - .5em);
+        height: calc(7vw - .5em);
+        margin-bottom: .5em;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: 1px solid #6c757d;
+        /* box-shadow: 0 0 15px rgba(117, 117, 117, .3); */
+        .img {
+          height: 80%;
+        }
       }
       .ui.bottom.sidebar {
-        background-color: lightgrey;
+        background-color: white;
         padding: .5em;
         margin-right: calc(7vw + .5em)!important;
         margin-left: calc(93vw - 20vw - .5em)! important;
@@ -23,8 +32,11 @@ const NavStyled = styled.nav`
         /* // for a fullboard size sidebar :
         width: calc(93vw - .5em); */
         .nav-sidebar {
-          color: white;
+          color: #6c757d;
           padding: .5em;
+          a {
+            color: #6c757d;
+          }
           .nav-items {
             display: flex;
             flex-direction: column;
@@ -55,6 +67,9 @@ const NavStyled = styled.nav`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      a {
+        color: white;
+      }
       .nav-items {
         display: flex;
       }
