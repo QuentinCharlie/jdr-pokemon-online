@@ -387,7 +387,6 @@ const TrainerModal = ({ trainer, pokemon }) => (
               />
               <div className="item-quantity">x6</div>
             </div>
-
           </div>
         </div>
       </div>

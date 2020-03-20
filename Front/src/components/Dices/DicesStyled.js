@@ -21,7 +21,7 @@ const DicesStyled = styled.div`
         }
       }
       .ui.bottom.sidebar {
-        background-color: lightcoral;
+        background-color: white;
         margin-left: .5em!important;
         width: calc(93vw - 1em)!important;
         height: 50vh!important;

@@ -446,7 +446,6 @@ const TrainerModalStyled = styled.div`
               box-shadow: 2px 4px 8px rgba(117, 117, 117, .6);
               color: white;
               transition: .2s;
-
             }
             .item-infos {
               display: flex;

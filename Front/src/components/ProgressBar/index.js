@@ -20,6 +20,7 @@ const ProgressBar = ({
     <ProgressBarStyled>
       <span className={skewNumber ? 'skew-number' : 'hidden'} />
       <span
+      className="number"
         style={{
           color: textColor,
         }}

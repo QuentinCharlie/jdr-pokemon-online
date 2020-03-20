@@ -22,12 +22,15 @@ const AttacksStyled = styled.div`
         }
       }
       .ui.left.sidebar {
-        background-color: lightskyblue;
+        background-color: white;
         width: 40vw;
         /* for a fullboard size sidebar : 
         width: calc(93vw - .5em); */
         .attacks-sidebar {
           color: white;
+          .button {
+            height: 20vh;
+          }
         }
       }
     }
@@ -50,8 +53,8 @@ const AttacksStyled = styled.div`
       overflow: auto;
       /* scrollbar hidden (IE/Edge) */
       -ms-overflow-style: none;
-                /* scrollbar hidden (Firefox) */
-                scrollbar-width: none;
+      /* scrollbar hidden (Firefox) */
+      scrollbar-width: none;
       /* scrollbar hidden (Chrome/Safari) */
       &::-webkit-scrollbar {
         display: none;
