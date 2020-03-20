@@ -41,7 +41,7 @@ const userReducer = (state = initialState, action = {}) => {
     
     case UPDATE_MJ_STATE: {
       console.log(action);
-      if (action.username === action.mjName) {
+      if (action.username === action.mjName){
         return {
           ...state,
           hasTrainer: false,
@@ -50,7 +50,7 @@ const userReducer = (state = initialState, action = {}) => {
           isMj: true,
         };
       }
-      if (state.isUserReady) {
+      if (action.username !== action.mjName && state.isUserReady) {
         return {
           ...state,
           hasTrainer: true,

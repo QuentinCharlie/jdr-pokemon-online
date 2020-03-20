@@ -1,6 +1,6 @@
 body{
     background-image: url("../images/map2.png");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 
 @font-face
@@ -53,6 +53,7 @@ body{
 
 .divPokemon{
     height: fit-content;
+
 }
 
 .divForm{
@@ -136,6 +137,12 @@ body{
     min-width: 17%;
     max-width: 17%;
     margin: 20px;
+    border-radius: 10px;
+}
+
+.pokemonCard a {
+    border-radius: 10px;
+    color: white;
 }
 
 .pokemonDetailCard{

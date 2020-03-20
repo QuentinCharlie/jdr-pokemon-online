@@ -19,7 +19,7 @@ import PokeballSpinner from 'src/components/PokemonSelector/PokeballSpinner';
 import AppStyled from './AppStyled';
 
 // == Composant
-const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty }) => {
+const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty, isAllPokemonsLoaded }) => {
   return (
     <AppStyled>
     
@@ -32,7 +32,7 @@ const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty }) => {
     {isUserReady && !isUsersNotEmpty && (
       <div>En attente d'un dresseur pour commencer l'aventure !</div>
     )}
-    {isUserReady && isUsersNotEmpty && (
+    {isUserReady && isUsersNotEmpty && isAllPokemonsLoaded && (
       <>
         <div className="mobile-tablet-app">
           <Board />
@@ -78,6 +78,7 @@ App.propTypes = {
   hasPokemon: PropTypes.bool.isRequired,
   isUserReady: PropTypes.bool.isRequired,
   isUsersNotEmpty: PropTypes.bool.isRequired,
+  isAllPokemonsLoaded: PropTypes.bool.isRequired,
 };
 
 // == Export
