@@ -37,7 +37,7 @@ const Attacks = ({
           direction="left"
           visible={visible}
         >
-          <div className="attacks-sidebar">boutons des attaques ici</div>
+          <div className="attacks-sidebar">boutons des attaques ici.</div>
         </Sidebar>
       </div>
 
