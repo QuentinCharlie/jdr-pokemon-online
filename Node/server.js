@@ -30,8 +30,8 @@ setInterval( function() {
     // TODO : Better close socket connection before closing whole server.js (thus freeing port)
     console.log("Exiting due to inactivity");
     // TODO : Ajax BDD free port
-    // const url = `http://54.89.22.26/game/${port}/delete`; // @change prod
-    const url = `http://localhost:8000/game/${port}/delete`;
+    const url = `http://54.89.22.26/game/${port}/delete`; // @change prod
+    // const url = `http://localhost:8000/game/${port}/delete`;
     axios.delete(url,{ data: { token: "M%P'c~]&7XBdz^Pe" }})
     .then((response) => {console.log(response.data); process.exit();}) 
     .catch((error) => {console.log(error.response.statusText); process.exit();});
