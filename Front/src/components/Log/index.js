@@ -150,7 +150,7 @@ const Log = ({
           </div>
         </div>
         <div className="current-player" style={{ backgroundColor: `#${primaryColor}` }}>
-          <p className="turn-name">C'est au tour de Ondine</p>
+          {/* <p className="turn-name">C'est au tour de Ondine</p> */}
         </div>
         {/* <svg className="svg3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220"><path fill="#19cd70" fillOpacity="1" d="M0,0L1440,32L1440,320L0,320Z" /></svg> */}
       </div>
