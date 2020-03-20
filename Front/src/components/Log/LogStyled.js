@@ -53,7 +53,7 @@ const LogStyled = styled.div`
             .entry {
               box-shadow: 0 0 15px rgba(117, 117, 117, .3);
               border-radius: 10px;
-              background-color: white;
+              background-color: rgba(255, 255, 255, .8);
               margin-bottom: .5em;
               padding: .5em;
               .turn {
