@@ -22,6 +22,7 @@ const gridReducer = (state = initialState, action = {}) => {
     case UPDATE_GRID_STATE: {
       console.log(action.grid);
       return {
+        ...state,
         ...action.grid,
       };
     }

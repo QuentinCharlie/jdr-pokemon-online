@@ -20,15 +20,15 @@ const initialState = {
 // Reducer
 const userReducer = (state = initialState, action = {}) => {
   console.log('userReducer');
-  let username = document.querySelector('#root').dataset.username;
+  let username = document.querySelector('#root').dataset.username; // @ change prod
   // const isMj = document.querySelector('#root').dataset.mj;
 
   switch (action.type) {
     case LOAD_USER:
       return {
         ...state,
-          // username: `${Math.floor(Math.random() * (100000000000 - 1 +1)) + 1}`,
-          username,
+          // username: `${Math.floor(Math.random() * (100000000000 - 1 +1)) + 1}`, // @change dev
+          username, // @change prod
 
       };
 
@@ -41,7 +41,7 @@ const userReducer = (state = initialState, action = {}) => {
     
     case UPDATE_MJ_STATE: {
       console.log(action);
-      if (action.username === action.mjName) {
+      if (action.username === action.mjName){
         return {
           ...state,
           hasTrainer: false,
@@ -50,7 +50,7 @@ const userReducer = (state = initialState, action = {}) => {
           isMj: true,
         };
       }
-      if (state.isUserReady) {
+      if (action.username !== action.mjName && state.isUserReady) {
         return {
           ...state,
           hasTrainer: true,
