@@ -7,11 +7,12 @@ import {
   Dropdown
 } from 'semantic-ui-react';
 
+// == Import utils
 import { getSidebarNameCapitalize } from 'src/utils/functions';
-// Styles
+// == Import styles
 import NavStyled from './NavStyled';
-
-// == Import
+// == Import files
+import menuIcon from 'src/assets/images/mobile-icons/menu.svg';
 
 // == Composant
 const Nav = ({
@@ -32,30 +33,48 @@ const Nav = ({
   return (
     <NavStyled>
       <div className="mobile-tablet">
-        <div className="nav-button" onClick={handleClick} />
+        <div className="nav-button" onClick={handleClick}>
+          <img src={menuIcon} alt="menu burger icon" />
+        </div>
         <Sidebar
           as={Segment}
           animation="overlay"
           direction="bottom"
           visible={visible}
         >
-         <div className="nav-sidebar">
-            <a href="#" className="nav-item">Accueil</a>
+          <div className="nav-sidebar">
+            <a href="http://54.89.22.26/" target="_blank" className="nav-item">Accueil</a>
             <div className="nav-items">
-              <a href="#" className="nav-item">Dresseurs</a>
-              <a href="#" className="nav-item">Pokemon</a>
-              <a href="#" className="nav-item">Ressources</a>
-              <a href="#" className="nav-item">Compte Joueur</a>
+              <Dropdown
+                trigger={
+                  <a href="#">Dresseurs</a>
+                }
+                className="nav-item"
+                scrolling
+              >
+                <Dropdown.Menu>
+                  {users.map((user) =>
+                    <Dropdown.Item
+                      content={user.trainer.name}
+                      key={`dropdown-mobile-item-key-${user.trainer.id}`}
+                      onClick={handleTrainerClick}
+                    />
+                  )}
+                </Dropdown.Menu>
+              </Dropdown>
+              <a href="http://54.89.22.26/pokemon/list" target="_blank" className="nav-item">Pokemon</a>
+              <a href="http://54.89.22.26/ressources" target="_blank" className="nav-item">Ressources</a>
+              {/* <a href="#" target="_blank" className="nav-item">Compte Joueur</a> */}
             </div>
-         </div>
+          </div>
         </Sidebar>
       </div>
 
       <div className="desktop">
         <a href="#" className="nav-item">Accueil</a>
         <div className="nav-items">
-          {isMj && 
-            <Dropdown 
+          {isMj &&
+            <Dropdown
               trigger={
                 <a href="#">Dresseurs</a>
               }
@@ -63,8 +82,8 @@ const Nav = ({
             >
               <Dropdown.Menu>
                 {users.map((user) =>
-                  <Dropdown.Item 
-                    content={user.trainer.name} 
+                  <Dropdown.Item
+                    content={user.trainer.name}
                     key={`dropdown-item-key-${user.trainer.id}`}
                     onClick={handleTrainerClick}
                   />
