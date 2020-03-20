@@ -41,7 +41,7 @@ const App = ({ isUserReady, hasTrainer, hasPokemon, isUsersNotEmpty }) => {
           <div className="docs">
             <div className="doc">
               <div className="doc-title">Livre d'Univers</div>
-              <div className="doc-description">Ce livre vous permettra de vous plonger dans l'univers pokémon afin de créer le sénario qui guidera les dresseurs tout au long de la partie.</div>
+              <div className="doc-description">Ce livre vous permettra de vous plonger dans l'univers Pokémon afin de créer le sénario qui guidera les dresseurs tout au long de la partie.</div>
               <div className="doc-link">
                 <a href="http://54.89.22.26/assets/ressources/Livre%20d'univers%20(v5.5).pdf" target="_blank" className="link"> En savoir plus.</a>
               </div>
