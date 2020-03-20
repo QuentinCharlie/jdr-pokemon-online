@@ -45,6 +45,7 @@ const sharedMiddleware = (store) => (next) => (action) => {
           store.dispatch(updateGridState(info.grid));        
           store.dispatch(updateLogState(info.log));
           store.dispatch(updateUsersState(info.users));
+          store.dispatch(updateMjState(mjName, mjName));
         }
         else if (mjName !== undefined && isThisAnUserReconnection) 
         {
@@ -59,6 +60,7 @@ const sharedMiddleware = (store) => (next) => (action) => {
           store.dispatch(updateUsersState(info.users));
           store.dispatch(linkTrainerToUser(trainer));
           store.dispatch(linkPokemonToUser(pokemon));
+          store.dispatch(userIsReady());
         }
         else 
         {
