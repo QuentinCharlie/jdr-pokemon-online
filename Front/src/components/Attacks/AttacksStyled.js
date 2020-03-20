@@ -10,7 +10,16 @@ const AttacksStyled = styled.div`
         width: calc(7vw - .5em);
         height: calc(7vw - .5em);
         margin-bottom: .5em;
-        background-color: lightskyblue;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: 1px solid #6c757d;
+        /* box-shadow: 0 0 15px rgba(117, 117, 117, .3); */
+        img {
+          height: 80%;
+        }
       }
       .ui.left.sidebar {
         background-color: lightskyblue;
@@ -41,7 +50,9 @@ const AttacksStyled = styled.div`
       overflow: auto;
       /* scrollbar hidden (IE/Edge) */
       -ms-overflow-style: none;
-      /* scrollbar hidden (Chrome/Firefox/Safari) */
+                /* scrollbar hidden (Firefox) */
+                scrollbar-width: none;
+      /* scrollbar hidden (Chrome/Safari) */
       &::-webkit-scrollbar {
         display: none;
       }

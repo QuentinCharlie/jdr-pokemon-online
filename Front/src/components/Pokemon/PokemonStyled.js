@@ -162,7 +162,9 @@ const PokemonStyled = styled.div`
         overflow: auto;
         /* scrollbar hidden (IE/Edge) */
         -ms-overflow-style: none;
-        /* scrollbar hidden (Chrome/Firefox/Safari) */
+                /* scrollbar hidden (Firefox) */
+                scrollbar-width: none;
+        /* scrollbar hidden (Chrome/Safari) */
         &::-webkit-scrollbar {
           display: none;
         }

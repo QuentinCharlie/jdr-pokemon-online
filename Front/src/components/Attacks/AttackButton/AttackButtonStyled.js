@@ -5,6 +5,23 @@ const AttackButtonStyled = styled.div`
   height: 48%;
   margin: 0 0 .5em 0;
 
+
+  @media (max-width : 1024px) {
+    .attacks-sidebar {
+      overflow: auto;
+      /* scrollbar hidden (IE/Edge) */
+      -ms-overflow-style: none;
+      /* scrollbar hidden (Firefox) */
+      scrollbar-width: none;
+      /* scrollbar hidden (Chrome/Safari) */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .attack-info {
+      display: none;
+    }
+  }
   /* Modal */
   
 
@@ -107,7 +124,9 @@ const AttackButtonStyled = styled.div`
         /* overflow: auto; */
         /* scrollbar hidden (IE/Edge)
         -ms-overflow-style: none;
-        /* scrollbar hidden (Chrome/Firefox/Safari) */
+        /* scrollbar hidden (Firefox) */
+        /* scrollbar-width: none; */
+        /* scrollbar hidden (Chrome/Safari) */
         /* &::-webkit-scrollbar {
           display: none;
         } */ 

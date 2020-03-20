@@ -49,7 +49,7 @@ const AttackButton = ({
             style={{ backgroundColor: `#${color}`,
             }}
           >
-            {console.log(type)}
+            {/* {console.log(type)} */}
             <div className="attack">
               <div className="attack-name">{name}</div>
               <div className="attack-icons">
@@ -60,6 +60,7 @@ const AttackButton = ({
                   {distance}
                 </div>
                 <Popup
+                  className="attack-popup-ui"
                   content={(
                     <InfoAttackPopUp
                       name={name}

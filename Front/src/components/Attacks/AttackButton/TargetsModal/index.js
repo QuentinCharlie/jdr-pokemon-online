@@ -33,7 +33,7 @@ const TargetsModal = ({
   isMj,
  }) => {
   const closeModal = () => {
-    document.body.querySelector('.modal-attack-targets').closest('.page').classList.remove('active', 'visible');
+    document.body.querySelector('.modal-attack-targets').parentNode.click();
   };
   const handleTrainerClick = (e) => {
     // console.log(damageCalc(pokemon, attack, target));
