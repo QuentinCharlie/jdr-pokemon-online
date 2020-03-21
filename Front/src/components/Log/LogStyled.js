@@ -21,7 +21,7 @@ const LogStyled = styled.div`
         }
       }
       .ui.top.sidebar {
-        background-color: transparent;
+        /* background-color: transparent; */
         padding: 0 .5em;
         margin-right: calc(7vw - 1em)! important;
         margin-left: calc(43vw - .5em)! important;
