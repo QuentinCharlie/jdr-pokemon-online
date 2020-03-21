@@ -30,6 +30,7 @@ const Nav = ({
     const trainerName = e.target.textContent;
     mjChangeTrainer(trainerName, users);
   }
+  
   return (
     <NavStyled>
       <div className="mobile-tablet">
