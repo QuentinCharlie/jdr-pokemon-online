@@ -25,16 +25,16 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 let timeSinceUse = 0; //increment++ setIntervall(1000ms) 
 
 const inactionTimer = 3600; // 3600s => 1h
-setInterval( function() { 
-  if( timeSinceUse > inactionTimer ) {
+setInterval(function () {
+  if (timeSinceUse > inactionTimer) {
     // TODO : Better close socket connection before closing whole server.js (thus freeing port)
     console.log("Exiting due to inactivity");
     // TODO : Ajax BDD free port
     const url = `http://54.89.22.26/game/${port}/delete`; // @change prod
     // const url = `http://localhost:8000/game/${port}/delete`;
-    axios.delete(url,{ data: { token: "M%P'c~]&7XBdz^Pe" }})
-    .then((response) => {console.log(response.data); process.exit();}) 
-    .catch((error) => {console.log(error.response.statusText); process.exit();});
+    axios.delete(url, { data: { token: "M%P'c~]&7XBdz^Pe" } })
+      .then((response) => { console.log(response.data); process.exit(); })
+      .catch((error) => { console.log(error.response.statusText); process.exit(); });
   }
   console.log("Timesince : " + timeSinceUse + "s");
   timeSinceUse += 1; // 1s
@@ -404,7 +404,10 @@ io.on('connection', (ws) => {
     /* start of change*/
 
     const index = state.grid.trainers.findIndex((trainer) => trainer.name === info.trainerName);
-    const trainerIndex =  state.grid.trainers[index];
+    const trainerIndex = state.grid.trainers[index];
+    const trainerIndexPokemon = trainerIndex.pokemon;
+    const trainerIndexPokemon0 = trainerIndex.pokemon[0];
+    const trainerIndexPokemon0Position = trainerIndexPokemon0.position;
     // console.log(info);
     // console.log(index);
     // console.log(state.grid.trainers);
@@ -413,26 +416,26 @@ io.on('connection', (ws) => {
     // console.log(state.grid.trainers[index].pokemon[0]);
     // let stateTrainers;
     // if (index !== undefined) {
-    const  stateTrainers = [
+    const stateTrainers = [
       ...state.grid.trainers.splice(0, index),
       {
         ...trainerIndex,
         pokemon: [
-          ...trainerIndex.pokemon.splice(0, 0),
+          ...trainerIndexPokemon.splice(0, 0),
           {
-            ...trainerIndex.pokemon[0],
+            ...trainerIndexPokemon0,
             position: {
-              ...trainerIndex.pokemon[0].position,
+              ...trainerIndexPokemon0Position,
               X: info.X,
               Y: info.Y,
             },
           },
-          ...trainerIndex.pokemon.splice(1),
+          ...trainerIndexPokemon.splice(1),
         ],
       },
       ...state.grid.trainers.splice(index + 1),
     ];
-    
+
     state.grid.trainers = stateTrainers;
     /* end of change*/
 
