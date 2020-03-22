@@ -400,6 +400,42 @@ io.on('connection', (ws) => {
 
   ws.on('move_pokemon', (info) => {
     // eslint-disable-next-line no-plusplus
+
+    // /* start of change*/
+
+    // const index = state.grid.trainers.findIndex((trainer) => trainer.name === info.trainerName);
+    // const trainerIndex =  state.grid.trainers[index];
+    // // console.log(info);
+    // // console.log(index);
+    // // console.log(state.grid.trainers);
+    // // console.log(state.grid.trainers[index]);
+    // // console.log(state.grid.trainers[index].pokemon);
+    // // console.log(state.grid.trainers[index].pokemon[0]);
+    // // let stateTrainers;
+    // // if (index !== undefined) {
+    // const  stateTrainers = [
+    //   ...state.grid.trainers.splice(0, index),
+    //   {
+    //     ...trainerIndex,
+    //     pokemon: [
+    //       ...trainerIndex.pokemon.splice(0, 0),
+    //       {
+    //         ...trainerIndex.pokemon[0],
+    //         position: {
+    //           ...trainerIndex.pokemon[0].position,
+    //           X: info.X,
+    //           Y: info.Y,
+    //         },
+    //       },
+    //       ...trainerIndex.pokemon.splice(1),
+    //     ],
+    //   },
+    //   ...state.grid.trainers.splice(index + 1),
+    // ];
+    
+    // state.grid.trainers = stateTrainers;
+    // /* end of change*/
+
     info.id = ++id;
     timeSinceUse = 0;
     io.emit('move_pokemon', info);
@@ -410,5 +446,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-server.listen(port); //prod
-// server.listen(port, 'localhost'); //dev
+server.listen(port); // @change prod
+// server.listen(port, 'localhost'); // @change dev

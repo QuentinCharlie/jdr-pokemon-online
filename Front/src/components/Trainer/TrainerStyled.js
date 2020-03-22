@@ -11,14 +11,229 @@ const TrainerStyled = styled.div`
         width: calc(7vw - .5em);
         height: calc(7vw - .5em);
         margin-bottom: .5em;
-        background-color: lightgreen;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          height: 80%;
+        }
       }
       .ui.left.sidebar {
-        background-color: lightgreen;
+        background-color: white;
         /* for a fullboard size sidebar : */
         width: calc(93vw - .5em);
         .trainer-sidebar {
           color: white;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          .top-wrapper {
+            height: 50%;
+            width: 100%;
+            display: flex;
+            margin-bottom: .5em;
+            .trainer-wrapper {
+              height: 100%;
+              width: 50%;
+              display: flex;
+              .trainer-avatar {
+                position: relative;
+                z-index: 1;
+                width: 50%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                img {
+                  width: 100%;
+                  transform: translateY(.5em);
+                }
+              }
+              .trainer-info {
+                /* background-color: lightblue; */
+                position: relative;
+                z-index: 0;
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: .5em;
+                p {
+                  color: #6c757d;
+                  font-size: .8em;
+                  margin: 0;
+                }
+              }
+            }
+            .trainer-additional-info {
+              height: 100%;
+              width: 50%;
+              display: flex;
+              .trainer-team {
+                background-color: lightgray;
+                border-radius: 10px;
+                box-shadow: 0 0 15px rgba(117, 117, 117, .3);
+                height: 100%;
+                width: 30%;
+                margin-right: .5em;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                .pokemon {
+                  width: 50%;
+                  height: calc(100% / 4);
+                  overflow: hidden;
+                  display: flex;
+                  justify-content: center;
+                  align-content: center;
+                  img {
+                    height: 100%;
+                    object-position: 50% 50%;
+                    objet-fit: cover;
+                  }
+                  &.empty {
+                    padding: .2em;
+                    img {
+                      height: 100%;
+                      objet-fit: cover;
+                      transform: rotate(15deg);
+                      opacity: .1;
+                    }
+                  }
+                }
+              }
+              .trainer-right-wrapper {
+                height: 100%;
+                width: 70%;
+                display : flex;
+                flex-direction: column;
+                .trainer-spendables {
+                  height: 20%;
+                  width: 100%;
+                  display: flex;
+                  margin-bottom: .5em;
+                  color: #6c757d;
+                  .money {
+                    border-radius: 10px;
+                    box-shadow: 0 0 15px rgba(117, 117, 117, .3);
+                    background-color: white;
+                    width: 50%;
+                    height: 100%;
+                    margin-right: .5em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  .exp {
+                    border-radius: 10px;
+                    box-shadow: 0 0 15px rgba(117, 117, 117, .3);
+                    background-color: white;
+                    width: 50%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                }
+                .inventory {
+                  border-radius: 10px;
+                  box-shadow: 0 0 15px rgba(117, 117, 117, .3);
+                  background-color: white;
+                  height: 80%;
+                  width: 100%;
+                  padding: .5em;
+                  overflow: auto;
+                  /* scrollbar hidden (IE/Edge) */
+                  -ms-overflow-style: none;
+                  /* scrollbar hidden (Firefox) */
+                  scrollbar-width: none;
+                  /* scrollbar hidden (Chrome/Safari) */
+                  &::-webkit-scrollbar {
+                    display: none;
+                  }
+                  .inventory-item {
+                    border-radius: 1em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: .8em;
+                    color: #6c757d;
+                    padding-right: .5em;
+                    &:hover {
+                      background-color: #6c757d;
+                      box-shadow: 2px 4px 8px rgba(117, 117, 117, .6);
+                      color: white;
+                      transition: .2s;
+                    }
+                    .item-infos {
+                      display: flex;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .bottom-wrapper {
+            position: relative;
+            z-index: 10;
+            height: 50%;
+            width: 100%;
+            display: flex;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(117, 117, 117, .6);
+            .stats-stats {
+              background-color: white;
+              color: #6c757d;
+              height: 100%;
+              width: 25%;
+              border-radius: 10px 0 0 10px;
+              padding: .5em;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              .stat {
+                display: flex;
+                flex-direction: column;
+                justify-content:flex-start;
+                font-size: .6em;
+                width: 100%;
+                height: calc(100% / 6);
+                margin-bottom: .2em;
+                .number {
+                  position: absolute;
+                  top: calc(50% - .3em);
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                }
+                .title {
+                  line-height: 1;
+                }
+              }
+            }
+            .stats-skills {
+              background-color: white;
+              height: 100%;
+              width: 75%;
+              border-radius: 0 10px 10px 0;
+              display: flex;
+              padding: .5em;
+              table {
+                width: 50%;
+                font-size: .7em;
+                line-height: 1.5;
+                color: #6c757d;
+                th {
+                  font-weight: bold;
+                  text-align: left;
+                }
+              }
+            }
+          }
         }
       }
     }

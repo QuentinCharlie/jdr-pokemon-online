@@ -12,9 +12,23 @@ import store from 'src/store';
 import { wsConnect } from 'src/actions/wsConnect';
 // import des data de l'API
 import { loadUser, loadState } from 'src/actions/user';
+import { changeMjState } from 'src/actions/mj';
+import { loadAllPokemons } from 'src/actions/pokemon';
+import { loadAllTrainers } from 'src/actions/trainer';
 // dispactch la volonté de connecter le WebSocket
+store.dispatch(loadAllTrainers());
+store.dispatch(loadAllPokemons());
 store.dispatch(wsConnect());
 store.dispatch(loadUser());
+const playerName = store.getState().user.username;
+const mjName = store.getState().mj.mjName;
+console.log('BEFORE INDEX IFFFFFFFFFFFFFFFFFFFFF');
+console.log(playerName);
+console.log(mjName);
+if (mjName === undefined) {
+  console.log('INDEX IFFFFFFFFFFFFFFFFFFFFF');
+  store.dispatch(changeMjState(playerName));
+}
 store.dispatch(loadState());
 
 // == Render

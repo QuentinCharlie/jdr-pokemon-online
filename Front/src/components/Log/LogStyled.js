@@ -10,29 +10,40 @@ const LogStyled = styled.div`
         width: calc(7vw - .5em);
         height: calc(7vw - .5em);
         margin-bottom: .5em;
-        background-color: lightblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: 1px solid #6c757d;
+        /* box-shadow: 0 0 15px rgba(117, 117, 117, .3); */
+        .img {
+          height: 80%;
+        }
       }
       .ui.top.sidebar {
-        background-color: lightblue;
-        padding: .5em;
+        /* background-color: transparent; */
+        padding: 0 .5em;
         margin-right: calc(7vw - 1em)! important;
         margin-left: calc(43vw - .5em)! important;
         width: 50vw!important;
         height: calc(100vh - .5em)!important;
+        overflow: hidden;
+        margin-top: .5em;
         /* // for a fullboard size sidebar :
         width: calc(93vw - .5em); */
         .log-sidebar {
           height: 100%;
           width: 100%;
-          padding: .2em;
+          /* padding: .2em; */
           .log {
             width: 100%;
-            height: 90%;
-            margin-bottom: .5em;
+            height: 100%;
             overflow: auto;
             /* scrollbar hidden (IE/Edge) */
             -ms-overflow-style: none;
-            /* scrollbar hidden (Chrome/Firefox/Safari) */
+            /* scrollbar hidden (Firefox) */
+            scrollbar-width: none;
+            /* scrollbar hidden (Chrome/Safari) */
             &::-webkit-scrollbar {
               display: none;
             }
@@ -40,8 +51,10 @@ const LogStyled = styled.div`
               margin-bottom: 0;
             } 
             .entry {
-              background-color: white;
-              margin-bottom: .3em;
+              box-shadow: 0 0 15px rgba(117, 117, 117, .3);
+              border-radius: 10px;
+              background-color: rgba(255, 255, 255, .8);
+              margin-bottom: .5em;
               padding: .5em;
               .turn {
                 padding: 0 1em;
@@ -99,7 +112,9 @@ const LogStyled = styled.div`
           overflow: auto;
           /* scrollbar hidden (IE/Edge) */
           -ms-overflow-style: none;
-          /* scrollbar hidden (Chrome/Firefox/Safari) */
+                /* scrollbar hidden (Firefox) */
+                scrollbar-width: none;
+          /* scrollbar hidden (Chrome/Safari) */
           &::-webkit-scrollbar {
             display: none;
           }

@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
   hasPokemon: state.user.hasPokemon,
   isUserReady: state.user.isUserReady,
   isUsersNotEmpty: isNotEmpty(state.users),
+  isAllPokemonsLoaded: state.pokemon.allPokemons !== undefined,
 });}
 
 // == Actions / dispatch

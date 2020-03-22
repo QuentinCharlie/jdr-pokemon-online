@@ -9,7 +9,7 @@ let socket;
 const logMiddleware = (store) => (next) => (action) => {
   let port = document.querySelector('#root').dataset.port; // @change prod
   // let port = 3001; // @change dev
-  console.log(port);
+  // console.log(port);
   // console.log('logMiddleware laisse passer : ', action);
 
   switch (action.type) {

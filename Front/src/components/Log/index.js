@@ -10,6 +10,7 @@ import {
 import { getSidebarNameCapitalize } from 'src/utils/functions';
 // == Import files
 import pokeball from 'src/assets/images/pokeball.png';
+import logIcon from 'src/assets/images/mobile-icons/log.svg';
 // == Import Styles
 import LogStyled from './LogStyled';
 
@@ -39,7 +40,9 @@ const Log = ({
   return (
     <LogStyled>
       <div className="mobile-tablet">
-        <div className="log-button" onClick={handleClick} />
+        <div className="log-button" onClick={handleClick}>
+          <img src={logIcon} alt="log icon"/>
+        </div>
         <Sidebar
           as={Segment}
           animation="overlay"
@@ -47,32 +50,50 @@ const Log = ({
           visible={visible}
         >
           <div className="log-sidebar">
-            <div className="log" ref={logContainer}>
-              <div className="entry" id="1">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
+            <div className="log">
+              {/* <img src={pokeball} alt="pokemon background" className="pokeball-background" /> */}
+              <div className="entries">
+              {/* <div className="blank-space" /> */}
+                {entries.map((entry) =>
+                  <div 
+                    className="entry"
+                    key={entry.id}   
+                  >
+                    {entry.isAttack &&
+                      <div 
+                        className="attack-entry"
+                        id={entry.id}
+                      >
+                        <p className="title">{entry.attack.title}</p>
+                        <div className="turn">
+                          <p className="attack">Attaque {entry.attack.attack} !</p>
+                          <p className="dices-roll">Jet d'attaque : {entry.attack.dicesRoll}</p>
+                          <div className="result">
+                            <p className="result-damage">Degats infligés : {entry.attack.resultDamage}</p>
+                            {/* <p className="result-status">Statut : {entry.attack.resultStatus}</p> */}
+                            <p className="result-message"> {entry.attack.message}</p>
+                          </div>
+                        </div>
+                      </div>
+                    }
+
+                    {entry.isDice &&
+                      <div 
+                        className="dice-entry"
+                      > 
+                        <p className="title">
+                          {`${entry.dice.roller.name} fait un jet de ${entry.dice.skill} :`}
+                        </p>
+                        <div className="turn">
+                          <p className="dices-roll">
+                            {entry.dice.diceRolls} 
+                          </p>
+                        </div>
+                      </div>
+                    }
                   </div>
-                </div>
+                )}
               </div>
-              <div className="entry" id="2">
-                <p className="name">Pikachu de Sacha attaque Onyx de Pierre :</p>
-                <div className="turn">
-                  <p className="action">Attaque Tonnerre</p>
-                  <p className="diceRoll">Jet d'attaque : 8, 7, 2, 1</p>
-                  <div className="result">
-                    <p className="result-damage">Degats infligés : 2</p>
-                    <p className="result-status">Statut : Paralysé</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="current-player">
-              <p className="turn-name">C'est au tour de Ondine</p>
             </div>
           </div>
         </Sidebar>
@@ -127,7 +148,7 @@ const Log = ({
           </div>
         </div>
         <div className="current-player" style={{ backgroundColor: `#${primaryColor}` }}>
-          <p className="turn-name">C'est au tour de Ondine</p>
+          {/* <p className="turn-name">C'est au tour de Ondine</p> */}
         </div>
         {/* <svg className="svg3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220"><path fill="#19cd70" fillOpacity="1" d="M0,0L1440,32L1440,320L0,320Z" /></svg> */}
       </div>
