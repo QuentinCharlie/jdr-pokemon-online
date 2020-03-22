@@ -7,7 +7,12 @@ import {
   Sidebar,
 } from 'semantic-ui-react';
 
+// == Import utils
 import { getSidebarNameCapitalize } from 'src/utils/functions';
+
+// == Import files
+import attackIcon from 'src/assets/images/mobile-icons/attack-icon.png';
+
 // == Import Components
 import AttackButton from 'src/containers/AttackButton';
 
@@ -30,14 +35,35 @@ const Attacks = ({
   return (
     <AttacksStyled>
       <div className="mobile-tablet">
-        <div className="attacks-button" onClick={handleClick} />
+        <div className="attacks-button" onClick={handleClick}>
+          <img src={attackIcon} alt="attack icon" />
+        </div>
         <Sidebar
           as={Segment}
           animation="overlay"
           direction="left"
           visible={visible}
         >
-          <div className="attacks-sidebar">boutons des attaques ici</div>
+          <div className="attacks-sidebar">
+            {attacks.map((attack) => (
+              <AttackButton
+                // eslint-disable-next-line react/no-array-index-key
+                key={`attack-button-mobile-key-${attack.id}`}
+                name={attack.name}
+                energy={attack.energy}
+                category={attack.category}
+                distance={attack.distance}
+                accuracy={attack.accuracy}
+                damage={attack.damage}
+                effect={attack.effect}
+                type={attack.type.name}
+                color={attack.type.color}
+                pokemon={pokemon}
+                trainer={trainer}
+                users={users}
+              />
+            ))}
+          </div>
         </Sidebar>
       </div>
 

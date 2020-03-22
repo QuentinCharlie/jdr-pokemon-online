@@ -58,7 +58,7 @@ const Grid = ({
           />
         ))
       }
-      <div id="grid" onDoubleClick={handleGridDoubleClick}>
+      <div id="grid" onDoubleClick={handleGridDoubleClick} onTouchEnd={handleGridDoubleClick}>
         <div ref={drop}>
           <div className="row row-1">
             <div onDragEnter={handleDragOver} className="cell cell-1"></div>
