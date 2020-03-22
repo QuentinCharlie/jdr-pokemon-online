@@ -9,7 +9,8 @@
     <div class="card pokemonCard">
       <img src="{{asset('assets/images/sprites-pokemon/'~ pokemon.number ~'.png')}}" class="card-img-top" alt="{{ pokemon.name }}">
       <div class="card-body">
-        <h5 class="card-title">{{pokemon.name}} : {{pokemon.number}}</h5>
+        <h5 class="card-title">{{pokemon.name}}</h5>
+        <h5 class="card-title"> n° {{pokemon.number}}</h5>
         <a href="{{ path('detail_pokemon', {'id' : pokemon.id}) }}" class="btn" style="background-color: #{{ pokemon.primary }}">Voir les détails</a>
       </div>
     </div>

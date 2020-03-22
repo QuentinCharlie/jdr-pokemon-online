@@ -4,9 +4,9 @@
 
 <h2 class="pokemonTitle">Liste des Dresseurs</h2>
 
-<div class="card-deck">
+<div class="card-deck-trainer">
   {% for trainer in trainers %}
-    <div class="card pokemonCard">
+    <div class="card TrainerCard">
       <img src="{{asset('assets/images/'~ trainer.name ~'.png')}}" class="card-img-top" alt="{{ trainer.name }}">
       <div class="card-body">
         <h5 class="card-title">{{trainer.name}} </h5>

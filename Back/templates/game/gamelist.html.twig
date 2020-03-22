@@ -3,26 +3,40 @@
 {% block body %}
 
 
-<div class="container-fluid"></div>
-    <div class="row">
-    <div class="card col-5" style="max-width: 50%; margin-right: 25em;margin-top: 4em;padding-bottom: 1em;height: auto;">
-        <div class="card-header">
-          Liste des parties en cours <a href="{{ path('game_create')}}" class="createButton">Créer</a>
-        </div>
-        <ul class="list-group list-group-flush">
-        {% for game in games %}
-          <li class="list-group-item">Partie n°{{game.port}}<a href="{{ path('game_board', {'port' : game.port})}}" class="joinButton">Rejoindre</a><a href="{{ path('game_mj_delete', {'port' : game.port})}}" class="myButton">Supprimer</a></li>
-        {% endfor %}
-        </ul>
-    </div>
+<div class="container-fluid">
+	<div class="ligne">
+		<div class="card row-card">
+			<div class="card-header">
+				<span>Liste des parties en cours</span>
+				<span><a href="{{ path('game_create')}}" class="createButton">Créer</a></span>
+			</div>
+			<div class="list-group-game list-group-flush">
+				{% for game in games %}
+					<div class="list-group-game-item">
+						<span>Partie de {{game.mj}}</span>
+						<span>
+							<a href="{{ path('game_board', {'port' : game.port})}}" class="joinButton">Rejoindre</a>
+						</span>
+						{# <span>
+							<a href="{{ path('game_mj_delete', {'port' : game.port})}}" class="myButton">Supprimer</a>
+						</span> #}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
 
-    <div class="card col-3" style="max-width: 50%;margin-right: 0px;margin-top: 4em;padding-bottom: 1em;height: auto!important;">
-        <img id="profil_img_gameboard" src="{{asset('assets/images/'~ app.user.avatar.name ~'.png')}}" class="card-img-top" alt="...">
-        <h2> Hey ! Mais <span id="nickname_gameboard">{{app.user.nickname}}</span> est arrivé !</h2>
-        <p> Nous te souhaitons de passer de bonnes parties de Jeu de Rôles en notre compagnie ! </p>
-        <p id="question">Une question ? Contacte l'équipe du site en cliquant sur ce <a href="{{ path('team')}}">lien </a>.</p>
-      </div>
-    </div>
-</div>
-
-{% endblock %}
+		<div class="card row-card row-card-trainer">
+			<img id="profil_img_gameboard" src="{{asset('assets/images/'~ app.user.avatar.name ~'.png')}}" class="card-img-top" alt="...">
+			<h2>
+				Bonjour
+				<span id="nickname_gameboard">{{app.user.nickname}}</span> !</br>
+				Bienvenue dans le jdr de Pokemon !</h2>
+			<p>
+				Nous te souhaitons de passer de bonnes parties de Jeu de Rôles en notre compagnie !
+			</p>
+			<p id="question">Une question ? Contacte l'équipe du site en cliquant sur ce
+				<a href="{{ path('team')}}">lien
+				</a>.</p>
+		</div>
+	</div>
+</div>{% endblock %}
