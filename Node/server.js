@@ -15,9 +15,9 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const io = socket(server);
-let port = 3001; // @change dev
+// let port = 3001; // @change dev
 //let port = 7001; // @change dev
-// let port = process.argv[2]; // @change prod
+let port = process.argv[2]; // @change prod
 io.set('origins', '*:*');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -446,5 +446,5 @@ io.on('connection', (ws) => {
 /*
  * Server
  */
-// server.listen(port); // @change prod
-server.listen(port, 'localhost'); // @change dev
+server.listen(port); // @change prod
+// server.listen(port, 'localhost'); // @change dev
