@@ -34,7 +34,7 @@ const logReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         entries: [
-          ...state.entries,
+          // ...state.entries,
           ...action.logState.entries,
         ],
       };
