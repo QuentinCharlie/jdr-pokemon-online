@@ -46,3 +46,27 @@ describe('Array', function() {
 ```
 
 puis en terminal `./node_modules/.bin/mocha tests/demo.test.js`
+
+
+Mais pour plus de facilité : 
+
+Dans les scripts de  package.json :
+
+```
+"test": "NODE_PATH=./ mocha --require tests/.setup.js tests/**/*.test.js",
+"test:watch": "NODE_PATH=./ mocha --watch --require tests/.setup.js tests/**/*.test.js"
+```
+
+Puis `yarn test` pour lancer tous les tests (qui doivent etre en .test.js) !
+Ou `yarn test:watch`, qui lance un serveur qui analyse les test en continu (très gourmand en ressources)
+
+## Librairie assertion
+
+Chai : https://chaijs.com
+
+Syntaxe pour nos assertions, beaucoup plus lisible qu'à l'accoutumé.
+
+- should
+- expect
+- assert
+
