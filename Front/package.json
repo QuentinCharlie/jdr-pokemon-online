@@ -10,6 +10,12 @@
     "test": "NODE_PATH=./ mocha --require tests/.setup.js tests/**/*.test.js",
     "test:watch": "NODE_PATH=./ mocha --watch --require tests/.setup.js tests/**/*.test.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test",
+      "pre-push": "yarn test"
+    }
+  },
   "devDependencies": {
     "@babel/core": "*",
     "@babel/plugin-proposal-class-properties": "*",
@@ -37,6 +43,7 @@
     "eslint-plugin-react-hooks": "*",
     "file-loader": "*",
     "html-webpack-plugin": "*",
+    "husky": "^4.2.5",
     "ignore-styles": "^5.0.1",
     "mini-css-extract-plugin": "*",
     "mocha": "^7.1.1",
