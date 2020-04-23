@@ -11,7 +11,7 @@ import { UPDATE_MJ_STATE } from 'src/actions/mj';
 
 // Initial State
 const initialState = {
-  hasTrainer: true,
+  hasTrainer: false,
   hasPokemon: false,
   isUserReady: false,
   isMj: true,

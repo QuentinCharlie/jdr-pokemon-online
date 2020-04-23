@@ -70,9 +70,10 @@ Syntaxe pour nos assertions, beaucoup plus lisible qu'à l'accoutumé.
 - expect
 - assert
 
-## Husky : 
+## Bonus : Husky 
 
-pre-commit tests
+Ne marche pas sur ma machine...
+
 `yarn add -D husky`
 
 Dans package.json, ajouter après les scripts :
@@ -84,3 +85,5 @@ Dans package.json, ajouter après les scripts :
     }
 },
 ```
+
+Cela permet de tester automatiquement à chaque commit/push
